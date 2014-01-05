@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="se2-traveldream-ditucci-cavagnis-conteEJB">
+        <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
+        <property name="java-output-path" value="/se2-traveldream-ditucci-cavagnis-conteEJB/build/classes"/>
+        <property name="ClientProject" value="se2-traveldream-ditucci-cavagnis-conteEJBClient"/>
+        <property name="ClientJARURI" value="se2-traveldream-ditucci-cavagnis-conteEJBClient.jar"/>
+    </wb-module>
+</project-modules>
