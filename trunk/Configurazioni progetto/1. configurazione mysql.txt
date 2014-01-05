@@ -1,0 +1,7 @@
+Configurazione Progetto: MySQL
+
+create database traveldreamdb;
+
+create user 'adminTravelDream'@'localhost' identified by 'traveldream';
+
+grant all on traveldreamdb.* to 'adminTravelDream'@'localhost';
