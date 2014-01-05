@@ -1,0 +1,2 @@
+INSERT INTO USERS VALUES ('employee@employee.it', 'employee', 'employee', 'employee', '5f4dcc3b5aa765d61d8327deb882cf99' ,'2013-12-25 23:47:12');
+INSERT INTO USERS_GROUPS VALUES ('employee@employee.it','EMPLOYEE');
