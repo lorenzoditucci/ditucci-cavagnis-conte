@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
+  <display-name>se2-traveldream-ditucci-cavagnis-conte</display-name>
+  <module>
+    <web>
+      <web-uri>se2-traveldream-ditucci-cavagnis-conteWeb.war</web-uri>
+      <context-root>se2-traveldream-ditucci-cavagnis-conteWeb</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>se2-traveldream-ditucci-cavagnis-conteEJB.jar</ejb>
+  </module>
+</application>
