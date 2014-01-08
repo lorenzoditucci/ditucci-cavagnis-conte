@@ -3,6 +3,24 @@
 	<persistence-unit name="se2-traveldream-ditucci-cavagnis-conteEJB">
 		<jta-data-source>jdbc/traveldreamdb_connection</jta-data-source>
 		<class>it.polimi.traveldream.ejb.management.entity.User</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Acquista</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.AcquistaPK</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Citta</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Cliente</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Dipendente</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Escursione</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Escursioniacquistate</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.EscursioniacquistatePK</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Giftlist</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Hotel</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Hotelacquistati</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.HotelacquistatiPK</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Pacchetto</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Pernottamento</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.PernottamentoPK</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Voliacquistati</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.VoliacquistatiPK</class>
+		<class>it.polimi.traveldream.ejb.management.entity.generated.Volo</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 		</properties>
