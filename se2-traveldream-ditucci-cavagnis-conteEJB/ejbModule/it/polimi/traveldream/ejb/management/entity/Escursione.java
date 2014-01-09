@@ -1,49 +1,44 @@
-package it.polimi.traveldream.ejb.management.entity.generated;
+package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the escursione database table.
+ * The persistent class for the Escursione database table.
  * 
  */
 @Entity
-@Table(name="escursione")
+@Table(name="Escursione")
 @NamedQuery(name="Escursione.findAll", query="SELECT e FROM Escursione e")
 public class Escursione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_escursione", unique=true, nullable=false)
+	@Column(unique=true, nullable=false)
 	private int idEscursione;
 
-	private int acquistato;
+	@Column(nullable=false)
+	private byte acquistato;
 
-	@Column(length=45)
+	@Column(nullable=false, length=45)
 	private String citta;
 
+	@Column(nullable=false)
 	private double costo;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_fine")
-	private Date dataFine;
+	@Column(nullable=false)
+	private Timestamp dataFine;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_inizio")
-	private Date dataInizio;
+	@Column(nullable=false)
+	private Timestamp dataInizio;
 
-	@Column(length=45)
+	@Column(nullable=false, length=45)
 	private String descrizione;
 
-	@Column(length=45)
+	@Column(nullable=false, length=45)
 	private String nome;
-
-	//bi-directional many-to-many association to Pacchetto
-	@ManyToMany(mappedBy="escursiones")
-	private List<Pacchetto> pacchettos;
 
 	public Escursione() {
 	}
@@ -56,11 +51,11 @@ public class Escursione implements Serializable {
 		this.idEscursione = idEscursione;
 	}
 
-	public int getAcquistato() {
+	public byte getAcquistato() {
 		return this.acquistato;
 	}
 
-	public void setAcquistato(int acquistato) {
+	public void setAcquistato(byte acquistato) {
 		this.acquistato = acquistato;
 	}
 
@@ -80,19 +75,19 @@ public class Escursione implements Serializable {
 		this.costo = costo;
 	}
 
-	public Date getDataFine() {
+	public Timestamp getDataFine() {
 		return this.dataFine;
 	}
 
-	public void setDataFine(Date dataFine) {
+	public void setDataFine(Timestamp dataFine) {
 		this.dataFine = dataFine;
 	}
 
-	public Date getDataInizio() {
+	public Timestamp getDataInizio() {
 		return this.dataInizio;
 	}
 
-	public void setDataInizio(Date dataInizio) {
+	public void setDataInizio(Timestamp dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 
@@ -110,14 +105,6 @@ public class Escursione implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Pacchetto> getPacchettos() {
-		return this.pacchettos;
-	}
-
-	public void setPacchettos(List<Pacchetto> pacchettos) {
-		this.pacchettos = pacchettos;
 	}
 
 }

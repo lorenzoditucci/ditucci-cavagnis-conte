@@ -1,32 +1,34 @@
-package it.polimi.traveldream.ejb.management.entity.generated;
+package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.util.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 
 /**
- * The persistent class for the volo database table.
+ * The persistent class for the Volo database table.
  * 
  */
 @Entity
-@Table(name="volo")
+@Table(name="Volo")
 @NamedQuery(name="Volo.findAll", query="SELECT v FROM Volo v")
 public class Volo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_volo", unique=true, nullable=false)
+	@Column(unique=true, nullable=false)
 	private int idVolo;
 
 	@Column(nullable=false)
-	private int acquistato;
+	private byte acquistato;
 
-	@Column(name="citta_arrivo", nullable=false, length=45)
+	@Column(nullable=false, length=45)
 	private String cittaArrivo;
 
-	@Column(name="citta_partenza", nullable=false, length=45)
+	@Column(nullable=false, length=45)
 	private String cittaPartenza;
 
 	@Column(nullable=false, length=45)
@@ -35,26 +37,11 @@ public class Volo implements Serializable {
 	@Column(nullable=false)
 	private double costo;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_fine", nullable=false)
-	private Date dataFine;
+	@Column(nullable=false)
+	private Timestamp dataFine;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_inizio", nullable=false)
-	private Date dataInizio;
-
-	//bi-directional many-to-many association to Pacchetto
-	@ManyToMany
-	@JoinTable(
-		name="volipacchetto"
-		, joinColumns={
-			@JoinColumn(name="id_volo", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_pacchetto", nullable=false)
-			}
-		)
-	private List<Pacchetto> pacchettos;
+	@Column(nullable=false)
+	private Timestamp dataInizio;
 
 	public Volo() {
 	}
@@ -67,11 +54,11 @@ public class Volo implements Serializable {
 		this.idVolo = idVolo;
 	}
 
-	public int getAcquistato() {
+	public byte getAcquistato() {
 		return this.acquistato;
 	}
 
-	public void setAcquistato(int acquistato) {
+	public void setAcquistato(byte acquistato) {
 		this.acquistato = acquistato;
 	}
 
@@ -107,28 +94,26 @@ public class Volo implements Serializable {
 		this.costo = costo;
 	}
 
-	public Date getDataFine() {
+	public Timestamp getDataFine() {
 		return this.dataFine;
 	}
 
-	public void setDataFine(Date dataFine) {
+	public void setDataFine(Timestamp dataFine) {
 		this.dataFine = dataFine;
 	}
 
-	public Date getDataInizio() {
+	public Timestamp getDataInizio() {
 		return this.dataInizio;
 	}
 
-	public void setDataInizio(Date dataInizio) {
+	public void setDataInizio(Timestamp dataInizio) {
 		this.dataInizio = dataInizio;
 	}
-
-	public List<Pacchetto> getPacchettos() {
-		return this.pacchettos;
-	}
-
-	public void setPacchettos(List<Pacchetto> pacchettos) {
-		this.pacchettos = pacchettos;
-	}
-
+	
+	/**
+	 * associazione many to many con Gift List
+	 */
+	
+		@ManyToMany(mappedBy="voli")
+		private List<GiftList> giftLists;
 }
