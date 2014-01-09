@@ -35,8 +35,11 @@
 				<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
 				<p:password id="pwd2" label="Confirm Password" value="#{registerBean.user.password}"/>
 			</h:panelGrid>
-			<p:commandButton value="Register" update="regGrid"
+			<p:commandButton value="Registrati" update="regGrid"
 				action="#{registerBean.register()}" />
+			<p:commandButton value="Pulisci" type="reset" />
+			<p:button value="Indietro" outcome="home"/>
+				
 
 		</p:panel>
 	</h:form>
