@@ -2,13 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<h:head>
+	<title>HomePage</title>
+</h:head>
 <h:body>
-	<h1>Hello #{userBean.name}</h1>
-	<h:form>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
+    	<h:form>
 		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
-	</h:form>
-</h:body>
+		</h:form>
+		<h:form><h4>Ricerca Pacchetto</h4></h:form>
+		
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="creapacchetto"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+    
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
 </html>
+
+
+
+
+
