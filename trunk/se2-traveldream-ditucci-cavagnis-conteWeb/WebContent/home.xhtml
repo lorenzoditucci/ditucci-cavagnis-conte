@@ -16,11 +16,25 @@
     </p:layoutUnit>  
     
     <p:layoutUnit position="west" size="200" resizable="true">  
-    	<h:link outcome="user/index" value="Accedi" /> <br />
-        <h:link outcome="employee/index" value="Area Impiegati" /> <br /> 
+    	<h:button outcome="user/index" value="Accedi"/> <br />
+        <h:button outcome="employee/index" value="Area Impiegati" /> <br /> 
 		<br />
-		<h:link value="Registrati" outcome="register" /> 
+		<h:button value="Registrati" outcome="register" /> 
 		<br />
+		<p:panelGrid columns="1" style="width=100%">
+		    <f:facet name="giftList">
+		        Gift List Area
+		    </f:facet>
+		
+		    <p:inputText id="codiceGiftList" value="codice gift list" label="codiceGistList" />
+		    
+		    <f:facet name="footer">
+		        <p:commandButton type="button" update="giftList" value="Cerca" icon="ui-icon-search"
+		        					action="#{cercaGiftListBean.cerca()}"/>
+		    </f:facet>
+		</p:panelGrid>
+		
+		
 	
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
