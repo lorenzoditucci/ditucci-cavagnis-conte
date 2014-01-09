@@ -15,6 +15,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -150,5 +152,19 @@ public class User implements Serializable {
                 + ", lastName=" + lastName +", address=" + address +", password=" + password
                 + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }
+    
+    /**
+	 * connessione pacchetto - acquista
+	 */
+	@ManyToMany
+	@JoinTable(
+			name="Acquista"
+			, joinColumns={
+					@JoinColumn(name="mail", nullable=false)
+			}
+			, inverseJoinColumns={
+					@JoinColumn(name="idPacchetto", nullable=false)
+			})
+	private List<Pacchetto> pacchetti;
 }
 
