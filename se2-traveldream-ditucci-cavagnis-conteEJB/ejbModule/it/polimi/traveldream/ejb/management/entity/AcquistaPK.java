@@ -13,19 +13,11 @@ public class AcquistaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(unique=true, nullable=false)
-	private int mailCliente;
-
-	@Column(unique=true, nullable=false)
 	private int idPacchetto;
 
 	public AcquistaPK() {
 	}
-	public int getMailCliente() {
-		return this.mailCliente;
-	}
-	public void setMailCliente(int mailCliente) {
-		this.mailCliente = mailCliente;
-	}
+	
 	public int getIdPacchetto() {
 		return this.idPacchetto;
 	}
@@ -42,14 +34,12 @@ public class AcquistaPK implements Serializable {
 		}
 		AcquistaPK castOther = (AcquistaPK)other;
 		return 
-			(this.mailCliente == castOther.mailCliente)
-			&& (this.idPacchetto == castOther.idPacchetto);
+			(this.idPacchetto == castOther.idPacchetto);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.mailCliente;
 		hash = hash * prime + this.idPacchetto;
 		
 		return hash;
