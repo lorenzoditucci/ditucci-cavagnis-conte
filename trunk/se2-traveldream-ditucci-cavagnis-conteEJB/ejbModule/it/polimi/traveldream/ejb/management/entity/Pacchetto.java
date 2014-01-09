@@ -41,10 +41,8 @@ public class Pacchetto implements Serializable {
 	private int disponibilitaMax;
 
 	@Column(nullable=false, length=45)
-	private String mailCliente;
+	private String mail;
 
-	@Column(nullable=false, length=45)
-	private String mailDipendente;
 
 	@Column(nullable=false, length=45)
 	private String nome;
@@ -108,20 +106,13 @@ public class Pacchetto implements Serializable {
 		this.disponibilitaMax = disponibilitaMax;
 	}
 
-	public String getMailCliente() {
-		return this.mailCliente;
+
+	public String getMail() {
+		return this.mail;
 	}
 
-	public void setMailCliente(String mailCliente) {
-		this.mailCliente = mailCliente;
-	}
-
-	public String getMailDipendente() {
-		return this.mailDipendente;
-	}
-
-	public void setMailDipendente(String mailDipendente) {
-		this.mailDipendente = mailDipendente;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public String getNome() {
@@ -206,5 +197,12 @@ public class Pacchetto implements Serializable {
 					@JoinColumn(name="idCitta", nullable=false)
 			})
 	private List<Citta> cittaDestinazione;
+	
+	/**
+	 * associazione con User - acquista
+	 */
+	
+		@ManyToMany(mappedBy="pacchetti")
+		private List<User> users;
 	
 }
