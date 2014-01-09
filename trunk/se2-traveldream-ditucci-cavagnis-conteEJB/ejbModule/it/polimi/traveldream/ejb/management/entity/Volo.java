@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -19,11 +21,12 @@ public class Volo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(unique=true, nullable=false)
 	private int idVolo;
 
 	@Column(nullable=false)
-	private byte acquistato;
+	private int acquistato;
 
 	@Column(nullable=false, length=45)
 	private String cittaArrivo;
@@ -46,6 +49,16 @@ public class Volo implements Serializable {
 	public Volo() {
 	}
 
+	public Volo(VoloDTO volo) {
+		this.dataInizio=new Timestamp(volo.getDataPartenza().getTime());
+		this.dataFine=new Timestamp(volo.getDataArrivo().getTime());
+		this.costo=volo.getCosto();
+		this.cittaArrivo=volo.getCittaArrivo();
+		this.cittaPartenza= volo.getCittaPartenza();
+		this.compagnia= volo.getCompagnia();
+		this.acquistato=0; /*a 0 di default in creazione*/
+	}
+
 	public int getIdVolo() {
 		return this.idVolo;
 	}
@@ -54,7 +67,7 @@ public class Volo implements Serializable {
 		this.idVolo = idVolo;
 	}
 
-	public byte getAcquistato() {
+	public int getAcquistato() {
 		return this.acquistato;
 	}
 
@@ -93,22 +106,25 @@ public class Volo implements Serializable {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
-
+	
 	public Timestamp getDataFine() {
-		return this.dataFine;
+		return dataFine;
 	}
 
 	public void setDataFine(Timestamp dataFine) {
 		this.dataFine = dataFine;
 	}
 
-	public Timestamp getDataInizio() { 
-		return this.dataInizio;
+	public Timestamp getDataInizio() {
+		return dataInizio;
 	}
 
 	public void setDataInizio(Timestamp dataInizio) {
 		this.dataInizio = dataInizio;
 	}
+
+
+
 	
 	/**
 	 * associazione many to many con Gift List

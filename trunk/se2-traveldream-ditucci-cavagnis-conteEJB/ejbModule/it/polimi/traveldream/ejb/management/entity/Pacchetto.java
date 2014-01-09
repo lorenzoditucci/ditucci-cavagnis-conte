@@ -44,7 +44,6 @@ public class Pacchetto implements Serializable {
 	@Column(nullable=false, length=45)
 	private String mail;
 
-
 	@Column(nullable=false, length=45)
 	private String nome;
 
