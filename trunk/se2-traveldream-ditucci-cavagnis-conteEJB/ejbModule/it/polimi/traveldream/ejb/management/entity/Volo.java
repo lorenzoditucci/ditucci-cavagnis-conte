@@ -116,4 +116,10 @@ public class Volo implements Serializable {
 	
 		@ManyToMany(mappedBy="voli")
 		private List<GiftList> giftLists;
+		
+	/**
+	 * associazione con Pacchetto (volinpacchetto)
+	 */
+		@ManyToMany(mappedBy="voli")
+		private List<Pacchetto> pacchetti;
 }
