@@ -19,6 +19,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -27,6 +32,9 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 @Entity
 @Table(name="USERS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING, length = 20)
+@DiscriminatorValue("user")
 @NamedQueries({
 	@NamedQuery(name=User.FIND_ALL,
 				query="SELECT u FROM User u ORDER BY u.registeredOn ASC")
@@ -72,7 +80,7 @@ public class User implements Serializable {
         this.firstName    = user.getFirstName();
         this.lastName     = user.getLastName();   
         this.address     = user.getAddress(); 
-        this.password     = DigestUtils.md5Hex(user.getPassword()); //qui la password è messa in chiaro ma non è da fare!
+        this.password     = DigestUtils.md5Hex(user.getPassword()); //qui la password ï¿½ messa in chiaro ma non ï¿½ da fare!
         this.registeredOn = new Date(); //timestamp della data di registrazione
     }
 	
