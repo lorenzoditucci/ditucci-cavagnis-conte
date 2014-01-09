@@ -1,8 +1,11 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -106,5 +109,12 @@ public class Escursione implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	/**
+	 * associazione many to many con Gift List
+	 */
+	
+		@ManyToMany(mappedBy="escursioni")
+		private List<GiftList> giftLists;
 
 }

@@ -102,7 +102,7 @@ public class Volo implements Serializable {
 		this.dataFine = dataFine;
 	}
 
-	public Timestamp getDataInizio() {
+	public Timestamp getDataInizio() { 
 		return this.dataInizio;
 	}
 
