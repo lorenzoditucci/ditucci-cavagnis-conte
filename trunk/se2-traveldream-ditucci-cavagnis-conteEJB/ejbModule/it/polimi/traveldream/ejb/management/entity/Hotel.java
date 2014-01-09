@@ -1,25 +1,26 @@
-package it.polimi.traveldream.ejb.management.entity.generated;
+package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the hotel database table.
+ * The persistent class for the Hotel database table.
  * 
  */
 @Entity
-@Table(name="hotel")
+@Table(name="Hotel")
 @NamedQuery(name="Hotel.findAll", query="SELECT h FROM Hotel h")
 public class Hotel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_hotel", unique=true, nullable=false)
+	@Column(unique=true, nullable=false)
 	private int idHotel;
 
 	@Column(nullable=false)
-	private int acquistato;
+	private byte acquistato;
 
 	@Column(nullable=false, length=45)
 	private String citta;
@@ -27,7 +28,10 @@ public class Hotel implements Serializable {
 	@Column(nullable=false)
 	private int classe;
 
-	@Column(nullable=false, length=255)
+	@Column(nullable=false)
+	private double costo;
+
+	@Column(nullable=false, length=45)
 	private String descrizione;
 
 	@Column(nullable=false, length=45)
@@ -35,6 +39,10 @@ public class Hotel implements Serializable {
 
 	@Column(nullable=false, length=45)
 	private String nome;
+
+	//bi-directional many-to-many association to GiftList
+	@ManyToMany(mappedBy="hotels")
+	private List<GiftList> giftLists;
 
 	public Hotel() {
 	}
@@ -47,11 +55,11 @@ public class Hotel implements Serializable {
 		this.idHotel = idHotel;
 	}
 
-	public int getAcquistato() {
+	public byte getAcquistato() {
 		return this.acquistato;
 	}
 
-	public void setAcquistato(int acquistato) {
+	public void setAcquistato(byte acquistato) {
 		this.acquistato = acquistato;
 	}
 
@@ -69,6 +77,14 @@ public class Hotel implements Serializable {
 
 	public void setClasse(int classe) {
 		this.classe = classe;
+	}
+
+	public double getCosto() {
+		return this.costo;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 
 	public String getDescrizione() {
@@ -93,6 +109,14 @@ public class Hotel implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<GiftList> getGiftLists() {
+		return this.giftLists;
+	}
+
+	public void setGiftLists(List<GiftList> giftLists) {
+		this.giftLists = giftLists;
 	}
 
 }

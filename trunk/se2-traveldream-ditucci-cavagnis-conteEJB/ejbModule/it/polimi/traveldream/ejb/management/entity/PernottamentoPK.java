@@ -1,10 +1,10 @@
-package it.polimi.traveldream.ejb.management.entity.generated;
+package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the pernottamento database table.
+ * The primary key class for the Pernottamento database table.
  * 
  */
 @Embeddable
@@ -12,10 +12,10 @@ public class PernottamentoPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_pacchetto", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(unique=true, nullable=false)
 	private int idPacchetto;
 
-	@Column(name="id_hotel", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(unique=true, nullable=false)
 	private int idHotel;
 
 	public PernottamentoPK() {
