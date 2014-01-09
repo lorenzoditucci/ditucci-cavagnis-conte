@@ -26,7 +26,9 @@ public class GiftList implements Serializable {
 	@Column(nullable=false, length=45)
 	private String nome;
 
-	//bi-directional many-to-many association to Hotel
+	/**
+	 * connessione bidirezionale many to many con gli hotel
+	 */
 	@ManyToMany
 	@JoinTable(
 		name="HotelAcquistati"
@@ -39,8 +41,10 @@ public class GiftList implements Serializable {
 		)
 	private List<Hotel> hotels;
 	
-	//bi-directional many-to-many association to Volo
-		@ManyToMany
+	/**
+	 * connessione bidirezionale many to many con i voli
+	 */
+	@ManyToMany
 		@JoinTable(
 			name="VoliAcquistati"
 			, joinColumns={
@@ -52,6 +56,22 @@ public class GiftList implements Serializable {
 			)
 		private List<Volo> voli;
 
+	/**
+	 * connessione bidirezionale many to many con le escursioni
+	 */
+	
+	@ManyToMany
+		@JoinTable(
+				name="EscursioniAcquistate"
+				, joinColumns={
+						@JoinColumn(name="idGiftList", nullable=false)
+				}
+				, inverseJoinColumns={
+						@JoinColumn(name="idEscursione", nullable=false)
+				}
+				)
+		private List<Escursione> escursioni;
+	
 	public GiftList() {
 	}
 
