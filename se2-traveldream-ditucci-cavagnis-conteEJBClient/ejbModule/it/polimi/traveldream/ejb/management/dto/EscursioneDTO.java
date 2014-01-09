@@ -1,20 +1,21 @@
 package it.polimi.traveldream.ejb.management.dto;
+
 /**
- *  Done
- * 
+ * done
  */
 
+
+import java.sql.Timestamp;
 import java.util.List;
+
 
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+public class EscursioneDTO {
 
-
-public class HotelDTO {
-	
 	@NotEmpty
-	private int idHotel;
+	private int idEscursione;
 
 	@NotEmpty
 	private byte acquistato;
@@ -23,31 +24,32 @@ public class HotelDTO {
 	private String citta;
 
 	@NotEmpty
-	private int classe;
-
-	@NotEmpty
 	private double costo;
 
 	@NotEmpty
-	private String descrizione;
+	private Timestamp dataFine;
 
 	@NotEmpty
-	private String indirizzo;
+	private Timestamp dataInizio;
+
+	@NotEmpty
+	private String descrizione;
 
 	@NotEmpty
 	private String nome;
 	
 	@NotEmpty
 	private List<GiftListDTO> giftLists;
+		
 	@NotEmpty
-	private List<GiftListDTO> pacchetti;
+	private List<PacchettoDTO> pacchetti;
 
-	public int getIdHotel() {
-		return idHotel;
+	public int getIdEscursione() {
+		return idEscursione;
 	}
 
-	public void setIdHotel(int idHotel) {
-		this.idHotel = idHotel;
+	public void setIdEscursione(int idEscursione) {
+		this.idEscursione = idEscursione;
 	}
 
 	public byte getAcquistato() {
@@ -66,14 +68,6 @@ public class HotelDTO {
 		this.citta = citta;
 	}
 
-	public int getClasse() {
-		return classe;
-	}
-
-	public void setClasse(int classe) {
-		this.classe = classe;
-	}
-
 	public double getCosto() {
 		return costo;
 	}
@@ -82,20 +76,28 @@ public class HotelDTO {
 		this.costo = costo;
 	}
 
+	public Timestamp getDataFine() {
+		return dataFine;
+	}
+
+	public void setDataFine(Timestamp dataFine) {
+		this.dataFine = dataFine;
+	}
+
+	public Timestamp getDataInizio() {
+		return dataInizio;
+	}
+
+	public void setDataInizio(Timestamp dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+
 	public String getDescrizione() {
 		return descrizione;
 	}
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
 	}
 
 	public String getNome() {
@@ -114,14 +116,13 @@ public class HotelDTO {
 		this.giftLists = giftLists;
 	}
 
-	public List<GiftListDTO> getPacchetti() {
+	public List<PacchettoDTO> getPacchetti() {
 		return pacchetti;
 	}
 
-	public void setPacchetti(List<GiftListDTO> pacchetti) {
+	public void setPacchetti(List<PacchettoDTO> pacchetti) {
 		this.pacchetti = pacchetti;
 	}
 	
 	
-
 }
