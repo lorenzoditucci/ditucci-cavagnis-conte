@@ -1,6 +1,8 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -39,5 +41,13 @@ public class Citta implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	/**
+	 * associazione con Pacchetto - destinazione
+	 */
+	
+		@ManyToMany(mappedBy="cittaDestinazione")
+		private List<Pacchetto> pacchetti;
+	
 
 }

@@ -1,8 +1,11 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -128,5 +131,80 @@ public class Pacchetto implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	/**
+	 * connessione bidirezionale many to many con gli hotel
+	 */
+	
+	@ManyToMany
+		@JoinTable(
+				name="Pernottamento"
+				, joinColumns={
+						@JoinColumn(name="idPacchetto", nullable=false)
+				}
+				, inverseJoinColumns={
+						@JoinColumn(name="idHotel", nullable=false)
+				}
+				)
+		private List<Hotel> hotels;
+	
+	/**
+	 * connessione con i voli (voliPacchetto)
+	 */
+	
+	@ManyToMany
+		@JoinTable(
+				name="VoliPacchetto"
+				, joinColumns={
+						@JoinColumn(name="idPacchetto", nullable=false)
+				}
+				, inverseJoinColumns={
+						@JoinColumn(name="idVolo", nullable=false)
+				})
+		private List<Volo> voli;
+	
+	/**
+	 * connessione con escursioni (escursioniPacchetto)
+	 */
+	
+	@ManyToMany
+		@JoinTable(
+				name="EscursioniPacchetto"
+				, joinColumns={
+						@JoinColumn(name="idPacchetto", nullable=false)
+				}
+				, inverseJoinColumns={
+						@JoinColumn(name="idEscursione", nullable=false)
+				})
+		private List<Escursione> escursioni;
+	
+	/**
+	 * connessione giftlist - Contiene
+	 */
+	
+	@ManyToMany
+	@JoinTable(
+			name="Contiene"
+			, joinColumns={
+					@JoinColumn(name="idPacchetto", nullable=false)
+			}
+			, inverseJoinColumns={
+					@JoinColumn(name="idGiftList", nullable=false)
+			})
+	private List<GiftList> giftLists;
+	
+	/**
+	 * connessione citta' - destinazione
+	 */
+	@ManyToMany
+	@JoinTable(
+			name="Destinazione"
+			, joinColumns={
+					@JoinColumn(name="idPacchetto", nullable=false)
+			}
+			, inverseJoinColumns={
+					@JoinColumn(name="idCitta", nullable=false)
+			})
+	private List<Citta> cittaDestinazione;
+	
 }

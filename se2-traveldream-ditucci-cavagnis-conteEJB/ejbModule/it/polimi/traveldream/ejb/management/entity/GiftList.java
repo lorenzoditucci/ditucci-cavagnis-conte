@@ -1,8 +1,9 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
+
 import java.util.List;
 
 
@@ -72,6 +73,24 @@ public class GiftList implements Serializable {
 				)
 		private List<Escursione> escursioni;
 	
+	/**
+	 * connessione pacchetto - Contiene
+	 */
+	
+	@ManyToMany
+	@JoinTable(
+			name="Contiene"
+			, joinColumns={
+					@JoinColumn(name="idGiftList", nullable=false)
+			}
+			, inverseJoinColumns={
+					@JoinColumn(name="idPacchetto", nullable=false)
+			})
+	private List<Pacchetto> pacchettiContenuti;
+	
+
+
+	
 	public GiftList() {
 	}
 
@@ -106,5 +125,12 @@ public class GiftList implements Serializable {
 	public void setHotels(List<Hotel> hotels) {
 		this.hotels = hotels;
 	}
+	
+	/**
+	 * associazione many to many con Gift List
+	 */
+	
+		@ManyToMany(mappedBy="giftLists")
+		private List<Pacchetto> pacchetti;
 
 }

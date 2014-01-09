@@ -1,7 +1,9 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -43,6 +45,13 @@ public class Hotel implements Serializable {
 	//bi-directional many-to-many association to GiftList
 	@ManyToMany(mappedBy="hotels")
 	private List<GiftList> giftLists;
+	
+	/**
+	 * associazione many to many con Gift List
+	 */
+	
+		@ManyToMany(mappedBy="hotels")
+		private List<GiftList> pacchetti;
 
 	public Hotel() {
 	}

@@ -116,5 +116,11 @@ public class Escursione implements Serializable {
 	
 		@ManyToMany(mappedBy="escursioni")
 		private List<GiftList> giftLists;
+		
+	/**
+	 * associazione con Pacchetto - escursioniPacchetto
+	 */
 
+		@ManyToMany(mappedBy="escursioni")
+		private List<Pacchetto> pacchetti;
 }
