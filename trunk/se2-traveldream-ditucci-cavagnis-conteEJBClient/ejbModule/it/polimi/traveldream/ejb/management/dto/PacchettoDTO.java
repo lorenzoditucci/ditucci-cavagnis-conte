@@ -1,6 +1,6 @@
 package it.polimi.traveldream.ejb.management.dto;
 
-/*
+/**
  * Done
  */
 import java.sql.Timestamp;

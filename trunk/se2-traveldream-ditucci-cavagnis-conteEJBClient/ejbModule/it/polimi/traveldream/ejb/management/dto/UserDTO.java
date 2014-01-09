@@ -1,4 +1,7 @@
 package it.polimi.traveldream.ejb.management.dto;
+/**
+ * done
+ */
 
 import javax.validation.constraints.Pattern;
 
