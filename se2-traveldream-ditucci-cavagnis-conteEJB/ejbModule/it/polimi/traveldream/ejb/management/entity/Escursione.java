@@ -1,5 +1,8 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -19,6 +22,7 @@ public class Escursione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(unique=true, nullable=false)
 	private int idEscursione;
 
@@ -44,6 +48,16 @@ public class Escursione implements Serializable {
 	private String nome;
 
 	public Escursione() {
+	}
+	
+	public Escursione(EscursioneDTO escursione) {
+		this.nome=escursione.getNome();
+		this.descrizione=escursione.getDescrizione();
+		this.dataInizio=new Timestamp(escursione.getDataInizio().getTime());
+		this.dataFine=new Timestamp(escursione.getDataFine().getTime());
+		this.costo=escursione.getCosto();
+		this.citta=escursione.getCitta();
+		this.acquistato=0; /*a 0 di default in creazione*/
 	}
 
 	public int getIdEscursione() {
