@@ -1,6 +1,6 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
-import it.polimi.traveldream.ejb.management.CercaMgr;
+import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.User;
@@ -18,9 +18,9 @@ import javax.persistence.TypedQuery;
  * Session Bean implementation class CercaMgrBean
  */
 @Stateless
-@Local(CercaMgr.class)
+@Local(CercaGiftListMgr.class)
 @LocalBean
-public class GiftListMgrBean implements CercaMgr {
+public class CercaGiftListMgrBean implements CercaGiftListMgr {
 
 	@PersistenceContext
     private EntityManager em;
@@ -30,13 +30,13 @@ public class GiftListMgrBean implements CercaMgr {
     /**
      * Default constructor. 
      */
-    public GiftListMgrBean() {
+    public CercaGiftListMgrBean() {
         // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * manager per la ricerca. 
-     * @see CercaMgr#cerca(cercaGiftListDTO)
+     * @see CercaGiftListMgr#cerca(cercaGiftListDTO)
      */
 
     
