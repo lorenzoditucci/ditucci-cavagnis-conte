@@ -4,6 +4,7 @@ import it.polimi.traveldream.ejb.management.CercaMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
@@ -12,7 +13,7 @@ import javax.faces.bean.ViewScoped;
  * Bean utilizzato per cercare i dati all'interno del database giftlist
  */
 @ManagedBean(name="cercaGiftListBean")
-@ViewScoped
+@javax.faces.bean.SessionScoped
 public class CercaGiftListBean {
 
 	/**
@@ -37,14 +38,20 @@ public class CercaGiftListBean {
         risultatoRicerca= new GiftListDTO();
     }
 
-    public void cerca(){
+    public String cerca(){
     	try {
     		setRisultatoRicerca(cercaMGR.cerca(Integer.parseInt(idRicerca)));
         	System.out.println("sto cercando...");
+        	/**
+        	 * metodo per la redirect
+        	 */
+        	return "userNonReg/giftList?faces-redirect=true";
 		} catch (Exception e) {
 			risultatoRicerca = new GiftListDTO();
 			risultatoRicerca.setNome("Non trovato, Riprova");
+			return null;
 		}
+    	
     	
     }
 
