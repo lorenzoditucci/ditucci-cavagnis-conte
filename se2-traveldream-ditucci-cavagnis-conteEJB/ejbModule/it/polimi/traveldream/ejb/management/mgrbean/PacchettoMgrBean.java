@@ -47,17 +47,32 @@ public class PacchettoMgrBean implements pacchettoMgr {
     @Override
     public ArrayList<PacchettoDTO> prendiTutti() {
     	System.out.println("entro in prendi tutti");
+    	/**
+    	 * utilizzo come query la default della entity in quanto mi servono tutti i pacchetti.
+    	 * (DA CAMBIARE) cambiamo l'ordine con cui le prendo.
+    	 */
     	TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("Pacchetto.findAll", Pacchetto.class);
     	List<Pacchetto> listaPacchetti =  queryRicerca.getResultList();
 		
+    	
+    	
     	/**
-    	 * definisco la lista di data type object pacchetto che torno al chiamante
+    	 * ritorno direttamente la copia della lista di pacchetti -risultato della query-
     	 */
-    	ArrayList<PacchettoDTO> pacchettiDaTornare = new ArrayList<PacchettoDTO>();
-    	/**
-    	 * copio dati
-    	 */
-    	for(int i=0; i<listaPacchetti.size();i++){
+    	return copiaListaQuery(listaPacchetti);
+  
+    	
+        
+    }
+
+    /**
+     * Dati x copiare la list di pacchetti che vengono dalla query in una lista di DTO che torno
+     * al chiamante.
+	 * 
+	 */
+	private ArrayList<PacchettoDTO> copiaListaQuery(List<Pacchetto> listaPacchetti) {
+		ArrayList<PacchettoDTO> copia = new ArrayList<PacchettoDTO>();
+		for(int i=0; i<listaPacchetti.size();i++){
     		PacchettoDTO daAggiungere = new PacchettoDTO();
     		daAggiungere.setIdPacchetto(listaPacchetti.get(i).getIdPacchetto());
     		daAggiungere.setCosto(listaPacchetti.get(i).getCosto());
@@ -69,12 +84,9 @@ public class PacchettoMgrBean implements pacchettoMgr {
     		daAggiungere.setMail(listaPacchetti.get(i).getMail());
     		daAggiungere.setNome(listaPacchetti.get(i).getNome());
     		
-    		pacchettiDaTornare.add(daAggiungere);
+    		copia.add(daAggiungere);
     	}
-    	return pacchettiDaTornare;
-  
-    	
-        
-    }
+		return copia;
+	}
 
 }

@@ -1,6 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
-import it.polimi.traveldream.ejb.management.CercaMgr;
+import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.ejb.EJB;
@@ -20,7 +20,7 @@ public class CercaGiftListBean {
 	 * il manager della ricerca e' colui che effettua le vere operazioni tra cui le query
 	 */
 	@EJB
-	private CercaMgr cercaMGR;
+	private CercaGiftListMgr cercaMGR;
 	//private GiftListDTO ricercaGiftList;//CHE MINCHIA E'?
 	/**
 	 * qui ci salvo il risultato della ricerca
