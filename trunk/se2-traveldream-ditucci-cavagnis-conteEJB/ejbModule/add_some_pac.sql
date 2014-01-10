@@ -1,0 +1,4 @@
+INSERT INTO Pacchetto (idpacchetto,costo,datainizio,datafine,descrizione,disponibilitaattuale,disponibilitamax,mail,nome) VALUES ("1","357","1970-12-31","1971-12-31","descrizione","10","100","lorenzo@lorenzo.it","franco");
+INSERT INTO Pacchetto (idpacchetto,costo,datainizio,datafine,descrizione,disponibilitaattuale,disponibilitamax,mail,nome) VALUES ("2","360","1970-12-31","1971-12-31","descrizione","10","100","lorenzo@lorenzo.it","franco");
+INSERT INTO Pacchetto (idpacchetto,costo,datainizio,datafine,descrizione,disponibilitaattuale,disponibilitamax,mail,nome) VALUES ("3","500","1970-12-31","1971-12-31","descrizione","10","100","lorenzo@lorenzo.it","franco");
+INSERT INTO Pacchetto (idpacchetto,costo,datainizio,datafine,descrizione,disponibilitaattuale,disponibilitamax,mail,nome) VALUES ("4","357","1970-12-31","1971-12-31","descrizione","10","100","lorenzo@lorenzo.it","franco");
