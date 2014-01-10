@@ -1,9 +1,14 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
+import it.polimi.traveldream.ejb.management.dto.UserDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -131,11 +136,47 @@ public class GiftList implements Serializable {
 		this.hotels = hotels;
 	}
 	
+	
+	
+	public List<Volo> getVoli() {
+		return voli;
+	}
+
+	public void setVoli(List<Volo> voli) {
+		this.voli = voli;
+	}
+
+	public List<Escursione> getEscursioni() {
+		return escursioni;
+	}
+
+	public void setEscursioni(List<Escursione> escursioni) {
+		this.escursioni = escursioni;
+	}
+
+	public List<Pacchetto> getPacchettiContenuti() {
+		return pacchettiContenuti;
+	}
+
+	public void setPacchettiContenuti(List<Pacchetto> pacchettiContenuti) {
+		this.pacchettiContenuti = pacchettiContenuti;
+	}
+
+	public List<Pacchetto> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<Pacchetto> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
+
+
 	/**
 	 * associazione many to many con Gift List
 	 */
 	
 		@ManyToMany(mappedBy="giftLists")
 		private List<Pacchetto> pacchetti;
+
 
 }
