@@ -6,57 +6,52 @@ package it.polimi.traveldream.ejb.management.dto;
 
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
+
+
+
+
+
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class EscursioneDTO {
 
-	@NotEmpty
-	private int idEscursione;
-
-	@NotEmpty
-	private byte acquistato;
+	@NotNull
+	private int acquistato;
 
 	@NotEmpty
 	private String citta;
 
-	@NotEmpty
+	@NotNull
+	@Min(1)
 	private double costo;
 
-	@NotEmpty
-	private Timestamp dataFine;
+	@NotNull
+	@Future
+	private Date dataFine;
 
-	@NotEmpty
-	private Timestamp dataInizio;
+	@NotNull
+	@Future
+	private Date dataInizio;
 
 	@NotEmpty
 	private String descrizione;
 
 	@NotEmpty
 	private String nome;
-	
-	@NotEmpty
-	private List<GiftListDTO> giftLists;
-		
-	@NotEmpty
-	private List<PacchettoDTO> pacchetti;
 
-	public int getIdEscursione() {
-		return idEscursione;
-	}
-
-	public void setIdEscursione(int idEscursione) {
-		this.idEscursione = idEscursione;
-	}
-
-	public byte getAcquistato() {
+	public int getAcquistato() {
 		return acquistato;
 	}
 
-	public void setAcquistato(byte acquistato) {
+	public void setAcquistato(int acquistato) {
 		this.acquistato = acquistato;
 	}
 
@@ -76,19 +71,19 @@ public class EscursioneDTO {
 		this.costo = costo;
 	}
 
-	public Timestamp getDataFine() {
+	public Date getDataFine() {
 		return dataFine;
 	}
 
-	public void setDataFine(Timestamp dataFine) {
+	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
 	}
 
-	public Timestamp getDataInizio() {
+	public Date getDataInizio() {
 		return dataInizio;
 	}
 
-	public void setDataInizio(Timestamp dataInizio) {
+	public void setDataInizio(Date dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 
@@ -108,21 +103,6 @@ public class EscursioneDTO {
 		this.nome = nome;
 	}
 
-	public List<GiftListDTO> getGiftLists() {
-		return giftLists;
-	}
-
-	public void setGiftLists(List<GiftListDTO> giftLists) {
-		this.giftLists = giftLists;
-	}
-
-	public List<PacchettoDTO> getPacchetti() {
-		return pacchetti;
-	}
-
-	public void setPacchetti(List<PacchettoDTO> pacchetti) {
-		this.pacchetti = pacchetti;
-	}
 	
 	
 }
