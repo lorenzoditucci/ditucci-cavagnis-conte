@@ -35,9 +35,11 @@ public class GiftListMgrBean implements CercaMgr {
     }
 
 	/**
+	 * manager per la ricerca. 
      * @see CercaMgr#cerca(cercaGiftListDTO)
      */
 
+    
 	@Override
 	public GiftListDTO cerca(int ricerca) {
 		TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftList", GiftList.class);
@@ -50,14 +52,10 @@ public class GiftListMgrBean implements CercaMgr {
 		giftListDTO.setNome(giftList.getNome());
 		giftListDTO.setMailCliente(giftList.getMailCliente());
 		/**
-		 * da completare..
+		 * da completare..(mancano le colonne nel database)
 		 */
 		return giftListDTO;
 	}
-	
-	public GiftList find(int id) {
-		//cercare nel database
-    	return em.find(GiftList.class, id);
-    }
+
 
 }
