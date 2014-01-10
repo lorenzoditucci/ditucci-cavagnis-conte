@@ -9,22 +9,31 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
- * Session Bean implementation class CercaGiftList
+ * Bean utilizzato per cercare i dati all'interno del database giftlist
  */
 @ManagedBean(name="cercaGiftListBean")
 @ViewScoped
 public class CercaGiftListBean {
 
+	/**
+	 * il manager della ricerca e' colui che effettua le vere operazioni tra cui le query
+	 */
 	@EJB
 	private CercaMgr cercaMGR;
-	private GiftListDTO ricercaGiftList;//CHE MINCHIA E'?
+	//private GiftListDTO ricercaGiftList;//CHE MINCHIA E'?
+	/**
+	 * qui ci salvo il risultato della ricerca
+	 */
 	private GiftListDTO risultatoRicerca;
+	/**
+	 * parametro che passo contente l'id della gift list da cercare.
+	 */
 	private String idRicerca; //stringa per passare
     /**
      * Default constructor. 
      */
     public CercaGiftListBean() {
-        ricercaGiftList= new GiftListDTO();
+      //  ricercaGiftList= new GiftListDTO();
         risultatoRicerca= new GiftListDTO();
     }
 
@@ -38,14 +47,6 @@ public class CercaGiftListBean {
 		}
     	
     }
-
-	public GiftListDTO getRicerca() {
-		return ricercaGiftList;
-	}
-
-	public void setRicerca(GiftListDTO ricerca) {
-		this.ricercaGiftList = ricerca;
-	}
 
 	public GiftListDTO getRisultatoRicerca() {
 		return risultatoRicerca;
