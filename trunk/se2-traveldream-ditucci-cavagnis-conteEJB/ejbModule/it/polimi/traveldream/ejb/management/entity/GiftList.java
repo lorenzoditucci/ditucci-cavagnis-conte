@@ -13,11 +13,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="GiftList")
-@NamedQuery(name="GiftList.findAll", query="SELECT g FROM GiftList g")
+@NamedQueries({
+	@NamedQuery(name="GiftList.findAll", query="SELECT g FROM GiftList g"),
+	@NamedQuery(name="cercaGiftList", query="SELECT g FROM GiftList g WHERE g.idGiftList= :id")
+})
+
 public class GiftList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(unique=true, nullable=false)
 	private int idGiftList;
 

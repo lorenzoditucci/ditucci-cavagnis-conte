@@ -8,6 +8,6 @@ import javax.ejb.Local;
 @Local
 public interface CercaMgr {
 
-	public void cerca(GiftListDTO ricerca);
+	public GiftListDTO cerca(int ricerca);
 
 }

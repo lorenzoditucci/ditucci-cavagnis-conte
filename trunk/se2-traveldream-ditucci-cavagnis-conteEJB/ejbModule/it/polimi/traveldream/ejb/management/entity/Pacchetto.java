@@ -20,7 +20,7 @@ public class Pacchetto implements Serializable {
 
 	@Id
 	@Column(unique=true, nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private int idPacchetto;
 
 	@Column(nullable=false)

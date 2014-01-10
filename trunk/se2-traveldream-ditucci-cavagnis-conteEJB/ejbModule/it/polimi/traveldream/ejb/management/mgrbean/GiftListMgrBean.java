@@ -12,6 +12,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  * Session Bean implementation class CercaMgrBean
@@ -38,9 +39,20 @@ public class GiftListMgrBean implements CercaMgr {
      */
 
 	@Override
-	public void cerca(GiftListDTO ricerca) {
-		
-		
+	public GiftListDTO cerca(int ricerca) {
+		TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftList", GiftList.class);
+		GiftList giftList = queryRicerca.setParameter("id", ricerca).getSingleResult();
+		GiftListDTO giftListDTO = new GiftListDTO();
+		/**
+		 * prova passaggio oggetto gift list in dto
+		 */
+		giftListDTO.setIdGiftList(giftList.getIdGiftList());
+		giftListDTO.setNome(giftList.getNome());
+		giftListDTO.setMailCliente(giftList.getMailCliente());
+		/**
+		 * da completare..
+		 */
+		return giftListDTO;
 	}
 	
 	public GiftList find(int id) {
