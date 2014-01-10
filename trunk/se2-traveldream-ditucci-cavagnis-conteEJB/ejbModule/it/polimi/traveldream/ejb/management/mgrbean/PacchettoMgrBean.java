@@ -49,7 +49,8 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	System.out.println("entro in prendi tutti");
     	/**
     	 * utilizzo come query la default della entity in quanto mi servono tutti i pacchetti.
-    	 * (DA CAMBIARE) cambiamo l'ordine con cui le prendo.
+    	 * La query di default e' stata leggermente modificata in modo da permettere l'ordine inverso
+    	 * 
     	 */
     	TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("Pacchetto.findAll", Pacchetto.class);
     	List<Pacchetto> listaPacchetti =  queryRicerca.getResultList();
