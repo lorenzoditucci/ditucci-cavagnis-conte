@@ -33,7 +33,7 @@ public class VoloBean {
 	
 	public String aggiungiVolo() {
 		
-		if (volo.getDataArrivo().before(volo.getDataPartenza())) {
+		if (volo.getDataArrivo().getTime() < volo.getDataPartenza().getTime() || volo.getDataArrivo().equals(volo.getDataPartenza())) {
 			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Intervallo date errato", "Non ha senso!!!"));
 		     return "";
 		}
