@@ -4,8 +4,8 @@ package it.polimi.traveldream.ejb.management.dto;
  * 
  */
 
-import java.util.List;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,19 +13,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class HotelDTO {
 	
-	@NotEmpty
-	private int idHotel;
-
-	@NotEmpty
-	private byte acquistato;
+	@NotNull
+	private int acquistato;
 
 	@NotEmpty
 	private String citta;
 
-	@NotEmpty
+	@NotNull
+	@Min(1)
 	private int classe;
 
-	@NotEmpty
+	@NotNull
+	@Min(1)
 	private double costo;
 
 	@NotEmpty
@@ -36,25 +35,13 @@ public class HotelDTO {
 
 	@NotEmpty
 	private String nome;
-	
-	@NotEmpty
-	private List<GiftListDTO> giftLists;
-	@NotEmpty
-	private List<GiftListDTO> pacchetti;
 
-	public int getIdHotel() {
-		return idHotel;
-	}
 
-	public void setIdHotel(int idHotel) {
-		this.idHotel = idHotel;
-	}
-
-	public byte getAcquistato() {
+	public int getAcquistato() {
 		return acquistato;
 	}
 
-	public void setAcquistato(byte acquistato) {
+	public void setAcquistato(int acquistato) {
 		this.acquistato = acquistato;
 	}
 
@@ -105,23 +92,5 @@ public class HotelDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public List<GiftListDTO> getGiftLists() {
-		return giftLists;
-	}
-
-	public void setGiftLists(List<GiftListDTO> giftLists) {
-		this.giftLists = giftLists;
-	}
-
-	public List<GiftListDTO> getPacchetti() {
-		return pacchetti;
-	}
-
-	public void setPacchetti(List<GiftListDTO> pacchetti) {
-		this.pacchetti = pacchetti;
-	}
-	
-	
 
 }

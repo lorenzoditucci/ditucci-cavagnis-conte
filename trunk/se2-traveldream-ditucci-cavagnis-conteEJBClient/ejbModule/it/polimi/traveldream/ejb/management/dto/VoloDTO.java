@@ -31,7 +31,7 @@ public class VoloDTO {
     private Date dataArrivo;
 	
 	@NotNull
-	@Min(0)
+	@Min(1)
     private Double costo;
     
 	public String getCompagnia() {
