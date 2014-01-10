@@ -5,10 +5,27 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+	<title>HomePage - Clienti</title>
+</h:head>
 <h:body>
-	<h1>Hello #{userBean.name}</h1>
-	<h:form>
-		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
-	</h:form>
-</h:body>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream - Clienti
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+        Vari pacchetti, fare css con quadratini che quando passi il mouse si colorano? oppure possiamo usare la funzione che abbassa lo schermo(carino l'italiano)
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
 </html>

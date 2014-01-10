@@ -42,8 +42,12 @@ public class GiftListMgrBean implements CercaMgr {
     
 	@Override
 	public GiftListDTO cerca(int ricerca) {
+		
 		TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftList", GiftList.class);
 		GiftList giftList = queryRicerca.setParameter("id", ricerca).getSingleResult();
+			
+		
+		
 		GiftListDTO giftListDTO = new GiftListDTO();
 		/**
 		 * prova passaggio oggetto gift list in dto
