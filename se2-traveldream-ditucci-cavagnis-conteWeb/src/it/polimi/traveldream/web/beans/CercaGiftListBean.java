@@ -45,7 +45,7 @@ public class CercaGiftListBean {
         	/**
         	 * metodo per la redirect
         	 */
-        	return "userNonReg/giftList?faces-redirect=true";
+        	return "giftList?faces-redirect=true";
 		} catch (Exception e) {
 			risultatoRicerca = new GiftListDTO();
 			risultatoRicerca.setNome("Non trovato, Riprova");
