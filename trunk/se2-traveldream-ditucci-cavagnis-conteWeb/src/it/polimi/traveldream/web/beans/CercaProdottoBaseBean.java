@@ -32,12 +32,7 @@ public class CercaProdottoBaseBean {
 	/*
 	 * Parametri di ricerca per l'Hotel
 	 */
-	private String hotelNome;
-
-	private String hotelCitta;
-
-	private int hotelClasse;
-
+	private HotelDTO hotel;
 
     /**
      * Default constructor. 
@@ -46,14 +41,17 @@ public class CercaProdottoBaseBean {
         this.risultatoRicercaEscursione= new ArrayList<EscursioneDTO>();
         this.risultatoRicercaHotel = new ArrayList<HotelDTO>();
         this.risultatoRicercaVolo = new ArrayList<VoloDTO>();
+        this.hotel = new HotelDTO();
+        
     }
 
     public String cercaHotel(){  
-    	System.out.println("Sto cercando");
-    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotelNome, hotelCitta, hotelClasse));
+    	System.out.println(hotel.getNome());
+    	
+    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getNome(),hotel.getDescrizione(),hotel.getClasse()));
 		System.out.println("Ho finito di cercare");
 
-    	return null;
+    	return "risultatiricercahotel?faces-redirect=true";
     }
     
     /*
@@ -85,28 +83,13 @@ public class CercaProdottoBaseBean {
 		this.risultatoRicercaEscursione = risultatoRicercaEscursione;
 	}
 
-	public String getHotelCitta() {
-		return hotelCitta;
+
+	public HotelDTO getHotel() {
+		return hotel;
 	}
 
-	public void setHotelCitta(String hotelCitta) {
-		this.hotelCitta = hotelCitta;
-	}
-
-	public int getHotelClasse() {
-		return hotelClasse;
-	}
-
-	public void setHotelClasse(int hotelClasse) {
-		this.hotelClasse = hotelClasse;
-	}
-	
-	public String getHotelNome() {
-		return hotelNome;
-	}
-
-	public void setHotelNome(String hotelNome) {
-		this.hotelNome = hotelNome;
+	public void setHotel(HotelDTO hotel) {
+		this.hotel = hotel;
 	}
 
  
