@@ -49,9 +49,8 @@ public class CercaProdottoBaseBean {
     }
 
     public String cercaHotel(){  
-    	System.out.println(hotel.getNome());
-    	
-    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getNome()));
+    
+    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getIdHotel()));
 		System.out.println("Ho finito di cercare");
 
     	return "risultatiricercahotel?faces-redirect=true";
