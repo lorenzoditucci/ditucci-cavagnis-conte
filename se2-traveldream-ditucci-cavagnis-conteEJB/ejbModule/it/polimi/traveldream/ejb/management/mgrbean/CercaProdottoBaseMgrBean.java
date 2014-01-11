@@ -8,9 +8,11 @@ import it.polimi.traveldream.ejb.management.pacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
+import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
@@ -51,9 +53,7 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
     	TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
     	
     	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", idHotel).getResultList();
-    	
-    	
-    	
+
     	if(listaHotel.size()>0) System.out.println("Lista non vuota");
     	else System.out.println("Lista VUOTA");
     	
@@ -77,7 +77,37 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
 	    	}
 			return copia;
 	}
-    
+
+	@Override
+	public ArrayList<VoloDTO> cercaVolo(int idVolo) {
+		TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
+    	
+    	List<Volo> listaVolo = queryRicerca.setParameter("idVolo", idVolo).getResultList();
+
+    	if(listaVolo.size()>0) System.out.println("Lista non vuota");
+    	else System.out.println("Lista VUOTA");
+    	
+    	return convertiInListaVoloDTO(listaVolo); 
+	}
+
+	private ArrayList<VoloDTO> convertiInListaVoloDTO(List<Volo> listaVolo) {
+		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
+		for(int i=0; i<listaVolo.size();i++){
+    		VoloDTO daAggiungere = new VoloDTO();
+    		daAggiungere.setIdVolo(listaVolo.get(i).getIdVolo());
+    		daAggiungere.setCompagnia(listaVolo.get(i).getCompagnia());
+    		daAggiungere.setDataPartenza(listaVolo.get(i).getDataInizio());
+    		daAggiungere.setDataArrivo(listaVolo.get(i).getDataFine());
+    		daAggiungere.setCittaPartenza(listaVolo.get(i).getCittaPartenza());
+    		daAggiungere.setCittaArrivo(listaVolo.get(i).getCittaArrivo());
+    		daAggiungere.setCosto(listaVolo.get(i).getCosto());
+    		daAggiungere.setAcquistato(listaVolo.get(i).getAcquistato());
+    		copia.add(daAggiungere);
+    	}
+		return copia;
+	}
+
+	
     
    
     
