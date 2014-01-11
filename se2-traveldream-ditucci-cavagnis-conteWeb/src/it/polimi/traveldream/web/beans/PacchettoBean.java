@@ -30,6 +30,9 @@ public class PacchettoBean {
     }
     
     public void cercaAll(){
+    	/*
+    	 * Prendi tutti?? non avevamo detto che si prendevano gli ultimi aggiunti?
+    	 * */
     	setRisultato(pacchettoMgr.prendiTutti());
     	
     }
