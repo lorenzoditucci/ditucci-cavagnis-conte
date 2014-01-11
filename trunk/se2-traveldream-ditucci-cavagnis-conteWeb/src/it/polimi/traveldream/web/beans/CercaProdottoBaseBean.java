@@ -7,6 +7,7 @@ import it.polimi.traveldream.ejb.management.CercaProdottoBaseMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
+import it.polimi.traveldream.ejb.management.dto.HotelRicercaDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
@@ -32,23 +33,25 @@ public class CercaProdottoBaseBean {
 	/*
 	 * Parametri di ricerca per l'Hotel
 	 */
-	private HotelDTO hotel;
+	private HotelRicercaDTO hotel;
 
-    /**
+    
+
+	/**
      * Default constructor. 
      */
     public CercaProdottoBaseBean() {
         this.risultatoRicercaEscursione= new ArrayList<EscursioneDTO>();
         this.risultatoRicercaHotel = new ArrayList<HotelDTO>();
         this.risultatoRicercaVolo = new ArrayList<VoloDTO>();
-        this.hotel = new HotelDTO();
+        this.hotel = new HotelRicercaDTO();
         
     }
 
     public String cercaHotel(){  
     	System.out.println(hotel.getNome());
     	
-    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getNome(),hotel.getDescrizione(),hotel.getClasse()));
+    	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getNome()));
 		System.out.println("Ho finito di cercare");
 
     	return "risultatiricercahotel?faces-redirect=true";
@@ -82,15 +85,15 @@ public class CercaProdottoBaseBean {
 			ArrayList<EscursioneDTO> risultatoRicercaEscursione) {
 		this.risultatoRicercaEscursione = risultatoRicercaEscursione;
 	}
-
-
-	public HotelDTO getHotel() {
+	public HotelRicercaDTO getHotel() {
 		return hotel;
 	}
 
-	public void setHotel(HotelDTO hotel) {
+	public void setHotel(HotelRicercaDTO hotel) {
 		this.hotel = hotel;
 	}
+
+	
 
  
 }
