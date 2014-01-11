@@ -62,7 +62,6 @@ public class CercaProdottoBaseBean {
     public String cercaVolo(){  
         
     	setRisultatoRicercaVolo(cercaProdottoBaseMgr.cercaVolo(volo.getIdVolo()));
-		System.out.println(getRisultatoRicercaVolo().get(0).getIdVolo());
 
     	return "risultatiricercavolo?faces-redirect=true";
     }
