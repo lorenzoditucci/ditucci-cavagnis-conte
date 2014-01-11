@@ -8,4 +8,6 @@ public interface pacchettoMgr {
 
 	ArrayList<PacchettoDTO> prendiTutti();
 
+	ArrayList<PacchettoDTO> prendiAcquistati(String userEmail);
+
 }

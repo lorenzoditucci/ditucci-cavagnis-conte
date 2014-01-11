@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 /**
  * bean per la gestione dei pacchetti
@@ -17,6 +18,13 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name="pacchettoBean")
 @javax.faces.bean.SessionScoped
 public class PacchettoBean {
+	
+	/**
+	 * questo serve x recuperare il bean in questione
+	 * per utilizzare cioe' la mail dell'utente
+	 */
+	@ManagedProperty("#{userBean.mail}")
+	private String userEmail;
 	
 	@EJB
 	private pacchettoMgr pacchettoMgr;
@@ -27,6 +35,7 @@ public class PacchettoBean {
      */
     public PacchettoBean() {
         setRisultato(new ArrayList<PacchettoDTO>());
+        userEmail = new String();
     }
     
     public void cercaAll(){
@@ -37,6 +46,10 @@ public class PacchettoBean {
     	
     }
 
+    public void cercaAcquistati(){
+    	setRisultato(pacchettoMgr.prendiAcquistati(userEmail));
+    	
+    }
 	public ArrayList<PacchettoDTO> getRisultato() {
 		return risultato;
 	}
@@ -45,4 +58,12 @@ public class PacchettoBean {
 		this.risultato = risultato;
 	}
 
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 }
