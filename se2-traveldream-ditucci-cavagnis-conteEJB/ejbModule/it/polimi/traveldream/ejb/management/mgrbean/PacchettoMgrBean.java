@@ -68,7 +68,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
      * al chiamante.
 	 * 
 	 */
-	private ArrayList<PacchettoDTO> copiaListaQuery(List<Pacchetto> listaPacchetti) {
+	public static ArrayList<PacchettoDTO> copiaListaQuery(List<Pacchetto> listaPacchetti) {
 		ArrayList<PacchettoDTO> copia = new ArrayList<PacchettoDTO>();
 		for(int i=0; i<listaPacchetti.size();i++){
     		PacchettoDTO daAggiungere = new PacchettoDTO();

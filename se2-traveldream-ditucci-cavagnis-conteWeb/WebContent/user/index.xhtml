@@ -23,6 +23,27 @@
 		</h:form>
 		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
 		
+		<h:form id="ricercaPacchetto">
+    
+		<p:panel header="Ricerca Pacchetto">
+		
+			<h:panelGrid columns="3" id="pacchettoGrid">
+	
+			<h:outputLabel for="email-pacchetto">email</h:outputLabel>
+        	<h:inputText id="email-pacchetto" value="#{cercaPacchettoBean.emailPacchetto}"/> 
+            <h:message for="email-pacchetto"></h:message>
+         
+
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+			    <h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+			
+			
+		<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+       </h:panelGrid>
+       </p:panel>
+	</h:form>
+		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
     

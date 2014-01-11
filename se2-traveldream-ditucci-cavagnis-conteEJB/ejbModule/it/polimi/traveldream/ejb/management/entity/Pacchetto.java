@@ -16,7 +16,8 @@ import java.util.List;
 @Table(name="Pacchetto")
 @NamedQueries({
 	@NamedQuery(name="Pacchetto.findAll", query="SELECT p FROM Pacchetto p ORDER BY p.idPacchetto DESC"),
-	@NamedQuery(name="cercaDaEmail", query="SELECT p FROM Pacchetto P where p.mail = :email")
+	@NamedQuery(name="cercaDaEmail", query="SELECT p FROM Pacchetto p where p.mail = :email"),
+	@NamedQuery(name="cercaPacchettiTuttiParam", query="SELECT p FROM Pacchetto p where (p.mail LIKE :mail AND p.nome LIKE :nome)")
 	
 })
 
