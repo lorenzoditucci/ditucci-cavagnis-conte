@@ -47,9 +47,14 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
     	/*
     	 * Cerco per nome
     	 * */
+    	System.out.println(""+nome);
     	TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelNome", Hotel.class);
+    	
     	List<Hotel> listaHotel = queryRicerca.setParameter("nome", nome).getResultList();
     	
+    	
+    	if(listaHotel.size()>0) System.out.println("Lista non vuota");
+    	else System.out.println("Lista VUOTA");
     	
     	return convertiInListaDTO(listaHotel);     
     }
