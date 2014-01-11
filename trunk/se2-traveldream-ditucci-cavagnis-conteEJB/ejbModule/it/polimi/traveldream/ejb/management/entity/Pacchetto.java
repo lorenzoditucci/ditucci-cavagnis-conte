@@ -14,7 +14,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="Pacchetto")
-@NamedQuery(name="Pacchetto.findAll", query="SELECT p FROM Pacchetto p ORDER BY p.idPacchetto DESC")
+@NamedQueries({
+	@NamedQuery(name="Pacchetto.findAll", query="SELECT p FROM Pacchetto p ORDER BY p.idPacchetto DESC"),
+	@NamedQuery(name="cercaDaEmail", query="SELECT p FROM Pacchetto P where p.mail = :email")
+	
+})
+
+	
+	
+
+
 public class Pacchetto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

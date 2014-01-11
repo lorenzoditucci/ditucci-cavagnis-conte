@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+<h:head>
+	<title>Clienti - Pacchetti Acquistati</title>
+</h:head>
+<h:body>
+<h:outputStylesheet library="css" name="../resources/style.css"  />
+<!-- chiamo il bean -->
+<!-- 
+	RAGIONAMENTO: FACCIAMO LO STESSO BEAN O NE CREIAMO UNO NUOVO?
+		OPZIONE 1 - STESSO BEAN: AD OGNI CAMBIO DI PAGINA ESEGUE UNA QUERY E IL RISULTATO HA DUE COSE DIVERSE A DIFFERENZA DELLA PAGINA CHE SI GUARDA
+		OPZIONE 2 - BEAN DIVERSO: SONO DUE COSE DIVERSE...
+	 -->
+#{pacchettoBean.cercaAcquistati()}
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream - Clienti - Pacchetti Acquistati
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+        PACCHETTI ACQUISTATI
+        
+        <div id='contenitore-pacchetto'>
+        	<div id="pacchetto-titolo">
+        	titolo del pacchetto
+        	</div>
+        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
+        </div>
+        <div class='contenitore-pacchetto'>
+        	<div class="pacchetto-titolo">
+        	titolo del pacchetto
+        	</div>
+        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
+        </div>
+        <!-- PROVA -->
+			       <h:form id="form">
+		
+			<p:dataGrid var="pack" value="#{pacchettoBean.risultato}" columns="3"
+				rows="12" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="9,12,15">
+		
+		        <p:panel header="#{pack.idPacchetto}" style="text-align:center">
+		            <h:panelGrid columns="1" style="width:100%">
+		                <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/> 
+		
+		                <h:outputText value="#{pack.mail}" />
+		
+		                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
+		                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" /> 
+		                    <f:setPropertyActionListener value="#{pacchettoBean}" 
+		                            target="#{pacchettoBean.risultato}" />
+		                </p:commandLink>
+		            </h:panelGrid>
+		        </p:panel>
+		
+			</p:dataGrid>
+			
+			<p:dialog header="Car Detail" widgetVar="carDialog" modal="true">
+				<p:outputPanel id="carDetail" style="text-align:center;">
+				
+					<p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
+					
+					<h:panelGrid  columns="2" cellpadding="5">
+						<h:outputLabel for="modelNo" value="Model No: " />
+						<h:outputText id="modelNo" value="#{tableBean.selectedCar.model}" />
+						
+						<h:outputLabel for="year" value="Year: " />
+						<h:outputText id="year" value="#{tableBean.selectedCar.year}" />
+						
+						<h:outputLabel for="color" value="Color: " />
+						<h:outputText id="color" value="#{tableBean.selectedCar.color}" style="color:#{tableBean.selectedCar.color}"/>
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		
+		</h:form>
+		
+			
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>

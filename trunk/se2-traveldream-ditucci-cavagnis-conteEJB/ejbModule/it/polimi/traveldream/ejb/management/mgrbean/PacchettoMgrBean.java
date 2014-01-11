@@ -86,5 +86,15 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	}
 		return copia;
 	}
+	
+	@Override
+	public ArrayList<PacchettoDTO> prendiAcquistati(String emailUtente){
+		System.out.println("Sono dentro prendiAcquistati - emailUtente = "+emailUtente);
+		
+		TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("cercaDaEmail", Pacchetto.class);
+		queryRicerca.setParameter("email", emailUtente);
+		List<Pacchetto> listaPacchetti = queryRicerca.getResultList();
+		return copiaListaQuery(listaPacchetti);	
+	}
 
 }
