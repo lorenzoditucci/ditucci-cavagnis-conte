@@ -4,39 +4,22 @@ package it.polimi.traveldream.ejb.management.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-public class VoloDTO {
-
+public class VoloRicercaDTO {
 
 	private int idVolo;
 	
-	@NotEmpty
 	private String compagnia;
 
-	@NotEmpty
     private String cittaPartenza;
-	
-	@NotEmpty
+
     private String cittaArrivo;
 	
-	@NotNull
-	@Future
     private Date dataPartenza;
-	
-	@NotNull
-	@Future
+
     private Date dataArrivo;
-	
-	@NotNull
-	@Min(1)
+
     private Double costo;
-	
-	private int acquistato;
     
 	public String getCompagnia() {
 		return compagnia;
@@ -93,14 +76,5 @@ public class VoloDTO {
 	public void setIdVolo(int idVolo) {
 		this.idVolo = idVolo;
 	}
-
-	public int getAcquistato() {
-		return acquistato;
-	}
-
-	public void setAcquistato(int acquistato) {
-		this.acquistato = acquistato;
-	}
-
 
 }
