@@ -46,15 +46,11 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
    * Mgr per la ricerca degli Hotel
    * */
     @Override
-    public ArrayList<HotelDTO> cercaHotel(String nome) {
+    public ArrayList<HotelDTO> cercaHotel(int idHotel) {
     	
-    	/*
-    	 * Cerco per nome
-    	 * */
-    	System.out.println(""+nome);
-    	TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelNome", Hotel.class);
+    	TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
     	
-    	List<Hotel> listaHotel = queryRicerca.setParameter("nome", nome).getResultList();
+    	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", idHotel).getResultList();
     	
     	
     	
