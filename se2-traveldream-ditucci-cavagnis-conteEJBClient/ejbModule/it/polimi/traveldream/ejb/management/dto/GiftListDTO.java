@@ -1,13 +1,9 @@
 package it.polimi.traveldream.ejb.management.dto;
 
-
-
-
-
+/**
+ * done
+ */
 import java.util.List;
-
-
-
 
 import org.hibernate.validator.constraints.NotEmpty;
 
