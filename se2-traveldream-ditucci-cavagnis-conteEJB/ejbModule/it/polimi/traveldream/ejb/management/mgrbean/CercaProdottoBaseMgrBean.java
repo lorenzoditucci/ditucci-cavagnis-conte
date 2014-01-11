@@ -21,6 +21,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+
+
+
+
 @Stateless
 @Local(CercaProdottoBaseMgr.class)
 @LocalBean
@@ -42,7 +46,7 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
    * Mgr per la ricerca degli Hotel
    * */
     @Override
-    public ArrayList<HotelDTO> cercaHotel(String nome, String citta, int classe) {
+    public ArrayList<HotelDTO> cercaHotel(String nome) {
     	
     	/*
     	 * Cerco per nome
@@ -51,6 +55,7 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
     	TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelNome", Hotel.class);
     	
     	List<Hotel> listaHotel = queryRicerca.setParameter("nome", nome).getResultList();
+    	
     	
     	
     	if(listaHotel.size()>0) System.out.println("Lista non vuota");

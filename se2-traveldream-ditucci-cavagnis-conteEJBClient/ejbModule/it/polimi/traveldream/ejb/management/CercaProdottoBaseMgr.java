@@ -9,6 +9,6 @@ import javax.ejb.Local;
 @Local
 public interface CercaProdottoBaseMgr {
 
-	ArrayList<HotelDTO> cercaHotel(String nome, String citta, int classe);
+	ArrayList<HotelDTO> cercaHotel(String nome);
 
 }
