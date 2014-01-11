@@ -24,12 +24,16 @@
 		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
+    
     	<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
     	<h:outputLabel value="pacchetto - #{pacchetto.idPacchetto}" /><br/>
     	<h:outputLabel value="costo - #{pacchetto.costo}" /><br/>
     	<p>-----------------</p><br/>
     	</ui:repeat>
-        Vari pacchetti, fare css con quadratini che quando passi il mouse si colorano? oppure possiamo usare la funzione che abbassa lo schermo(carino l'italiano)
+    	
+       <!-- Vari pacchetti, fare css con quadratini che quando passi il mouse si colorano?
+        oppure possiamo usare la funzione che abbassa lo schermo(carino l'italiano)  --> 
+    
     </p:layoutUnit>  
     
 </p:layout>    

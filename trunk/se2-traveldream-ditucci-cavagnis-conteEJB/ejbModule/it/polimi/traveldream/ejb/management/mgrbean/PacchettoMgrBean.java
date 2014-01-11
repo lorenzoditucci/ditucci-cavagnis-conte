@@ -60,10 +60,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	/**
     	 * ritorno direttamente la copia della lista di pacchetti -risultato della query-
     	 */
-    	return copiaListaQuery(listaPacchetti);
-  
-    	
-        
+    	return copiaListaQuery(listaPacchetti);     
     }
 
     /**

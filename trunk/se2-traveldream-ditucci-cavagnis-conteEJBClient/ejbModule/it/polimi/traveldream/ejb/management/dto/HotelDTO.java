@@ -13,6 +13,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class HotelDTO {
 	
+	
+	private int idHotel;
+	
 	@NotNull
 	private int acquistato;
 
@@ -91,6 +94,14 @@ public class HotelDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public int getIdHotel() {
+		return idHotel;
+	}
+
+	public void setIdHotel(int idHotel) {
+		this.idHotel = idHotel;
 	}
 
 }
