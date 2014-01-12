@@ -9,6 +9,7 @@ import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
+import it.polimi.traveldream.ejb.management.entity.User;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import javax.annotation.Resource;
@@ -49,4 +50,9 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		return copia;
 	}
 
+	 @Override
+	 public void remove(int id) {
+		Escursione e = em.find(Escursione.class, id);
+        em.remove(e);
+	}
 }

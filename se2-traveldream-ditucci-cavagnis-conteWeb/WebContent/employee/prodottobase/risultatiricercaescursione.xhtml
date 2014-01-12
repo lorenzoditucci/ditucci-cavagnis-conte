@@ -41,9 +41,15 @@
     	<h:outputLabel value="data fine - #{escursione.dataFine}" /><br/>
     	<h:outputLabel value="città - #{escursione.citta}" /><br/>
     	<h:outputLabel value="costo - #{escursione.costo}" /><br/>
-    	<h:outputLabel value="qcquistato - #{escursione.acquistato}" /><br/>
-    	<p>-----------------</p><br/>
+    	<h:outputLabel value="acquistato - #{escursione.acquistato}" /><br/>
+    	<br/>
+    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione.idEscursione)}">  
+        <h:outputText value="Elimina" />  
+        </p:commandLink> 
+    	
     	</ui:repeat>
+    	
+    	 
   
     
     </p:layoutUnit>  
