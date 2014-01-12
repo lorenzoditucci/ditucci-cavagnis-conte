@@ -10,4 +10,6 @@ public interface EscursioneMgr {
 	
 	public void save(EscursioneDTO escursione);
 
+	public void remove(int id);
+
 }

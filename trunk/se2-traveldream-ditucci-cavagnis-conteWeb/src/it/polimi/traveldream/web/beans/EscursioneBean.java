@@ -19,7 +19,7 @@ public class EscursioneBean {
 	private EscursioneMgr escursioneMgr;
 
 	private EscursioneDTO escursione;
-	
+
 	public EscursioneDTO getEscursione() {
 		return escursione;
 	}
@@ -41,5 +41,13 @@ public class EscursioneBean {
 		
 		escursioneMgr.save(escursione);	
 		return "aggiungiprodottobase";
+	}	
+	
+	
+public String rimuoviEscursione(int id) {
+	System.out.println(id);
+	escursioneMgr.remove(id);	
+	return "";	
 	}
+	
 }
