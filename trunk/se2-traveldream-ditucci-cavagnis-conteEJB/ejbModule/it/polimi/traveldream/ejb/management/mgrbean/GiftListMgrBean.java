@@ -43,11 +43,7 @@ public class GiftListMgrBean implements GiftListMgr {
     
     @Override
     public ArrayList<GiftListDTO> cercaGLperMail(String userEmail) {
-    	/**
-    	 * utilizzo come query la default della entity in quanto mi servono tutti i pacchetti.
-    	 * La query di default e' stata leggermente modificata in modo da permettere l'ordine inverso
-    	 * 
-    	 */
+    	
     	TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftListPerMail", GiftList.class);
     	List<GiftList> listaGiftList =  queryRicerca.setParameter("mail", userEmail).getResultList();
 		
@@ -58,6 +54,7 @@ public class GiftListMgrBean implements GiftListMgr {
 		ArrayList<GiftListDTO> copia = new ArrayList<GiftListDTO>();
 		for(int i=0; i<listaGiftList.size();i++){
     		GiftListDTO daAggiungere = new GiftListDTO();
+    		daAggiungere.setIdGiftList(listaGiftList.get(i).getIdGiftList());
     		daAggiungere.setNome(listaGiftList.get(i).getNome());
     		daAggiungere.setMailCliente(listaGiftList.get(i).getMailCliente());
     		daAggiungere.setHotels(HotelMgrBean.copiaListaToDTO(listaGiftList.get(i).getHotels()));
