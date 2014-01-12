@@ -58,9 +58,7 @@ public class CercaGiftListBean {
 			setRisultatoRicerca(new ArrayList<GiftListDTO>());
 			getRisultatoRicerca().get(0).setNome("Non trovato, Riprova");
 			return null;
-		}
-    	
-    	
+		}	
     }
 
 

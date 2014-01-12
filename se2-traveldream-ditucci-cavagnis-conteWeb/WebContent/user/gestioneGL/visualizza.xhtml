@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       >
 <h:head>
-	<title>Clienti - Gestione Gift List</title>
+	<title>Clienti - Visualizza Dettagli Gift List</title>
 </h:head>
 <h:body>
 <h:outputStylesheet library="css" name="../resources/style.css"  />
 
-#{giftListBean.cercaGlPerMail()}
+
 <p:layout fullPage="true">  
 	<p:layoutUnit position="north" size="100" resizable="true">  
         Travel Dream - Clienti - Pacchetti Acquistati
@@ -29,21 +29,12 @@
     
     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
     
-    Elenco Gift List Create da te.
+    #{visualizzaDettagliGLBean.giftList.nome}
   	<h:form>
-  	 <ui:repeat var="gl" value="#{giftListBean.risultatoRicerca}">
-		<h:outputLabel value= "id - #{gl.idGiftList}" /><br/> 	 
-    	<h:outputLabel value="nome - #{gl.nome}" />
-    	<p:commandLink action="#{visualizzaDettagliGLBean.foo()}"> 
-    		<h:outputText value= "dettagli"/>
-    	</p:commandLink>
-    	<br/>
-    	<p>-----------------</p><br/>
-    	</ui:repeat>
-    	
-    </h:form>
-
-    <h:link value="Crea Gift List" outcome="creaGL"></h:link>
+    
+	
+		
+	</h:form>
     </p:layoutUnit>  
     
 </p:layout>  
