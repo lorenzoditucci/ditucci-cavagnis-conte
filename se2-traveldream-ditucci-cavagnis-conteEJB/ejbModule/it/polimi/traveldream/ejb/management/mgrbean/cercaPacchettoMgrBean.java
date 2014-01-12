@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
@@ -41,17 +42,23 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
 	/**
      * @see cercaPacchettoMgr#cercaPacchettiParam(int, String)
      */
-    public ArrayList<PacchettoDTO> cercaPacchettiParam(String emailPacchetto, String nomePacchetto) {
-        TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("cercaPacchettiTuttiParam", Pacchetto.class);
-        /**
-         * set di tutti i parametri di ricerca.
-         */
-        queryRicerca.setParameter("mail","%" + emailPacchetto + "%");
-        queryRicerca.setParameter("nome", "%" + nomePacchetto + "%");
-        /**
-         * prendo risultati della query
-         */
-        List<Pacchetto> pacchettiRis = queryRicerca.getResultList();
+    public ArrayList<PacchettoDTO> cercaPacchettiParam(Date dataPartenza, Date dataFine, Double costo, String nomePacchetto) {
+    	
+    	String query="SELECT p from Pacchetto p WHERE (p.nome LIKE :nome "
+    			+ "AND (:dataPartenza IS NULL OR (p.dataInizio >= :dataPartenza)) "
+    			+ "AND (:dataFine IS NULL OR(p.dataFine <= :dataFine)) "
+    			+ "AND (:costo IS NULL OR(p.costo <= :costo)))";
+    	
+    	TypedQuery<Pacchetto> queryDiRicerca = em.createQuery(query,Pacchetto.class);
+    	/**
+    	 * aggiunta parametri
+    	 */
+    	queryDiRicerca.setParameter("nome", "%" + nomePacchetto + "%");
+    	queryDiRicerca.setParameter("dataPartenza", dataPartenza);
+    	queryDiRicerca.setParameter("dataFine", dataFine);
+    	queryDiRicerca.setParameter("costo", costo);
+    	
+        List<Pacchetto> pacchettiRis = queryDiRicerca.getResultList();
         
         /**
          * passo tutti i parametri della lista ad un arraylist di pacchettidto
