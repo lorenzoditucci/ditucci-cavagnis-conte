@@ -68,16 +68,8 @@ public class CercaProdottoBaseBean {
     }
     
     public String cercaEscursione(){
-		System.out.println(escursione.getNome());
-		if(escursione.getDescrizione().length()==0) System.out.println("NULLLLLLLLL!");
-		else System.out.println(escursione.getDescrizione());
-		
-		if(escursione.getDataInizio() == null) System.out.println("NULLLLLLLLL2!");
-		else System.out.println(escursione.getDataInizio());
-		/*System.out.println(escursione.getDataFine());
-		System.out.println(escursione.getCitta());*/
-		
-		return "";
+    	setRisultatoRicercaEscursione(cercaProdottoBaseMgr.cercaEscursione(escursione.getIdEscursione()));
+    	return "risultatiricercaescursione?faces-redirect=true";
     }
     
     /*

@@ -7,6 +7,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class EscursioneRicercaDTO {
+	
+	private int idEscursione;
 
 	private int acquistato;
 
@@ -76,5 +78,13 @@ public class EscursioneRicercaDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public int getIdEscursione() {
+		return idEscursione;
+	}
+
+	public void setIdEscursione(int idEscursione) {
+		this.idEscursione = idEscursione;
 	}
 }

@@ -5,10 +5,12 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.management.CercaProdottoBaseMgr;
 import it.polimi.traveldream.ejb.management.pacchettoMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
@@ -83,9 +85,6 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
 		TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
     	
     	List<Volo> listaVolo = queryRicerca.setParameter("idVolo", idVolo).getResultList();
-
-    	if(listaVolo.size()>0) System.out.println("Lista non vuota");
-    	else System.out.println("Lista VUOTA");
     	
     	return convertiInListaVoloDTO(listaVolo); 
 	}
@@ -105,6 +104,38 @@ public class CercaProdottoBaseMgrBean implements CercaProdottoBaseMgr {
     		copia.add(daAggiungere);
     	}
 		return copia;
+	}
+
+	@Override
+	public ArrayList<EscursioneDTO> cercaEscursione(int idEscursione) {
+        TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursioneId", Escursione.class);
+    	
+    	List<Escursione> listaEscursione = queryRicerca.setParameter("idEscursione", idEscursione).getResultList();
+
+    	if(listaEscursione.size()>0) System.out.println("Lista non vuota");
+    	else System.out.println("Lista VUOTA");
+    	
+    	return convertiInListaEscursioneDTO(listaEscursione); 
+	}
+
+	private ArrayList<EscursioneDTO> convertiInListaEscursioneDTO(
+			List<Escursione> listaEscursione) {
+		
+		ArrayList<EscursioneDTO> copia = new ArrayList<EscursioneDTO>();
+		for(int i=0; i<listaEscursione.size();i++){
+    		EscursioneDTO daAggiungere = new EscursioneDTO();
+    		daAggiungere.setIdEscursione(listaEscursione.get(i).getIdEscursione());
+    		daAggiungere.setNome(listaEscursione.get(i).getNome());
+    		daAggiungere.setDescrizione(listaEscursione.get(i).getDescrizione());
+    		daAggiungere.setDataInizio(listaEscursione.get(i).getDataInizio());
+    		daAggiungere.setDataFine(listaEscursione.get(i).getDataFine());
+    		daAggiungere.setCitta(listaEscursione.get(i).getCitta());
+    		daAggiungere.setCosto(listaEscursione.get(i).getCosto());
+    		daAggiungere.setAcquistato(listaEscursione.get(i).getAcquistato());
+    		copia.add(daAggiungere);
+    	}
+		return copia;
+		
 	}
 
 	
