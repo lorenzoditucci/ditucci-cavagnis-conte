@@ -33,6 +33,9 @@
   
     <p:layoutUnit position="center">  
   
+   <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+  
+  	<h:form id="formEscursione">
         <ui:repeat var="escursione" value="#{cercaProdottoBaseBean.risultatoRicercaEscursione}">
     	<h:outputLabel value="id - #{escursione.idEscursione}" /><br/>
     	<h:outputLabel value="nome - #{escursione.nome}" /><br/>
@@ -43,11 +46,12 @@
     	<h:outputLabel value="costo - #{escursione.costo}" /><br/>
     	<h:outputLabel value="acquistato - #{escursione.acquistato}" /><br/>
     	<br/>
-    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione.idEscursione)}">  
+    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione)}">  
         <h:outputText value="Elimina" />  
         </p:commandLink> 
     	
     	</ui:repeat>
+    </h:form>
     	
     	 
   
