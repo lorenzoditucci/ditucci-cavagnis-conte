@@ -22,6 +22,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class EscursioneDTO {
+	
+	private int idEscursione;
 
 	@NotNull
 	private int acquistato;
@@ -101,6 +103,14 @@ public class EscursioneDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public int getIdEscursione() {
+		return idEscursione;
+	}
+
+	public void setIdEscursione(int idEscursione) {
+		this.idEscursione = idEscursione;
 	}
 
 	

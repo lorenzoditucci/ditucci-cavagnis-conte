@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management;
 
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
@@ -13,6 +14,8 @@ public interface CercaProdottoBaseMgr {
 	ArrayList<HotelDTO> cercaHotel(int idHotel);
 
 	ArrayList<VoloDTO> cercaVolo(int idVolo);
+
+	ArrayList<EscursioneDTO> cercaEscursione(int idEscursione);
 
 
 }
