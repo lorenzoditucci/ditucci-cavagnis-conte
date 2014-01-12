@@ -1,21 +1,20 @@
 package it.polimi.traveldream.web.beans;
 
-import java.util.ArrayList;
-
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
+
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name="giftListBean")
-@RequestScoped
-public class GiftListBean {
-	
+@ManagedBean(name="gestioneGiftListBean")
+@ViewScoped
+
+public class GestioneGiftListBean {
 	@EJB
 	private GiftListMgr giftListMgr;
 
@@ -23,14 +22,14 @@ public class GiftListBean {
 	
 	@ManagedProperty("#{userBean.mail}")
 	private String userEmail;
-
-
 	
-	public GiftListBean(){
-		giftList = new GiftListDTO();
-		userEmail = new String();	
+	private ArrayList<GiftListDTO> risultatoRicerca;
+	
+	public GestioneGiftListBean(){
+		this.giftList = new GiftListDTO();
+		this.userEmail = new String();
+		this.risultatoRicerca = new ArrayList<GiftListDTO>();
 	}
-	
 	
 	public GiftListDTO getGiftList() {
 		return giftList;
@@ -39,7 +38,7 @@ public class GiftListBean {
 	public void setGiftList(GiftListDTO giftList) {
 		this.giftList = giftList;
 	}
-	
+
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -48,10 +47,17 @@ public class GiftListBean {
 		this.userEmail = userEmail;
 	}
 
-	public String aggiungiGiftList() {
-		giftList.setMailCliente(userEmail);
-		giftListMgr.save(giftList);	
+	public ArrayList<GiftListDTO> getRisultatoRicerca() {
+		return risultatoRicerca;
+	}
+
+	public void setRisultatoRicerca(ArrayList<GiftListDTO> risultatoRicerca) {
+		this.risultatoRicerca = risultatoRicerca;
+	}
+	
+	public String cercaGlPerMail(){
+		setRisultatoRicerca(giftListMgr.cercaGLperMail(this.userEmail));
 		return "gestione?faces-redirect=true";
 	}
-		
+
 }
