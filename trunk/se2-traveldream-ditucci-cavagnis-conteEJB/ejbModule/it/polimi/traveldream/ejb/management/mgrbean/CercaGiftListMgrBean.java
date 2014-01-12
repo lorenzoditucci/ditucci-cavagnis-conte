@@ -1,5 +1,8 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
@@ -41,24 +44,13 @@ public class CercaGiftListMgrBean implements CercaGiftListMgr {
 
     
 	@Override
-	public GiftListDTO cerca(int ricerca) {
+	public ArrayList<GiftListDTO> cerca(int ricerca) {
 		
 		TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftList", GiftList.class);
-		GiftList giftList = queryRicerca.setParameter("id", ricerca).getSingleResult();
+		List<GiftList> giftList = queryRicerca.setParameter("id", ricerca).getResultList();
 			
 		
-		
-		GiftListDTO giftListDTO = new GiftListDTO();
-		/**
-		 * prova passaggio oggetto gift list in dto
-		 */
-		giftListDTO.setIdGiftList(giftList.getIdGiftList());
-		giftListDTO.setNome(giftList.getNome());
-		giftListDTO.setMailCliente(giftList.getMailCliente());
-		/**
-		 * da completare..(mancano le colonne nel database)
-		 */
-		return giftListDTO;
+		return GiftListMgrBean.copiaListaQuery(giftList);
 	}
 
 
