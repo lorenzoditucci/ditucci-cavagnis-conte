@@ -5,11 +5,17 @@ import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+
+import com.sun.org.apache.xml.internal.security.Init;
 
 
 @ManagedBean(name="visualizzaDettagliGLBean")
-@javax.faces.bean.SessionScoped
+@SessionScoped
+
 public class VisualizzaDettagliGLBean {
 	
 	@EJB
@@ -17,10 +23,10 @@ public class VisualizzaDettagliGLBean {
 
 	private GiftListDTO giftList;
 	
-	
 	public VisualizzaDettagliGLBean(){
 		this.giftList = new GiftListDTO();
 	}
+	
 	
 	public String dettagli(GiftListDTO giftList){
 		System.out.println("Funzione Dettagli");

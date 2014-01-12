@@ -9,9 +9,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name="giftListBean")
-@RequestScoped
+@ViewScoped
 public class GiftListBean {
 	
 	@EJB
