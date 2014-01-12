@@ -3,53 +3,62 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
 <h:head>
-	<title>Clienti - Gestione Gift List</title>
+	<title>Gift List Da te Create</title>
 </h:head>
 <h:body>
-<h:outputStylesheet library="css" name="../resources/style.css"  />
-
 #{giftListBean.cercaGlPerMail()}
 <p:layout fullPage="true">  
 	<p:layoutUnit position="north" size="100" resizable="true">  
-        Travel Dream - Clienti - Pacchetti Acquistati
+        Travel Dream
     </p:layoutUnit>  
     
     <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
     	<h:form>
-	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
-	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
+		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
 		</h:form>
-		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
+		<h:form><h4>Ricerca Pacchetto</h4></h:form>
 		
- </p:layoutUnit>  
+		<h:form><h:link value="Crea Pacchetto" outcome=""></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="cercaprodottobase"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+  
     <p:layoutUnit position="center">  
-    
-    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-    
-    Elenco Gift List Create da te.
-  	<h:form>
-  	 <ui:repeat var="gl" value="#{giftListBean.risultatoRicerca}">
-		<h:outputLabel value= "id - #{gl.idGiftList}" /><br/> 	 
-    	<h:outputLabel value="nome - #{gl.nome}" />
-    	<p:commandLink action="#{visualizzaDettagliGLBean.foo()}"> 
-    		<h:outputText value= "dettagli"/>
-    	</p:commandLink>
+  
+   <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+  
+  	<h:form id="giftList">
+        <ui:repeat var="gl" value="#{giftListBean.risultatoRicerca}">
+    	<h:outputLabel value="id - #{gl.idGiftList}" /><br/>
+    	<h:outputLabel value="nome - #{gl.nome}" /><br/>
     	<br/>
-    	<p>-----------------</p><br/>
+    	<h:commandLink id="dettagliGL" action="#{visualizzaDettagliGLBean.foo()}">  
+        	<h:outputText value="dettagli" />  
+        </h:commandLink>
+        <br/> 
     	</ui:repeat>
-    	
     </h:form>
-
-    <h:link value="Crea Gift List" outcome="creaGL"></h:link>
+    
+    <h:form>
+    	<h:commandLink action="#{visualizzaDettagliGLBean.foo()}" value= "link a comando">	
+    	</h:commandLink>
+    </h:form>
+    	
+    	
+    	 
+  
+    
     </p:layoutUnit>  
     
-</p:layout>  
-      
+</p:layout>    
 </h:body>           
 </html>
-
-
-

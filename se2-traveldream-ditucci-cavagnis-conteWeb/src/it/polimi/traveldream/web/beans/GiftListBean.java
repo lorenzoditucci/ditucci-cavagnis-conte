@@ -70,4 +70,9 @@ public class GiftListBean {
 		return "gestione?faces-redirect=true";
 	}
 	
+	public String foo(){
+		return "visualizza";
+	}
+	
+	
 }

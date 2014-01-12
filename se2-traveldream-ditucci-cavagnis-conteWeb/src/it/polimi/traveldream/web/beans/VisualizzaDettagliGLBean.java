@@ -1,6 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.faces.bean.ManagedBean;
@@ -12,7 +13,7 @@ import javax.ejb.EJB;
 public class VisualizzaDettagliGLBean {
 	
 	@EJB
-	private GiftListMgr giftListMgr;
+	private VisualizzaDettagliGLMgr visualizzaDettagliGLMgrMgr;
 
 	private GiftListDTO giftList;
 	
@@ -24,12 +25,12 @@ public class VisualizzaDettagliGLBean {
 	public String dettagli(GiftListDTO giftList){
 		System.out.println("Funzione Dettagli");
 		this.setGiftList(giftList);
-		return "visualizza?faces-redirect=true";
+		return "visualizza";
 	}
 
 	public String foo(){
 		System.out.println("foo");
-		return "visualizza?faces-redirect=true";
+		return "visualizza";
 	}
 	public GiftListDTO getGiftList() {
 		return giftList;
