@@ -34,21 +34,17 @@
     <p:layoutUnit position="center">  
   
   
-	<h:form>
+	<h:form id="ricercaEscursione">
 		<p:panel header="Form di ricerca">
 			<h:panelGrid columns="2" id="formRicerca">
 				<h:outputLabel for="idEscursione">Id:</h:outputLabel>
 				<h:inputText id="idEscursione" value="#{cercaProdottoBaseBean.escursione.idEscursione}" />
-
+                <h:message for="idEscursione"></h:message>
 			</h:panelGrid>
 			<h:commandButton value="Cerca Escursione" action="#{cercaProdottoBaseBean.cercaEscursione()}" />
 
 		</p:panel>
 	</h:form>
-  
-  
-  
-  
     
     </p:layoutUnit>  
     

@@ -13,7 +13,9 @@ import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloRicercaDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  * Bean utilizzato per cercare i dati all'interno del database dei prodotti base
@@ -53,10 +55,13 @@ public class CercaProdottoBaseBean {
     }
 
     public String cercaHotel(){  
-    
     	setRisultatoRicercaHotel(cercaProdottoBaseMgr.cercaHotel(hotel.getIdHotel()));
-		System.out.println("Ho finito di cercare");
-
+    	
+    	if(getRisultatoRicercaHotel().isEmpty()){
+    		FacesContext.getCurrentInstance().addMessage("ricercaHotel:idHotel", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attenzione!", "La ricerca non ha prodotto risultati"));
+    		return "";
+    	}
+    	
     	return "risultatiricercahotel?faces-redirect=true";
     }
     
@@ -64,11 +69,23 @@ public class CercaProdottoBaseBean {
     public String cercaVolo(){  
         
     	setRisultatoRicercaVolo(cercaProdottoBaseMgr.cercaVolo(volo.getIdVolo()));
+    	
+    	if(getRisultatoRicercaVolo().isEmpty()){
+    		FacesContext.getCurrentInstance().addMessage("ricercaVolo:idVolo", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attenzione!", "La ricerca non ha prodotto risultati"));
+    		return "";
+    	}
+    	
     	return "risultatiricercavolo?faces-redirect=true";
     }
     
     public String cercaEscursione(){
     	setRisultatoRicercaEscursione(cercaProdottoBaseMgr.cercaEscursione(escursione.getIdEscursione()));
+    	
+    	if(getRisultatoRicercaEscursione().isEmpty()){
+    		FacesContext.getCurrentInstance().addMessage("ricercaEscursione:idEscursione", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attenzione!", "La ricerca non ha prodotto risultati"));
+    		return "";
+    	}
+
     	return "risultatiricercaescursione?faces-redirect=true";
     }
     
