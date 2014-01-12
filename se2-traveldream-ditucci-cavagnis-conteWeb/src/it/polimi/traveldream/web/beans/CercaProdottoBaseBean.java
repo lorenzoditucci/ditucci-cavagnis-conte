@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
 import it.polimi.traveldream.ejb.management.CercaProdottoBaseMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.EscursioneRicercaDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelRicercaDTO;
@@ -36,7 +37,7 @@ public class CercaProdottoBaseBean {
 	 */
 	private HotelRicercaDTO hotel;
 	private VoloRicercaDTO volo;
-    
+	private EscursioneRicercaDTO escursione;
 
 	/**
      * Default constructor. 
@@ -46,7 +47,8 @@ public class CercaProdottoBaseBean {
         this.risultatoRicercaHotel = new ArrayList<HotelDTO>();
         this.risultatoRicercaVolo = new ArrayList<VoloDTO>();
         this.hotel = new HotelRicercaDTO();
-        this.volo=new VoloRicercaDTO();
+        this.volo = new VoloRicercaDTO();
+        this.escursione = new EscursioneRicercaDTO();
         
     }
 
@@ -62,8 +64,20 @@ public class CercaProdottoBaseBean {
     public String cercaVolo(){  
         
     	setRisultatoRicercaVolo(cercaProdottoBaseMgr.cercaVolo(volo.getIdVolo()));
-
     	return "risultatiricercavolo?faces-redirect=true";
+    }
+    
+    public String cercaEscursione(){
+		System.out.println(escursione.getNome());
+		if(escursione.getDescrizione().length()==0) System.out.println("NULLLLLLLLL!");
+		else System.out.println(escursione.getDescrizione());
+		
+		if(escursione.getDataInizio() == null) System.out.println("NULLLLLLLLL2!");
+		else System.out.println(escursione.getDataInizio());
+		/*System.out.println(escursione.getDataFine());
+		System.out.println(escursione.getCitta());*/
+		
+		return "";
     }
     
     /*
@@ -108,6 +122,14 @@ public class CercaProdottoBaseBean {
 
 	public void setVolo(VoloRicercaDTO volo) {
 		this.volo = volo;
+	}
+
+	public EscursioneRicercaDTO getEscursione() {
+		return escursione;
+	}
+
+	public void setEscursione(EscursioneRicercaDTO escursione) {
+		this.escursione = escursione;
 	}
 
 	
