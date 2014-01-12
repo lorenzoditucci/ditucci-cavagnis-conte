@@ -21,14 +21,20 @@
 		<br />
 		
 		
-		<p:outputLabel value="#{cercaGiftListBean.getRisultatoRicerca().nome}"></p:outputLabel>
-		
 		
 	
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
         FUNZIKA
-        <p:outputLabel value="#{cercaGiftListBean.risultatoRicerca.mailCliente}"></p:outputLabel>
+        <ui:repeat var="gift" value="#{cercaGiftListBean.risultatoRicerca}">
+        <h:outputLabel value="#{gift.idGiftList}" />
+        <h:outputLabel value="#{gift.nome}" />
+        <h:outputLabel value="#{gift.mailCliente}" />
+        <h:outputLabel value="#{gift.voli}" />
+        <h:outputLabel value="#{gift.idGiftList}" />
+        <h:outputLabel value="#{gift.idGiftList}" />
+        
+        </ui:repeat>
     </p:layoutUnit>  
     
 </p:layout>    

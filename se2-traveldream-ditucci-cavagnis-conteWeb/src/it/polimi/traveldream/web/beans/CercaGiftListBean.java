@@ -1,5 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
+import java.util.ArrayList;
+
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
@@ -25,7 +27,7 @@ public class CercaGiftListBean {
 	/**
 	 * qui ci salvo il risultato della ricerca
 	 */
-	private GiftListDTO risultatoRicerca;
+	private ArrayList<GiftListDTO> risultatoRicerca;
 	/**
 	 * parametro che passo contente l'id della gift list da cercare.
 	 */
@@ -35,7 +37,7 @@ public class CercaGiftListBean {
      */
     public CercaGiftListBean() {
       //  ricercaGiftList= new GiftListDTO();
-        risultatoRicerca= new GiftListDTO();
+        setRisultatoRicerca(new ArrayList<GiftListDTO>());
     }
 
     public String cerca(){
@@ -47,21 +49,14 @@ public class CercaGiftListBean {
         	 */
         	return "giftList?faces-redirect=true";
 		} catch (Exception e) {
-			risultatoRicerca = new GiftListDTO();
-			risultatoRicerca.setNome("Non trovato, Riprova");
+			setRisultatoRicerca(new ArrayList<GiftListDTO>());
+			getRisultatoRicerca().get(0).setNome("Non trovato, Riprova");
 			return null;
 		}
     	
     	
     }
 
-	public GiftListDTO getRisultatoRicerca() {
-		return risultatoRicerca;
-	}
-
-	public void setRisultatoRicerca(GiftListDTO risultatoRicerca) {
-		this.risultatoRicerca = risultatoRicerca;
-	}
 
 	public String getIdRicerca() {
 		return idRicerca;
@@ -69,5 +64,13 @@ public class CercaGiftListBean {
 
 	public void setIdRicerca(String idRicerca) {
 		this.idRicerca = idRicerca;
+	}
+
+	public ArrayList<GiftListDTO> getRisultatoRicerca() {
+		return risultatoRicerca;
+	}
+
+	public void setRisultatoRicerca(ArrayList<GiftListDTO> risultatoRicerca) {
+		this.risultatoRicerca = risultatoRicerca;
 	}
 }
