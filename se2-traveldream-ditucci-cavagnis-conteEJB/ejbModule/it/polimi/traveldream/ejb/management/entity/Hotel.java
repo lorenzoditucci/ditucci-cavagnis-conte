@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -72,6 +74,15 @@ public class Hotel implements Serializable {
 			this.nome=hotel.getNome();
 			this.indirizzo=hotel.getIndirizzo();
 			this.acquistato=0; /*a 0 di default in creazione*/	
+	}
+	
+	public static List<Hotel> copiaToHotel(List<HotelDTO> lista){
+		List<Hotel> copia = new ArrayList<Hotel>();
+		for(int i=0; i<lista.size(); i++){
+			Hotel daAggiungere = new Hotel(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
 	}
 
 	public int getIdHotel() {
