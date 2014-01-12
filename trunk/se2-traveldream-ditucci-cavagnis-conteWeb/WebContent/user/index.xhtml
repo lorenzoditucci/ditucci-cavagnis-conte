@@ -30,14 +30,25 @@
 		
 			<h:panelGrid columns="3" id="pacchettoGrid">
 	
-			<h:outputLabel for="email-pacchetto">email</h:outputLabel>
-        	<h:inputText id="email-pacchetto" value="#{cercaPacchettoBean.emailPacchetto}"/> 
-            <h:message for="email-pacchetto"></h:message>
+			
          
 
-				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
-			    <h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
-				<p:message for="nome-pacchetto"></p:message>
+			<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+			<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+			<p:message for="nome-pacchetto"></p:message>
+				
+				
+			<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+			<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+			<h:message for="data-inizio"></h:message>
+			
+			<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+			<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+			<h:message for="data-fine"></h:message>
+			
+			<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+        	<h:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+            <h:message for="costo-pacchetto"></h:message>
 			
 			
 		<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>

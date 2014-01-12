@@ -5,6 +5,7 @@ import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -12,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.xml.crypto.Data;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
@@ -28,7 +30,9 @@ public class CercaPacchettoBean {
 	private ArrayList<PacchettoDTO> risultato;
 	private int idPacchetto;
 	private String nomePacchetto;
-	private String emailPacchetto;
+	private Date dataPartenza;
+	private Date dataRitorno;
+	private Double costo;
 	
 	
 
@@ -77,25 +81,59 @@ public class CercaPacchettoBean {
 	
 	public String cercaPacchetti(){
 		System.out.println("cercapacchetti - faccio controllo");
-		if(emailPacchetto.equals("") && nomePacchetto.equals("")){
+		if(costo == null && nomePacchetto == null && dataPartenza==null && dataRitorno == null ){
 			FacesContext.getCurrentInstance().addMessage("ricercaPacchetto:nome-pacchetto", new FacesMessage(FacesMessage.SEVERITY_ERROR,"campiVuoti", "campi vuoti - ricerca nulla!"));
 			return "";
 		}
-		setRisultato(mgr.cercaPacchettiParam(emailPacchetto, nomePacchetto));
+		else{
+			if(dataPartenza != null && dataRitorno != null && dataPartenza.getTime()>dataRitorno.getTime()){
+				FacesContext.getCurrentInstance().addMessage("ricercaPacchetto:data-inizio", new FacesMessage(FacesMessage.SEVERITY_ERROR,"TPartenza>TRitorno","La data partenza non puo' essere maggiore della data di arrivo"));
+				return "";
+			}
+		}
+		setRisultato(mgr.cercaPacchettiParam(dataPartenza,dataRitorno,costo, nomePacchetto));
 		
 		return "risultatiRicercaPacchetti?faces-redirect=true";
 	}
 
 
 
-	public String getEmailPacchetto() {
-		return emailPacchetto;
+
+
+
+
+	public Date getDataPartenza() {
+		return dataPartenza;
 	}
 
 
 
-	public void setEmailPacchetto(String emailPacchetto) {
-		this.emailPacchetto = emailPacchetto;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
+	}
+
+
+
+	public Date getDataRitorno() {
+		return dataRitorno;
+	}
+
+
+
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
+	}
+
+
+
+	public Double getCosto() {
+		return costo;
+	}
+
+
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
 	}
 
 }
