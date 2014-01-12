@@ -21,17 +21,17 @@
 		<br />
 		<h:button value="Registrati" outcome="register" /> 
 		<br />
-		<h:form>
+		<h:form id="cercaGiftList">
 		<p:panelGrid columns="1" style="width=100%">
 		    <f:facet name="giftList">
 		        Gift List Area
 		    </f:facet>
 		
 		    <h:inputText id="codiceGiftList" value="#{cercaGiftListBean.idRicerca}" label="codiceGistList" />
+		    <p:message for="codiceGiftList"></p:message>
 		    
 		    <f:facet name="footer">
-		        <h:commandButton value="Cerca" 
-		        					action="#{cercaGiftListBean.cerca()}"/>
+		        <h:commandButton value="Cerca" action="#{cercaGiftListBean.cerca()}"/>
 		    </f:facet>
 		</p:panelGrid>
 		</h:form>

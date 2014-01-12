@@ -7,9 +7,11 @@ import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  * Bean utilizzato per cercare i dati all'interno del database giftlist
@@ -47,6 +49,10 @@ public class CercaGiftListBean {
         	/**
         	 * metodo per la redirect
         	 */
+        	if(getRisultatoRicerca().size()==0){
+        		FacesContext.getCurrentInstance().addMessage("cercaGiftList:codiceGiftList", new FacesMessage(FacesMessage.SEVERITY_ERROR,"giftListNonTrovato", "GiftList non trovata!"));
+        		return "";
+        	}
         	return "giftList?faces-redirect=true";
 		} catch (Exception e) {
 			setRisultatoRicerca(new ArrayList<GiftListDTO>());
