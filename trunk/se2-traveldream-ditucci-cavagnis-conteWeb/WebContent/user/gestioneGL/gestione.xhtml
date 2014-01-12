@@ -37,20 +37,16 @@
    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
   
   	<h:form id="giftList">
-        <ui:repeat var="gl" value="#{giftListBean.risultatoRicerca}">
-    	<h:outputLabel value="id - #{gl.idGiftList}" /><br/>
-    	<h:outputLabel value="nome - #{gl.nome}" /><br/>
-    	<br/>
-    	<h:commandLink id="dettagliGL" action="#{visualizzaDettagliGLBean.foo()}">  
-        	<h:outputText value="dettagli" />  
-        </h:commandLink>
-        <br/> 
-    	</ui:repeat>
+        <h:dataTable var="gl" value="#{giftListBean.risultatoRicerca}">
+        	<h:column><h:outputText value="#{gl.idGiftList}"></h:outputText></h:column>
+        	<h:column><h:outputText value="#{gl.nome}"></h:outputText></h:column>
+        	<h:column><h:commandLink value="dettagliGL" action="#{visualizzaDettagliGLBean.dettagli(gl)}"/></h:column>
+    	</h:dataTable>
     </h:form>
     
+    
     <h:form>
-    	<h:commandLink action="#{visualizzaDettagliGLBean.foo()}" value= "link a comando">	
-    	</h:commandLink>
+    	<h:link outcome="creaGL" value= "Crea nuova GiftList"/>	
     </h:form>
     	
     	
