@@ -62,11 +62,12 @@ public class GiftListBean {
 	public String aggiungiGiftList() {
 		giftList.setMailCliente(userEmail);
 		giftListMgr.save(giftList);	
-		return "gestioneGL/gestione";
+		return "gestione?faces-redirect=true";
 	}
 	
 	public String cercaGlPerMail(){
 		setRisultatoRicerca(giftListMgr.cercaGLperMail(this.userEmail));
 		return "gestione?faces-redirect=true";
 	}
+	
 }
