@@ -34,6 +34,24 @@
         <h:outputLabel value="#{gift.idGiftList}" />
         
         </ui:repeat>
+        
+        <h:form>
+			<ui:repeat var="gift" value="#{cercaGiftListBean.risultatoRicerca}">
+		
+		    <p:growl id="growl" showDetail="true" />
+		
+		    <p:fieldset legend="Pacchetto - #{gift.idGiftList}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:panelGrid columns="2" cellpadding="10">
+		            
+		            <h:outputText value="nome: #{gift.nome}, mail cliente : #{gift.mailCliente}"/>;
+		            <ui:repeat var="esc" value="#{gift.escursioni}">
+		            	<h:outputText value="città escursione - #{esc.citta}" />
+		            </ui:repeat>
+		        </h:panelGrid>
+		    </p:fieldset>
+			</ui:repeat>
+		</h:form>
     </p:layoutUnit>  
     
 </p:layout>    
