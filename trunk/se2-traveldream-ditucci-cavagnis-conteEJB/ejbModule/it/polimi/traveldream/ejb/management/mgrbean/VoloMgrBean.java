@@ -7,6 +7,8 @@ import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Group;
 import it.polimi.traveldream.ejb.management.entity.User;
 import it.polimi.traveldream.ejb.management.entity.Volo;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,4 +34,20 @@ public class VoloMgrBean implements VoloMgr {
 		em.persist(newVolo); 
 		}
 
+	public static ArrayList<VoloDTO> copiaListaToDTO(List<Volo> listaVolo){
+		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
+		for (int i = 0; i < listaVolo.size(); i++){
+			VoloDTO daAggiungere = new VoloDTO();
+			daAggiungere.setCittaArrivo(listaVolo.get(i).getCittaArrivo());
+			daAggiungere.setCittaPartenza(listaVolo.get(i).getCittaPartenza());
+			daAggiungere.setCompagnia(listaVolo.get(i).getCompagnia());
+			daAggiungere.setAcquistato(listaVolo.get(i).getAcquistato());
+			daAggiungere.setCosto(listaVolo.get(i).getCosto());
+			daAggiungere.setDataArrivo(new Timestamp(listaVolo.get(i).getDataFine().getTime()));
+			daAggiungere.setDataPartenza(new Timestamp(listaVolo.get(i).getDataInizio().getTime()));
+			
+			copia.add(daAggiungere);
+		}
+		return copia;
+	}
 }

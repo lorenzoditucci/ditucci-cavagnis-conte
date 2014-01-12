@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+<h:head>
+	<title>Clienti - Gestione Gift List</title>
+</h:head>
+<h:body>
+<h:outputStylesheet library="css" name="../resources/style.css"  />
+
+#{giftListBean.cercaGlPerMail()}
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream - Clienti - Pacchetti Acquistati
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
+		
+ </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+    
+    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+    
+    Elenco Gift List Create da te.
+  	<h:form>
+  	 <ui:repeat var="gl" value="#{giftListBean.risultatoRicerca}">
+    	<h:outputLabel value="nome - #{gl.nome}" /><br/>
+    	<p>-----------------</p><br/>
+    	</ui:repeat>
+    
+	
+		
+	</h:form>
+
+    <h:link value="Crea Gift List" outcome="creaGL"></h:link>
+    </p:layoutUnit>  
+    
+</p:layout>  
+      
+</h:body>           
+</html>
+
+
+

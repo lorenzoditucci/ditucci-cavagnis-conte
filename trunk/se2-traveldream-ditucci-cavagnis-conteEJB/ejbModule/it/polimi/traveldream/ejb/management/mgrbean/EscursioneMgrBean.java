@@ -1,5 +1,9 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
@@ -27,5 +31,22 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		Escursione newEscursione = new Escursione(escursione);
 		em.persist(newEscursione); 
 		}
+	
+	public static ArrayList<EscursioneDTO> copiaListaToDTO(List<Escursione> listaEscursione){
+		ArrayList<EscursioneDTO> copia = new ArrayList<EscursioneDTO>();
+		for(int i=0; i<listaEscursione.size(); i++){
+			EscursioneDTO daAggiungere = new EscursioneDTO();
+			daAggiungere.setNome(listaEscursione.get(i).getNome());
+			daAggiungere.setDescrizione(listaEscursione.get(i).getDescrizione());
+			daAggiungere.setCitta(listaEscursione.get(i).getCitta());
+			daAggiungere.setAcquistato(listaEscursione.get(i).getAcquistato());
+			daAggiungere.setCosto(listaEscursione.get(i).getIdEscursione());
+			daAggiungere.setDataInizio(new Timestamp(listaEscursione.get(i).getDataInizio().getTime()));
+			daAggiungere.setDataFine(new Timestamp(listaEscursione.get(i).getDataFine().getTime()));
+			
+			copia.add(daAggiungere);
+		}
+		return copia;
+	}
 
 }

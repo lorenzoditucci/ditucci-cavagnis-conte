@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,7 +21,8 @@ import java.util.List;
 @Table(name="GiftList")
 @NamedQueries({
 	@NamedQuery(name="GiftList.findAll", query="SELECT g FROM GiftList g"),
-	@NamedQuery(name="cercaGiftList", query="SELECT g FROM GiftList g WHERE g.idGiftList= :id")
+	@NamedQuery(name="cercaGiftList", query="SELECT g FROM GiftList g WHERE g.idGiftList= :id"),
+	@NamedQuery(name="cercaGiftListPerMail", query = "SELECT g FROM GiftList g WHERE g.mailCliente = :mail")
 })
 
 public class GiftList implements Serializable {
@@ -102,6 +104,19 @@ public class GiftList implements Serializable {
 
 	
 	public GiftList() {
+	}
+
+	//TODO: è sbagliato creare nuovi ArrayList quindi devo creare metodo che da Lista di DTO mi genera lista di 
+	//entità normali.
+	public GiftList(GiftListDTO giftList) {
+		this.mailCliente = giftList.getMailCliente();
+		this.nome = giftList.getNome();
+		this.escursioni = new ArrayList<Escursione>();
+		this.hotels = new ArrayList<Hotel>();
+		this.pacchetti = new ArrayList<Pacchetto>();
+		this.pacchettiContenuti = new ArrayList<Pacchetto>();
+		this.voli = new ArrayList<Volo>();
+		
 	}
 
 	public int getIdGiftList() {
