@@ -1,10 +1,13 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,6 +61,32 @@ public class Pacchetto implements Serializable {
 	private String nome;
 
 	public Pacchetto() {
+	}
+	
+	public Pacchetto(PacchettoDTO p){
+		this.costo = p.getCosto();
+		this.descrizione = p.getDescrizione();
+		this.nome = p.getNome();
+		this.dataInizio = new Timestamp(p.getDataInizio().getTime());
+		this.dataFine = new Timestamp(p.getDataFine().getTime());
+		this.disponibilitaAttuale = p.getDisponibilitaAttuale();
+		this.disponibilitaMax = p.getDisponibilitaMax();
+		this.cittaDestinazione = Citta.copiaToCitta(p.getCittaDestinazione());
+		this.escursioni = Escursione.copiaToEscursione(p.getEscursioni());
+		this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
+		this.voli = Volo.copiaToVolo(p.getVoli());
+		this.hotels = Hotel.copiaToHotel(p.getHotels());
+		this.users = User.copiaToUser(p.getUsers());
+		
+	}
+	
+	public static List<Pacchetto> copiaToPacchetto(List<PacchettoDTO> lista){
+		List<Pacchetto> copia = new ArrayList<Pacchetto>();
+		for(int i=0; i<lista.size(); i++){
+			Pacchetto daAggiungere = new Pacchetto(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
 	}
 
 	public int getIdPacchetto() {
@@ -214,5 +243,6 @@ public class Pacchetto implements Serializable {
 	
 		@ManyToMany(mappedBy="pacchetti")
 		private List<User> users;
+		
 	
 }

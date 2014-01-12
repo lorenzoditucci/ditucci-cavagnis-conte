@@ -1,6 +1,10 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
+import it.polimi.traveldream.ejb.management.dto.HotelDTO;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -42,12 +46,25 @@ public class Citta implements Serializable {
 		this.nome = nome;
 	}
 	
+	public Citta(CittaDTO citta){
+		this.nome = citta.getNome();
+		this.pacchetti = Pacchetto.copiaToPacchetto(citta.getPacchetti());
+	}
 	/**
 	 * associazione con Pacchetto - destinazione
 	 */
 	
 		@ManyToMany(mappedBy="cittaDestinazione")
 		private List<Pacchetto> pacchetti;
+		
+		public static List<Citta> copiaToCitta(List<CittaDTO> lista){
+			List<Citta> copia = new ArrayList<Citta>();
+			for(int i=0; i<lista.size(); i++){
+				Citta daAggiungere = new Citta(lista.get(i));
+				copia.add(daAggiungere);	
+			}
+			return copia;
+		}
 	
 
 }

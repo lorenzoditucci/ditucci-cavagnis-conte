@@ -106,17 +106,24 @@ public class GiftList implements Serializable {
 	public GiftList() {
 	}
 
-	//TODO: è sbagliato creare nuovi ArrayList quindi devo creare metodo che da Lista di DTO mi genera lista di 
-	//entità normali.
+	
 	public GiftList(GiftListDTO giftList) {
 		this.mailCliente = giftList.getMailCliente();
 		this.nome = giftList.getNome();
-		this.escursioni = new ArrayList<Escursione>();
-		this.hotels = new ArrayList<Hotel>();
-		this.pacchetti = new ArrayList<Pacchetto>();
-		this.pacchettiContenuti = new ArrayList<Pacchetto>();
-		this.voli = new ArrayList<Volo>();
-		
+		this.escursioni = Escursione.copiaToEscursione(giftList.getEscursioni());
+		this.hotels = Hotel.copiaToHotel(giftList.getHotels());
+		this.pacchetti = Pacchetto.copiaToPacchetto(giftList.getPacchetti());
+		this.pacchettiContenuti = Pacchetto.copiaToPacchetto(giftList.getPacchettiContenuti());
+		this.voli = Volo.copiaToVolo(giftList.getVoli());	
+	}
+	
+	public static List<GiftList> copiaToGiftList(List<GiftListDTO> lista){
+		List<GiftList> copia = new ArrayList<GiftList>();
+		for(int i=0; i<lista.size(); i++){
+			GiftList daAggiungere = new GiftList(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
 	}
 
 	public int getIdGiftList() {

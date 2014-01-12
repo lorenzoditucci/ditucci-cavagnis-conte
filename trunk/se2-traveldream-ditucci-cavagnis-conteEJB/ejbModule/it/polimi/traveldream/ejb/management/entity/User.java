@@ -1,9 +1,11 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 
+import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,6 +87,15 @@ public class User implements Serializable {
         this.password     = DigestUtils.md5Hex(user.getPassword()); //qui la password � messa in chiaro ma non � da fare!
         this.registeredOn = new Date(); //timestamp della data di registrazione
     }
+	
+	public static List<User> copiaToUser(List<UserDTO> lista){
+		List<User> copia = new ArrayList<User>();
+		for(int i=0; i<lista.size(); i++){
+			User daAggiungere = new User(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
+	}
 	
 	
 	public String getFirstName() {
