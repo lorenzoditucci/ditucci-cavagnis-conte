@@ -9,4 +9,6 @@ public interface HotelMgr {
 	
 	public void save(HotelDTO volo);
 
+	public void remove(int idHotel);
+
 }

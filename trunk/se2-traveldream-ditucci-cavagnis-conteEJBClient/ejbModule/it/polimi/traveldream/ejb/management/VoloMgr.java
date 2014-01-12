@@ -10,4 +10,6 @@ public interface VoloMgr {
 	
 	public void save(VoloDTO volo);
 
+	public void remove(int idVolo);
+
 }

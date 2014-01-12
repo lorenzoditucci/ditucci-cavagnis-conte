@@ -7,6 +7,7 @@ import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
@@ -46,6 +47,12 @@ public class HotelMgrBean implements HotelMgr {
 			copia.add(daAggiungere);
 		}
 		return copia;
+	}
+
+	@Override
+	public void remove(int idHotel) {
+		Hotel h = em.find(Hotel.class, idHotel);
+        em.remove(h);
 	}
 	
 }
