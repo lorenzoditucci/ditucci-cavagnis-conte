@@ -44,10 +44,19 @@ public class EscursioneBean {
 	}	
 	
 	
-public String rimuoviEscursione(int id) {
-	System.out.println(id);
-	escursioneMgr.remove(id);	
-	return "";	
+public String rimuoviEscursione(EscursioneDTO e) {
+	System.out.println(e.getIdEscursione());
+		if(e.getAcquistato()==0){
+			escursioneMgr.remove(e.getIdEscursione());
+			return "cercaescursione";		
+		}				
+		else{
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Errore",  "Non puoi rimuovere un prodotto base che fa parte di un pacchetto acquistato");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			return "";
+		}
+			
+		
 	}
 	
 }
