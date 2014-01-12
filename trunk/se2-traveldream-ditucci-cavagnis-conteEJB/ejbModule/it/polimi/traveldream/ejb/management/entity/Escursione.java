@@ -7,7 +7,10 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,6 +64,15 @@ public class Escursione implements Serializable {
 		this.costo=escursione.getCosto();
 		this.citta=escursione.getCitta();
 		this.acquistato=0; /*a 0 di default in creazione*/
+	}
+	
+	public static List<Escursione> copiaToEscursione(List<EscursioneDTO> lista){
+		List<Escursione> copia = new ArrayList<Escursione>();
+		for(int i=0; i<lista.size(); i++){
+			Escursione daAggiungere = new Escursione(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
 	}
 
 	public int getIdEscursione() {
