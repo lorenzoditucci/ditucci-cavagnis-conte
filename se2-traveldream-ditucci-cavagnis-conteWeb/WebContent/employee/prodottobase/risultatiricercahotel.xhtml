@@ -42,7 +42,13 @@
     	<h:outputLabel value="costo - #{hotel.costo}" /><br/>
     	<h:outputLabel value="acquistato - #{hotel.acquistato}" /><br/>
     	<p>-----------------</p><br/>
+    	
+    	<p:commandLink id="elimina" action="#{hotelBean.rimuoviHotel(hotel)}">  
+        <h:outputText value="Elimina" />  
+        </p:commandLink> 	
+    
     	</ui:repeat>
+  
   
     
     </p:layoutUnit>  

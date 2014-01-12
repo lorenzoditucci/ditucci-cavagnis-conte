@@ -44,6 +44,10 @@
 	    <h:outputLabel value="Acquistato - #{volo.acquistato}" /><br/>
 	
     	<p>-----------------</p><br/>
+    	<p:commandLink id="elimina" action="#{voloBean.rimuoviVolo(volo)}">  
+        <h:outputText value="Elimina" />  
+        </p:commandLink> 
+    	
     	</ui:repeat>
   
     

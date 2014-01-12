@@ -1,6 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
@@ -45,4 +46,19 @@ public class VoloBean {
 		voloMgr.save(volo);	
 		return "aggiungiprodottobase";
 	}
+	
+	public String rimuoviVolo(VoloDTO v) {
+			if(v.getAcquistato()==0){
+				voloMgr.remove(v.getIdVolo());
+				return "cercaescursione";		
+			}				
+			else{
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Errore",  "Non puoi rimuovere un prodotto base che fa parte di un pacchetto acquistato");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return "";
+			}
+				
+			
+		}
+	
 }

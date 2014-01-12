@@ -5,6 +5,7 @@ import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Group;
+import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.User;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
@@ -49,5 +50,12 @@ public class VoloMgrBean implements VoloMgr {
 			copia.add(daAggiungere);
 		}
 		return copia;
+	}
+
+	@Override
+	public void remove(int idVolo) {
+		Volo v = em.find(Volo.class, idVolo);
+        em.remove(v);
+		
 	}
 }
