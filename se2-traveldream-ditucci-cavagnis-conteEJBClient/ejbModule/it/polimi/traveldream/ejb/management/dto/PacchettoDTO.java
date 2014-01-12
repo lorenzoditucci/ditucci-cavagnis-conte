@@ -3,6 +3,10 @@ package it.polimi.traveldream.ejb.management.dto;
 /**
  * Done
  */
+
+
+
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -42,6 +46,48 @@ public class PacchettoDTO {
 	@NotEmpty
 	private List<HotelDTO> hotels;
 	
+	@NotEmpty
+	private List<CittaDTO> cittaDestinazione;
+	
+	private List<EscursioneDTO> escursioni;
+	
+	private List<UserDTO> users;
+	
+	private List<GiftListDTO> giftLists;
+	
+	
+	public List<UserDTO> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserDTO> users) {
+		this.users = users;
+	}
+
+	public List<GiftListDTO> getGiftLists() {
+		return giftLists;
+	}
+
+	public void setGiftLists(List<GiftListDTO> giftLists) {
+		this.giftLists = giftLists;
+	}
+
+	public List<EscursioneDTO> getEscursioni() {
+		return escursioni;
+	}
+
+	public void setEscursioni(List<EscursioneDTO> escursioni) {
+		this.escursioni = escursioni;
+	}
+
+	public List<CittaDTO> getCittaDestinazione() {
+		return cittaDestinazione;
+	}
+
+	public void setCittaDestinazione(List<CittaDTO> cittaDestinazione) {
+		this.cittaDestinazione = cittaDestinazione;
+	}
+
 	public List<VoloDTO> getVoli() {
 		return voli;
 	}

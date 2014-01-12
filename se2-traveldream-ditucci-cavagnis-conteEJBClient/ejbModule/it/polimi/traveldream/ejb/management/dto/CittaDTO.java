@@ -1,6 +1,10 @@
 package it.polimi.traveldream.ejb.management.dto;
 
 
+
+
+import java.util.List;
+
 import com.sun.istack.internal.NotNull;
 
 public class CittaDTO {
@@ -10,6 +14,17 @@ public class CittaDTO {
 
 	@NotNull
 	private String nome;
+	
+	
+	public List<PacchettoDTO> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<PacchettoDTO> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
+
+	private List<PacchettoDTO> pacchetti;
 
 	public int getIdCitta() {
 		return idCitta;

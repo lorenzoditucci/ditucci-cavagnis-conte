@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb.management.dto;
 /**
  * done
  */
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -33,6 +34,16 @@ public class GiftListDTO {
 	@NotEmpty
 	private List<PacchettoDTO> pacchetti;
 
+	public GiftListDTO(){
+		this.pacchetti = new ArrayList<PacchettoDTO>();
+		this.hotels = new ArrayList<HotelDTO>(); 
+		this.pacchettiContenuti = new ArrayList<PacchettoDTO>();
+		this.nome = new String();
+		this.mailCliente = new String();
+		this.voli = new ArrayList<VoloDTO>();
+		this.escursioni = new ArrayList<EscursioneDTO>();
+	}
+	
 	public int getIdGiftList() {
 		return idGiftList;
 	}
