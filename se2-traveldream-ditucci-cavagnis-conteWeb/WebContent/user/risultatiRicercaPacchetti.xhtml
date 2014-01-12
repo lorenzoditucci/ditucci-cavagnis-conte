@@ -27,60 +27,21 @@
     <p:layoutUnit position="center">  
         risultato ricerca
         
-        <div id='contenitore-pacchetto'>
-        	<div id="pacchetto-titolo">
-        	titolo del pacchetto
-        	</div>
-        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
-        </div>
-        <div class='contenitore-pacchetto'>
-        	<div class="pacchetto-titolo">
-        	titolo del pacchetto
-        	</div>
-        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
-        </div>
-        <!-- PROVA -->
-			       <h:form id="form">
+        <h:form>
+			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
 		
-			<p:dataGrid var="pack" value="#{cercaPacchettoBean.risultato}" columns="3"
-				rows="12" paginator="true"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="9,12,15">
+		    <p:growl id="growl" showDetail="true" />
 		
-		        <p:panel header="#{pack.idPacchetto}" style="text-align:center">
-		            <h:panelGrid columns="1" style="width:100%">
-		                <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/> 
-		
-		                <h:outputText value="#{pack.nome}" />
-		
-		                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
-		                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" /> 
-		                    <f:setPropertyActionListener value="#{cercaPacchettoBean}" 
-		                            target="#{cercaPacchettoBean.risultato}" />
-		                </p:commandLink>
-		            </h:panelGrid>
-		        </p:panel>
-		
-			</p:dataGrid>
-			
-			<p:dialog header="Car Detail" widgetVar="carDialog" modal="true">
-				<p:outputPanel id="carDetail" style="text-align:center;">
-				
-					<p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
-					
-					<h:panelGrid  columns="2" cellpadding="5">
-						<h:outputLabel for="modelNo" value="Model No: " />
-						<h:outputText id="modelNo" value="#{tableBean.selectedCar.model}" />
-						
-						<h:outputLabel for="year" value="Year: " />
-						<h:outputText id="year" value="#{tableBean.selectedCar.year}" />
-						
-						<h:outputLabel for="color" value="Color: " />
-						<h:outputText id="color" value="#{tableBean.selectedCar.color}" style="color:#{tableBean.selectedCar.color}"/>
-					</h:panelGrid>
-				</p:outputPanel>
-			</p:dialog>
-		
+		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:panelGrid columns="2" cellpadding="10">
+		            
+		            <h:outputText value="Pacchetto #{pacchetto.idPacchetto} - #{pacchetto.nome} "/><br/>
+		            <h:outputText value="Data Inizio #{pacchetto.dataInizio} - Data Fine #{pacchetto.dataFine}" /><br/>
+		            <h:outputText value="Costo #{pacchetto.costo}"/><br/>
+		        </h:panelGrid>
+		    </p:fieldset>
+			</ui:repeat>
 		</h:form>
 		
 			

@@ -10,12 +10,7 @@
 </h:head>
 <h:body>
 <h:outputStylesheet library="css" name="../resources/style.css"  />
-<!-- chiamo il bean -->
-<!-- 
-	RAGIONAMENTO: FACCIAMO LO STESSO BEAN O NE CREIAMO UNO NUOVO?
-		OPZIONE 1 - STESSO BEAN: AD OGNI CAMBIO DI PAGINA ESEGUE UNA QUERY E IL RISULTATO HA DUE COSE DIVERSE A DIFFERENZA DELLA PAGINA CHE SI GUARDA
-		OPZIONE 2 - BEAN DIVERSO: SONO DUE COSE DIVERSE...
-	 -->
+
 #{pacchettoBean.cercaAcquistati()}
 <p:layout fullPage="true">  
 	<p:layoutUnit position="north" size="100" resizable="true">  
