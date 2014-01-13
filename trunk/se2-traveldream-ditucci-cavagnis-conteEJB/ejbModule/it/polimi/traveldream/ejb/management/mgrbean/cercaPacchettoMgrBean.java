@@ -69,7 +69,7 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
         	queryDiRicerca.setParameter("dataFine", t2);
 			
 		} catch (NullPointerException e) {
-			queryDiRicerca.setParameter("dataInizio", null);
+			queryDiRicerca.setParameter("dataFine", null);
 		}
     	
     	queryDiRicerca.setParameter("costo", costo);
