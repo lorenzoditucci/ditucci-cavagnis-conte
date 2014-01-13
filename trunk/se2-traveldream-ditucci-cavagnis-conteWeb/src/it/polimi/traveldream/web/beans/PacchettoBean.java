@@ -6,6 +6,7 @@ import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -30,12 +31,16 @@ public class PacchettoBean {
 	private pacchettoMgr pacchettoMgr;
 	
 	private ArrayList<PacchettoDTO> risultato;
-    /**
-     * Default constructor. 
-     */
-    public PacchettoBean() {
-        setRisultato(new ArrayList<PacchettoDTO>());
+    
+	@PostConstruct
+	public void init() {
+		setRisultato(new ArrayList<PacchettoDTO>());
         userEmail = new String();
+	}
+	
+	
+    public PacchettoBean() {
+        
     }
     
     public void cercaAll(){
