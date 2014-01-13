@@ -10,4 +10,6 @@ public interface cercaPacchettoMgr {
 	ArrayList<PacchettoDTO> cercaPacchettiParam(Date dataPartenza,Date dataRitorno, Double costo,
 			String nomePacchetto);
 
+	ArrayList<PacchettoDTO> cercaPacchettoId(int idPacchetto);
+
 }
