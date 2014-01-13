@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Volo;
 
 /*
  * Bean stateful per mantenimento della sessione
@@ -23,6 +29,12 @@ import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 @Local(CreaPacchettoMgr.class)
 @LocalBean
 public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
+	@PersistenceContext
+    private EntityManager em;
+	
+	@Resource
+	private EJBContext context;
+	
 	public PacchettoDTO pacchettoInBean;
 	public List<VoloDTO> voloInBean;
 	
@@ -64,6 +76,32 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		this.pacchettoInBean.setDisponibilitaAttuale(pacchetto.getDisponibilitaMax());
 		//il costo è ancora da calcolare
 		this.pacchettoInBean.setCosto(0.0);
+	}
+
+	@Override
+	public List<VoloDTO> cercaVolo(int idVoloDaCercare) {
+        TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
+    	
+    	List<Volo> listaVolo = queryRicerca.setParameter("idVolo", idVoloDaCercare).getResultList();
+    	
+    	return convertiInListaVoloDTO(listaVolo); 
+	}
+
+	private ArrayList<VoloDTO> convertiInListaVoloDTO(List<Volo> listaVolo) {
+		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
+		for(int i=0; i<listaVolo.size();i++){
+    		VoloDTO daAggiungere = new VoloDTO();
+    		daAggiungere.setIdVolo(listaVolo.get(i).getIdVolo());
+    		daAggiungere.setCompagnia(listaVolo.get(i).getCompagnia());
+    		daAggiungere.setDataPartenza(listaVolo.get(i).getDataInizio());
+    		daAggiungere.setDataArrivo(listaVolo.get(i).getDataFine());
+    		daAggiungere.setCittaPartenza(listaVolo.get(i).getCittaPartenza());
+    		daAggiungere.setCittaArrivo(listaVolo.get(i).getCittaArrivo());
+    		daAggiungere.setCosto(listaVolo.get(i).getCosto());
+    		daAggiungere.setAcquistato(listaVolo.get(i).getAcquistato());
+    		copia.add(daAggiungere);
+    	}
+		return copia;
 	}
 
 
