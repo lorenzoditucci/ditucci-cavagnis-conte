@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,8 @@ import javax.ejb.Stateless;
 import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 /**
@@ -54,11 +57,27 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
     	 * aggiunta parametri
     	 */
     	queryDiRicerca.setParameter("nome", "%" + nomePacchetto + "%");
-    	queryDiRicerca.setParameter("dataPartenza", dataPartenza);
-    	queryDiRicerca.setParameter("dataFine", dataFine);
+    	try {
+    		Timestamp t1 = new Timestamp(dataPartenza.getTime());
+        	queryDiRicerca.setParameter("dataPartenza", t1);
+		} catch (NullPointerException e) {
+			queryDiRicerca.setParameter("dataPartenza", null);
+		}
+    	
+    	try {
+    		Timestamp t2 = new Timestamp(dataFine.getTime());
+        	queryDiRicerca.setParameter("dataFine", t2);
+			
+		} catch (NullPointerException e) {
+			queryDiRicerca.setParameter("dataInizio", null);
+		}
+    	
     	queryDiRicerca.setParameter("costo", costo);
     	
+    	System.out.println(queryDiRicerca);
+    	
         List<Pacchetto> pacchettiRis = queryDiRicerca.getResultList();
+        System.out.println(pacchettiRis.size());
         
         /**
          * passo tutti i parametri della lista ad un arraylist di pacchettidto
