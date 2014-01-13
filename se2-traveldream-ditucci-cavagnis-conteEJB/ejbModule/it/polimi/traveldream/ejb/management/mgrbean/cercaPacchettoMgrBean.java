@@ -87,4 +87,13 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
 			return PacchettoMgrBean.copiaListaQuery(pacchettiRis);
     }
 
+	@Override
+	public ArrayList<PacchettoDTO> cercaPacchettoId(int idPacchetto) {
+		TypedQuery<Pacchetto> query = em.createNamedQuery("cercaPacchettiId", Pacchetto.class);
+		query.setParameter("id", idPacchetto);
+		List<Pacchetto> risultati = query.getResultList();
+		return PacchettoMgrBean.copiaListaQuery(risultati);
+		
+	}
+
 }

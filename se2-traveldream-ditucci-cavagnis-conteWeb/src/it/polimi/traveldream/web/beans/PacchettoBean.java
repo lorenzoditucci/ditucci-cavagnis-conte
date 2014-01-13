@@ -51,8 +51,9 @@ public class PacchettoBean {
     	
     }
 
-    public void cercaAcquistati(){
-    	setRisultato(pacchettoMgr.prendiAcquistati(userEmail));
+    public void cercaAcquistati(String mail){
+    	setUserEmail(mail);
+    	setRisultato(pacchettoMgr.prendiAcquistati(mail));
     	
     }
 	public ArrayList<PacchettoDTO> getRisultato() {
