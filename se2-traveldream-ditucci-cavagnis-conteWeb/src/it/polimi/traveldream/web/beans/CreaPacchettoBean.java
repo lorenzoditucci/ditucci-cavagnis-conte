@@ -20,7 +20,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @ManagedBean(name="creaPacchettoBean")
-@RequestScoped
+@ViewScoped
 public class CreaPacchettoBean {
 	
 	@EJB
@@ -38,6 +38,11 @@ public class CreaPacchettoBean {
 	@Future
 	private Date dataFine;
 	
+	@NotNull
+	private int idVoloDaCercare;
+	
+	private VoloDTO volo;
+
 	/*Lista di voli da aggiungere*/
 	private List<VoloDTO> voli;
 	
@@ -61,9 +66,27 @@ public class CreaPacchettoBean {
 	
 		creaPacchettoMgr.instanziaPacchetto(getPacchetto());
 		
-		return ""; //rimane sulla pagina corrente
+		return "aggiungiVoliInPacchetto"; 
 	}
 
+	public String cercaEAggiungiVolo(){
+		System.out.println(idVoloDaCercare);
+		volo=new VoloDTO();
+  
+    	if(creaPacchettoMgr.cercaVolo(idVoloDaCercare).isEmpty()){
+    		
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attenzione!", "La ricerca non ha prodotto risultati"));
+    		return null;
+    	}else{
+    		
+    		this.volo=creaPacchettoMgr.cercaVolo(idVoloDaCercare).get(0);
+    		System.out.println(getVoli().size());
+    		getVoli().add(volo);
+    		System.out.println(getVoli().size());
+    		return null;
+    	}	
+	}
+	
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
 	}
@@ -97,6 +120,25 @@ public class CreaPacchettoBean {
 
 	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
+	}
+	
+	public int getIdVoloDaCercare() {
+		return idVoloDaCercare;
+	}
+
+
+	public void setIdVoloDaCercare(int idVoloDaCercare) {
+		this.idVoloDaCercare = idVoloDaCercare;
+	}
+
+
+	public VoloDTO getVolo() {
+		return volo;
+	}
+
+
+	public void setVolo(VoloDTO volo) {
+		this.volo = volo;
 	}
 
 }
