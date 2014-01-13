@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Crea Pacchetto</title>
+</h:head>
+<h:body>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
+    	<h:form>
+		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		<h:form><h4>Ricerca Pacchetto</h4></h:form>
+		
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="prodottobase/aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="prodottobase/cercaprodottobase"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+    
+    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+    
+    	  Form Creazione Pacchetto
+  <h:form>
+		<p:panel header="Dati del nuovo Pacchetto">
+		
+			<h:panelGrid columns="3" id="pacchettoGrid">
+			
+			<h:outputLabel for="nome">Nome:</h:outputLabel>
+			<h:inputText id="nome" value="#{creaPacchettoBean.pacchetto.nome}" />
+		    <h:message for="nome"></h:message>
+		    
+		    <h:outputLabel for="descrizione">Descrizione:</h:outputLabel>
+			<h:inputText id="descrizione" value="#{creaPacchettoBean.pacchetto.descrizione}" />
+		    <h:message for="descrizione"></h:message>
+		    
+		    <h:outputLabel for="disponibilita-max">Disponibilità max:</h:outputLabel> 
+            <h:inputText id="disponibilita-max" value="#{creaPacchettoBean.pacchetto.disponibilitaMax}" />
+            <h:message for="disponibilita-max"></h:message>
+            
+            <h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+			<p:calendar value="#{creaPacchettoBean.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+			<h:message for="data-inizio"></h:message>
+			
+			<h:outputLabel for="data-fine">Data di Ritorno:</h:outputLabel>
+			<p:calendar value="#{creaPacchettoBean.dataFine}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+			<h:message for="data-fine"></h:message>
+            
+
+		<h:commandButton value="Crea Pacchetto" action="#{creaPacchettoBean.inizializzaPacchetto()}" update="pacchettoGrid"/>
+       </h:panelGrid>
+       </p:panel>
+	</h:form>
+    
+    
+    
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>
+
+

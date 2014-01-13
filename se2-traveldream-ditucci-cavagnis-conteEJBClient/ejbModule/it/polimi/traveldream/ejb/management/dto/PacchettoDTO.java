@@ -8,7 +8,11 @@ package it.polimi.traveldream.ejb.management.dto;
 
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -16,22 +20,24 @@ public class PacchettoDTO {
 	@NotEmpty
 	private int idPacchetto;
 
-	@NotEmpty
+	@NotNull
+	@Min(1)
 	private double costo;
 
-	@NotEmpty
+	@NotNull
 	private Timestamp dataFine;
 
-	@NotEmpty
+	@NotNull
 	private Timestamp dataInizio;
 
 	@NotEmpty
 	private String descrizione;
 
-	@NotEmpty
+	@NotNull
 	private int disponibilitaAttuale;
 
-	@NotEmpty
+	@NotNull
+	@Min(1)
 	private int disponibilitaMax;
 
 	@NotEmpty
