@@ -40,7 +40,15 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	@Override
 	public void instanziaPacchetto(PacchettoDTO pacchetto) {
 		copiaDTOtoDTOStateful(pacchetto);
-		System.out.println(pacchettoInBean.getNome()); //debug
+		//debug
+		System.out.println("Sei nel bean statefule");
+		System.out.println(pacchettoInBean.getNome());
+		System.out.println(pacchettoInBean.getDescrizione());
+		System.out.println(pacchettoInBean.getDisponibilitaMax());
+		System.out.println(pacchettoInBean.getDisponibilitaAttuale());
+		System.out.println(pacchettoInBean.getCosto());
+		System.out.println(pacchettoInBean.getDataInizio());
+		System.out.println(pacchettoInBean.getDataFine());
 	}
 
 	/*

@@ -50,17 +50,15 @@ public class CreaPacchettoBean {
 	}
 	
 	
-	public String inizializzaPacchetto(){
-		System.out.println(pacchetto.getNome()); //per debug
-		pacchetto.setDataInizio(new Timestamp(dataInizio.getTime()*1000));
-		pacchetto.setDataFine(new Timestamp(dataFine.getTime()*1000));
+	public String inizializzaPacchetto(){ 
+		pacchetto.setDataInizio(new Timestamp(dataInizio.getTime()));
+		pacchetto.setDataFine(new Timestamp(dataFine.getTime()));
 
 		if(dataInizio.after(dataFine) || dataInizio.equals(dataFine)){
 			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Intervallo date errato", "Non ha senso!!!"));
 		     return "";
 		}
-		
-		
+	
 		creaPacchettoMgr.instanziaPacchetto(getPacchetto());
 		
 		return ""; //rimane sulla pagina corrente
