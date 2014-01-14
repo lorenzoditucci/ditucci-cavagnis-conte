@@ -75,18 +75,29 @@ public class CreaPacchettoBean {
   
     	if(creaPacchettoMgr.cercaVolo(idVoloDaCercare).isEmpty()){
     		
-    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attenzione!", "La ricerca non ha prodotto risultati"));
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non trovato", "La ricerca non ha prodotto risultati"));
     		return null;
     	}else{
-    		
     		this.volo=creaPacchettoMgr.cercaVolo(idVoloDaCercare).get(0);
-    		System.out.println(getVoli().size());
+    		if(giaContenuto()){
+    			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Giˆ in lista", "La ricerca non ha prodotto risultati"));
+        		return null;
+    		}
     		getVoli().add(volo);
-    		System.out.println(getVoli().size());
     		return null;
     	}	
 	}
 	
+	private boolean giaContenuto() {
+		for(int i=0; i< getVoli().size(); i++)
+		{
+			if(getVoli().get(i).getIdVolo()==volo.getIdVolo())
+				return true;
+		}		
+		return false;
+	}
+
+
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
 	}
