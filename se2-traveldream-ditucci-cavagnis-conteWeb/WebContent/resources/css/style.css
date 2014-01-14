@@ -14,6 +14,18 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 10pt;
     color: #000000;
+}
+
+#contenitore-generale{
+    z-index: 100;
+}
+
+#background{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
     background: url(#{resource['image:sfondo.jpg']}) no-repeat center; 
     background-size: cover;
 }
@@ -23,6 +35,58 @@ body {
     height: 100px;
     padding-top: 0px;
     display: block;
+}
+
+#menu-sinistra{
+    background-color: #ffffff;
+    border: 1px solid #E50F17;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: 0px 0px 20px #000000;
+    -webkit-box-shadow: 0px 0px 20px #000000;
+    box-shadow: 0px 0px 20px #000000;
+    /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    opacity: 0.77;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 77);
+    /*-ms-filter must come before filter*/
+    filter: alpha(opacity = 77);
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*All filters must be placed together*/
+
+    width: 20%;
+    float: left;
+    height: auto;
+    display: inline-block;
+    padding-left: 30px;
+
+}
+
+#contenitore-centrale{
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    position: static;
+
+    background-color: #ffffff;
+    border: 1px solid #E50F17;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: 0px 0px 20px #000000;
+    -webkit-box-shadow: 0px 0px 20px #000000;
+    box-shadow: 0px 0px 20px #000000;
+    /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    opacity: 0.77;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 77);
+    /*-ms-filter must come before filter*/
+    filter: alpha(opacity = 77);
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*All filters must be placed together*/
 }
 
 #contenitore-form{
