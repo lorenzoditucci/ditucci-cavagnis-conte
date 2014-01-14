@@ -61,6 +61,8 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		System.out.println(pacchettoInBean.getCosto());
 		System.out.println(pacchettoInBean.getDataInizio());
 		System.out.println(pacchettoInBean.getDataFine());
+		System.out.println(pacchettoInBean.getMail());
+		
 	}
 
 	/*
@@ -76,6 +78,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		this.pacchettoInBean.setDisponibilitaAttuale(pacchetto.getDisponibilitaMax());
 		//il costo è ancora da calcolare
 		this.pacchettoInBean.setCosto(0.0);
+		this.pacchettoInBean.setMail(pacchetto.getMail());
 	}
 
 	@Override

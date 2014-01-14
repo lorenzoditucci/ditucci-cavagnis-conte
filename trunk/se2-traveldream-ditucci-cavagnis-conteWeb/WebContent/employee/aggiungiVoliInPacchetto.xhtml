@@ -31,8 +31,7 @@
 		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
-    
-    ----
+
     <h:form id="inserimentoVoliForm">  
   
     <p:growl id="msgs" />  
@@ -47,8 +46,7 @@
             <p:commandButton value="Reset" type="reset"/>  
             <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
                             action="#{creaPacchettoBean.cercaEAggiungiVolo()}" update="voli msgs @parent" >  
-      <!--  <p:collector value="#{creaPacchettoBean.volo}"   
-                            addTo="#{creaPacchettoBean.voli}" />   -->         
+             
             </p:commandButton>  
         </h:panelGrid>  
     </p:panel>  
@@ -127,18 +125,11 @@
   
         </p:dataTable>  
     </p:outputPanel>  
-  
-</h:form>  
-    
-    
-    
-    ----
-    
-    
-    
-    
-    
-    
+  <h:commandButton value="Aggiungi voli" action="#{creaPacchettoBean.aggiungiVoliInPacchetto()}" update ="inserimentoVoliForm"></h:commandButton>
+</h:form>    
+
+
+   
     </p:layoutUnit>  
     
 </p:layout>    

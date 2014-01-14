@@ -55,9 +55,11 @@ public class CreaPacchettoBean {
 	}
 	
 	
-	public String inizializzaPacchetto(){ 
+	public String inizializzaPacchetto(String mailDipendente){ 
+		
 		pacchetto.setDataInizio(new Timestamp(dataInizio.getTime()));
 		pacchetto.setDataFine(new Timestamp(dataFine.getTime()));
+		pacchetto.setMail(mailDipendente);
 
 		if(dataInizio.after(dataFine) || dataInizio.equals(dataFine)){
 			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Intervallo date errato", "Non ha senso!!!"));
@@ -88,6 +90,40 @@ public class CreaPacchettoBean {
     	}	
 	}
 	
+	
+	public String aggiungiVoliInPacchetto(){
+		/*controllo sulla correttezza della lista di voli
+		 * da inviare allo stateful
+		*/
+		if(!dateECittaConseguenti()){
+			//error
+			System.out.println("lista sbagliata");
+			//lanciare la facet
+			return null;
+		}
+		System.out.println("TUTTO OK");
+		
+		return null;
+	}
+	/*
+	 * Verifica che i voli siano conseguenti e che sia una catena
+	 * */
+	private boolean dateECittaConseguenti() {
+		
+		if(getVoli().size()<2)
+			return false;
+		
+		for(int i=0; i<getVoli().size()-1; i++){
+			if(getVoli().get(i).getDataArrivo().after(getVoli().get(i+1).getDataPartenza()))
+				return false;
+			if(!getVoli().get(i).getCittaArrivo().equals(getVoli().get(i+1).getCittaPartenza()))
+				return false;
+		}
+		return true;
+		
+	}
+
+
 	private boolean giaContenuto() {
 		for(int i=0; i< getVoli().size(); i++)
 		{
