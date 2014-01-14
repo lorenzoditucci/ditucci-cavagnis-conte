@@ -117,6 +117,9 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 				&& voli.get(voli.size()-1).getDataArrivo().equals(pacchettoInBean.getDataFine()))
 		{
 			System.out.println("date ok al pacchetto");
+			//copia voli nello stateful
+			this.voloInBean.addAll(voli);
+			
 			return true;
 
 		}

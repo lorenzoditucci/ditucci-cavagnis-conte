@@ -103,11 +103,13 @@ public class CreaPacchettoBean {
 		System.out.println("TUTTO OK");
 		
 		//vado sul bean stateful
-		if(creaPacchettoMgr.inserisciVoliInPacchettoInstanziato(getVoli())){
-			//ritorna la pagina successiva
-			
-			return null;
+		if(!creaPacchettoMgr.inserisciVoliInPacchettoInstanziato(getVoli())){
+			//non coerenti
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+			return null;	
 		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+		
 		
 		return null;
 	}
