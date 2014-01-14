@@ -2,74 +2,92 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>HomePage - Clienti</title>
+	<h:outputStylesheet name="css/style.css" />
+	<title>Homepage: Clienti</title>
 </h:head>
 <h:body>
 <!-- chiamo il bean -->
 #{pacchettoBean.cercaAll()}
-<p:layout fullPage="true">  
-	<p:layoutUnit position="north" size="100" resizable="true">  
-        Travel Dream - Clienti
-    </p:layoutUnit>  
-    
-    <p:layoutUnit position="west" size="300" resizable="true">  
-    	<h:form>
-	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
-	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
-	    	<h:link value="GestioneGiftList" outcome="gestioneGL/gestione"></h:link>
-		</h:form>
-		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
-		
-		<h:form id="ricercaPacchetto">
-    
-		<p:panel header="Ricerca Pacchetto">
-		
-			<h:panelGrid columns="3" id="pacchettoGrid">
-	
-			
-         
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+</div>
+<div id="menu-sinistra">
 
-			<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
-			<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
-			<p:message for="nome-pacchetto"></p:message>
-				
-				
-			<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
-			<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
-			<h:message for="data-inizio"></h:message>
+		<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
+	    </h:form>
+	    	<h:link  outcome="gestioneGL/gestione">
+	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
+	    		- Gestione Gifti List
+	    	</h:link><br/>
+	    	<h:link  outcome="pacchettiAcquistati.xhtml">
+	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+	    		- Pacchetti Acquistati
+	    	</h:link><br/>
+	    	
+	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+    
+			<p:panel>
 			
-			<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
-			<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
-			<h:message for="data-fine"></h:message>
-			
-			<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
-        	<h:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
-            <h:message for="costo-pacchetto"></h:message>
-			
-			
-		<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
-       </h:panelGrid>
-       </p:panel>
-	</h:form>
+				<h:panelGrid columns="1" id="pacchettoGrid">
 		
-  </p:layoutUnit>  
-    <p:layoutUnit position="center">  
+				
+	         
+	
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+					
+					
+				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+				<h:message for="data-inizio"></h:message>
+				
+				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+				<h:message for="data-fine"></h:message>
+				
+				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+	            <h:message for="costo-pacchetto"></h:message>
+				
+				
+			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+	       </h:panelGrid>
+	       </p:panel>
+		</h:form>
+	
+</div>
+<div id='contenitore-centrale'>
+	<div id='contenitore-form-testo'>
     
-    	<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
-    	<h:outputLabel value="pacchetto - #{pacchetto.idPacchetto}" /><br/>
-    	<h:outputLabel value="costo - #{pacchetto.costo}" /><br/>
-    	<p>-----------------</p><br/>
-    	</ui:repeat>
-    	
-       <!-- Vari pacchetti, fare css con quadratini che quando passi il mouse si colorano?
-        oppure possiamo usare la funzione che abbassa lo schermo(carino l'italiano)  --> 
-    
-    </p:layoutUnit>  
-    
-</p:layout>    
+	<h:form style="padding : 30px;">
+			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
+		
+		    <p:growl id="growl" showDetail="true" />
+		
+		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:panelGrid columns="2" cellpadding="10">
+		            
+		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
+		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
+		            	<h:outputText value="città escursione - #{esc.citta}" />
+		            </ui:repeat>
+		        </h:panelGrid>
+		    </p:fieldset>
+			</ui:repeat>
+		</h:form>  
+		</div>
+</div>
+</div>
 </h:body>           
 </html>
+
