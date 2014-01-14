@@ -122,8 +122,9 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			//copia voli nello stateful
 			this.voloInBean.addAll(voli);
 			
+			this.pacchettoInBean.setCosto(pacchettoInBean.getCosto()+costoTotaleDeiVoli());
 			
-			
+			System.out.println(pacchettoInBean.getCosto());
 			return true;
 
 		}
@@ -134,6 +135,15 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	}
 
 	
+	private double costoTotaleDeiVoli() {
+		double tot=0;
+		for(int i=0; i<voloInBean.size(); i++)
+			tot=tot+voloInBean.get(i).getCosto();
+		
+		return tot;
+			
+	}
+
 	public static boolean stessoGiornoMeseAnno(Timestamp data1, Date data2) {
 		if(data1.getDate() == data2.getDate() && data1.getMonth() == data2.getMonth()
 				&& data1.getYear() == data2.getYear())
