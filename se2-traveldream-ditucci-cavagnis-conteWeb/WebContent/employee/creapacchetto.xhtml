@@ -61,7 +61,7 @@
 			<h:message for="data-fine"></h:message>
             
 
-		<h:commandButton value="Crea Pacchetto" action="#{creaPacchettoBean.inizializzaPacchetto()}" update="pacchettoGrid"/>
+		<h:commandButton value="Crea Pacchetto" action="#{creaPacchettoBean.inizializzaPacchetto(userBean.mail)}" update="pacchettoGrid"/>
        </h:panelGrid>
        </p:panel>
 	</h:form>
