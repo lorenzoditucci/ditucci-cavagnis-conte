@@ -114,12 +114,19 @@ public class CreaPacchettoBean {
 			return false;
 		
 		for(int i=0; i<getVoli().size()-1; i++){
+			//date conseguenti
 			if(getVoli().get(i).getDataArrivo().after(getVoli().get(i+1).getDataPartenza()))
 				return false;
+			//cittˆ conseguenti
 			if(!getVoli().get(i).getCittaArrivo().equals(getVoli().get(i+1).getCittaPartenza()))
 				return false;
 		}
-		return true;
+		
+		//circolaritˆ dei voli
+		if(!getVoli().get(0).getCittaPartenza().equals(getVoli().get(getVoli().size()-1).getCittaArrivo()))
+			return false;
+			
+			return true;
 		
 	}
 
