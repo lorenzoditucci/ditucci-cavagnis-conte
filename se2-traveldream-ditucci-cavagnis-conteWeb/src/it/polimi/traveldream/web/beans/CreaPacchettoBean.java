@@ -110,7 +110,8 @@ public class CreaPacchettoBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 		
-		
+		//coerenti
+		//salto alla prossima pagina
 		return null;
 	}
 	/*
