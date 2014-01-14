@@ -14,5 +14,7 @@ public interface CreaPacchettoMgr {
 	public void instanziaPacchetto(PacchettoDTO pacchetto);
 
 	public List<VoloDTO> cercaVolo(int idVoloDaCercare);
+
+	public boolean inserisciVoliInPacchettoInstanziato(List<VoloDTO> voli);
 	
 }

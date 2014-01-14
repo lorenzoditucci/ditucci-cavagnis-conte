@@ -14,13 +14,14 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @ManagedBean(name="creaPacchettoBean")
-@ViewScoped
+@SessionScoped
 public class CreaPacchettoBean {
 	
 	@EJB
@@ -96,12 +97,17 @@ public class CreaPacchettoBean {
 		 * da inviare allo stateful
 		*/
 		if(!dateECittaConseguenti()){
-			//error
-			System.out.println("lista sbagliata");
-			//lanciare la facet
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore nella lista dei voli", "La ricerca non ha prodotto risultati"));
 			return null;
 		}
 		System.out.println("TUTTO OK");
+		
+		//vado sul bean stateful
+		if(creaPacchettoMgr.inserisciVoliInPacchettoInstanziato(getVoli())){
+			//ritorna la pagina successiva
+			
+			return null;
+		}
 		
 		return null;
 	}
