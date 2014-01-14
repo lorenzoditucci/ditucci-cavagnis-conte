@@ -1,6 +1,8 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -113,12 +115,14 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		//precedentemente
 		System.out.println(voli.get(0).getDataPartenza().getTime());
 		System.out.println(pacchettoInBean.getDataInizio().getTime());
-		if(voli.get(0).getDataPartenza().equals(pacchettoInBean.getDataInizio())
-				&& voli.get(voli.size()-1).getDataArrivo().equals(pacchettoInBean.getDataFine()))
+		if(stessoGiornoMeseAnno(pacchettoInBean.getDataInizio(), voli.get(0).getDataArrivo())
+				&& stessoGiornoMeseAnno(pacchettoInBean.getDataFine(), voli.get(voli.size()-1).getDataArrivo()))
 		{
 			System.out.println("date ok al pacchetto");
 			//copia voli nello stateful
 			this.voloInBean.addAll(voli);
+			
+			
 			
 			return true;
 
@@ -127,6 +131,16 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		
 		System.out.println("NO date non giuste al pacchetto");
 		return false;
+	}
+
+	
+	public static boolean stessoGiornoMeseAnno(Timestamp data1, Date data2) {
+		if(data1.getDate() == data2.getDate() && data1.getMonth() == data2.getMonth()
+				&& data1.getYear() == data2.getYear())
+			return true;
+		
+		return false;
+		
 	}
 
 
