@@ -121,10 +121,18 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			System.out.println("date ok al pacchetto");
 			//copia voli nello stateful
 			this.voloInBean.addAll(voli);
-			
+			//setta costo nel pacchetto salvato nel bean stateful
 			this.pacchettoInBean.setCosto(pacchettoInBean.getCosto()+costoTotaleDeiVoli());
+			/*
+			 * ORA E' UN CASINO:
+			 * devo inserire nella base di dati le cittˆ
+			 * se esistono non le aggiungo e successivamente 
+			 * prelevo le cittˆ DTO dalle entity
+			 * e le inserisco 
+			 * */
+			/*Sono arrivato qui*/
 			
-			System.out.println(pacchettoInBean.getCosto());
+			
 			return true;
 
 		}
