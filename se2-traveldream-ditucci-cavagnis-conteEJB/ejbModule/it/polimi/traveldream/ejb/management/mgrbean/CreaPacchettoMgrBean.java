@@ -107,6 +107,25 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		return copia;
 	}
 
+	@Override
+	public boolean inserisciVoliInPacchettoInstanziato(List<VoloDTO> voli) {
+		//verifica che i voli siano coerenti ai dati del pacchetto creato
+		//precedentemente
+		System.out.println(voli.get(0).getDataPartenza().getTime());
+		System.out.println(pacchettoInBean.getDataInizio().getTime());
+		if(voli.get(0).getDataPartenza().equals(pacchettoInBean.getDataInizio())
+				&& voli.get(voli.size()-1).getDataArrivo().equals(pacchettoInBean.getDataFine()))
+		{
+			System.out.println("date ok al pacchetto");
+			return true;
+
+		}
+			
+		
+		System.out.println("NO date non giuste al pacchetto");
+		return false;
+	}
+
 
 
 }
