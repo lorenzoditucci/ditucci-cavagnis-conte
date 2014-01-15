@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Volo;
@@ -39,6 +40,8 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	
 	public PacchettoDTO pacchettoInBean;
 	public List<VoloDTO> voloInBean;
+	
+	public List<CittaDTO> cittaInBean;
 	
 	/*
 	 * Questo metodo viene chiamato automaticamente alla creazione 
@@ -125,10 +128,10 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			this.pacchettoInBean.setCosto(pacchettoInBean.getCosto()+costoTotaleDeiVoli());
 			/*
 			 * ORA E' UN CASINO:
-			 * devo inserire nella base di dati le cittˆ
-			 * se esistono non le aggiungo e successivamente 
-			 * prelevo le cittˆ DTO dalle entity
-			 * e le inserisco 
+			 * Prendo tutte le cittˆ coinvolte nei voli
+			 * e le copio nella lista locale delle cittˆ del
+			 * bean stateful
+			 * 
 			 * */
 			/*Sono arrivato qui*/
 			
