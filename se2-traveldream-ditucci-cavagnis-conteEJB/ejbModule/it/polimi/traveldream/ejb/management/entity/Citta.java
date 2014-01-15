@@ -16,11 +16,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="Citta")
-@NamedQuery(name="Citta.findAll", query="SELECT c FROM Citta c")
+
+@NamedQueries({
+	@NamedQuery(name="Citta.findAll", query="SELECT c FROM Citta c"),
+	@NamedQuery(name="Citta.cercaCittaNome", query="SELECT c FROM Citta c where c.nome = :nomeCitta")	
+})
 public class Citta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue	
 	@Column(unique=true, nullable=false)
 	private int idCitta;
 
@@ -48,7 +53,7 @@ public class Citta implements Serializable {
 	
 	public Citta(CittaDTO citta){
 		this.nome = citta.getNome();
-		this.pacchetti = Pacchetto.copiaToPacchetto(citta.getPacchetti());
+		//this.pacchetti = Pacchetto.copiaToPacchetto(citta.getPacchetti());
 	}
 	/**
 	 * associazione con Pacchetto - destinazione
