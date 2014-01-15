@@ -1,7 +1,7 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
-import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Group;
@@ -15,7 +15,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJB;
 import javax.ejb.EJBContext;
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,11 +31,23 @@ public class VoloMgrBean implements VoloMgr {
 	
 	@Resource
 	private EJBContext context;
+	
+	@EJB
+	private CittaMgrBean cittaMgrBean;
 
 	@Override
 	public void save(VoloDTO volo) {
 		Volo newVolo = new Volo(volo);
-		em.persist(newVolo); 
+		em.persist(newVolo);
+		
+		/*Aggiungi cittˆ al db*/
+		CittaDTO cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(volo.getCittaArrivo());
+		cittaMgrBean.save(cittaDaInserire);
+		
+		cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(volo.getCittaPartenza());
+		cittaMgrBean.save(cittaDaInserire);
 		}
 
 	public static ArrayList<VoloDTO> copiaListaToDTO(List<Volo> listaVolo){
