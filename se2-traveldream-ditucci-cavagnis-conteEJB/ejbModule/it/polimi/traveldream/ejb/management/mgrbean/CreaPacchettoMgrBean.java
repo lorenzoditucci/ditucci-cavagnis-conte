@@ -38,9 +38,21 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	@Resource
 	private EJBContext context;
 	
+	/*
+	 * 
+	 * 
+	 * 
+	 * NON SERVONO VOLOINBEAN E ALTRE ROBE PERCHè IN PACCHETTODTO HO TUTTO
+	 * 
+	 * 
+	 * 
+	 * */
 	public PacchettoDTO pacchettoInBean;
+	
+	//NON SERVE! ADATTARE CON PACCHETTO IN BEAN
 	public List<VoloDTO> voloInBean;
 	
+	//NON SERVE
 	public List<CittaDTO> cittaInBean;
 	
 	/*
