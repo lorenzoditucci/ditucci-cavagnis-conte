@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
@@ -12,6 +13,7 @@ import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,11 +27,20 @@ public class HotelMgrBean implements HotelMgr {
 	
 	@Resource
 	private EJBContext context;
+	
+	@EJB
+	private CittaMgrBean cittaMgrBean;
 
 	@Override
 	public void save(HotelDTO hotel) {
 		Hotel newHotel = new Hotel(hotel);
 		em.persist(newHotel); 
+		
+		/*Aggiungi cittˆ al db*/
+		CittaDTO cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(hotel.getCitta());
+		cittaMgrBean.save(cittaDaInserire);
+		
 		}
 	
 	public static ArrayList<HotelDTO> copiaListaToDTO(List<Hotel> listaHotel){
