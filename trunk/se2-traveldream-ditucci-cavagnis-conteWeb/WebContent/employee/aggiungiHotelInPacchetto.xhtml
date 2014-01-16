@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Pernottamenti</title>
+</h:head>
+<h:body>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
+    	<h:form>
+		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		<h:form><h4>Ricerca Pacchetto</h4></h:form>
+		
+		<h:form><h:link value="Crea Pacchetto" outcome="employee/creapacchetto"></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="prodottobase/aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="prodottobase/cercaprodottobase"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+
+    <h:form id="inserimentoPernottamentiForm">  
+  
+    <p:growl id="msgs" />  
+  
+    <p:panel header="Inserisci id Hotel">  
+    	<h:panelGrid columns="1" id="grid"> 
+
+            <h:outputLabel value="Id Hotel (Rispettare ordine dei voli): " for="idHotel"></h:outputLabel>  
+            <p:inputText id="idHotel"   
+                            value="#{creaPacchettoBean.idHotelDaCercare}" required="true"/>  
+                      <h:outputLabel value="Data inizio " for="data-inizio"></h:outputLabel>             
+              <p:calendar id="data-inizio"   
+                            value="#{creaPacchettoBean.dataInizioPernottamento}" required="true" pattern="MM/dd/yyyy" />       
+       <h:outputLabel value="Data fine: " for="data-fine"></h:outputLabel> 
+        	 <p:calendar id="data-fine"   
+                            value="#{creaPacchettoBean.dataFinePernottamento}" required="true" pattern="MM/dd/yyyy"/>	
+        		
+            <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
+                            action="#{creaPacchettoBean.cercaEAggiungiPernottamento()}" update="pernottamenti msgs @parent" >  
+             
+            </p:commandButton>  
+        </h:panelGrid>  
+    </p:panel>  
+      
+    <p:outputPanel id="pernottamenti"> 
+        <p:dataTable id="pernottamentoTable" value="#{creaPacchettoBean.pernottamenti}" var="pernottamento">  
+ 
+        </p:dataTable>  
+
+
+ </p:outputPanel>    
+</h:form>    
+
+
+   
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>
+

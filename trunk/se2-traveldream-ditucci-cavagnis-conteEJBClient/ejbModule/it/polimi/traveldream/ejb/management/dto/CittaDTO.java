@@ -15,7 +15,14 @@ public class CittaDTO {
 	@NotNull
 	private String nome;
 	
+	public CittaDTO() {
+		//default constructor
+	}
 	
+	public CittaDTO(String citta) {
+		this.nome=citta;
+	}
+
 	public List<PacchettoDTO> getPacchetti() {
 		return pacchetti;
 	}
