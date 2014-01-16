@@ -16,16 +16,15 @@
 		<class>it.polimi.traveldream.ejb.management.entity.EscursioniPacchettoPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.GiftList</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Hotel</class>
+		<class>it.polimi.traveldream.ejb.management.entity.Impiegato</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Pacchetto</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Pernottamento</class>
-		<class>it.polimi.traveldream.ejb.management.entity.PernottamentoPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.User</class>
 		<class>it.polimi.traveldream.ejb.management.entity.VoliAcquistati</class>
 		<class>it.polimi.traveldream.ejb.management.entity.VoliAcquistatiPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.VoliPacchetto</class>
 		<class>it.polimi.traveldream.ejb.management.entity.VoliPacchettoPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Volo</class>
-		<class>it.polimi.traveldream.ejb.management.entity.Impiegato</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="create-tables"/>
 		</properties>
