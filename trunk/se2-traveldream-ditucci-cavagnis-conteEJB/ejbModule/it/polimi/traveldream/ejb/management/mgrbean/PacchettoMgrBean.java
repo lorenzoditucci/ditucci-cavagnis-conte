@@ -81,6 +81,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
     		daAggiungere.setDisponibilitaMax(listaPacchetti.get(i).getDisponibilitaMax());
     		daAggiungere.setMail(listaPacchetti.get(i).getMail());
     		daAggiungere.setNome(listaPacchetti.get(i).getNome());
+    		//manca la copia delle liste?!
     		
     		copia.add(daAggiungere);
     	}

@@ -1,7 +1,9 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -14,27 +16,35 @@ import java.sql.Timestamp;
 @NamedQuery(name="Pernottamento.findAll", query="SELECT p FROM Pernottamento p")
 public class Pernottamento implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
-	private PernottamentoPK id;
-
+	
+	@Id
+	@GeneratedValue
+	@Column(unique=true, nullable=false)
+	private int idPernottametto;
+	
 	@Column(nullable=false)
 	private Timestamp dataInizio;
 
 	@Column(nullable=false)
-	private int numeroNotti;
+	private Timestamp dataFine;
+	
+	@OneToOne(optional = false)
+	private Hotel hotel;
+	
+	@OneToOne(optional = false)
+	private Pacchetto pacchetto;
 
 	public Pernottamento() {
 	}
 
-	public PernottamentoPK getId() {
-		return this.id;
+	public int getIdPernottametto() {
+		return idPernottametto;
 	}
-
-	public void setId(PernottamentoPK id) {
-		this.id = id;
+	
+	public void setIdPernottametto(int idPernottametto) {
+		this.idPernottametto = idPernottametto;
 	}
-
+	
 	public Timestamp getDataInizio() {
 		return this.dataInizio;
 	}
@@ -43,12 +53,30 @@ public class Pernottamento implements Serializable {
 		this.dataInizio = dataInizio;
 	}
 
-	public int getNumeroNotti() {
-		return this.numeroNotti;
+	public Timestamp getDataFine() {
+		return this.dataFine;
 	}
 
-	public void setNumeroNotti(int numeroNotti) {
-		this.numeroNotti = numeroNotti;
+	public void setDataFine(Timestamp numeroNotti) {
+		this.dataFine = numeroNotti;
 	}
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	public Pacchetto getPacchetto() {
+		return pacchetto;
+	}
+
+	public void setPacchetto(Pacchetto pacchetto) {
+		this.pacchetto = pacchetto;
+	}
+	
+	
 
 }
