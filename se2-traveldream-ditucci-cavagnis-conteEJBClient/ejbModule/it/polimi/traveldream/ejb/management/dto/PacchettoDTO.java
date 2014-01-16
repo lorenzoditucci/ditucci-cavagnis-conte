@@ -8,6 +8,7 @@ package it.polimi.traveldream.ejb.management.dto;
 
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +61,12 @@ public class PacchettoDTO {
 	
 	private List<GiftListDTO> giftLists;
 	
+	public PacchettoDTO(){
+		this.cittaDestinazione=new ArrayList<CittaDTO>();
+		this.pernotti=new ArrayList<PernottamentoDTO>();
+		this.voli=new ArrayList<VoloDTO>();
+		this.escursioni=new ArrayList<EscursioneDTO>();	
+	}
 	
 	public List<UserDTO> getUsers() {
 		return users;

@@ -19,8 +19,10 @@ import javax.persistence.TypedQuery;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
+import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 /*
@@ -37,23 +39,8 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	
 	@Resource
 	private EJBContext context;
-	
-	/*
-	 * 
-	 * 
-	 * 
-	 * NON SERVONO VOLOINBEAN E ALTRE ROBE PERCHè IN PACCHETTODTO HO TUTTO
-	 * 
-	 * 
-	 * 
-	 * */
+
 	public PacchettoDTO pacchettoInBean;
-	
-	//NON SERVE! ADATTARE CON PACCHETTO IN BEAN
-	public List<VoloDTO> voloInBean;
-	
-	//NON SERVE
-	public List<CittaDTO> cittaInBean;
 	
 	/*
 	 * Questo metodo viene chiamato automaticamente alla creazione 
@@ -63,23 +50,11 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	@PostConstruct
 	public void initialize() {
 		this.pacchettoInBean=new PacchettoDTO();
-	    this.voloInBean=new ArrayList<VoloDTO>();
-	}
+		}
 
 	@Override
 	public void instanziaPacchetto(PacchettoDTO pacchetto) {
 		copiaDTOtoDTOStateful(pacchetto);
-		//debug
-		System.out.println("Sei nel bean statefule");
-		System.out.println(pacchettoInBean.getNome());
-		System.out.println(pacchettoInBean.getDescrizione());
-		System.out.println(pacchettoInBean.getDisponibilitaMax());
-		System.out.println(pacchettoInBean.getDisponibilitaAttuale());
-		System.out.println(pacchettoInBean.getCosto());
-		System.out.println(pacchettoInBean.getDataInizio());
-		System.out.println(pacchettoInBean.getDataFine());
-		System.out.println(pacchettoInBean.getMail());
-		
 	}
 
 	/*
@@ -128,40 +103,39 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	public boolean inserisciVoliInPacchettoInstanziato(List<VoloDTO> voli) {
 		//verifica che i voli siano coerenti ai dati del pacchetto creato
 		//precedentemente
-		System.out.println(voli.get(0).getDataPartenza().getTime());
-		System.out.println(pacchettoInBean.getDataInizio().getTime());
 		if(stessoGiornoMeseAnno(pacchettoInBean.getDataInizio(), voli.get(0).getDataArrivo())
 				&& stessoGiornoMeseAnno(pacchettoInBean.getDataFine(), voli.get(voli.size()-1).getDataArrivo()))
 		{
-			System.out.println("date ok al pacchetto");
 			//copia voli nello stateful
-			this.voloInBean.addAll(voli);
+			this.pacchettoInBean.getVoli().addAll(voli);
+			System.out.println(pacchettoInBean.getVoli().get(0).getCittaPartenza());
 			//setta costo nel pacchetto salvato nel bean stateful
 			this.pacchettoInBean.setCosto(pacchettoInBean.getCosto()+costoTotaleDeiVoli());
-			/*
-			 * ORA E' UN CASINO:
-			 * Prendo tutte le città coinvolte nei voli
-			 * e le copio nella lista locale delle città del
-			 * bean stateful
-			 * 
-			 * */
-			/*Sono arrivato qui*/
-			
+			//copio città visitate nel pacchetto
+			copiaCittaInPacchettoBean();
 			
 			return true;
 
 		}
-			
-		
-		System.out.println("NO date non giuste al pacchetto");
 		return false;
 	}
 
-	
+	/*
+	 * Copia le città nel pacchetto, la prima città è quella di partenza
+	 * e le restanti sono quelle d'arrivo
+	 * */
+	private void copiaCittaInPacchettoBean() {
+		ArrayList<CittaDTO> daCopiare = new ArrayList<CittaDTO>();
+		for(int i=0; i<pacchettoInBean.getVoli().size();i++){
+			daCopiare.add(new CittaDTO(pacchettoInBean.getVoli().get(i).getCittaPartenza()));	
+		}
+		pacchettoInBean.getCittaDestinazione().addAll(daCopiare);
+	}
+
 	private double costoTotaleDeiVoli() {
 		double tot=0;
-		for(int i=0; i<voloInBean.size(); i++)
-			tot=tot+voloInBean.get(i).getCosto();
+		for(int i=0; i<this.pacchettoInBean.getVoli().size(); i++)
+			tot=tot+this.pacchettoInBean.getVoli().get(i).getCosto();
 		
 		return tot;
 			
@@ -174,6 +148,33 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		
 		return false;
 		
+	}
+
+	@Override
+	public List<HotelDTO> cercaHotel(int idHotelDaCercare) {
+		TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
+	    	
+	    List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", idHotelDaCercare).getResultList();
+	    	
+	    return convertiInListaHotelDTO(listaHotel); 
+	}
+
+	private List<HotelDTO> convertiInListaHotelDTO(List<Hotel> listaHotel) {
+			ArrayList<HotelDTO> copia = new ArrayList<HotelDTO>();
+			for(int i=0; i<listaHotel.size();i++){
+	    		HotelDTO daAggiungere = new HotelDTO();
+	    		daAggiungere.setIdHotel(listaHotel.get(i).getIdHotel());
+	    		daAggiungere.setNome(listaHotel.get(i).getNome());
+	    		daAggiungere.setDescrizione(listaHotel.get(i).getDescrizione());
+	    		daAggiungere.setIndirizzo(listaHotel.get(i).getIndirizzo());
+	    		daAggiungere.setCitta(listaHotel.get(i).getCitta());
+	    		daAggiungere.setClasse(listaHotel.get(i).getClasse());
+	    		daAggiungere.setCosto(listaHotel.get(i).getCosto());
+	    		daAggiungere.setAcquistato(listaHotel.get(i).getAcquistato());
+	    		copia.add(daAggiungere);
+	    	}
+			return copia;
+	
 	}
 
 
