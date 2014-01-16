@@ -24,10 +24,6 @@ import java.util.List;
 	
 })
 
-	
-	
-
-
 public class Pacchetto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +71,6 @@ public class Pacchetto implements Serializable {
 		this.escursioni = Escursione.copiaToEscursione(p.getEscursioni());
 		this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
 		this.voli = Volo.copiaToVolo(p.getVoli());
-		this.hotels = Hotel.copiaToHotel(p.getHotels());
 		this.users = User.copiaToUser(p.getUsers());
 		
 	}
@@ -162,21 +157,6 @@ public class Pacchetto implements Serializable {
 		this.nome = nome;
 	}
 	
-	/**
-	 * connessione bidirezionale many to many con gli hotel
-	 */
-	
-	@ManyToMany
-		@JoinTable(
-				name="Pernottamento"
-				, joinColumns={
-						@JoinColumn(name="idPacchetto", nullable=false)
-				}
-				, inverseJoinColumns={
-						@JoinColumn(name="idHotel", nullable=false)
-				}
-				)
-		private List<Hotel> hotels;
 	
 	/**
 	 * connessione con i voli (voliPacchetto)
@@ -243,6 +223,9 @@ public class Pacchetto implements Serializable {
 	
 		@ManyToMany(mappedBy="pacchetti")
 		private List<User> users;
+		
+	@OneToMany
+	private List<Pernottamento> pernottiList;
 		
 	
 }

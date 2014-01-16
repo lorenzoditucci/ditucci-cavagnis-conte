@@ -50,10 +50,9 @@ public class PacchettoDTO {
 	private List<VoloDTO> voli;
 	
 	@NotEmpty
-	private List<HotelDTO> hotels;
-	
-	@NotEmpty
 	private List<CittaDTO> cittaDestinazione;
+	
+	private List<PernottamentoDTO> pernotti;
 	
 	private List<EscursioneDTO> escursioni;
 	
@@ -102,13 +101,6 @@ public class PacchettoDTO {
 		this.voli = voli;
 	}
 
-	public List<HotelDTO> getHotels() {
-		return hotels;
-	}
-
-	public void setHotels(List<HotelDTO> hotels) {
-		this.hotels = hotels;
-	}
 
 	public int getIdPacchetto() {
 		return idPacchetto;
@@ -181,5 +173,15 @@ public class PacchettoDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<PernottamentoDTO> getPernotti() {
+		return pernotti;
+	}
+
+	public void setPernotti(List<PernottamentoDTO> pernotti) {
+		this.pernotti = pernotti;
+	}
+	
+	
 
 }
