@@ -5,6 +5,7 @@ import java.util.List;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.Local;
@@ -19,5 +20,8 @@ public interface CreaPacchettoMgr {
 	public boolean inserisciVoliInPacchettoInstanziato(List<VoloDTO> voli);
 
 	public List<HotelDTO> cercaHotel(int idHotelDaCercare);
+
+	public boolean inserisciPernottamentiInPacchettoInstanziato(
+			List<PernottamentoDTO> pernottamenti);
 	
 }

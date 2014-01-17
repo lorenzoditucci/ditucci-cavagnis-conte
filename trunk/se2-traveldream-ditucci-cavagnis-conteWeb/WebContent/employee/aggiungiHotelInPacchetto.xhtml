@@ -42,27 +42,81 @@
             <h:outputLabel value="Id Hotel (Rispettare ordine dei voli): " for="idHotel"></h:outputLabel>  
             <p:inputText id="idHotel"   
                             value="#{creaPacchettoBean.idHotelDaCercare}" required="true"/>  
-                      <h:outputLabel value="Data inizio " for="data-inizio"></h:outputLabel>             
+     <h:outputLabel value="Data inizio " for="data-inizio"></h:outputLabel>             
               <p:calendar id="data-inizio"   
                             value="#{creaPacchettoBean.dataInizioPernottamento}" required="true" pattern="MM/dd/yyyy" />       
-       <h:outputLabel value="Data fine: " for="data-fine"></h:outputLabel> 
+      <h:outputLabel value="Data fine: " for="data-fine"></h:outputLabel> 
         	 <p:calendar id="data-fine"   
                             value="#{creaPacchettoBean.dataFinePernottamento}" required="true" pattern="MM/dd/yyyy"/>	
-        		
+        		      
             <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
                             action="#{creaPacchettoBean.cercaEAggiungiPernottamento()}" update="pernottamenti msgs @parent" >  
-             
             </p:commandButton>  
         </h:panelGrid>  
-    </p:panel>  
+    </p:panel>   
+  
       
     <p:outputPanel id="pernottamenti"> 
         <p:dataTable id="pernottamentoTable" value="#{creaPacchettoBean.pernottamenti}" var="pernottamento">  
- 
+ 			<p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Id" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.idHotel}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Nome" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.nome}" />  
+            </p:column> 
+            
+             <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Indirizzo" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.indirizzo}" />  
+            </p:column>  
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Citta" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.citta}" />  
+            </p:column> 
+            
+             <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Da" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.dataInizio}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="A" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.dataFine}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Operazione" />  
+                </f:facet>  
+                <p:commandLink value="Rimuovi" update=":inserimentoPernottamentiForm:pernottamenti" process=":inserimentoPernottamentiForm:pernottamenti">  
+                    <p:collector value="#{pernottamento}"  
+                                 removeFrom="#{creaPacchettoBean.pernottamenti}" />  
+                </p:commandLink>  
+            </p:column> 
+            
+            
+           
         </p:dataTable>  
 
 
- </p:outputPanel>    
+ </p:outputPanel>   
+ <h:commandButton value="Aggiungi hotel" action="#{creaPacchettoBean.aggiungiPernottamentiInPacchetto()}" update ="inserimentoPernottamentiForm"></h:commandButton> 
 </h:form>    
 
 

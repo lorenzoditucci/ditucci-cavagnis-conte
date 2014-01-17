@@ -51,8 +51,6 @@ public class CreaPacchettoBean {
 	@Future
 	private Date dataInizioPernottamento;
 	
-
-
 	@NotNull
 	@Future
 	private Date dataFinePernottamento;
@@ -163,6 +161,38 @@ public class CreaPacchettoBean {
     	}	
 		
 	}
+	
+	
+	public String aggiungiPernottamentiInPacchetto(){
+		if(!dateConseguentiPernottamenti()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore temporale nella lista dei pernottamenti", "La ricerca non ha prodotto risultati"));
+			return null;
+		}
+		
+		//vado sul bean stateful
+		if(!creaPacchettoMgr.inserisciPernottamentiInPacchettoInstanziato(getPernottamenti())){
+			//non coerenti
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+			return null;	
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+		
+		/*Prossima pagina: selezione degli hotel*/
+		return "aggiungiEscursioniInPacchetto";
+	}
+
+	private boolean dateConseguentiPernottamenti() {
+		if(this.getPernottamenti().size()<1)
+			return false;
+		
+		for(int i=0; i<getPernottamenti().size()-1; i++){
+			if(getPernottamenti().get(i).getDataFine().getTime()>getPernottamenti().get(i+1).getDataInizio().getTime())
+				return false;	
+		}
+		
+		return true;
+	}
+
 
 	private boolean hotelGiaContenuto(HotelDTO hotelScelto) {
 		for(int i=0; i<pernottamenti.size(); i++){
