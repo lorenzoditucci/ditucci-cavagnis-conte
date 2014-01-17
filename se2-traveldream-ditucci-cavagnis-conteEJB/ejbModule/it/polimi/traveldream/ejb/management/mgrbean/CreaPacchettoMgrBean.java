@@ -21,6 +21,7 @@ import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Volo;
@@ -175,6 +176,58 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	    	}
 			return copia;
 	
+	}
+
+	@Override
+	public boolean inserisciPernottamentiInPacchettoInstanziato(
+			List<PernottamentoDTO> pernottamenti) {
+		if(!checkConsistenzaPacchettoPernottamenti(pernottamenti))
+			return false;
+		
+		pacchettoInBean.setPernotti(new ArrayList<PernottamentoDTO>());
+		pacchettoInBean.getPernotti().addAll(pernottamenti);
+		
+		aggiornaPrezzoPacchettoInBeanConPernottamenti();
+
+		return true;
+	}
+
+	private void aggiornaPrezzoPacchettoInBeanConPernottamenti() {
+		double prezzoPernottamento=0;
+		for(int i=0; i<pacchettoInBean.getPernotti().size(); i++){
+			Timestamp dataInizio =pacchettoInBean.getPernotti().get(i).getDataInizio();
+			Timestamp dataFine =pacchettoInBean.getPernotti().get(i).getDataFine();
+			dataInizio.setHours(0);
+			dataInizio.setMinutes(0);
+			dataFine.setHours(0);
+			dataFine.setMinutes(0);
+			int giorni=(int) (dataFine.getTime()-dataInizio.getTime())/86400000;
+			System.out.println(giorni);
+			prezzoPernottamento+=giorni*pacchettoInBean.getPernotti().get(i).getHotel().getCosto();
+			System.out.println(prezzoPernottamento);
+			pacchettoInBean.setCosto(pacchettoInBean.getCosto()+prezzoPernottamento);
+			System.out.println(pacchettoInBean.getCosto());
+		}
+		
+		
+	}
+
+	private boolean checkConsistenzaPacchettoPernottamenti(
+			List<PernottamentoDTO> pernottamenti) {
+		//controllo se ci sono tanti aerei quante cittˆ visitate
+		if(pernottamenti.size()!=pacchettoInBean.getVoli().size()-1){
+			System.out.println("Non va bene la grandezza");
+			return false;	
+		}
+		
+		for(int i=0; i<pernottamenti.size(); i++){
+			if(!(pacchettoInBean.getVoli().get(i).getCittaArrivo().equals(pernottamenti.get(i).getHotel().getCitta()))
+				|| 	!stessoGiornoMeseAnno(new Timestamp(pacchettoInBean.getVoli().get(i).getDataArrivo().getTime()),pernottamenti.get(i).getDataInizio())
+				|| !stessoGiornoMeseAnno(new Timestamp(pacchettoInBean.getVoli().get(i+1).getDataPartenza().getTime()),pernottamenti.get(i).getDataFine())
+				){System.out.println("Errore nelle date"); return false; } 
+		}
+	
+		return true;
 	}
 
 
