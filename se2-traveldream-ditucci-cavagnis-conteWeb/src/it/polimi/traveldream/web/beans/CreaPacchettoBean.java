@@ -209,9 +209,10 @@ public class CreaPacchettoBean {
     	}	
 	}
 	
-	public String aggiungiEscursioniInPacchetto(){
+	public String aggiungiEscursioniInPacchetto() throws CloneNotSupportedException{
 		/*possono non essere escursioni in un pacchetto*/
 		if(this.getEscursioni().isEmpty()){
+			this.setPacchetto(creaPacchettoMgr.ottieniPacchettoDaConfermare());
 			return "confermaPacchetto";
 		}
 		
@@ -232,6 +233,7 @@ public class CreaPacchettoBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 		
 		/*Prossima pagina: confermo creazione del pacchetto*/
+		this.setPacchetto(creaPacchettoMgr.ottieniPacchettoDaConfermare());
 		return "confermaPacchetto";
 	}
 	

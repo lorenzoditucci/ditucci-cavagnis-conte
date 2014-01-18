@@ -188,6 +188,37 @@ public class PacchettoDTO {
 	public void setPernotti(List<PernottamentoDTO> pernotti) {
 		this.pernotti = pernotti;
 	}
+
+	public PacchettoDTO clona() throws CloneNotSupportedException {
+		PacchettoDTO pacchettoClonato = new PacchettoDTO();
+		
+		pacchettoClonato.setNome(this.getNome());
+		pacchettoClonato.setDescrizione(this.getDescrizione());
+		pacchettoClonato.setDisponibilitaMax(this.getDisponibilitaMax());
+		pacchettoClonato.setDisponibilitaAttuale(this.getDisponibilitaAttuale());
+		pacchettoClonato.setDataInizio(this.getDataInizio());
+		pacchettoClonato.setDataFine(this.getDataFine());
+		pacchettoClonato.setCosto(this.getCosto());
+		pacchettoClonato.setMail(this.getMail());
+		
+		ArrayList<CittaDTO> citta = new ArrayList<CittaDTO>();
+		citta.addAll(this.getCittaDestinazione());
+		pacchettoClonato.setCittaDestinazione(citta);
+		
+		ArrayList<VoloDTO> voli = new ArrayList<VoloDTO>();
+		voli.addAll(this.getVoli());
+		pacchettoClonato.setVoli(voli);
+		
+		ArrayList<EscursioneDTO> escursioni = new ArrayList<EscursioneDTO>();
+		escursioni.addAll(this.getEscursioni());
+		pacchettoClonato.setEscursioni(escursioni);
+		
+		ArrayList<PernottamentoDTO> pernotti = new ArrayList<PernottamentoDTO>();
+		pernotti.addAll(this.getPernotti());
+		pacchettoClonato.setPernotti(pernotti);
+		
+		return pacchettoClonato;
+	}
 	
 	
 

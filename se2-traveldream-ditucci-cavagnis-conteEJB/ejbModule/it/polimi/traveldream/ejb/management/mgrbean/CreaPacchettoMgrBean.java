@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.lang.Object;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -297,6 +298,11 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public PacchettoDTO ottieniPacchettoDaConfermare() throws CloneNotSupportedException {
+		return pacchettoInBean.clona();
 	}
 
 
