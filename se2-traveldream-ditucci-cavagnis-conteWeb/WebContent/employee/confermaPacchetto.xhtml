@@ -31,9 +31,67 @@
 		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
-    
-    </p:layoutUnit>  
-    
+        Riepilogo dati principali pacchetto:  <br/>	    
+        <h:form>
+        	<h:outputText value="Nome: #{creaPacchettoBean.pacchetto.nome}"/><br/>
+		   	<h:outputText value="Descrizione: #{creaPacchettoBean.pacchetto.descrizione}"/><br/>
+		    <h:outputText value="Dal: #{creaPacchettoBean.pacchetto.dataInizio}"/><br/>
+		   	<h:outputText value="Al: #{creaPacchettoBean.pacchetto.dataFine}"/><br/>
+		   	<h:outputText value="Disponibilità max: #{creaPacchettoBean.pacchetto.disponibilitaMax}"/><br/>
+		   	<h:outputText value="Disponibilità attuale: #{creaPacchettoBean.pacchetto.disponibilitaAttuale}"/><br/>		       
+			<h:outputText value="Prezzo totale: #{creaPacchettoBean.pacchetto.costo}"/><br/>		  
+		</h:form>
+		
+		<br/>	
+		Riepilogo dei voli 
+		<br/>	
+		
+		<h:form>
+        	<ui:repeat value="#{creaPacchettoBean.pacchetto.voli}" var="volo">  
+                <h:outputText value="Compangia: #{volo.compagnia}"/><br/>
+                <h:outputText value="Da: #{volo.cittaPartenza}"/><br/>
+                <h:outputText value="A: #{volo.cittaArrivo}"/><br/>
+                <h:outputText value="Parte il: #{volo.dataPartenza}"/><br/>
+                <h:outputText value="Arriva al: #{volo.dataPartenza}"/><br/>
+                <h:outputText value="Costo: #{volo.costo}"/><br/>   
+                <br/>	  
+            </ui:repeat>  	       
+		</h:form>
+		
+		<br/>	
+		Riepilogo dei pernottamenti
+		<br/>	
+		
+		<h:form>
+        	<ui:repeat value="#{creaPacchettoBean.pacchetto.pernotti}" var="pernotte">  
+                <h:outputText value="Dal: #{pernotte.dataInizio}"/><br/>
+                <h:outputText value="Al: #{pernotte.dataFine}"/><br/>
+                <h:outputText value="Presso Hotel: #{pernotte.hotel.nome}"/><br/>
+               	<h:outputText value="Città: #{pernotte.hotel.citta}"/><br/>
+				<h:outputText value="Prezzo per notte: #{pernotte.hotel.costo}"/><br/>          	       	 
+                <br/>	  
+            </ui:repeat>  	       
+		</h:form>
+		
+		<br/>	
+		Riepilogo dell'escursioni
+		<br/>	
+		
+		<h:form>
+        	<ui:repeat value="#{creaPacchettoBean.pacchetto.escursioni}" var="escursione">  
+                <h:outputText value="Nome: #{escursione.nome}"/><br/>
+                <h:outputText value="Descrizione: #{escursione.descrizione}"/><br/>
+                <h:outputText value="Dal: #{escursione.dataInizio}"/><br/>
+                <h:outputText value="Al: #{escursione.dataFine}"/><br/>
+                <h:outputText value="Presso: #{escursione.citta}"/><br/> 
+                <h:outputText value="Prezzo: #{escursione.costo}"/><br/>       	       	 
+                <br/>	  
+            </ui:repeat>  	       
+		</h:form>
+		
+		
+		
+    </p:layoutUnit>     
 </p:layout>    
 </h:body>           
 </html>
