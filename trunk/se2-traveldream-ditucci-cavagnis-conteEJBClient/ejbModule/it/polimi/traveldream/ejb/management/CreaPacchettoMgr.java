@@ -28,5 +28,7 @@ public interface CreaPacchettoMgr {
 
 	public boolean inserisciEscursioniInPacchettoInstanziato(
 			List<EscursioneDTO> escursioni);
+
+	public PacchettoDTO ottieniPacchettoDaConfermare() throws CloneNotSupportedException;
 	
 }
