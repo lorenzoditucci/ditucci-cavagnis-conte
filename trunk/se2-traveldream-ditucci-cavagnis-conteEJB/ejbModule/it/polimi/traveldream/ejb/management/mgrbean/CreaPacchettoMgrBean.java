@@ -19,10 +19,12 @@ import javax.persistence.TypedQuery;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
@@ -202,11 +204,9 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			dataFine.setHours(0);
 			dataFine.setMinutes(0);
 			int giorni=(int) (dataFine.getTime()-dataInizio.getTime())/86400000;
-			System.out.println(giorni);
 			prezzoPernottamento+=giorni*pacchettoInBean.getPernotti().get(i).getHotel().getCosto();
-			System.out.println(prezzoPernottamento);
 			pacchettoInBean.setCosto(pacchettoInBean.getCosto()+prezzoPernottamento);
-			System.out.println(pacchettoInBean.getCosto());
+			
 		}
 		
 		
@@ -228,6 +228,34 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		}
 	
 		return true;
+	}
+
+	@Override
+	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare) {
+		TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursioneId", Escursione.class);
+	    	
+	    List<Escursione> listaEscursioni = queryRicerca.setParameter("idEscursione", idEscursioneDaCercare).getResultList();
+	    	
+	    return convertiInListaEscursioneDTO(listaEscursioni); 
+	}
+
+	private List<EscursioneDTO> convertiInListaEscursioneDTO(
+			List<Escursione> listaEscursioni) {
+		ArrayList<EscursioneDTO> copia = new ArrayList<EscursioneDTO>();
+		for(int i=0; i<listaEscursioni.size();i++){
+    		EscursioneDTO daAggiungere = new EscursioneDTO();
+    		daAggiungere.setIdEscursione(listaEscursioni.get(i).getIdEscursione());
+    		daAggiungere.setNome(listaEscursioni.get(i).getNome());
+    		daAggiungere.setDescrizione(listaEscursioni.get(i).getDescrizione());
+    		daAggiungere.setDataInizio(listaEscursioni.get(i).getDataInizio());
+    		daAggiungere.setDataFine(listaEscursioni.get(i).getDataFine());
+    		daAggiungere.setCitta(listaEscursioni.get(i).getCitta());
+    		daAggiungere.setCosto(listaEscursioni.get(i).getCosto());
+    		daAggiungere.setAcquistato(listaEscursioni.get(i).getAcquistato());
+    		copia.add(daAggiungere);
+    	}
+		return copia;	
+		
 	}
 
 
