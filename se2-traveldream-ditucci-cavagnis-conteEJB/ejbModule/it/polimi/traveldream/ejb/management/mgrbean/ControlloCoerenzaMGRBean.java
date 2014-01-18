@@ -1,6 +1,9 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -9,10 +12,14 @@ import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import sun.org.mozilla.javascript.internal.ast.ThrowStatement;
+import sun.tools.jar.resources.jar;
 
 /**
  * Session Bean implementation class ControlloCoerenzaMGRBean.
@@ -41,56 +48,38 @@ public class ControlloCoerenzaMGRBean {
     	 * variabili di supporto per il controllo della coerenza del pacchetto
     	 */
     	List <VoloDTO> voli = new ArrayList<VoloDTO>();
+    	List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
     	
     	if(p == null)
     		throw new NullPointerException();
     	voli = p.getVoli();
     	
     	Collections.sort(voli, VoloDTO.ordinaPerDataPartenza);
+    	Collections.sort(pernottamenti, PernottamentoDTO.ordinaPerDataInizio);
+    	
     	controllaVoli(voli);
+    	controllaPernottamenti(voli, pernottamenti);
     	
     	
     	return;
     }
     
     
-    private void checkHotels(List<VoloDTO> voli, List<HotelDTO> hotels) {
-    	//controllo che il numero di voli e di hotel sia giusto
-    	VoloDTO voloArrivo;
-    	VoloDTO voloPartenza;
-    	boolean trovatoArrivo;
-    	boolean trovatoPartenza;
+    private void controllaPernottamenti(List<VoloDTO> voli, List<PernottamentoDTO> p) throws CoerenzaException{
     	
-    	
-    	if (voli.size() != hotels.size() + 1)
-    		//TODO: solleva eccezione "La cardinalità dei voli e degli hotel non è coerente."
-    		;
-    	
-    	/*
-    	 * per ogni hotel devo trovare un volo che arriva e uno che parte dalla città in cui si trova 
-    	 * l'hotel e devo verificare che la prenotazione sia compresa tra la data di arrivo e di partenza  
-    	 *
-    	 */
-    	for(int i = 0; i<hotels.size(); i++ ){
-    		trovatoArrivo = false;
-    		trovatoPartenza = false;
-    		for (int j=0; j<voli.size() && (!trovatoArrivo || !trovatoPartenza); j++){
-    			if(voli.get(j).getCittaArrivo().equals(hotels.get(i).getCitta())){
-    					voloArrivo = voli.get(j);
-    					trovatoArrivo = true;
-    			}
-    			if(voli.get(j).getCittaPartenza().equals(hotels.get(i).getCitta())){
-    				trovatoPartenza = true;
-    				voloPartenza = voli.get(j);
-    			}	
-    		}
-    	//TODO controlla che il pernottamento sia dentro le date dei due voli	
-    	if (!trovatoArrivo || !trovatoPartenza){
-    		//TODO l'hotel non è raggiungibile
-    		;
+    	if(voli.size() != p.size() + 1 )
+    		throw new CoerenzaException("Il numero di voli e il numero dei pernottamenti non sono coerenti");
+    	//controllo geografico e temporale
+    	for(int i = 0; i < voli.size() - 1; i++){
+    			//geografico
+    			if(!voli.get(i).getCittaArrivo().equals(p.get(i).getHotel().getCitta()))
+    				throw new CoerenzaException("Nella città "+ voli.get(i).getCittaArrivo()+ " manca il pernottamento");
+    			//temporale
+    			if(! periodoContenuto(voli.get(i).getDataArrivo(),voli.get(i+1).getDataPartenza(),p.get(i).getDataInizio(),p.get(i).getDataFine()))
+    				throw new CoerenzaException("il pernottamento "+p.get(i).getIdPernottametto() + " non coincide con l'arrivo e la partenza di due voli.");	
     	}
     	
-    	}
+    	
     	return;
     }
     
@@ -98,6 +87,7 @@ public class ControlloCoerenzaMGRBean {
 	 * controllo che per ogni escursione ci sia un hotel nella stessa città e che la data dell'escursione 
 	 * sia compresa nel periodo in cui ci si trattiene in quella città
 	 */
+    
     private void controllaEscursioni(List<EscursioneDTO> e,List<HotelDTO> h){
     	boolean trovato;
     	/*
@@ -142,5 +132,36 @@ public class ControlloCoerenzaMGRBean {
     					"ma il successivo parte da "+ voli.get(i+1).getCittaPartenza());	
     	}
     	return;
+    }
+    
+    private boolean periodoContenuto(java.util.Date inizioP, java.util.Date fineP, Timestamp inizio, Timestamp fine){
+    	Calendar inizioPCalendar = toCalendar(inizioP);
+    	Calendar finePCalendar = toCalendar(fineP);
+    	Calendar inizioCalendar = toCalendar(inizio);
+    	Calendar fineCalendar = toCalendar(fine);
+    	
+    	if(stessoGiornoMeseAnno(inizioPCalendar,inizioCalendar) && stessoGiornoMeseAnno(finePCalendar,fineCalendar))
+    		return true;
+    	return false;
+    }
+    
+   /*
+    * converte un oggetto formato Date in uno formato Calendar
+    */
+    
+    private Calendar toCalendar(java.util.Date data){
+    	Calendar newDataCalendar = Calendar.getInstance();
+    	newDataCalendar.setTime(data);
+    	return newDataCalendar;
+    }
+    
+    /*
+     * controlla che due date Calendar siano uguali con granularitù pari al giorno
+     */
+    private boolean stessoGiornoMeseAnno(Calendar d1,Calendar d2){
+    	if(d1.DAY_OF_MONTH == d2.DAY_OF_MONTH && d1.MONTH == d2.MONTH && d1.YEAR == d2.YEAR )
+    		return true;
+    	return false;
+    	
     }
 }
