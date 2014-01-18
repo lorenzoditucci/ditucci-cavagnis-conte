@@ -210,10 +210,42 @@ public class CreaPacchettoBean {
 	}
 	
 	public String aggiungiEscursioniInPacchetto(){
+		/*possono non essere escursioni in un pacchetto*/
+		if(this.getEscursioni().isEmpty()){
+			return "confermaPacchetto";
+		}
 		
-		return null;
+		/*controllo sulla correttezza della lista delle escursioni
+		 * da inviare allo stateful
+		*/
+		if(!escursioniConDateConseguenti()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore temporale nella lista delle escursioni", "La ricerca non ha prodotto risultati"));
+			return null;
+		}
+		
+		//vado sul bean stateful
+		if(!creaPacchettoMgr.inserisciEscursioniInPacchettoInstanziato(getEscursioni())){
+			//non coerenti
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date/Cittˆ non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+			return null;	
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+		
+		/*Prossima pagina: confermo creazione del pacchetto*/
+		return "confermaPacchetto";
 	}
 	
+
+	private boolean escursioniConDateConseguenti() {
+		for(int i=0; i<this.getEscursioni().size()-1; i++){
+			if(this.getEscursioni().get(i).getDataFine().getTime()>
+					this.getEscursioni().get(i+1).getDataInizio().getTime()){
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 	private boolean escursioneGiaContenuta() {
 		for(int i = 0; i<getEscursioni().size(); i++){
