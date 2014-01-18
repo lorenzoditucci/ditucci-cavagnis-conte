@@ -11,6 +11,7 @@ import java.util.List;
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.ControlloCoerenzaMGR;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
@@ -63,6 +64,27 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	controllaPernottamenti(voli, pernottamenti);
     	controllaEscursioni(p.getEscursioni(), pernottamenti);
     	
+    	
+    	return;
+    }
+    
+    @Override
+    public void controllaGiftList(GiftListDTO g) throws CoerenzaException{
+    	
+    	List<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+    	
+    	if(g == null)
+    		throw new NullPointerException();
+    	pacchetti = g.getPacchetti();
+    	
+    	Collections.sort(pacchetti, PacchettoDTO.ordinaPerDataInizio);
+    	
+    	if(pacchetti.size() > 1){
+    		for (int i = 0; i < pacchetti.size() -1;i++){
+    			if(pacchetti.get(i).getDataFine().after(pacchetti.get(i+1).getDataFine()))
+    				throw new CoerenzaException("Due pacchetti si sovrappongono");
+    		}
+    	}
     	
     	return;
     }
