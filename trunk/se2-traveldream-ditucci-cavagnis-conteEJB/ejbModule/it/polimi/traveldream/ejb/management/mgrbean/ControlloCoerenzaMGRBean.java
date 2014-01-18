@@ -61,6 +61,7 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	
     	controllaVoli(voli);
     	controllaPernottamenti(voli, pernottamenti);
+    	controllaEscursioni(p.getEscursioni(), pernottamenti);
     	
     	
     	return;
@@ -77,7 +78,7 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     			if(!voli.get(i).getCittaArrivo().equals(p.get(i).getHotel().getCitta()))
     				throw new CoerenzaException("Nella città "+ voli.get(i).getCittaArrivo()+ " manca il pernottamento");
     			//temporale
-    			if(! periodoContenuto(voli.get(i).getDataArrivo(),voli.get(i+1).getDataPartenza(),p.get(i).getDataInizio(),p.get(i).getDataFine()))
+    			if(! periodoContenutoEsattamente(voli.get(i).getDataArrivo(),voli.get(i+1).getDataPartenza(),p.get(i).getDataInizio(),p.get(i).getDataFine()))
     				throw new CoerenzaException("il pernottamento "+p.get(i).getIdPernottametto() + " non coincide con l'arrivo e la partenza di due voli.");	
     	}
     	
@@ -90,25 +91,19 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
 	 * sia compresa nel periodo in cui ci si trattiene in quella città
 	 */
     
-    private void controllaEscursioni(List<EscursioneDTO> e,List<HotelDTO> h){
-    	boolean trovato;
-    	/*
-    	 * itero sulle escursioni
-    	 */
-    		for(int i=0; i<e.size();i++){
-    			trovato=false;
-    			// itero sugli alberghi
-    			for(int j=0; j < h.size() && !trovato; j++){
-    				if(e.get(i).getCitta().equals(h.get(j).getCitta()))
-    				//TODO: controllo che l'escursione sia dentro al pernottamento 
-    					trovato = true;
-    			}
-    		if(!trovato)
-    			//TODO solleva eccezione perchè l'escursione non è in una città raggiunta.
-    			;
+    private void controllaEscursioni(List<EscursioneDTO> e,List<PernottamentoDTO> p) throws CoerenzaException{
+    	boolean controllata = false;
+    	
+    	for(int i=0; i < e.size(); i++){
+    		controllata = false;
+    		for(int j = 0; j < p.size() && !controllata; j++){
+    			if(e.get(i).getCitta().equals(p.get(j).getHotel().getCitta()) && 
+    					periodoContenuto(p.get(j).getDataInizio(), p.get(j).getDataFine(), e.get(i).getDataInizio(), e.get(i).getDataFine()))
+    				controllata = true;
     		}
-    		
-    			
+    		if(!controllata)
+    			throw new CoerenzaException("L'escursione "+ e.get(i).getNome() + " non è coerente con il pacchetto");
+    	}
     	return;
     }
     
@@ -136,13 +131,20 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	return;
     }
     
-    private boolean periodoContenuto(java.util.Date inizioP, java.util.Date fineP, Timestamp inizio, Timestamp fine){
+    private boolean periodoContenutoEsattamente(java.util.Date inizioP, java.util.Date fineP, Timestamp inizio, Timestamp fine){
     	Calendar inizioPCalendar = toCalendar(inizioP);
     	Calendar finePCalendar = toCalendar(fineP);
     	Calendar inizioCalendar = toCalendar(inizio);
     	Calendar fineCalendar = toCalendar(fine);
     	
     	if(stessoGiornoMeseAnno(inizioPCalendar,inizioCalendar) && stessoGiornoMeseAnno(finePCalendar,fineCalendar))
+    		return true;
+    	return false;
+    }
+    
+    private boolean periodoContenuto(java.util.Date inizioP, java.util.Date fineP, java.util.Date inizio, java.util.Date fine){
+    	
+    	if(inizioP.before(inizio) && fineP.after(fine))
     		return true;
     	return false;
     }
