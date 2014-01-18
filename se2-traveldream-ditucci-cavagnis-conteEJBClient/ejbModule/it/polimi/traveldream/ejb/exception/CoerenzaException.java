@@ -3,7 +3,14 @@ package it.polimi.traveldream.ejb.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoerenzaException {
+/**
+ * eccezione lanciata in caso di incoerenza di un pacchetto o di una giftlist.
+ * Contiene al suo interno una stringa di messaggi da visualizzare all'utente.
+ * @author giorgioconte
+ *
+ */
+
+public class CoerenzaException extends RuntimeException{
 
 	
 	private List<String> messaggi;
