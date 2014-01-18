@@ -1,7 +1,7 @@
 package it.polimi.traveldream.ejb.management.dto;
 
 import java.sql.Timestamp;
-
+import java.util.Comparator;
 
 import com.sun.istack.internal.NotNull;
 
@@ -61,5 +61,19 @@ public class PernottamentoDTO {
 	public void setPacchetto(PacchettoDTO pacchetto) {
 		this.pacchetto = pacchetto;
 	}
+	
+	public static Comparator <PernottamentoDTO>
+	ordinaPerDataInizio = new Comparator <PernottamentoDTO>()
+	{
+		public int compare(PernottamentoDTO p1, PernottamentoDTO p2)
+		{
+			if(p1.getDataInizio().before(p2.getDataInizio()))
+				return -1;
+			if(p1.getDataInizio().after(p2.getDataInizio()))
+				return 1;
+			return 0;
+		}
+	};
+	
 
 }
