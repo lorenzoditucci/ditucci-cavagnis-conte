@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
+import it.polimi.traveldream.ejb.management.ControlloCoerenzaMGR;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
@@ -28,7 +29,7 @@ import sun.tools.jar.resources.jar;
  */
 @Stateless
 @LocalBean
-public class ControlloCoerenzaMGRBean {
+public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
 
     /**
      * Default constructor. 
@@ -43,6 +44,7 @@ public class ControlloCoerenzaMGRBean {
      * @throws CoerenzaException. Quando il pacchetto non è coerente.
      */
     
+    @Override
     public void controlloPacchetto(PacchettoDTO p) throws CoerenzaException {
     	/*
     	 * variabili di supporto per il controllo della coerenza del pacchetto
