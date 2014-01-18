@@ -258,6 +258,47 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		
 	}
 
+	@Override
+	public boolean inserisciEscursioniInPacchettoInstanziato(
+			List<EscursioneDTO> escursioni) {
+		/*coerenza con pacchetto*/
+		for(int i=0; i<escursioni.size(); i++){
+			/*se non esiste un pernottamento che include l'escursione allora non  coerente*/
+			if(!esisteUnHotelCoerenteAllEscursione(escursioni.get(i))){
+				return false;
+			}
+		}
+		pacchettoInBean.setEscursioni(new ArrayList<EscursioneDTO>());
+		pacchettoInBean.getEscursioni().addAll(escursioni);
+		aggiornaPrezzoPacchettoConEscursioni(escursioni);
+		
+		return true;
+
+	}
+
+	private void aggiornaPrezzoPacchettoConEscursioni(
+			List<EscursioneDTO> escursioni) {
+		double prezzoEscursioni=0;
+		for(int i=0; i<escursioni.size(); i++){
+			prezzoEscursioni+=escursioni.get(i).getCosto();
+		}
+		pacchettoInBean.setCosto(pacchettoInBean.getCosto()+prezzoEscursioni);
+		System.out.println(pacchettoInBean.getCosto());
+		
+	}
+
+	private boolean esisteUnHotelCoerenteAllEscursione(
+			EscursioneDTO escursione) {
+		for(int i=0; i<pacchettoInBean.getPernotti().size(); i++){
+			if(pacchettoInBean.getPernotti().get(i).getHotel().getCitta().equals(escursione.getCitta())
+					&& escursione.getDataInizio().getTime()>=pacchettoInBean.getPernotti().get(i).getDataInizio().getTime()
+					&& escursione.getDataFine().getTime()<=pacchettoInBean.getPernotti().get(i).getDataFine().getTime()){
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 
 }
