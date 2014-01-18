@@ -23,5 +23,7 @@ public interface CreaPacchettoMgr {
 
 	public boolean inserisciPernottamentiInPacchettoInstanziato(
 			List<PernottamentoDTO> pernottamenti);
+
+	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare);
 	
 }

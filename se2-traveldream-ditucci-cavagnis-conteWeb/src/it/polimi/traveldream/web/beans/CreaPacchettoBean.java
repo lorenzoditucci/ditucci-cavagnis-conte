@@ -7,6 +7,7 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
@@ -48,6 +49,10 @@ public class CreaPacchettoBean {
 	private int idHotelDaCercare;
 	
 	@NotNull
+	private int idEscursioneDaCercare;
+
+
+	@NotNull
 	@Future
 	private Date dataInizioPernottamento;
 	
@@ -59,10 +64,14 @@ public class CreaPacchettoBean {
 	
 	private PernottamentoDTO pernottamento;
 
+	private EscursioneDTO escursione;
+	
 	/*Lista di voli da aggiungere*/
 	private List<VoloDTO> voli;
 	
 	private List<PernottamentoDTO> pernottamenti;
+	
+	private List<EscursioneDTO> escursioni;
 	
 	/*
 	 * costruttore che inizializza i DTO
@@ -71,6 +80,7 @@ public class CreaPacchettoBean {
 		this.pacchetto= new PacchettoDTO();
 		this.voli= new ArrayList<VoloDTO>();
 		this.pernottamenti=new ArrayList<PernottamentoDTO>();
+		this.escursioni=new ArrayList<EscursioneDTO>();
 	}
 	
 	
@@ -180,6 +190,40 @@ public class CreaPacchettoBean {
 		/*Prossima pagina: selezione degli hotel*/
 		return "aggiungiEscursioniInPacchetto";
 	}
+	
+	public String cercaEAggiungiEscursione(){
+		escursione = new EscursioneDTO();
+		  
+    	if(creaPacchettoMgr.cercaEscursione(idEscursioneDaCercare).isEmpty()){
+    		
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non trovato", "La ricerca non ha prodotto risultati"));
+    		return null;
+    	}else{
+    		this.escursione=creaPacchettoMgr.cercaEscursione(idEscursioneDaCercare).get(0);
+    		if(escursioneGiaContenuta()){
+    			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Giˆ in lista", "La ricerca non ha prodotto risultati"));
+        		return null;
+    		}
+    		getEscursioni().add(escursione);
+    		return null;
+    	}	
+	}
+	
+	public String aggiungiEscursioniInPacchetto(){
+		
+		return null;
+	}
+	
+
+	private boolean escursioneGiaContenuta() {
+		for(int i = 0; i<getEscursioni().size(); i++){
+			if(getEscursioni().get(i).getIdEscursione()==escursione.getIdEscursione()){
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	private boolean dateConseguentiPernottamenti() {
 		if(this.getPernottamenti().size()<1)
@@ -341,6 +385,38 @@ public class CreaPacchettoBean {
 	public void setDataFinePernottamento(Date dataFinePernottamento) {
 		this.dataFinePernottamento = dataFinePernottamento;
 	}
+	
+	
+	public int getIdEscursioneDaCercare() {
+		return idEscursioneDaCercare;
+	}
 
 
+	public void setIdEscursioneDaCercare(int idEscursioneDaCercare) {
+		this.idEscursioneDaCercare = idEscursioneDaCercare;
+	}
+
+
+	public EscursioneDTO getEscursione() {
+		return escursione;
+	}
+
+
+	public void setEscursione(EscursioneDTO escursione) {
+		this.escursione = escursione;
+	}
+
+
+	public List<EscursioneDTO> getEscursioni() {
+		return escursioni;
+	}
+
+
+	public void setEscursioni(List<EscursioneDTO> escursioni) {
+		this.escursioni = escursioni;
+	}
+
+
+
+	
 }

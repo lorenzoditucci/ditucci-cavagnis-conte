@@ -22,7 +22,7 @@
 		</h:form>
 		<h:form><h4>Ricerca Pacchetto</h4></h:form>
 		
-		<h:form><h:link value="Crea Pacchetto" outcome="employee/creapacchetto"></h:link></h:form>
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
 		
 		<h:form><h:link value="Aggiungi prodotto base" outcome="prodottobase/aggiungiprodottobase"></h:link></h:form>
 		
@@ -31,11 +31,96 @@
 		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
-    
-    </p:layoutUnit>  
+
+    <h:form id="inserimentoEscursioniForm">  
+  
+    <p:growl id="msgs" />  
+  
+    <p:panel header="Inserisci id Escursione">  
+    	<h:panelGrid columns="2" id="grid"> 
+
+            <h:outputLabel value="Id Escursione: " for="idEscursione"></h:outputLabel>  
+            <p:inputText id="idEscursione"   
+                            value="#{creaPacchettoBean.idEscursioneDaCercare}" required="true"/>  
+        
+            <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
+                            action="#{creaPacchettoBean.cercaEAggiungiEscursione()}" update="escursioni msgs @parent" >  
+             
+            </p:commandButton>  
+        </h:panelGrid>  
+    </p:panel>  
+      
+    <p:outputPanel id="escursioni">  
+        <p:dataTable id="escursioniTable" value="#{creaPacchettoBean.escursioni}" var="escursione">  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Id" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.idEscursione}" />  
+            </p:column>  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Nome" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.nome}" />  
+            </p:column>  
+            
+            
+               <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Descrizione" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.descrizione}" />  
+            </p:column>  
+            
+  
+  			<p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Città" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.citta}" />  
+            </p:column> 
+            
+            <p:column>  
+               <f:facet name="header">   
+                    <h:outputText value="Da: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.dataInizio}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="A: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.dataFine}" />  
+            </p:column> 
+            
+              <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Costo: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.costo}" />  
+            </p:column> 
+
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Operazione" />  
+                </f:facet>  
+                <p:commandLink value="Rimuovi" update=":inserimentoEscursioniForm:escursioni" process=":inserimentoEscursioniForm:escursioni">  
+                    <p:collector value="#{escursione}"  
+                                 removeFrom="#{creaPacchettoBean.escursioni}" />  
+                </p:commandLink>  
+            </p:column>  
+  
+        </p:dataTable>  
+    </p:outputPanel>  
+  <h:commandButton value="Aggiungi escursioni" action="#{creaPacchettoBean.aggiungiEscursioniInPacchetto()}" update ="inserimentoEscursioniForm"></h:commandButton>
+</h:form>    
+</p:layoutUnit>  
     
 </p:layout>    
 </h:body>           
 </html>
-
 
