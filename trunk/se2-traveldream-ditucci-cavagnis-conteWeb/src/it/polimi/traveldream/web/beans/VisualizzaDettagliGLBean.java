@@ -1,8 +1,11 @@
 package it.polimi.traveldream.web.beans;
 
+import java.util.List;
+
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
+import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,16 +37,16 @@ public class VisualizzaDettagliGLBean {
 		return "visualizza";
 	}
 
-	public String foo(){
-		System.out.println("foo");
-		return "visualizza";
-	}
 	public GiftListDTO getGiftList() {
 		return giftList;
 	}
 
 	public void setGiftList(GiftListDTO giftList) {
 		this.giftList = giftList;
+	}
+	
+	public List<PacchettoDTO> getPacchetti(){
+		return giftList.getPacchetti();
 	}
 
 }

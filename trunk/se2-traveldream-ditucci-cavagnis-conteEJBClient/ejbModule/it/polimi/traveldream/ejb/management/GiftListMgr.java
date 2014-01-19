@@ -15,7 +15,9 @@ public interface GiftListMgr {
 	
 	public void save(GiftListDTO giftList);
 	
-	public ArrayList<GiftListDTO> cercaGLperMail(String userEmail); 
+	public ArrayList<GiftListDTO> cercaGLperMail(String userEmail);
+
+	void aggiungiPacchetto(GiftListDTO glDTO, PacchettoDTO pDTO); 
 	
 	
 
