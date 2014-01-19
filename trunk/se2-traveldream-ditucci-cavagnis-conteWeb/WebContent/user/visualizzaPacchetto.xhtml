@@ -82,7 +82,7 @@
 		     
 		        </h:panelGrid>
 		    </p:fieldset>
-		    <h:link value="Aggiungi a GiftList" outcome="inserisciPacchettoInGL.xhtml" /><br/>
+		    <h:commandLink value = "Aggiungi a GiftList" action = "#{inserisciPacchettoInGLBean.inserisciPacchetto(pacchetto)}"/><br/>
 		    <p:commandLink value="Acquista" action="#" /><br/>
 		    <p:commandLink value="Personalizza" action="#" /><br/>
 		    <p:commandLink value="Invia ad Amico" action="#"/><br/>
