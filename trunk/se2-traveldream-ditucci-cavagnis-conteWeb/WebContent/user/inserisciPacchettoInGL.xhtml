@@ -70,10 +70,8 @@
 	<div id='contenitore-form-testo'>
     
 	<h:form style="padding : 30px;">
-			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultatoVisualizzaPacchetto}">
-				<h:outputText>#{pacchetto.id}</h:outputText>
-				<h:outputText>#{pacchetto.nome}</h:outputText>
-			</ui:repeat>
+			<h:outputLabel value = "Id del pacchetto #{inserisciPacchettoInGLBean.pDTO.idPacchetto}"/><br/>
+			<h:outputLabel value="Nome del pacchetto da #{inserisciPacchettoInGLBean.pDTO.nome}" /><br/>
 			<p:outputPanel>
 				<p:dataTable id="GlTable" value="#{inserisciPacchettoInGLBean.risultatoRicerca}" var="gl">
 					<p:column>
