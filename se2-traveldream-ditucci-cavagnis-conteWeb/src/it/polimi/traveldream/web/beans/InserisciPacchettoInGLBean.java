@@ -40,11 +40,10 @@ public class InserisciPacchettoInGLBean {
 	public String inserisciPacchetto(PacchettoDTO pacchettoDTO){
 		this.pDTO = pacchettoDTO;
 		System.out.println("inserisci pacchetto");
-		return "inserisciPacchettoInGL?faces-redirect=true";
+		return "inserisciPacchettoInGL.xhtml";
 	}
 	
 	public void cercaPerMail(){
-		
 		this.setRisultatoRicerca(glBean.cercaGLperMail(userEmail));
 		return;
 	}
