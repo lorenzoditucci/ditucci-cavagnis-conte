@@ -6,26 +6,66 @@
       xmlns:p="http://primefaces.org/ui"
       >
 <h:head>
+	<h:outputStylesheet name="css/style.css" />
 	<title>Clienti - Visualizza Dettagli Gift List</title>
 </h:head>
 <h:body>
-<h:outputStylesheet library="css" name="../resources/style.css"  />
 
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+</div>
 
-<p:layout fullPage="true">  
-	<p:layoutUnit position="north" size="100" resizable="true">  
-        Travel Dream - Clienti - Pacchetti Acquistati
-    </p:layoutUnit>  
-    
-    <p:layoutUnit position="west" size="200" resizable="true">  
-    	<h:form>
+<div id="menu-sinistra">
+
+		<h:form>
 	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
-	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
-		</h:form>
-		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
+	    </h:form>
+	    	<h:link  outcome="gestione">
+	    		<img src="../../resources/image/giftList.png" width="30px" height="30px"/>
+	    		- Gestione Gifti List
+	    	</h:link><br/>
+	    	<h:link  outcome="../pacchettiAcquistati.xhtml">
+	    		<img src="../../resources/image/acquistati.png" width="30px" height="30px"/>
+	    		- Pacchetti Acquistati
+	    	</h:link><br/>
+	    	
+	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+    
+			<p:panel>
+			
+				<h:panelGrid columns="1" id="pacchettoGrid">
 		
- </p:layoutUnit>  
-    <p:layoutUnit position="center">  
+				
+	         
+	
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+					
+					
+				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+				<h:message for="data-inizio"></h:message>
+				
+				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+				<h:message for="data-fine"></h:message>
+				
+				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+	            <h:message for="costo-pacchetto"></h:message>
+				
+				
+			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+	       </h:panelGrid>
+	       </p:panel>
+		</h:form>
+	
+</div>  
+    <div id = "contenitore-centrale">
     
     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
   	<h:form>
@@ -36,10 +76,9 @@
 		</ui:repeat>
 		
 	</h:form>
-    </p:layoutUnit>  
     
-</p:layout>  
-      
+    </div>
+</div>
 </h:body>           
 </html>
 
