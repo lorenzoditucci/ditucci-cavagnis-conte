@@ -51,7 +51,8 @@ public class Hotel implements Serializable {
 
 	@Column(nullable=false, length=45)
 	private String nome;
-
+	
+	
 	//bi-directional many-to-many association to GiftList
 	@ManyToMany(mappedBy="hotels")
 	private List<GiftList> giftLists;
@@ -60,8 +61,8 @@ public class Hotel implements Serializable {
 	 * associazione many to many con Gift List
 	 */
 	
-		@ManyToMany(mappedBy="hotels")
-		private List<GiftList> pacchetti;
+	@ManyToMany(mappedBy="hotels")
+	private List<GiftList> pacchetti;
 
 	public Hotel() {
 	}

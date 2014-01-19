@@ -42,6 +42,11 @@ public class InserisciPacchettoInGLBean {
 		return "inserisciPacchettoInGL.xhtml";
 	}
 	
+	public String aggiungi(GiftListDTO gl){
+		glBean.aggiungiPacchetto(gl, pDTO);
+		return "visualizzaPacchetto";
+	}
+	
 	public void cercaPerMail(){
 		this.setRisultatoRicerca(glBean.cercaGLperMail(userEmail));
 		return;
