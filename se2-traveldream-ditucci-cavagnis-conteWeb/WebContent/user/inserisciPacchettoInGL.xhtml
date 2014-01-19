@@ -86,6 +86,9 @@
 						</f:facet>
 						<h:outputText value = "#{gl.nome}"/>
 					</p:column>
+					<p:column>
+						<h:commandLink value="Aggiungi Pacchetto" action="#{inserisciPacchettoInGLBean.aggiungi(gl)}" />
+					</p:column>
 				</p:dataTable>
 			</p:outputPanel>
 		</h:form>  
