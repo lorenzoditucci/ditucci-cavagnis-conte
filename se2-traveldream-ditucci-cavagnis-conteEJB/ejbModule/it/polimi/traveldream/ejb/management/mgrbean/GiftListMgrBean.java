@@ -74,5 +74,16 @@ public class GiftListMgrBean implements GiftListMgr {
 		em.persist(newGiftList); 
     	
     }
+    
+    @Override
+    public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO){
+    	Pacchetto p = new Pacchetto(pDTO);
+    	GiftList gl = new GiftList(glDTO);
+    	
+    	
+    	gl.getPacchetti().add(p);
+    	em.persist(gl);
+    	
+    }
 
 }

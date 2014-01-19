@@ -7,9 +7,11 @@
 
 <h:head>
 	<h:outputStylesheet name="css/style.css" />
-	<title>Clienti: Pacchetto Selezionato</title>
+	<title>Inserisci Pacchetto in Gift List</title>
 </h:head>
 <h:body>
+<!-- chiamo il bean -->
+#{pacchettoBean.cercaAll()}
 <div id="background" />
 <div id='contenitore-geneale'>
 <div id="banner-top">	
@@ -63,30 +65,31 @@
 		</h:form>
 	
 </div>
+#{inserisciPacchettoInGLBean.cercaPerMail()}
 <div id='contenitore-centrale'>
 	<div id='contenitore-form-testo'>
     
 	<h:form style="padding : 30px;">
 			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultatoVisualizzaPacchetto}">
-		
-		    <p:growl id="growl" showDetail="true" />
-		
-		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
-		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
-		        <h:panelGrid columns="2" cellpadding="10">
-		            
-		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
-		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
-		            	<h:outputText value="città escursione - #{esc.citta}" />
-		            </ui:repeat>
-		     
-		        </h:panelGrid>
-		    </p:fieldset>
-		    <h:link value="Aggiungi a GiftList" outcome="inserisciPacchettoInGL.xhtml" /><br/>
-		    <p:commandLink value="Acquista" action="#" /><br/>
-		    <p:commandLink value="Personalizza" action="#" /><br/>
-		    <p:commandLink value="Invia ad Amico" action="#"/><br/>
+				<h:outputText>#{pacchetto.id}</h:outputText>
+				<h:outputText>#{pacchetto.nome}</h:outputText>
 			</ui:repeat>
+			<p:outputPanel>
+				<p:dataTable id="GlTable" value="#{inserisciPacchettoInGLBean.risultatoRicerca}" var="gl">
+					<p:column>
+						<f:facet name="header">   
+                    		<h:outputText value="Id" />  
+                		</f:facet>  
+                		<h:outputText value="#{gl.idGiftList}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value = "Nome"/>
+						</f:facet>
+						<h:outputText value = "#{gl.nome}"/>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
 		</h:form>  
 		</div>
 </div>
