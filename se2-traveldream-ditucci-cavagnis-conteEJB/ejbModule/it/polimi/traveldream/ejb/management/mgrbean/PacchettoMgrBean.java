@@ -98,4 +98,12 @@ public class PacchettoMgrBean implements pacchettoMgr {
 		return copiaListaQuery(listaPacchetti);	
 	}
 
+	@Override
+	public ArrayList<PacchettoDTO> prendiPerId(int idPacchetto) {
+		TypedQuery<Pacchetto> query = em.createNamedQuery("cercaPacchettiId", Pacchetto.class);
+		query.setParameter("id", idPacchetto);
+		List<Pacchetto> listaPacchetti = query.getResultList();
+		return copiaListaQuery(listaPacchetti);
+	}
+
 }
