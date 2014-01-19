@@ -14,7 +14,6 @@
 <div id="background" />
 <div id='contenitore-geneale'>
 <div id="banner-top">	
-	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
 </div>
 <div id="menu-sinistra">
 
@@ -39,7 +38,7 @@
 <div id='contenitore-centrale'>
 	<div id='contenitore-form-testo'>
 	risultato ricerca
-	<h:form style="padding : 30px;">
+	<h:form  style="padding : 30px;">
 			<ui:repeat var="gift" value="#{cercaGiftListBean.risultatoRicerca}">
 		
 		    <p:growl id="growl" showDetail="true" />
@@ -55,6 +54,7 @@
 		        </h:panelGrid>
 		    </p:fieldset>
 			</ui:repeat>
+			<h:link outcome="dettagliGiftList">Visualizza Dettagli</h:link>
 		</h:form>
 		</div>
 </div>

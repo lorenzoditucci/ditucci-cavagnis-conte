@@ -35,6 +35,8 @@ body {
     height: 100px;
     padding-top: 0px;
     display: block;
+    background: url(#{resource['image:banner.gif']}) no-repeat center;
+    background-size: conver;
 }
 
 #menu-sinistra{

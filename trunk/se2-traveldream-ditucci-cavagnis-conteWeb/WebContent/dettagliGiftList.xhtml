@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<title>GiftList - Dettagli</title>
+</h:head>
+<h:body>
+
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+</div>
+<div id="menu-sinistra">
+
+	<h:link outcome="user/index">
+    		<img src="resources/image/user.png" alt="login" width="30" height="30" />
+    		 - Accesso Clienti
+   	</h:link><br/>
+   	<h:link outcome="employee/index">
+    		<img src="resources/image/impiegato.png" alt="login" width="30" height="30" />
+    		- Admin
+   	</h:link>
+	<h:form id="cercaGiftList" style="padding:15px">
+			Gift List<br/>
+		
+		    <h:inputText id="codiceGiftList" value="#{cercaGiftListBean.idRicerca}" label="codiceGistList" />
+		    <p:message for="codiceGiftList"></p:message>
+		    
+		    
+		   <h:commandButton value="Cerca" action="#{cercaGiftListBean.cerca()}"/>
+		</h:form>
+</div>
+<div id='contenitore-centrale'>
+	<div id='contenitore-form-testo'>
+	<h:form  style="padding : 30px;">
+			<ui:repeat var="gift" value="#{cercaGiftListBean.risultatoRicerca}">
+		
+		    <p:growl id="growl" showDetail="true" />
+		
+		    <p:fieldset legend="#{gift.nome}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:panelGrid columns="2" cellpadding="10">
+			        <ui:repeat var="pacchetto" value="#{gift.pacchetti}">
+			        	<h:outputLabel value="pacchetto - #{pacchetto.idPacchetto}" />
+			        	<h:outputLabel value="Prodotti Base contenuti non ancora acquistati" />
+			        	<!-- VOLI CONTENUTI IN GIFT -->
+			        	<ui:repeat var="voli" value="#{pacchetto.voli}">
+			        		<h:outputLabel value="città Partenza: -#{voli.cittaPartenza}" />
+			        		<h:outputLabel value="città Arrivo: -#{voli.cittaArrivo}" />
+			        		<h:outputLabel value="Compagnia: -#{voli.compagnia}" />
+			        		<h:outputLabel value="costo: -#{voli.costo}" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(voli)}" value="Acquista Volo" />
+			        	</ui:repeat>
+			        	<!-- ESCURSIONI CONTENUTE IN GF -->
+			        	<ui:repeat var="escursioni" value="#{pacchetto.escursioni}">
+			        		<h:outputLabel value="nome: -#{escursioni.nome}" />
+			        		<h:outputLabel value="città: -#{escursioni.citta}" />
+			        		<h:outputLabel value="descrizione: -#{escursioni.descrizione}" />
+			        		<h:outputLabel value="data inizio -#{escursioni.dataInizio}" />
+			        		<h:outputLabel value="data fine -#{escursioni.dataFine}" />
+			        		<h:outputLabel value="costo: -#{escursioni.costo}" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(escursioni)}" value="Acquista Escursione" />
+			        	</ui:repeat>
+			        	<!-- HOTEL - PERNOTTAMENTI CONTENUTI -->
+			        	<ui:repeat var="pernottamenti" value="#{pacchetto.pernotti}">
+			        		<h:outputLabel value="Hotel -#{pernottamenti.hotel}" />
+			        		<h:outputLabel value="data inizio -#{pernottamenti.dataInizio}" />
+			        		<h:outputLabel value="data fine -#{pernottamenti.dataFine}" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(pernottamenti)}" value="Acquista Pernottamento" />
+			        	</ui:repeat>
+			        </ui:repeat>
+		        </h:panelGrid>
+		    </p:fieldset>
+			</ui:repeat>
+		</h:form>
+		</div>
+</div>
+</div>
+</h:body>           
+</html>
+
