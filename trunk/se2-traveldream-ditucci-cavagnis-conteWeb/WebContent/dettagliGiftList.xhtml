@@ -54,7 +54,7 @@
 			        		<h:outputLabel value="città Arrivo: -#{voli.cittaArrivo}" />
 			        		<h:outputLabel value="Compagnia: -#{voli.compagnia}" />
 			        		<h:outputLabel value="costo: -#{voli.costo}" />
-			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(voli)}" value="Acquista Volo" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(voli,gift)}" value="Acquista Volo" />
 			        	</ui:repeat>
 			        	<!-- ESCURSIONI CONTENUTE IN GF -->
 			        	<ui:repeat var="escursioni" value="#{pacchetto.escursioni}">
@@ -64,14 +64,14 @@
 			        		<h:outputLabel value="data inizio -#{escursioni.dataInizio}" />
 			        		<h:outputLabel value="data fine -#{escursioni.dataFine}" />
 			        		<h:outputLabel value="costo: -#{escursioni.costo}" />
-			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(escursioni)}" value="Acquista Escursione" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(escursioni,gift)}" value="Acquista Escursione" />
 			        	</ui:repeat>
 			        	<!-- HOTEL - PERNOTTAMENTI CONTENUTI -->
 			        	<ui:repeat var="pernottamenti" value="#{pacchetto.pernotti}">
 			        		<h:outputLabel value="Hotel -#{pernottamenti.hotel}" />
 			        		<h:outputLabel value="data inizio -#{pernottamenti.dataInizio}" />
 			        		<h:outputLabel value="data fine -#{pernottamenti.dataFine}" />
-			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(pernottamenti)}" value="Acquista Pernottamento" />
+			        		<h:commandButton action="#{prodottoBaseBean.acquistaProdottoBase(pernottamenti,gift)}" value="Acquista Pernottamento" />
 			        	</ui:repeat>
 			        </ui:repeat>
 		        </h:panelGrid>
