@@ -13,6 +13,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import quicktime.sound.SICompletion;
+
 /**
  * bean per la gestione dei pacchetti
  */
@@ -31,6 +33,7 @@ public class PacchettoBean {
 	private pacchettoMgr pacchettoMgr;
 	
 	private ArrayList<PacchettoDTO> risultato;
+	private ArrayList<PacchettoDTO> risultatoVisualizzaPacchetto;
     
 	@PostConstruct
 	public void init() {
@@ -56,6 +59,17 @@ public class PacchettoBean {
     	setRisultato(pacchettoMgr.prendiAcquistati(mail));
     	
     }
+    
+    /**
+     * quando si seleziona un pacchetto, lo cerca e restituisce una nuova pagina
+     * 
+     * @param idPacchetto
+     * @return
+     */
+    public String visualizzaPacchetto(int idPacchetto){
+    	setRisultatoVisualizzaPacchetto(pacchettoMgr.prendiPerId(idPacchetto));
+    	return "visualizzaPacchetto?faces-redirect=true";
+    }
 	public ArrayList<PacchettoDTO> getRisultato() {
 		return risultato;
 	}
@@ -71,5 +85,16 @@ public class PacchettoBean {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+
+
+	public ArrayList<PacchettoDTO> getRisultatoVisualizzaPacchetto() {
+		return risultatoVisualizzaPacchetto;
+	}
+
+
+	public void setRisultatoVisualizzaPacchetto(
+			ArrayList<PacchettoDTO> risultatoVisualizzaPacchetto) {
+		this.risultatoVisualizzaPacchetto = risultatoVisualizzaPacchetto;
 	}
 }

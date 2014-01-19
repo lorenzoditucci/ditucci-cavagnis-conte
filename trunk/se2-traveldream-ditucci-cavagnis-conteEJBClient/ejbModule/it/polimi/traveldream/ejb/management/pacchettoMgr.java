@@ -10,4 +10,6 @@ public interface pacchettoMgr {
 
 	ArrayList<PacchettoDTO> prendiAcquistati(String userEmail);
 
+	ArrayList<PacchettoDTO> prendiPerId(int idPacchetto);
+
 }
