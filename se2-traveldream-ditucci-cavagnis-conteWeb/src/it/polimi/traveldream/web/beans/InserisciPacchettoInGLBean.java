@@ -38,8 +38,7 @@ public class InserisciPacchettoInGLBean {
 	}
 	
 	public String inserisciPacchetto(PacchettoDTO pacchettoDTO){
-		this.pDTO = pacchettoDTO;
-		System.out.println("inserisci pacchetto");
+		this.setpDTO(pacchettoDTO);
 		return "inserisciPacchettoInGL.xhtml";
 	}
 	
@@ -48,10 +47,6 @@ public class InserisciPacchettoInGLBean {
 		return;
 	}
 	
-	public void foo(){
-		System.out.println("foo");
-	}
-
 	public PacchettoDTO getpDTO() {
 		return pDTO;
 	}
