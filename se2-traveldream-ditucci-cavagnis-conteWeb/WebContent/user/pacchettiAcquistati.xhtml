@@ -12,13 +12,12 @@
 <h:body>
 <div id='background' />
 
-
+<!-- DA COTNROLLARE FORSE NON FUNZIONA -->
 #{pacchettoBean.cercaAcquistati(userBean.mail)}
 <div id="contenitore-generale">
 	<div id="banner-top">
 	</div>
 	<div id="menu-sinistra">
-
 		<h:form>
 	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
 	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
@@ -68,7 +67,7 @@
 	<div id='contenitore-form-testo'>
     
 	<h:form style="padding : 30px;">
-			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
+			<ui:repeat var="pacchetto" value="#{userBean.pacchettiAcquistati}">
 		
 		    <p:growl id="growl" showDetail="true" />
 		

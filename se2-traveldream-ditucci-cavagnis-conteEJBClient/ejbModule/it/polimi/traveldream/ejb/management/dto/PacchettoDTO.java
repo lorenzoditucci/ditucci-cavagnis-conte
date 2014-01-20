@@ -57,8 +57,11 @@ public class PacchettoDTO {
 	private List<PernottamentoDTO> pernotti;
 	
 	private List<EscursioneDTO> escursioni;
-	
-	private List<UserDTO> users;
+	/**
+	 * cosa veniva salvato in USERS??
+	 * lo cambio in uno userDTO
+	 */
+	private UserDTO user;
 	
 	private List<GiftListDTO> giftLists;
 	
@@ -69,14 +72,6 @@ public class PacchettoDTO {
 		this.escursioni=new ArrayList<EscursioneDTO>();	
 	}
 	
-	public List<UserDTO> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<UserDTO> users) {
-		this.users = users;
-	}
-
 	public List<GiftListDTO> getGiftLists() {
 		return giftLists;
 	}
@@ -222,6 +217,15 @@ public class PacchettoDTO {
 	}
 	
 	
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+
 	public static Comparator <PacchettoDTO>
 	ordinaPerDataInizio = new Comparator <PacchettoDTO>()
 	{

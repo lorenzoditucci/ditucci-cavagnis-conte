@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb.management.entity;
 
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
+import it.polimi.traveldream.ejb.management.mgrbean.PacchettoMgrBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import org.apache.commons.codec.digest.DigestUtils;
+
+import com.sun.org.glassfish.external.statistics.Statistic;
 
 /**
  * Entity implementation class for Entity: UserEntity
@@ -95,6 +98,17 @@ public class User implements Serializable {
 			copia.add(daAggiungere);	
 		}
 		return copia;
+	}
+	
+	public static User copiaToUser(UserDTO user){
+		User newUser = new User();
+		newUser.setAddress(user.getAddress());
+		newUser.setEmail(user.getEmail());
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setPacchetti(Pacchetto.copiaToPacchetto(user.getPacchettiAcquistati()));
+		newUser.setPassword(user.getPassword());
+		return newUser;
 	}
 	
 	
@@ -164,7 +178,15 @@ public class User implements Serializable {
                 + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }
     
-    /**
+    public List<Pacchetto> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<Pacchetto> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
+
+	/**
 	 * connessione pacchetto - acquista
 	 */
 	@ManyToMany
