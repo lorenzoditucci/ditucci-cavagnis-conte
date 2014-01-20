@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class GiftListDTO {
 
 	@NotEmpty
-	
 	private int idGiftList;
 
 	@NotEmpty

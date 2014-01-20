@@ -39,7 +39,6 @@ public class HotelDTO {
 	@NotEmpty
 	private String nome;
 
-
 	public int getAcquistato() {
 		return acquistato;
 	}
