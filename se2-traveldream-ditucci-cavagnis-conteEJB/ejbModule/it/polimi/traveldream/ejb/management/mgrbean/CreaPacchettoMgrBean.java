@@ -325,8 +325,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		newPacchetto.setCittaDestinazione(new ArrayList<Citta>());
 		newPacchetto.setVoli(new ArrayList<Volo>());
 		newPacchetto.setEscursioni(new ArrayList<Escursione>());
-		newPacchetto.setPernottiList(new ArrayList<Pernottamento>());
-
+		
 		//persist
 		em.persist(newPacchetto);
 		
@@ -336,10 +335,6 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		for(int i=0; i<pacchettoInBean.getVoli().size(); i++){
 			 TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
 		 	 List<Volo> listaVolo = queryRicerca.setParameter("idVolo", pacchettoInBean.getVoli().get(i).getIdVolo()).getResultList();
-		 	 //bidirectional
-		 	/* listaVolo.get(0).setPacchetti(new ArrayList<Pacchetto>());
-		 	 listaVolo.get(0).getPacchetti().add(newPacchetto);
-		 	 */
 		 	 voli.add(listaVolo.get(0));	
 		}
 		newPacchetto.getVoli().addAll(voli);
@@ -349,10 +344,6 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		for(int i=0; i<pacchettoInBean.getEscursioni().size(); i++){
 			 TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursioneId", Escursione.class);
 		 	 List<Escursione> listaEscursione = queryRicerca.setParameter("idEscursione", pacchettoInBean.getEscursioni().get(i).getIdEscursione()).getResultList();
-		    
-		 	/* listaEscursione.get(0).setPacchetti(new ArrayList<Pacchetto>());
-		 	 listaEscursione.get(0).getPacchetti().add(newPacchetto);
-		 	 */
 		 	 escursioni.add(listaEscursione.get(0));	
 		}
 		
@@ -367,6 +358,19 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		}
 		newPacchetto.getCittaDestinazione().addAll(citta);
 		
+		//pernottamento
+		for(int i=0; i<pacchettoInBean.getPernotti().size(); i++){
+			Pernottamento newPernottamento=new Pernottamento(pacchettoInBean.getPernotti().get(i));
+
+			TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
+		 	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", pacchettoInBean.getPernotti().get(i).getHotel().getIdHotel()).getResultList();
+			
+		 	newPernottamento.setHotel(listaHotel.get(0));
+		 	newPernottamento.setPacchetto(newPacchetto);
+		 	
+		 	em.persist(newPernottamento);
+		}
+	
 		//manca pernottamento che sono da creare
 		return true;
 	}
