@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import java.io.Serializable;
 
@@ -271,6 +272,28 @@ public class Pacchetto implements Serializable {
 
 	public void setCittaDestinazione(List<Citta> citta) {
 		this.cittaDestinazione=citta;
+	}
+
+	public PacchettoDTO convertiInDTO() {
+		PacchettoDTO pacchetto = new PacchettoDTO();
+		pacchetto.setIdPacchetto(this.getIdPacchetto());
+		pacchetto.setNome(this.getNome());
+		pacchetto.setDescrizione(this.getDescrizione());
+		pacchetto.setDataFine(this.getDataFine());
+		pacchetto.setDataInizio(this.getDataInizio());
+		pacchetto.setCosto(this.getCosto());
+		pacchetto.setDisponibilitaAttuale(this.getDisponibilitaAttuale());
+		pacchetto.setDisponibilitaMax(this.getDisponibilitaMax());
+		pacchetto.setMail(this.getMail());
+		
+		//voli
+		pacchetto.setVoli(Volo.copiaToVoloDTO(this.getVoli()));
+		//escursioni
+		pacchetto.setEscursioni(Escursione.copiaToEscursioneDTO(this.getEscursioni()));
+		//citta
+		pacchetto.setCittaDestinazione(Citta.copiaToCittaDTO(this.getCittaDestinazione()));
+	
+		return pacchetto;
 	}
 		
 	

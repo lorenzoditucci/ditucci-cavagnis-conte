@@ -160,4 +160,23 @@ public class Escursione implements Serializable {
 	public void setPacchetti(List<Pacchetto> pacchetti) {
 		this.pacchetti = pacchetti;
 	}
+
+	public static List<EscursioneDTO> copiaToEscursioneDTO(
+			List<Escursione> lista) {
+			ArrayList<EscursioneDTO> copia = new ArrayList<EscursioneDTO>();
+			for(int i=0; i<lista.size(); i++){
+				EscursioneDTO daAggiungere=new EscursioneDTO();
+				daAggiungere.setIdEscursione(lista.get(i).getIdEscursione());
+				daAggiungere.setNome(lista.get(i).getNome());
+				daAggiungere.setDescrizione(lista.get(i).getDescrizione());
+				daAggiungere.setCitta(lista.get(i).getCitta());
+				daAggiungere.setCosto(lista.get(i).getCosto());
+				daAggiungere.setDataInizio(lista.get(i).getDataInizio());
+				daAggiungere.setDataFine(lista.get(i).getDataFine());
+				daAggiungere.setAcquistato(lista.get(i).getAcquistato());
+				copia.add(daAggiungere);	
+			}
+			return copia;
+		
+	}
 }

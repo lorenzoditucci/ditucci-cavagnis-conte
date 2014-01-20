@@ -73,6 +73,24 @@ public class Volo implements Serializable {
 		}
 		return copia;
 	}
+	
+	public static List<VoloDTO> copiaToVoloDTO(List<Volo> lista){
+		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
+		for(int i=0; i<lista.size(); i++){
+			VoloDTO daAggiungere=new VoloDTO();
+			daAggiungere.setIdVolo(lista.get(i).getIdVolo());
+			daAggiungere.setCompagnia(lista.get(i).getCompagnia());
+			daAggiungere.setCittaPartenza(lista.get(i).getCittaPartenza());
+			daAggiungere.setCittaArrivo(lista.get(i).getCittaArrivo());
+			daAggiungere.setCosto(lista.get(i).getCosto());
+			daAggiungere.setDataPartenza(lista.get(i).getDataInizio());
+			daAggiungere.setDataArrivo(lista.get(i).getDataFine());
+			daAggiungere.setAcquistato(lista.get(i).getAcquistato());
+			copia.add(daAggiungere);	
+		}
+		return copia;
+	}
+	
 
 	public int getIdVolo() {
 		return this.idVolo;
