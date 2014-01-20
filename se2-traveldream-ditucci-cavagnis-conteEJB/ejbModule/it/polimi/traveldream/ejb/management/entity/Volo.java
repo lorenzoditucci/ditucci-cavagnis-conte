@@ -145,12 +145,20 @@ public class Volo implements Serializable {
 	 * associazione many to many con Gift List
 	 */
 	
-		@ManyToMany(mappedBy="voli")
+		@ManyToMany(mappedBy="voli",cascade = CascadeType.PERSIST)
 		private List<GiftList> giftLists;
 		
 	/**
 	 * associazione con Pacchetto (volinpacchetto)
 	 */
-		@ManyToMany(mappedBy="voli")
+		@ManyToMany(mappedBy="voli", cascade = CascadeType.PERSIST)
 		private List<Pacchetto> pacchetti;
+
+	public List<Pacchetto> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<Pacchetto> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
 }

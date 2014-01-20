@@ -30,5 +30,7 @@ public interface CreaPacchettoMgr {
 			List<EscursioneDTO> escursioni);
 
 	public PacchettoDTO ottieniPacchettoDaConfermare() throws CloneNotSupportedException;
+
+	public boolean salvaPacchettoInDB();
 	
 }

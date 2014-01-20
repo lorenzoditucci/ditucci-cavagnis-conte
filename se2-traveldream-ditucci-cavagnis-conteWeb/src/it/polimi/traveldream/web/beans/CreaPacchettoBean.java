@@ -306,6 +306,11 @@ public class CreaPacchettoBean {
 		
 	}
 
+	
+	public String salvaPacchetto(){
+		creaPacchettoMgr.salvaPacchettoInDB();
+		return null;
+	}
 
 	private boolean giaContenuto() {
 		for(int i=0; i< getVoli().size(); i++)

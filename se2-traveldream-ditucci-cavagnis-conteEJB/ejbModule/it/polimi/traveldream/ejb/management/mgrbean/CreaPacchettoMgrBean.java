@@ -25,8 +25,11 @@ import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Citta;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
+import it.polimi.traveldream.ejb.management.entity.Pacchetto;
+import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 /*
@@ -304,7 +307,69 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	public PacchettoDTO ottieniPacchettoDaConfermare() throws CloneNotSupportedException {
 		return pacchettoInBean.clona();
 	}
+/*
+ * Salva il pacchetto nella persistenza dei dati
+ * */
+	@Override
+	public boolean salvaPacchettoInDB(){
+		Pacchetto newPacchetto = new Pacchetto();
+		newPacchetto.setNome(pacchettoInBean.getNome());
+		newPacchetto.setDescrizione(pacchettoInBean.getDescrizione());
+		newPacchetto.setDisponibilitaAttuale(pacchettoInBean.getDisponibilitaAttuale());
+		newPacchetto.setDisponibilitaMax(pacchettoInBean.getDisponibilitaMax());
+		newPacchetto.setDataInizio(pacchettoInBean.getDataInizio());
+		newPacchetto.setDataFine(pacchettoInBean.getDataFine());
+		newPacchetto.setCosto(pacchettoInBean.getCosto());
+		newPacchetto.setMail(pacchettoInBean.getMail());
+		//relations
+		newPacchetto.setCittaDestinazione(new ArrayList<Citta>());
+		newPacchetto.setVoli(new ArrayList<Volo>());
+		newPacchetto.setEscursioni(new ArrayList<Escursione>());
+		newPacchetto.setPernottiList(new ArrayList<Pernottamento>());
 
+		//persist
+		em.persist(newPacchetto);
+		
+		
+		//association
+		List<Volo> voli = new ArrayList<Volo>();
+		for(int i=0; i<pacchettoInBean.getVoli().size(); i++){
+			 TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
+		 	 List<Volo> listaVolo = queryRicerca.setParameter("idVolo", pacchettoInBean.getVoli().get(i).getIdVolo()).getResultList();
+		 	 //bidirectional
+		 	/* listaVolo.get(0).setPacchetti(new ArrayList<Pacchetto>());
+		 	 listaVolo.get(0).getPacchetti().add(newPacchetto);
+		 	 */
+		 	 voli.add(listaVolo.get(0));	
+		}
+		newPacchetto.getVoli().addAll(voli);
+		
+		
+		List<Escursione> escursioni = new ArrayList<Escursione>();
+		for(int i=0; i<pacchettoInBean.getEscursioni().size(); i++){
+			 TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursioneId", Escursione.class);
+		 	 List<Escursione> listaEscursione = queryRicerca.setParameter("idEscursione", pacchettoInBean.getEscursioni().get(i).getIdEscursione()).getResultList();
+		    
+		 	/* listaEscursione.get(0).setPacchetti(new ArrayList<Pacchetto>());
+		 	 listaEscursione.get(0).getPacchetti().add(newPacchetto);
+		 	 */
+		 	 escursioni.add(listaEscursione.get(0));	
+		}
+		
+		newPacchetto.getEscursioni().addAll(escursioni);
+		
+		
+		List<Citta> citta = new ArrayList<Citta>();
+		for(int i=0; i<pacchettoInBean.getCittaDestinazione().size(); i++){
+			 TypedQuery<Citta> queryRicerca = em.createNamedQuery("Citta.cercaCittaNome", Citta.class);
+		 	 List<Citta> listaCitta = queryRicerca.setParameter("nomeCitta", pacchettoInBean.getCittaDestinazione().get(i).getNome()).getResultList();
+		     citta.add(listaCitta.get(0));	
+		}
+		newPacchetto.getCittaDestinazione().addAll(citta);
+		
+		//manca pernottamento che sono da creare
+		return true;
+	}
 
 
 }
