@@ -71,9 +71,11 @@ public class Pacchetto implements Serializable {
 		
 		this.cittaDestinazione = Citta.copiaToCitta(p.getCittaDestinazione());
 		this.escursioni = Escursione.copiaToEscursione(p.getEscursioni());
-		this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
+		if(p.getGiftLists()!=null)
+			this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
 		this.voli = Volo.copiaToVolo(p.getVoli());
-		this.users = User.copiaToUser(p.getUsers());
+		if(p.getUsers()!=null)
+			this.users = User.copiaToUser(p.getUsers());
 		
 	}
 	
