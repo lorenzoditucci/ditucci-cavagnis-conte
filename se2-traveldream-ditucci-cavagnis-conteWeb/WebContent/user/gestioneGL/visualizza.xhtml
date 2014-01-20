@@ -71,7 +71,7 @@
   	<p:panel>
   	<h:form>
   		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel><br/>
-  		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchetti}">
+  		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchettiContenuti}">
 	  		<p:outputPanel>
 	  		<h:outputText value = "#{pacchetto.nome}"/><br/>
 	  		<p:outputLabel>Voli</p:outputLabel>

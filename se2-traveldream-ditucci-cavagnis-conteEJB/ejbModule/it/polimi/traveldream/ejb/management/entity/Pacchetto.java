@@ -218,15 +218,15 @@ public class Pacchetto implements Serializable {
 	 * connessione giftlist - Contiene
 	 */
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy= "pacchettiContenuti")
+	/*@JoinTable(
 			name="Contiene"
 			, joinColumns={
 					@JoinColumn(name="idPacchetto", nullable=false, referencedColumnName="idPacchetto")
 			}
 			, inverseJoinColumns={
 					@JoinColumn(name="idGiftList", nullable=false, referencedColumnName="idGiftList")
-			})
+			})*/
 	private List<GiftList> giftLists;
 	
 	/**
