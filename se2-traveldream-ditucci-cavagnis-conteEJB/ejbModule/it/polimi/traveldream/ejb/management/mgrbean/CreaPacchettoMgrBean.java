@@ -27,6 +27,7 @@ import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Citta;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
+import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
 import it.polimi.traveldream.ejb.management.entity.Pernottamento;
@@ -75,7 +76,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		this.pacchettoInBean.setDataFine(pacchetto.getDataFine());
 		//E' stato appena creato e quindi non l'ha ancora comprato nessuno
 		this.pacchettoInBean.setDisponibilitaAttuale(pacchetto.getDisponibilitaMax());
-		//il costo è ancora da calcolare
+		//il costo ÔøΩ ancora da calcolare
 		this.pacchettoInBean.setCosto(0.0);
 		this.pacchettoInBean.setMail(pacchetto.getMail());
 	}
@@ -118,7 +119,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			System.out.println(pacchettoInBean.getVoli().get(0).getCittaPartenza());
 			//setta costo nel pacchetto salvato nel bean stateful
 			this.pacchettoInBean.setCosto(pacchettoInBean.getCosto()+costoTotaleDeiVoli());
-			//copio città visitate nel pacchetto
+			//copio cittÔøΩ visitate nel pacchetto
 			copiaCittaInPacchettoBean();
 			
 			return true;
@@ -128,7 +129,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	}
 
 	/*
-	 * Copia le città nel pacchetto, la prima città è quella di partenza
+	 * Copia le cittÔøΩ nel pacchetto, la prima cittÔøΩ ÔøΩ quella di partenza
 	 * e le restanti sono quelle d'arrivo
 	 * */
 	private void copiaCittaInPacchettoBean() {
@@ -218,7 +219,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 
 	private boolean checkConsistenzaPacchettoPernottamenti(
 			List<PernottamentoDTO> pernottamenti) {
-		//controllo se ci sono tanti aerei quante città visitate
+		//controllo se ci sono tanti aerei quante cittÔøΩ visitate
 		if(pernottamenti.size()!=pacchettoInBean.getVoli().size()-1){
 			System.out.println("Non va bene la grandezza");
 			return false;	
@@ -267,7 +268,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 			List<EscursioneDTO> escursioni) {
 		/*coerenza con pacchetto*/
 		for(int i=0; i<escursioni.size(); i++){
-			/*se non esiste un pernottamento che include l'escursione allora non è coerente*/
+			/*se non esiste un pernottamento che include l'escursione allora non ÔøΩ coerente*/
 			if(!esisteUnHotelCoerenteAllEscursione(escursioni.get(i))){
 				return false;
 			}
@@ -325,6 +326,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		newPacchetto.setCittaDestinazione(new ArrayList<Citta>());
 		newPacchetto.setVoli(new ArrayList<Volo>());
 		newPacchetto.setEscursioni(new ArrayList<Escursione>());
+		newPacchetto.setGiftLists(new ArrayList<GiftList>());
 		
 		//persist
 		em.persist(newPacchetto);
