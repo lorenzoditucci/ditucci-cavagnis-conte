@@ -45,9 +45,9 @@
 		    <p:fieldset legend="#{gift.nome}" toggleable="true" toggleSpeed="500">
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
 		        <h:panelGrid columns="2" cellpadding="10">
-			        <ui:repeat var="pacchetto" value="#{gift.pacchetti}">
-			        	<h:outputLabel value="pacchetto - #{pacchetto.idPacchetto}" />
-			        	<h:outputLabel value="Prodotti Base contenuti non ancora acquistati" />
+			        <ui:repeat var="pacchetto" value="#{gift.pacchettiContenuti}">
+			        	<h:outputLabel value="pacchetto - #{pacchetto.idPacchetto}" /><br/>
+			        	<h:outputLabel value="Prodotti Base contenuti non ancora acquistati" /><br/>
 			        	<!-- VOLI CONTENUTI IN GIFT -->
 			        	<ui:repeat var="voli" value="#{pacchetto.voli}">
 			        		<h:outputLabel value="città Partenza: -#{voli.cittaPartenza}" />

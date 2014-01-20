@@ -96,6 +96,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
     		daAggiungere.setNome(listaPacchetti.get(i).getNome());
     		//manca la copia delle liste?!
     		
+    		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaPacchetti.get(i).getVoli()));
     		copia.add(daAggiungere);
     	}
 		return copia;

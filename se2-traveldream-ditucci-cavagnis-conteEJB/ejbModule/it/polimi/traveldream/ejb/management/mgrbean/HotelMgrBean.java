@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.HotelMgr;
-import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
-import it.polimi.traveldream.ejb.management.dto.VoloDTO;
-import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
-import it.polimi.traveldream.ejb.management.entity.Volo;
-
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBContext;
@@ -36,7 +31,7 @@ public class HotelMgrBean implements HotelMgr {
 		Hotel newHotel = new Hotel(hotel);
 		em.persist(newHotel); 
 		
-		/*Aggiungi cittˆ al db*/
+		/*Aggiungi citta' al db*/
 		CittaDTO cittaDaInserire = new CittaDTO();
 		cittaDaInserire.setNome(hotel.getCitta());
 		cittaMgrBean.save(cittaDaInserire);
