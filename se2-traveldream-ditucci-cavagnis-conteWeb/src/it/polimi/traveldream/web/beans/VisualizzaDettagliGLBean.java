@@ -32,7 +32,6 @@ public class VisualizzaDettagliGLBean {
 	
 	
 	public String dettagli(GiftListDTO giftList){
-		System.out.println("Funzione Dettagli");
 		this.setGiftList(giftList);
 		return "visualizza";
 	}
