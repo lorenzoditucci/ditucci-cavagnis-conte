@@ -41,7 +41,7 @@ public class Pernottamento implements Serializable {
 	@OneToOne(optional = false)
 	private Hotel hotel;
 	
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade=CascadeType.REMOVE) 	
 	private Pacchetto pacchetto;
 
 	public Pernottamento() {

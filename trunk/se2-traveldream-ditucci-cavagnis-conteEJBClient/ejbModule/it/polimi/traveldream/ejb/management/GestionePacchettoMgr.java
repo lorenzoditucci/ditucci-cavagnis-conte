@@ -11,5 +11,7 @@ import javax.ejb.Local;
 public interface GestionePacchettoMgr {
 
 	public PacchettoDTO cercaPacchettoId(int idPacchettoDaCercare);
+
+	public boolean eliminaPacchettoId(PacchettoDTO pacchetto);
 	
 }
