@@ -86,8 +86,13 @@
                 <h:outputText value="Presso: #{escursione.citta}"/><br/> 
                 <h:outputText value="Prezzo: #{escursione.costo}"/><br/>       	       	 
                 <br/>	  
-            </ui:repeat>  	       
+            </ui:repeat> 
+            
+            
+            <h:commandButton value="Conferma" action="#{creaPacchettoBean.salvaPacchetto()}"/>
+			       
 		</h:form>
+		
 		
 		
 		

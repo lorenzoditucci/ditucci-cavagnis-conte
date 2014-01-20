@@ -59,7 +59,7 @@ public class Citta implements Serializable {
 	 * associazione con Pacchetto - destinazione
 	 */
 	
-		@ManyToMany(mappedBy="cittaDestinazione")
+		@ManyToMany(mappedBy="cittaDestinazione", cascade = CascadeType.PERSIST)
 		private List<Pacchetto> pacchetti;
 		
 		public static List<Citta> copiaToCitta(List<CittaDTO> lista){

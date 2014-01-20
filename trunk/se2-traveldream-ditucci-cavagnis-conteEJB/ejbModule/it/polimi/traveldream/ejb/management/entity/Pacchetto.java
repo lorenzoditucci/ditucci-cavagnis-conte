@@ -67,6 +67,8 @@ public class Pacchetto implements Serializable {
 		this.dataFine = new Timestamp(p.getDataFine().getTime());
 		this.disponibilitaAttuale = p.getDisponibilitaAttuale();
 		this.disponibilitaMax = p.getDisponibilitaMax();
+		
+		
 		this.cittaDestinazione = Citta.copiaToCitta(p.getCittaDestinazione());
 		this.escursioni = Escursione.copiaToEscursione(p.getEscursioni());
 		this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
@@ -162,29 +164,42 @@ public class Pacchetto implements Serializable {
 	 * connessione con i voli (voliPacchetto)
 	 */
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 		@JoinTable(
 				name="VoliPacchetto"
 				, joinColumns={
-						@JoinColumn(name="idPacchetto", nullable=false)
+						@JoinColumn(name="idPacchetto", nullable=false, referencedColumnName="idPacchetto")
 				}
 				, inverseJoinColumns={
-						@JoinColumn(name="idVolo", nullable=false)
+						@JoinColumn(name="idVolo", nullable=false, referencedColumnName="idVolo")
 				})
 		private List<Volo> voli;
 	
+	public List<Volo> getVoli() {
+		return voli;
+	}
+
+	public List<Escursione> getEscursioni() {
+		return escursioni;
+	}
+
+	public List<Citta> getCittaDestinazione() {
+		return cittaDestinazione;
+	}
+
+
 	/**
 	 * connessione con escursioni (escursioniPacchetto)
 	 */
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 		@JoinTable(
 				name="EscursioniPacchetto"
 				, joinColumns={
-						@JoinColumn(name="idPacchetto", nullable=false)
+						@JoinColumn(name="idPacchetto", nullable=false, referencedColumnName="idPacchetto")
 				}
 				, inverseJoinColumns={
-						@JoinColumn(name="idEscursione", nullable=false)
+						@JoinColumn(name="idEscursione", nullable=false, referencedColumnName="idEscursione")
 				})
 		private List<Escursione> escursioni;
 	
@@ -192,28 +207,28 @@ public class Pacchetto implements Serializable {
 	 * connessione giftlist - Contiene
 	 */
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 			name="Contiene"
 			, joinColumns={
-					@JoinColumn(name="idPacchetto", nullable=false)
+					@JoinColumn(name="idPacchetto", nullable=false, referencedColumnName="idPacchetto")
 			}
 			, inverseJoinColumns={
-					@JoinColumn(name="idGiftList", nullable=false)
+					@JoinColumn(name="idGiftList", nullable=false, referencedColumnName="idGiftList")
 			})
 	private List<GiftList> giftLists;
 	
 	/**
 	 * connessione citta' - destinazione
 	 */
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 			name="Destinazione"
 			, joinColumns={
-					@JoinColumn(name="idPacchetto", nullable=false)
+					@JoinColumn(name="idPacchetto", nullable=false, referencedColumnName="idPacchetto")
 			}
 			, inverseJoinColumns={
-					@JoinColumn(name="idCitta", nullable=false)
+					@JoinColumn(name="idCitta", nullable=false, referencedColumnName="idCitta")
 			})
 	private List<Citta> cittaDestinazione;
 	
@@ -221,11 +236,31 @@ public class Pacchetto implements Serializable {
 	 * associazione con User - acquista
 	 */
 	
-		@ManyToMany(mappedBy="pacchetti")
+		@ManyToMany(mappedBy="pacchetti", cascade = CascadeType.ALL)
 		private List<User> users;
 		
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Pernottamento> pernottiList;
+
+	public List<Pernottamento> getPernottiList() {
+		return pernottiList;
+	}
+
+	public void setPernottiList(List<Pernottamento> pernottiList) {
+		this.pernottiList = pernottiList;
+	}
+
+	public void setVoli(List<Volo> voli) {
+		this.voli=voli;
+	}
+
+	public void setEscursioni(List<Escursione> escursioni) {
+		this.escursioni=escursioni;
+	}
+
+	public void setCittaDestinazione(List<Citta> citta) {
+		this.cittaDestinazione=citta;
+	}
 		
 	
 }

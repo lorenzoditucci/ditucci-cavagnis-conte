@@ -143,13 +143,21 @@ public class Escursione implements Serializable {
 	 * associazione many to many con Gift List
 	 */
 	
-		@ManyToMany(mappedBy="escursioni")
+		@ManyToMany(mappedBy="escursioni", cascade = CascadeType.PERSIST)
 		private List<GiftList> giftLists;
 		
 	/**
 	 * associazione con Pacchetto - escursioniPacchetto
 	 */
 
-		@ManyToMany(mappedBy="escursioni")
+		@ManyToMany(mappedBy="escursioni", cascade = CascadeType.PERSIST)
 		private List<Pacchetto> pacchetti;
+
+	public List<Pacchetto> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<Pacchetto> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
 }
