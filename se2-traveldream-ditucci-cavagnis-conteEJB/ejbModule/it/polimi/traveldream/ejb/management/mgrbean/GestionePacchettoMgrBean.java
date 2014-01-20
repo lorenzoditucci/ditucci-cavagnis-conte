@@ -47,4 +47,21 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 
 	}
 
+	@Override
+	public boolean eliminaPacchettoId(PacchettoDTO pacchetto) {
+		if(pacchetto.getDisponibilitaAttuale()==pacchetto.getDisponibilitaMax()){
+			/*Il pacchetto non è mai stato acquistato*/
+			Pacchetto daRimuovere;
+			daRimuovere = em.find(Pacchetto.class, pacchetto.getIdPacchetto());
+			for(int i=0; i<pacchetto.getPernotti().size();i++){
+				em.remove(em.find(Pernottamento.class, pacchetto.getPernotti().get(i).getIdPernottametto()));
+			}	
+			em.remove(daRimuovere);
+			return true;
+		}else{
+			return false;
+			}
+		
+	}
+
 }

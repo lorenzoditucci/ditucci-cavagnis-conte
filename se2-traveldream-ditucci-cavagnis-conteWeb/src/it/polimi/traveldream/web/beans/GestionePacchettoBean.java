@@ -45,6 +45,16 @@ public class GestionePacchettoBean {
 		}	
 	}
 	
+	public String eliminaPacchetto(){
+		if(gestionePacchettoMgr.eliminaPacchettoId(pacchetto)){
+			
+			return "index.xhtml";
+		}else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non è possibile eliminare", "Non presente"));
+		    return "";
+		}
+		
+	}
 
 	public int getIdPacchettoDaCercare() {
 		return idPacchettoDaCercare;

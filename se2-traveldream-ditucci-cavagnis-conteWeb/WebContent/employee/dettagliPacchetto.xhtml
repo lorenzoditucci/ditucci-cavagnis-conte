@@ -31,6 +31,7 @@
 		
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
+    
         Riepilogo dati principali pacchetto:  <br/>	    
         <h:form>
         	<h:outputText value="Nome: #{gestionePacchettoBean.pacchetto.nome}"/><br/>
@@ -86,10 +87,14 @@
                 <h:outputText value="Presso: #{escursione.citta}"/><br/> 
                 <h:outputText value="Prezzo: #{escursione.costo}"/><br/>       	       	 
                 <br/>	  
-            </ui:repeat>  
+            </ui:repeat> 
+            
+            <h:commandButton value="Elimina" action="#{gestionePacchettoBean.eliminaPacchetto()}"></h:commandButton>
+		 
 
    </h:form>
-		
+   
+   
 		
 		
 		

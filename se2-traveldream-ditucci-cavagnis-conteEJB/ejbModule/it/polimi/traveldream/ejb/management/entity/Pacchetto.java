@@ -167,7 +167,7 @@ public class Pacchetto implements Serializable {
 	 * connessione con i voli (voliPacchetto)
 	 */
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 		@JoinTable(
 				name="VoliPacchetto"
 				, joinColumns={
@@ -195,7 +195,7 @@ public class Pacchetto implements Serializable {
 	 * connessione con escursioni (escursioniPacchetto)
 	 */
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 		@JoinTable(
 				name="EscursioniPacchetto"
 				, joinColumns={
@@ -233,7 +233,7 @@ public class Pacchetto implements Serializable {
 	/**
 	 * connessione citta' - destinazione
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 			name="Destinazione"
 			, joinColumns={
@@ -251,7 +251,7 @@ public class Pacchetto implements Serializable {
 		@OneToMany(cascade = CascadeType.ALL)
 		private List<User> users;
 		
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.REMOVE)
 	private List<Pernottamento> pernottiList;
 
 	public List<Pernottamento> getPernottiList() {
