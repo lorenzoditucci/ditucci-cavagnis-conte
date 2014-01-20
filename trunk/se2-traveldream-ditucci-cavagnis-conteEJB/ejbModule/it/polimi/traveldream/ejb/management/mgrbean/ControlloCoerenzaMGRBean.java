@@ -75,7 +75,7 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	
     	if(g == null)
     		throw new NullPointerException();
-    	pacchetti = g.getPacchetti();
+    	pacchetti = g.getPacchettiContenuti();
     	
     	Collections.sort(pacchetti, PacchettoDTO.ordinaPerDataInizio);
     	

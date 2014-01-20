@@ -71,13 +71,35 @@
   	<p:panel>
   	<h:form>
   		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel><br/>
-  		<p:outputPanel>
-		<p:dataTable var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchetti}">
-			
-			<h:outputText value = "#{pacchetto.nome}"/>
-			
-		</p:dataTable>
-		</p:outputPanel>
+  		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchetti}">
+	  		<p:outputPanel>
+	  		<h:outputText value = "#{pacchetto.nome}"/><br/>
+	  		<p:outputLabel>Voli</p:outputLabel>
+			<p:dataTable var="volo" value="#{pacchetto.voli}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Id"/>
+					</f:facet>
+					<h:outputText value = "#{volo.idVolo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Città Partenza"/>
+					</f:facet>
+					<h:outputText value="#{volo.cittaPartenza}"/>
+				</p:column>
+			</p:dataTable>
+			<p:dataTable var="pernottamento" value="#{pacchetto.pernotti}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Id"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.idHotel}"/>
+				</p:column>
+			</p:dataTable>
+			</p:outputPanel>
+		</ui:repeat>
 	</h:form>
     </p:panel>
     </div>

@@ -59,7 +59,6 @@ public class GiftListMgrBean implements GiftListMgr {
     		daAggiungere.setMailCliente(listaGiftList.get(i).getMailCliente());
     		daAggiungere.setHotels(HotelMgrBean.copiaListaToDTO(listaGiftList.get(i).getHotels()));
     		daAggiungere.setEscursioni(EscursioneMgrBean.copiaListaToDTO(listaGiftList.get(i).getEscursioni()));
-    		daAggiungere.setPacchetti(PacchettoMgrBean.copiaListaQuery(listaGiftList.get(i).getPacchetti()));
     		daAggiungere.setPacchettiContenuti(PacchettoMgrBean.copiaListaQuery(listaGiftList.get(i).getPacchettiContenuti()));
     		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaGiftList.get(i).getVoli()));
     		
@@ -81,12 +80,10 @@ public class GiftListMgrBean implements GiftListMgr {
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
     	ArrayList<Pacchetto> lista = new ArrayList<Pacchetto>();
     	
-    	lista.addAll(gl.getPacchetti());
-    	
+    	lista.addAll(gl.getPacchettiContenuti());
     	lista.add(p);
-    	gl.setPacchetti(lista);
     	gl.setPacchettiContenuti(lista);
-    	em.merge(gl);    	
+    	em.merge(gl);
     }
 
 }

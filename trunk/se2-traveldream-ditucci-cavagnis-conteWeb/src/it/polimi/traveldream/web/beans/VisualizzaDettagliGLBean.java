@@ -45,7 +45,7 @@ public class VisualizzaDettagliGLBean {
 	}
 	
 	public List<PacchettoDTO> getPacchetti(){
-		return giftList.getPacchetti();
+		return giftList.getPacchettiContenuti();
 	}
 
 }

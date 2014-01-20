@@ -34,11 +34,7 @@ public class GiftListDTO {
 	@NotEmpty
 	private List<PacchettoDTO> pacchettiContenuti;
 	
-	@NotEmpty
-	private List<PacchettoDTO> pacchetti;
-
 	public GiftListDTO(){
-		this.pacchetti = new ArrayList<PacchettoDTO>();
 		this.hotels = new ArrayList<HotelDTO>(); 
 		this.pacchettiContenuti = new ArrayList<PacchettoDTO>();
 		this.nome = new String();
@@ -101,16 +97,7 @@ public class GiftListDTO {
 
 	public void setPacchettiContenuti(List<PacchettoDTO> pacchettiContenuti) {
 		this.pacchettiContenuti = pacchettiContenuti;
-	}
-
-	public List<PacchettoDTO> getPacchetti() {
-		return pacchetti;
-	}
-
-	public void setPacchetti(List<PacchettoDTO> pacchetti) {
-		this.pacchetti = pacchetti;
-	}
-	
+	}	
 	
 
 }
