@@ -104,7 +104,9 @@ public class PacchettoMgrBean implements pacchettoMgr {
 	@Override
 	public ArrayList<PacchettoDTO> prendiAcquistati(String emailUtente){
 		System.out.println("Sono dentro prendiAcquistati - emailUtente = "+emailUtente);
-		
+		/**
+		 * fittizia, la query va cambiata!!
+		 */
 		TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("cercaDaEmail", Pacchetto.class);
 		queryRicerca.setParameter("email", emailUtente);
 		List<Pacchetto> listaPacchetti = queryRicerca.getResultList();
