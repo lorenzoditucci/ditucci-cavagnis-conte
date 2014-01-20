@@ -93,7 +93,7 @@ public class CercaPacchettoBean {
 		}
 		setRisultato(mgr.cercaPacchettiParam(dataPartenza,dataRitorno,costo, nomePacchetto));
 		
-		return "risultatiRicercaPacchetti?faces-redirect=true";
+		return "/user/risultatiRicercaPacchetti.xhtml";
 	}
 
 
