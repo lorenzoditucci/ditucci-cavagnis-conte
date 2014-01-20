@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>HomePage</title>
+</h:head>
+<h:body>
+<h:outputStylesheet library="css" name="resources/style.css"  />
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="300" resizable="true">  
+    	
+    	<h:link outcome="user/index">
+    		<img src="resources/login.png" alt="login" width="20" height="20" />
+    	</h:link>
+    	<h:button outcome="user/index" value="Accedi"/> <br />
+        <h:button outcome="employee/index" value="Area Impiegati" /> <br /> 
+		<br />
+		<h:button value="Registrati" outcome="register" /> 
+		<br />
+		<h:form id="cercaGiftList">
+		<p:panelGrid columns="1" style="width=100%">
+			<b>Gift List Area</b>
+		    <f:facet name="giftList">
+		        Gift List Area
+		    </f:facet>
+		
+		    <h:inputText id="codiceGiftList" value="#{cercaGiftListBean.idRicerca}" label="codiceGistList" />
+		    <p:message for="codiceGiftList"></p:message>
+		    
+		    <f:facet name="footer">
+		        <h:commandButton value="Cerca" action="#{cercaGiftListBean.cerca()}"/>
+		    </f:facet>
+		</p:panelGrid>
+		</h:form>
+		
+		
+		
+		
+	
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+        Il Gruppo Travel Dream opera nella distribuzione turistica attraverso un unico marchio costituisc il più grande Network Italiano di Agenzie di viaggi e turismo, specializzato nella vendita di pacchetti turistici organizzati. Presenti capillarmente con circa 700 punti vendita sul territorio nazionale, rappresentiamo oggi il riferimento per i viaggi e le vacanze degli Italiani, offrendo soluzioni capaci di far fronte a tutte le esigenze dei Clienti grazie a competenze che poggiano su 40 anni di consolidata esperienza. Assortimento, sicurezza, competenza e convenienza hanno permesso di movimentare, anche nel 2011, oltre 2 milioni di italiani per viaggi e vacanze.
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>
+

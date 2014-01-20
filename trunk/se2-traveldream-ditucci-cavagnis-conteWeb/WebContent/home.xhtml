@@ -4,54 +4,67 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <h:head>
-	<title>HomePage</title>
+<h:outputStylesheet name="css/style.css" />
+	<title>Homepage</title>
+	
 </h:head>
 <h:body>
-<h:outputStylesheet library="css" name="resources/style.css"  />
+<div id="background" />
+<div id='contenitore-geneale'>
 
-<p:layout fullPage="true">  
-	<p:layoutUnit position="north" size="100" resizable="true">  
-        Travel Dream
-    </p:layoutUnit>  
-    
-    <p:layoutUnit position="west" size="300" resizable="true">  
-    	
-    	<h:link outcome="user/index">
-    		<img src="resources/login.png" alt="login" width="20" height="20" />
-    	</h:link>
-    	<h:button outcome="user/index" value="Accedi"/> <br />
-        <h:button outcome="employee/index" value="Area Impiegati" /> <br /> 
-		<br />
-		<h:button value="Registrati" outcome="register" /> 
-		<br />
-		<h:form id="cercaGiftList">
-		<p:panelGrid columns="1" style="width=100%">
-			<b>Gift List Area</b>
-		    <f:facet name="giftList">
-		        Gift List Area
-		    </f:facet>
-		
-		    <h:inputText id="codiceGiftList" value="#{cercaGiftListBean.idRicerca}" label="codiceGistList" />
-		    <p:message for="codiceGiftList"></p:message>
-		    
-		    <f:facet name="footer">
-		        <h:commandButton value="Cerca" action="#{cercaGiftListBean.cerca()}"/>
-		    </f:facet>
-		</p:panelGrid>
-		</h:form>
-		
-		
-		
-		
+	<div id="banner-top">	
+		<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+	</div>
+	<div id='contenitore-form'>
+		<div id='contenitore-form-testo'>
+		<br/><b>Registrati!</b><br/><br/>
+		<h:form>
+			
+				<h:panelGrid columns="3" id="regGrid" style="margin:auto;">
+					<h:outputLabel for="email">Email:</h:outputLabel>
+					<p:inputText id="email" value="#{registerBean.user.email}" />
+					<p:message for="email" />
 	
-  </p:layoutUnit>  
-    <p:layoutUnit position="center">  
-        Il Gruppo Travel Dream opera nella distribuzione turistica attraverso un unico marchio costituisc il più grande Network Italiano di Agenzie di viaggi e turismo, specializzato nella vendita di pacchetti turistici organizzati. Presenti capillarmente con circa 700 punti vendita sul territorio nazionale, rappresentiamo oggi il riferimento per i viaggi e le vacanze degli Italiani, offrendo soluzioni capaci di far fronte a tutte le esigenze dei Clienti grazie a competenze che poggiano su 40 anni di consolidata esperienza. Assortimento, sicurezza, competenza e convenienza hanno permesso di movimentare, anche nel 2011, oltre 2 milioni di italiani per viaggi e vacanze.
-    </p:layoutUnit>  
-    
-</p:layout>    
+					<h:outputLabel for="firstName">First name:</h:outputLabel>
+					<p:inputText id="firstName" value="#{registerBean.user.firstName}" />
+					<p:message for="firstName" />
+	
+					<h:outputLabel for="lastName">Last name:</h:outputLabel>
+					<p:inputText id="lastName" value="#{registerBean.user.lastName}" />
+					<p:message for="lastName" />
+	
+					<h:outputLabel for="address">Address:</h:outputLabel>
+					<p:inputText id="address" value="#{registerBean.user.address}" />
+					<p:message for="address" />
+	
+					<h:outputLabel for="password">Password:</h:outputLabel>
+					<p:password id="password" value="#{registerBean.user.password}"
+						feedback="true" match="pwd2" label="Password"/>
+					<p:message for="password" />
+	
+					<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
+					<p:password id="pwd2" label="Confirm Password" value="#{registerBean.user.password}"/>
+				</h:panelGrid>
+				<p:commandButton value="Registrati" update="regGrid"
+					action="#{registerBean.register()}" />
+				<p:commandButton value="Pulisci" type="reset" />
+				<p:button value="Indietro" outcome="home"/>
+					
+	
+			
+		</h:form>
+		<div id="menu" class="container">
+		    <ul>
+		        <li><a href="user/index.xhtml" accesskey="1" title="">Accedi</a></li>
+		        <li><a href="giftList.xhtml" accesskey="2" title="">GiftList Area</a></li>
+		        <li><a href="employee/index.xhtml" accesskey="3" title="">Impiegati</a></li>
+		
+		    </ul>
+		</div>
+	
+		</div>
+	</div>
+</div>
 </h:body>           
 </html>
-
