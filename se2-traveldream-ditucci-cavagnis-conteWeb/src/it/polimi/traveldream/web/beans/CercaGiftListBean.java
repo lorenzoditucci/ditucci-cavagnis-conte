@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Pattern;
 
 /**
  * Bean utilizzato per cercare i dati all'interno del database giftlist
@@ -33,6 +34,8 @@ public class CercaGiftListBean {
 	/**
 	 * parametro che passo contente l'id della gift list da cercare.
 	 */
+	@Pattern(regexp="[0123456789]+",
+		    message="Il codice giftList deve essere un numero!")
 	private String idRicerca; //stringa per passare
     /**
      * Default constructor. 

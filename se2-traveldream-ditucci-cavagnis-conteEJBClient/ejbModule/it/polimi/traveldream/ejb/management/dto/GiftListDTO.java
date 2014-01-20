@@ -6,11 +6,14 @@ package it.polimi.traveldream.ejb.management.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class GiftListDTO {
 
 	@NotEmpty
+	
 	private int idGiftList;
 
 	@NotEmpty
