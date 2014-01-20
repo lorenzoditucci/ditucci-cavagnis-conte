@@ -14,6 +14,7 @@ import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -52,10 +53,20 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	 * La query di default e' stata leggermente modificata in modo da permettere l'ordine inverso
     	 * 
     	 */
+    	String queryRicerca = "SELECT p "
+    			+ "FROM Pacchetto p WHERE p.mail NOT IN("
+    			+ "SELECT i.email "
+    			+ "FROM  Impiegato i )";
+    	TypedQuery<Pacchetto> q = em.createQuery(queryRicerca, Pacchetto.class);
+    	//q.setParameter("tipo", "impiegato");
+    	List<Pacchetto> listaPacchetti = q.getResultList();
+    	/**
+    	 * OLD METHOD
+    	 
     	TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("Pacchetto.findAll", Pacchetto.class);
     	List<Pacchetto> listaPacchetti =  queryRicerca.getResultList();
 		
-    	
+    	*/
     	
     	/**
     	 * ritorno direttamente la copia della lista di pacchetti -risultato della query-
