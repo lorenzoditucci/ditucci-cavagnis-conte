@@ -112,7 +112,6 @@ public class GiftList implements Serializable {
 		this.nome = giftList.getNome();
 		this.escursioni = Escursione.copiaToEscursione(giftList.getEscursioni());
 		this.hotels = Hotel.copiaToHotel(giftList.getHotels());
-		this.pacchetti = Pacchetto.copiaToPacchetto(giftList.getPacchetti());
 		this.pacchettiContenuti = Pacchetto.copiaToPacchetto(giftList.getPacchettiContenuti());
 		this.voli = Volo.copiaToVolo(giftList.getVoli());	
 	}
@@ -183,22 +182,5 @@ public class GiftList implements Serializable {
 	public void setPacchettiContenuti(List<Pacchetto> pacchettiContenuti) {
 		this.pacchettiContenuti = pacchettiContenuti;
 	}
-
-	public List<Pacchetto> getPacchetti() {
-		return pacchetti;
-	}
-
-	public void setPacchetti(List<Pacchetto> pacchetti) {
-		this.pacchetti = pacchetti;
-	}
-
-
-	/**
-	 * associazione many to many con Gift List
-	 */
-	
-		@ManyToMany(mappedBy="giftLists")
-		private List<Pacchetto> pacchetti;
-
 
 }
