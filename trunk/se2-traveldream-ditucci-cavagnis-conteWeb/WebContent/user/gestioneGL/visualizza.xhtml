@@ -71,7 +71,7 @@
   	<h:form>
     
 		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel>
-		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.getPacchetti()}">
+		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.pacchetti}">
 			<h:outputText>#{pacchetto.nome}</h:outputText>
 		</ui:repeat>
 		
