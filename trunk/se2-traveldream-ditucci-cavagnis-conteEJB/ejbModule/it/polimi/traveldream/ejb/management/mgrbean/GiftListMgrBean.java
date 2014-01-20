@@ -81,8 +81,10 @@ public class GiftListMgrBean implements GiftListMgr {
     	System.out.println(p.getIdPacchetto());
     	List<Pacchetto> lista = new ArrayList<Pacchetto>();
     	lista.addAll(gl.getPacchettiContenuti());
-    	lista.add(p);
-    	gl.setPacchettiContenuti(lista);
+    	if(!lista.contains(p)){
+    		lista.add(p);
+    		gl.setPacchettiContenuti(lista);
+    	}
     	em.merge(gl);
     }
 

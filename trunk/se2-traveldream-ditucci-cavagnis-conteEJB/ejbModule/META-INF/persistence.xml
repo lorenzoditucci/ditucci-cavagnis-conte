@@ -5,8 +5,6 @@
 		<class>it.polimi.traveldream.ejb.management.entity.Acquista</class>
 		<class>it.polimi.traveldream.ejb.management.entity.AcquistaPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Citta</class>
-		<class>it.polimi.traveldream.ejb.management.entity.Contiene</class>
-		<class>it.polimi.traveldream.ejb.management.entity.ContienePK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Escursione</class>
 		<class>it.polimi.traveldream.ejb.management.entity.EscursioniAcquistate</class>
 		<class>it.polimi.traveldream.ejb.management.entity.EscursioniAcquistatePK</class>
