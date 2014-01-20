@@ -44,13 +44,13 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
     	 * devo anche controllare che il booleano di acquistato sia ad uno?
     	 */
         giftList.getVoli().add(volo);
-        em.merge(giftList);
+        em.persist(giftList);
     }
 
 	@Override
 	public void registraAcquisto(EscursioneDTO escursione, GiftListDTO giftList) {
 		giftList.getEscursioni().add(escursione);
-		em.merge(escursione);
+		em.persist(escursione);
 		
 	}
 

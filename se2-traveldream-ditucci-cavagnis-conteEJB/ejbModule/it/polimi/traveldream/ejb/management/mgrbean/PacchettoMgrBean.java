@@ -58,7 +58,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	String queryRicerca = "SELECT p "
     			+ "FROM Pacchetto p WHERE p.mail IN("
     			+ "SELECT i.email "
-    			+ "FROM  Impiegato i )";
+    			+ "FROM  Impiegato i ) ORDER BY p.idPacchetto DESC";
     	TypedQuery<Pacchetto> q = em.createQuery(queryRicerca, Pacchetto.class);
     	//q.setParameter("tipo", "impiegato");
     	List<Pacchetto> listaPacchetti = q.getResultList();
