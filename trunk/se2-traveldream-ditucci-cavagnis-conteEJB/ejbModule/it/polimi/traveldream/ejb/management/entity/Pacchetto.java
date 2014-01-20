@@ -74,8 +74,8 @@ public class Pacchetto implements Serializable {
 		if(p.getGiftLists()!=null)
 			this.giftLists = GiftList.copiaToGiftList(p.getGiftLists());
 		this.voli = Volo.copiaToVolo(p.getVoli());
-		if(p.getUsers()!=null)
-			this.users = User.copiaToUser(p.getUsers());
+		if(p.getUser()!=null)
+			this.users.add(User.copiaToUser(p.getUser()));
 		
 	}
 	
@@ -247,7 +247,7 @@ public class Pacchetto implements Serializable {
 	 * associazione con User - acquista
 	 */
 	
-		@ManyToMany(mappedBy="pacchetti", cascade = CascadeType.ALL)
+		@OneToMany(cascade = CascadeType.ALL)
 		private List<User> users;
 		
 	@OneToMany(cascade = CascadeType.ALL)

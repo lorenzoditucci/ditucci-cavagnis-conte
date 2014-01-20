@@ -3,6 +3,8 @@ package it.polimi.traveldream.ejb.management.dto;
  * done
  */
 
+import java.util.ArrayList;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,6 +26,9 @@ public class UserDTO {
 	
 	@NotEmpty
     private String password;
+	
+	@NotEmpty
+	private ArrayList<PacchettoDTO> pacchettiAcquistati;
      
     public String getFirstName() {
         return firstName;
@@ -64,6 +69,14 @@ public class UserDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public ArrayList<PacchettoDTO> getPacchettiAcquistati() {
+		return pacchettiAcquistati;
+	}
+
+	public void setPacchettiAcquistati(ArrayList<PacchettoDTO> pacchettiAcquistati) {
+		this.pacchettiAcquistati = pacchettiAcquistati;
+	}
 
 }
 
