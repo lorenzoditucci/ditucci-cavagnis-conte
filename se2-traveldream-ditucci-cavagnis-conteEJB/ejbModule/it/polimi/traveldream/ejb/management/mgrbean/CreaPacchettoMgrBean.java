@@ -7,10 +7,12 @@ import java.util.List;
 import java.lang.Object;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -311,6 +313,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 /*
  * Salva il pacchetto nella persistenza dei dati
  * */
+	@Remove
 	@Override
 	public boolean salvaPacchettoInDB(){
 		Pacchetto newPacchetto = new Pacchetto();
@@ -377,5 +380,10 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		return true;
 	}
 
-
+	@PreDestroy
+	public void exit(){
+		System.out.println("Sessione staful crea pacchetto terminata");
+	}
+	
+	
 }
