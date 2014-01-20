@@ -23,6 +23,7 @@ public class GestionePacchettoBean {
 	
 	private PacchettoDTO pacchetto;
 	
+	private String avviso;
 	
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -55,6 +56,11 @@ public class GestionePacchettoBean {
 		}
 		
 	}
+	
+	public String inviaComunicazione(){
+		System.out.println(avviso);
+		return null;
+	}
 
 	public int getIdPacchettoDaCercare() {
 		return idPacchettoDaCercare;
@@ -62,6 +68,16 @@ public class GestionePacchettoBean {
 
 	public void setIdPacchettoDaCercare(int idPacchettoDaCercare) {
 		this.idPacchettoDaCercare = idPacchettoDaCercare;
+	}
+
+
+	public String getAvviso() {
+		return avviso;
+	}
+
+
+	public void setAvviso(String avviso) {
+		this.avviso = avviso;
 	}
 
 }
