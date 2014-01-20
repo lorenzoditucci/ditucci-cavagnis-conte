@@ -203,6 +203,15 @@ public class Pacchetto implements Serializable {
 				})
 		private List<Escursione> escursioni;
 	
+	public List<GiftList> getGiftLists() {
+		return giftLists;
+	}
+
+	public void setGiftLists(List<GiftList> giftLists) {
+		this.giftLists = giftLists;
+	}
+
+
 	/**
 	 * connessione giftlist - Contiene
 	 */
