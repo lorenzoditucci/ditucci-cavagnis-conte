@@ -14,12 +14,14 @@ import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.bean.SessionScoped;
 import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+import com.sun.xml.ws.runtime.dev.Session;
 
 /**
  * Session Bean implementation class PacchettoMgrBean
