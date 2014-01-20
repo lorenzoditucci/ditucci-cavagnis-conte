@@ -6,86 +6,68 @@
       xmlns:p="http://primefaces.org/ui"
       >
 <h:head>
+<h:outputStylesheet name="css/style.css" />
 	<title>Clienti - Pacchetti Acquistati</title>
 </h:head>
 <h:body>
-<h:outputStylesheet library="css" name="../resources/style.css"  />
+<div id='background' />
+
 
 #{pacchettoBean.cercaAcquistati(userBean.mail)}
-<p:layout fullPage="true">  
-	<p:layoutUnit position="north" size="100" resizable="true">  
-        Travel Dream - Clienti - Pacchetti Acquistati
-    </p:layoutUnit>  
-    
-    <p:layoutUnit position="west" size="200" resizable="true">  
-    	<h:form>
-	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
-	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" />
-		</h:form>
-		<h:button value="Visualizza Pacchetti Acquistati" outcome="pacchettiAcquistati"></h:button>
-		
-  </p:layoutUnit>  
-    <p:layoutUnit position="center">  
-        PACCHETTI ACQUISTATI
-        
-        <div id='contenitore-pacchetto'>
-        	<div id="pacchetto-titolo">
-        	titolo del pacchetto
-        	</div>
-        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
-        </div>
-        <div class='contenitore-pacchetto'>
-        	<div class="pacchetto-titolo">
-        	titolo del pacchetto
-        	</div>
-        	<div class="pacchetto-descrizione">descrizione del pacchetto</div>
-        </div>
-        <!-- PROVA -->
-			       <h:form id="form">
-		
-			<p:dataGrid var="pack" value="#{pacchettoBean.risultato}" columns="3"
-				rows="12" paginator="true"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="9,12,15">
-		
-		        <p:panel header="#{pack.idPacchetto}" style="text-align:center">
-		            <h:panelGrid columns="1" style="width:100%">
-		                <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/> 
-		
-		                <h:outputText value="#{pack.mail}" />
-		
-		                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
-		                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" /> 
-		                    <f:setPropertyActionListener value="#{pacchettoBean}" 
-		                            target="#{pacchettoBean.risultato}" />
-		                </p:commandLink>
-		            </h:panelGrid>
-		        </p:panel>
-		
-			</p:dataGrid>
-			
-			<p:dialog header="Car Detail" widgetVar="carDialog" modal="true">
-				<p:outputPanel id="carDetail" style="text-align:center;">
-				
-					<p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
-					
-					<h:panelGrid  columns="2" cellpadding="5">
-						<h:outputLabel for="modelNo" value="Model No: " />
-						<h:outputText id="modelNo" value="#{tableBean.selectedCar.model}" />
-						
-						<h:outputLabel for="year" value="Year: " />
-						<h:outputText id="year" value="#{tableBean.selectedCar.year}" />
-						
-						<h:outputLabel for="color" value="Color: " />
-						<h:outputText id="color" value="#{tableBean.selectedCar.color}" style="color:#{tableBean.selectedCar.color}"/>
-					</h:panelGrid>
-				</p:outputPanel>
-			</p:dialog>
-		
-		</h:form>
-		
-		<!-- Prova 2 -->
+<div id="contenitore-generale">
+	<div id="banner-top">
+	</div>
+	<div id="menu-sinistra">
+
 		<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
+	    </h:form>
+	    	<h:link  outcome="gestioneGL/gestione">
+	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
+	    		- Gestione Gifti List
+	    	</h:link><br/>
+	    	<h:link  outcome="pacchettiAcquistati.xhtml">
+	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+	    		- Pacchetti Acquistati
+	    	</h:link><br/>
+	    	
+	    	<h:form id="pacchettiAcquistati" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+    
+			<p:panel>
+			
+				<h:panelGrid columns="1" id="pacchettoGrid">
+		
+				
+	         
+	
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+					
+					
+				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+				<h:message for="data-inizio"></h:message>
+				
+				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+				<h:message for="data-fine"></h:message>
+				
+				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+	            <h:message for="costo-pacchetto"></h:message>
+				
+				
+			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+	       </h:panelGrid>
+	       </p:panel>
+		</h:form>
+	</div>
+	<div id='contenitore-centrale'>
+	<div id='contenitore-form-testo'>
+    
+	<h:form style="padding : 30px;">
 			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
 		
 		    <p:growl id="growl" showDetail="true" />
@@ -94,17 +76,18 @@
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
 		        <h:panelGrid columns="2" cellpadding="10">
 		            
-		            <h:outputText value="#{pacchetto.nome} - Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.
-		                          In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,
-		                          killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows."/>;
+		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
+		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
+		            	<h:outputText value="città escursione - #{esc.citta}" />
+		            </ui:repeat>
+		        <h:commandButton action="#{pacchettoBean.visualizzaPacchetto(pacchetto.idPacchetto)}" value="Visualizza Pacchetto" />
+		     
 		        </h:panelGrid>
 		    </p:fieldset>
 			</ui:repeat>
-		</h:form>
-		
-			
-    </p:layoutUnit>  
-    
-</p:layout>    
+		</h:form>  
+		</div>
+</div>
+</div>    
 </h:body>           
 </html>
