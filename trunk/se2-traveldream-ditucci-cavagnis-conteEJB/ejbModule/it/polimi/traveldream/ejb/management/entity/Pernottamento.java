@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb.management.entity;
 
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -35,6 +37,11 @@ public class Pernottamento implements Serializable {
 	private Pacchetto pacchetto;
 
 	public Pernottamento() {
+	}
+	
+	public Pernottamento(PernottamentoDTO pernottamento) {
+		this.dataInizio=pernottamento.getDataInizio();
+		this.dataFine=pernottamento.getDataFine();
 	}
 
 	public int getIdPernottametto() {
