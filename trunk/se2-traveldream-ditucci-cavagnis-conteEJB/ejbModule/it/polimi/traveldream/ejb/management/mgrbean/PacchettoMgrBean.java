@@ -56,7 +56,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	 * 
     	 */
     	String queryRicerca = "SELECT p "
-    			+ "FROM Pacchetto p WHERE p.mail NOT IN("
+    			+ "FROM Pacchetto p WHERE p.mail IN("
     			+ "SELECT i.email "
     			+ "FROM  Impiegato i )";
     	TypedQuery<Pacchetto> q = em.createQuery(queryRicerca, Pacchetto.class);
