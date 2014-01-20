@@ -77,7 +77,7 @@ public class GiftListMgrBean implements GiftListMgr {
     
     @Override
     public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO){    	
-    	GiftList gl = new GiftList(glDTO);
+    	GiftList gl = em.find(GiftList.class, glDTO.getIdGiftList());
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
     	ArrayList<Pacchetto> lista = new ArrayList<Pacchetto>();
     	
@@ -86,9 +86,7 @@ public class GiftListMgrBean implements GiftListMgr {
     	lista.add(p);
     	gl.setPacchetti(lista);
     	gl.setPacchettiContenuti(lista);
-    	em.merge(gl);
-    	
-    	
+    	em.merge(gl);    	
     }
 
 }

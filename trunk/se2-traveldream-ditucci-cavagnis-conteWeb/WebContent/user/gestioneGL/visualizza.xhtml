@@ -68,15 +68,18 @@
     <div id = "contenitore-centrale">
     
     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+  	<p:panel>
   	<h:form>
-    
-		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel>
-		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.pacchetti}">
-			<h:outputText>#{pacchetto.nome}</h:outputText>
-		</ui:repeat>
-		
+  		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel><br/>
+  		<p:outputPanel>
+		<p:dataTable var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchetti}">
+			
+			<h:outputText value = "#{pacchetto.nome}"/>
+			
+		</p:dataTable>
+		</p:outputPanel>
 	</h:form>
-    
+    </p:panel>
     </div>
 </div>
 </h:body>           
