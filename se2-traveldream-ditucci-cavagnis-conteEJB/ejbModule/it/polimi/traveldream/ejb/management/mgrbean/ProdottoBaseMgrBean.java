@@ -43,14 +43,36 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
     	 * aggiungo il volo alla lista e faccio update della giftList
     	 * devo anche controllare che il booleano di acquistato sia ad uno?
     	 */
+    	controllaAcquisto(volo);
         giftList.getVoli().add(volo);
-        em.persist(giftList);
+        em.merge(giftList);
     }
+    
+    /**
+     * controlla se il volo registrato e' gia' stato acquistato e nel caso lo registra
+     * @param volo
+     */
+	private void controllaAcquisto(VoloDTO volo) {
+		if(volo.getAcquistato()==0){
+			volo.setAcquistato(1);
+			em.merge(volo);
+		}
+		
+	}
 
 	@Override
 	public void registraAcquisto(EscursioneDTO escursione, GiftListDTO giftList) {
+		controllaAcquisto(escursione);
 		giftList.getEscursioni().add(escursione);
-		em.persist(escursione);
+		em.merge(escursione);
+		
+	}
+
+	private void controllaAcquisto(EscursioneDTO escursione) {
+		if(escursione.getAcquistato()==0){
+			escursione.setAcquistato(1);
+			em.merge(escursione);
+		}
 		
 	}
 
