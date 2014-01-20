@@ -14,6 +14,7 @@ import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
+import javax.ejb.Remove;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -306,10 +307,12 @@ public class CreaPacchettoBean {
 		
 	}
 
-	
 	public String salvaPacchetto(){
 		creaPacchettoMgr.salvaPacchettoInDB();
-		return null;
+		
+		//distruggi session scope
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index.xhtml";
 	}
 
 	private boolean giaContenuto() {
