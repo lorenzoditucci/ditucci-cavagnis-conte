@@ -12,12 +12,15 @@ import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import org.jboss.weld.context.ejb.Ejb;
 
 /**
  * Session Bean implementation class GiftListMgrBean
@@ -35,6 +38,8 @@ public class GiftListMgrBean implements GiftListMgr {
      * Default constructor. 
      */
 	
+	@EJB
+	private ControlloCoerenzaMGRBean controlloCoerenzaMGRBean;
 	
 	
     public GiftListMgrBean() {
@@ -81,6 +86,10 @@ public class GiftListMgrBean implements GiftListMgr {
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
     	List<Pacchetto> lista = new ArrayList<Pacchetto>();
     	lista.addAll(gl.getPacchettiContenuti());
+    	List<PacchettoDTO> listaDTO = new ArrayList<PacchettoDTO>(glDTO.getPacchettiContenuti());
+    	listaDTO.add(pDTO);
+    	controlloCoerenzaMGRBean.controllaGiftList(glDTO);
+    	
     	if(!lista.contains(p)){
     		lista.add(p);
     		gl.setPacchettiContenuti(lista);

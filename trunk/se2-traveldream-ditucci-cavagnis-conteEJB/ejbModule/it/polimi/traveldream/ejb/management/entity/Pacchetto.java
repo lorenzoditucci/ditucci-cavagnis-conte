@@ -2,6 +2,9 @@ package it.polimi.traveldream.ejb.management.entity;
 
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate;
+
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
 
 import java.io.Serializable;
 
