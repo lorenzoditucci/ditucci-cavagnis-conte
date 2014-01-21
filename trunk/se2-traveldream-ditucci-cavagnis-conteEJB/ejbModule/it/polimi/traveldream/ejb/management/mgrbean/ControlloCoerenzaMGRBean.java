@@ -60,6 +60,15 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	Collections.sort(voli, VoloDTO.ordinaPerDataPartenza);
     	Collections.sort(pernottamenti, PernottamentoDTO.ordinaPerDataInizio);
     	
+    	// controllo che la data partenza sia lo stesso giorno della data inizio
+    	
+    	if(!(stessoGiornoMeseAnno(toCalendar(voli.get(0).getDataPartenza()), toCalendar(p.getDataInizio()))) &&
+    			stessoGiornoMeseAnno(toCalendar(voli.get(voli.size()-1).getDataArrivo()), toCalendar(p.getDataFine())))
+    	{
+    		throw new CoerenzaException("La partenza del primo volo non coincide con l'inizio del pacchetto e/o l'arrivo dell'ultimo"
+    				+ "volo non coincide con la fine del pacchetto");
+    	}
+    	
     	controllaVoli(voli);
     	controllaPernottamenti(voli, pernottamenti);
     	controllaEscursioni(p.getEscursioni(), pernottamenti);
@@ -130,8 +139,11 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     }
     
     private void controllaVoli(List<VoloDTO> voli) throws CoerenzaException{
-    	if (voli.size()<2)
+    	if (voli.size()<2){
     		throw new CoerenzaException("Il pacchetto deve contenere almeno due voli");
+    	}
+    	
+    	
     	
     	//Controllo che non ci siano voli sovrapposti
     	
