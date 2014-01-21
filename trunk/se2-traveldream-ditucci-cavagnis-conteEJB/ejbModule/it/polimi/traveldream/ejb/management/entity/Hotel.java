@@ -52,17 +52,18 @@ public class Hotel implements Serializable {
 	@Column(nullable=false, length=45)
 	private String nome;
 	
-	
+	/*
 	//bi-directional many-to-many association to GiftList
 	@ManyToMany(mappedBy="hotels")
 	private List<GiftList> giftLists;
-	
+	/*
 	/**
 	 * associazione many to many con Gift List
 	 */
-	
+	/*
 	@ManyToMany(mappedBy="hotels")
 	private List<GiftList> pacchetti;
+	*/
 
 	public Hotel() {
 	}
@@ -149,7 +150,7 @@ public class Hotel implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	/*
 	public List<GiftList> getGiftLists() {
 		return this.giftLists;
 	}
@@ -157,5 +158,5 @@ public class Hotel implements Serializable {
 	public void setGiftLists(List<GiftList> giftLists) {
 		this.giftLists = giftLists;
 	}
-
+*/
 }

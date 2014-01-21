@@ -85,7 +85,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
 		ArrayList<PacchettoDTO> copia = new ArrayList<PacchettoDTO>();
 		for(int i=0; i<listaPacchetti.size();i++){
     		PacchettoDTO daAggiungere = new PacchettoDTO();
-    		daAggiungere.setIdPacchetto(listaPacchetti.get(i).getIdPacchetto());
+    		/*daAggiungere.setIdPacchetto(listaPacchetti.get(i).getIdPacchetto());
     		daAggiungere.setCosto(listaPacchetti.get(i).getCosto());
     		daAggiungere.setDataFine(listaPacchetti.get(i).getDataFine());
     		daAggiungere.setDataInizio(listaPacchetti.get(i).getDataInizio());
@@ -96,7 +96,9 @@ public class PacchettoMgrBean implements pacchettoMgr {
     		daAggiungere.setNome(listaPacchetti.get(i).getNome());
     		//manca la copia delle liste?!
     		
-    		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaPacchetti.get(i).getVoli()));
+    		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaPacchetti.get(i).getVoli()));*/
+    		daAggiungere = listaPacchetti.get(i).convertiInDTO();
+    		
     		copia.add(daAggiungere);
     	}
 		return copia;

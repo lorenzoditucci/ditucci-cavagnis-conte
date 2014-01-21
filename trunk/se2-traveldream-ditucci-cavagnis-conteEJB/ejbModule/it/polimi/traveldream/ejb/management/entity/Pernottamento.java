@@ -47,9 +47,16 @@ public class Pernottamento implements Serializable {
 	public Pernottamento() {
 	}
 	
+	/**
+	 * Costruttore che, preso ingresso un pernottamentoDTO, crea un pernottamento uguale.
+	 */
+	
 	public Pernottamento(PernottamentoDTO pernottamento) {
+		this.idPernottametto = pernottamento.getIdPernottametto();
 		this.dataInizio=pernottamento.getDataInizio();
 		this.dataFine=pernottamento.getDataFine();
+		this.hotel = new Hotel(pernottamento.getHotel());
+		this.pacchetto = new Pacchetto(pernottamento.getPacchetto());
 	}
 
 	public int getIdPernottametto() {
@@ -115,7 +122,19 @@ public class Pernottamento implements Serializable {
 				copia.add(daAggiungere);	
 			}
 			return copia;
-
+		
+	}
+	
+	public static List<Pernottamento> copiaToPernottamento(List<PernottamentoDTO> lista){
+		List<Pernottamento> copia = new ArrayList<Pernottamento>();
+		
+		for(int i = 0; i<lista.size(); i++){
+			Pernottamento  daAggiungere = new Pernottamento(lista.get(i));
+			
+			copia.add(daAggiungere);
+		}
+		
+		return copia; 
 	}
 	
 	
