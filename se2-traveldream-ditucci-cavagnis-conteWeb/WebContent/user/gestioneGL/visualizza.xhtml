@@ -75,31 +75,95 @@
 	  		<p:outputPanel>
 	  		<h:outputText value = "#{pacchetto.nome}"/><br/>
 	  		<p:outputLabel>Voli</p:outputLabel>
+	  		
+	  		<!-- mostro i dettagli dei voli -->
 			<p:dataTable var="volo" value="#{pacchetto.voli}">
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Id"/>
-					</f:facet>
-					<h:outputText value = "#{volo.idVolo}"/>
-				</p:column>
-				
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value = "Città Partenza"/>
 					</f:facet>
 					<h:outputText value="#{volo.cittaPartenza}"/>
 				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.cittaArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataArrivo}"/>
+				</p:column>
 			</p:dataTable>
+			<!-- Mostro i dettagli dei pernottamenti -->
 			<p:outputLabel>Pernottamenti</p:outputLabel>
 			<p:dataTable var="pernottamento" value="#{visualizzaDettagliGLBean.getPernottamentiDiPacchetto(pacchetto)}">
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Id"/>
+						<h:outputText value="Nome Hotel"/>
 					</f:facet>
-					<h:outputText value = "#{pernottamento.hotel.idHotel}"/>
+					<h:outputText value = "#{pernottamento.hotel.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data inizio Prenotazione"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataInizio}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fine"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataFine}"/>
 				</p:column>
 			</p:dataTable>
+			
+			<!--  Mostro i dettagli delle escursioni -->
+			<p:outputLabel>Escursioni</p:outputLabel>
+			<p:dataTable var="escursione" value = "#{pacchetto.escursioni}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.citta}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrizione"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.descrizione}"/>
+				</p:column>
+			
+			</p:dataTable>
 			</p:outputPanel>
+			<p:commandButton value="Rimuovi Pacchetto"/>
 		</ui:repeat>
 	</h:form>
     </p:panel>
