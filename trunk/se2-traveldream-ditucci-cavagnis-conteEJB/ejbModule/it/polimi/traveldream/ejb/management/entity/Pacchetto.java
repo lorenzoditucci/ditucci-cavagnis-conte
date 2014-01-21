@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate;
+
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,16 +255,7 @@ public class Pacchetto implements Serializable {
 		@OneToMany(cascade = CascadeType.ALL)
 		private List<User> users;
 		
-	@OneToMany(cascade=CascadeType.REMOVE)
-	private List<Pernottamento> pernottiList;
-
-	public List<Pernottamento> getPernottiList() {
-		return pernottiList;
-	}
-
-	public void setPernottiList(List<Pernottamento> pernottiList) {
-		this.pernottiList = pernottiList;
-	}
+	
 
 	public void setVoli(List<Volo> voli) {
 		this.voli=voli;
@@ -292,7 +287,8 @@ public class Pacchetto implements Serializable {
 		pacchetto.setEscursioni(Escursione.copiaToEscursioneDTO(this.getEscursioni()));
 		//citta
 		pacchetto.setCittaDestinazione(Citta.copiaToCittaDTO(this.getCittaDestinazione()));
-	
+		
+		
 		return pacchetto;
 	}
 		
