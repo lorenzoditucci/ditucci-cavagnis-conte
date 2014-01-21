@@ -45,9 +45,16 @@ public class VisualizzaDettagliGLMgrBean implements VisualizzaDettagliGLMgr {
 	@Override 
 	public List<PernottamentoDTO> cercaPernottamentiDaPacchetto(PacchettoDTO pacchetto){
 		TypedQuery<Pernottamento> queryRicerca = em.createNamedQuery("Pernottamento.cercaPernottamentoIdPacchetto", Pernottamento.class);
+		if(pacchetto == null){
+			System.out.println("nullo");
+			return null;
+		}else{
+			System.out.println(pacchetto.getIdPacchetto());
+		
 		List<Pernottamento> listaPernottamenti = queryRicerca.setParameter("idPacchetto", pacchetto.getIdPacchetto()).getResultList();
 		
 		return Pernottamento.copiaToPernottamentoDTO(listaPernottamenti);
+		}
 	}
 	
 }

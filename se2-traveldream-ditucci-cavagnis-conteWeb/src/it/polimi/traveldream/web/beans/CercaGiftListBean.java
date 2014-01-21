@@ -1,9 +1,13 @@
 package it.polimi.traveldream.web.beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
+import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
+import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -27,6 +31,7 @@ public class CercaGiftListBean {
 	@EJB
 	private CercaGiftListMgr cercaMGR;
 	//private GiftListDTO ricercaGiftList;//CHE MINCHIA E'?
+	@EJB private VisualizzaDettagliGLMgr visualizzaDettagliGLMgr;
 	/**
 	 * qui ci salvo il risultato della ricerca
 	 */
@@ -64,6 +69,11 @@ public class CercaGiftListBean {
 		}	
     }
 
+    public List<PernottamentoDTO> getPernottamentiDiPacchetto(PacchettoDTO pacchetto){
+		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
+		pernottamenti = visualizzaDettagliGLMgr.cercaPernottamentiDaPacchetto(pacchetto);
+		return pernottamenti;
+	}
 
 	public String getIdRicerca() {
 		return idRicerca;
