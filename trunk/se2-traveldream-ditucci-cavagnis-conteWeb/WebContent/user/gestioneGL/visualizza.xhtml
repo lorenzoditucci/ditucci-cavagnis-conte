@@ -91,7 +91,7 @@
 				</p:column>
 			</p:dataTable>
 			<p:outputLabel>Pernottamenti</p:outputLabel>
-			<p:dataTable var="pernottamento" value="#{pacchetto.pernotti}">
+			<p:dataTable var="pernottamento" value="#{visualizzaDettagliGLBean.getPernottamentiDiPacchetto(pacchetto)}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Id"/>
