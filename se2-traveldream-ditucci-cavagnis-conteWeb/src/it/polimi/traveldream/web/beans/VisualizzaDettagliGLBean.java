@@ -1,11 +1,13 @@
 package it.polimi.traveldream.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,6 +27,7 @@ public class VisualizzaDettagliGLBean {
 	private VisualizzaDettagliGLMgr visualizzaDettagliGLMgrMgr;
 
 	private GiftListDTO giftList;
+	
 	
 	public VisualizzaDettagliGLBean(){
 		this.giftList = new GiftListDTO();
@@ -46,6 +49,12 @@ public class VisualizzaDettagliGLBean {
 	
 	public List<PacchettoDTO> getPacchetti(){
 		return giftList.getPacchettiContenuti();
+	}
+	
+	public List<PernottamentoDTO> getPernottamentiDiPacchetto(PacchettoDTO pacchetto){
+		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
+		pernottamenti = visualizzaDettagliGLMgrMgr.cercaPernottamentiDaPacchetto(pacchetto);
+		return pernottamenti;
 	}
 
 }
