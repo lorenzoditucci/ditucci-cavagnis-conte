@@ -93,6 +93,18 @@ public class Pacchetto implements Serializable {
 		return copia;
 	}
 
+	
+	@OneToMany(cascade=CascadeType.REMOVE)
+	private List<Pernottamento> pernottiList;
+			
+	public List<Pernottamento> getPernottiList() {
+	return pernottiList;
+		}
+	
+	public void setPernottiList(List<Pernottamento> pernottiList) {
+	this.pernottiList = pernottiList;
+	}
+	
 	public int getIdPacchetto() {
 		return this.idPacchetto;
 	}
