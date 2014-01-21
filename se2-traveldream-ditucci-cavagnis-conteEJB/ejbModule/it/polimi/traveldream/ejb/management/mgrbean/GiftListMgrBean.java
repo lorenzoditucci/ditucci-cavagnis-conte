@@ -79,11 +79,24 @@ public class GiftListMgrBean implements GiftListMgr {
     public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO){    	
     	GiftList gl = em.find(GiftList.class, glDTO.getIdGiftList());
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
-    	System.out.println(p.getIdPacchetto());
     	List<Pacchetto> lista = new ArrayList<Pacchetto>();
     	lista.addAll(gl.getPacchettiContenuti());
     	if(!lista.contains(p)){
     		lista.add(p);
+    		gl.setPacchettiContenuti(lista);
+    	}
+    	em.merge(gl);
+    }
+    
+    @Override
+    public void rimuovi(PacchettoDTO pDTO, GiftListDTO glDTO){
+    	GiftList gl = em.find(GiftList.class, glDTO.getIdGiftList());
+    	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
+    	List<Pacchetto> lista = new ArrayList<Pacchetto>();
+    	
+    	lista.addAll(gl.getPacchettiContenuti());
+    	if(lista.contains(p)){
+    		lista.remove(p);
     		gl.setPacchettiContenuti(lista);
     	}
     	em.merge(gl);
