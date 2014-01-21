@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>HomePage</title>
+</h:head>
+<h:body>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
+    	<h:form>
+		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		
+		<h:form id="cercaPacchettoID">
+			<h:outputLabel for="id-pacchetto">Cerca pacchetto:</h:outputLabel>
+			<h:inputText id="id-pacchetto" value="#{gestionePacchettoBean.idPacchettoDaCercare}" />
+	   
+	    <h:commandButton value="Cerca" action="#{gestionePacchettoBean.cercaPacchetto()}" update="cercaPacchettoID"/>
+		</h:form>
+		
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="prodottobase/aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="prodottobase/cercaprodottobase"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+    	
+    	 <h:form id="modificaPacchettoForm">  
+  
+		<p:panel header="Dati del pacchetto">
+		
+			<h:panelGrid columns="3" id="pacchettoGrid">
+			
+			<h:outputLabel for="nome">Nome:</h:outputLabel>
+			<h:inputText id="nome" value="#{gestionePacchettoBean.pacchetto.nome}" />
+		    <h:message for="nome"></h:message>
+		    
+		    <h:outputLabel for="descrizione">Descrizione:</h:outputLabel>
+			<h:inputText id="descrizione" value="#{gestionePacchettoBean.pacchetto.descrizione}" />
+		    <h:message for="descrizione"></h:message>
+		    
+		    <h:outputLabel for="disponibilita-max">Disponibilità max:</h:outputLabel> 
+            <h:inputText id="disponibilita-max" value="#{gestionePacchettoBean.pacchetto.disponibilitaMax}" />
+            <h:message for="disponibilita-max"></h:message>
+            
+            <h:outputLabel for="disponibilita-attuale">Disponibilità attuale:</h:outputLabel> 
+            <h:outputLabel id="disponibilita-attuale" value="#{gestionePacchettoBean.pacchetto.disponibilitaAttuale}" />
+            <h:message for="disponibilita-attuale"></h:message>
+            
+            <h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+			<p:calendar value="#{gestionePacchettoBean.pacchetto.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy" />  
+			<h:message for="data-inizio"></h:message>
+			
+			<h:outputLabel for="data-fine">Data di Ritorno:</h:outputLabel>
+			<p:calendar value="#{gestionePacchettoBean.pacchetto.dataFine}" id="data-fine" pattern="MM/dd/yyyy" />
+			<h:message for="data-fine"></h:message>
+			
+			<h:outputLabel for="costo">Costo:</h:outputLabel> 
+            <h:outputLabel id="costo" value="#{gestionePacchettoBean.pacchetto.costo}" />
+            <h:message for="costo"></h:message>
+        </h:panelGrid>
+       </p:panel>
+       
+      	Voli contenuti nel pacchetto
+       <p:outputPanel id="voli">  
+        <p:dataTable id="voliTable" value="#{gestionePacchettoBean.pacchetto.voli}" var="volo">  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Id" />  
+                </f:facet>  
+                <h:outputText value="#{volo.idVolo}" />  
+            </p:column>  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Città partenza" />  
+                </f:facet>  
+                <h:outputText value="#{volo.cittaPartenza}" />  
+            </p:column>  
+            
+            
+             <p:column>  
+               <f:facet name="header">   
+                    <h:outputText value="Città arrivo" />  
+                </f:facet>  
+                <h:outputText value="#{volo.cittaArrivo}" />  
+            </p:column> 
+  
+  			<p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Compagnia" />  
+                </f:facet>  
+                <h:outputText value="#{volo.compagnia}" />  
+            </p:column> 
+            
+            <p:column>  
+               <f:facet name="header">   
+                    <h:outputText value="Data partenza: " />  
+                </f:facet>  
+                <h:outputText value="#{volo.dataPartenza}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Data arrivo: " />  
+                </f:facet>  
+                <h:outputText value="#{volo.dataArrivo}" />  
+            </p:column> 
+            
+              <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Costo: " />  
+                </f:facet>  
+                <h:outputText value="#{volo.costo}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Acquistato: " />  
+                </f:facet>  
+                <h:outputText value="#{volo.acquistato}" />  
+            </p:column>
+
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Operazione" />  
+                </f:facet>  
+                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:voli" process=":modificaPacchettoForm:voli">  
+                    <p:collector value="#{volo}"  
+                                 removeFrom="#{gestionePacchettoBean.pacchetto.voli}" />  
+                </p:commandLink>  
+            </p:column>  
+  
+        </p:dataTable>  
+    </p:outputPanel> 
+    
+   Pernottamenti contenuti nel pacchetto 
+    <p:outputPanel id="pernottamenti"> 
+        <p:dataTable id="pernottamentoTable" value="#{gestionePacchettoBean.pacchetto.pernotti}" var="pernottamento">  
+ 			<p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Id" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.idHotel}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Nome" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.nome}" />  
+            </p:column> 
+            
+             <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Indirizzo" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.indirizzo}" />  
+            </p:column>  
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Citta" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.hotel.citta}" />  
+            </p:column> 
+            
+             <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Da" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.dataInizio}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="A" />  
+                </f:facet>  
+                <h:outputText value="#{pernottamento.dataFine}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Operazione" />  
+                </f:facet>  
+                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:pernottamenti" process=":modificaPacchettoForm:pernottamenti">  
+                    <p:collector value="#{pernottamento}"  
+                                 removeFrom="#{gestionePacchettoBean.pacchetto.pernotti}" />  
+                </p:commandLink>  
+            </p:column>      
+        </p:dataTable>  
+ </p:outputPanel>  
+ 
+ Escursioni contenute nel pacchetto 
+ <p:outputPanel id="escursioni">  
+        <p:dataTable id="escursioniTable" value="#{gestionePacchettoBean.pacchetto.escursioni}" var="escursione">  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Id" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.idEscursione}" />  
+            </p:column>  
+  
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Nome" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.nome}" />  
+            </p:column>  
+            
+            
+               <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Descrizione" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.descrizione}" />  
+            </p:column>  
+            
+  
+  			<p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Città" />  
+                </f:facet>  
+                <h:outputText value="#{escursione.citta}" />  
+            </p:column> 
+            
+            <p:column>  
+               <f:facet name="header">   
+                    <h:outputText value="Da: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.dataInizio}" />  
+            </p:column> 
+            
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="A: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.dataFine}" />  
+            </p:column> 
+            
+              <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Costo: " />  
+                </f:facet>  
+                <h:outputText value="#{escursione.costo}" />  
+            </p:column> 
+
+            <p:column>  
+                <f:facet name="header">   
+                    <h:outputText value="Operazione" />  
+                </f:facet>  
+                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:escursioni" process=":modificaPacchettoForm:escursioni">  
+                    <p:collector value="#{escursione}"  
+                                 removeFrom="#{gestionePacchettoBean.pacchetto.escursioni}" />  
+                </p:commandLink>  
+            </p:column>  
+  
+        </p:dataTable>  
+    </p:outputPanel> 
+ 
+	</h:form>
+	
+    
+    </p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>
+
+
