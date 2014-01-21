@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management;
 
+import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 

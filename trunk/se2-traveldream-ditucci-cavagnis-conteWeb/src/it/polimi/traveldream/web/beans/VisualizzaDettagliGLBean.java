@@ -25,7 +25,9 @@ public class VisualizzaDettagliGLBean {
 	
 	@EJB
 	private VisualizzaDettagliGLMgr visualizzaDettagliGLMgrMgr;
-
+	@EJB
+	private GiftListMgr glMgr;
+	
 	private GiftListDTO giftList;
 	
 	
@@ -55,6 +57,11 @@ public class VisualizzaDettagliGLBean {
 		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
 		pernottamenti = visualizzaDettagliGLMgrMgr.cercaPernottamentiDaPacchetto(pacchetto);
 		return pernottamenti;
+	}
+	
+	public String rimuoviPacchetto(PacchettoDTO p) {
+		glMgr.rimuovi(p,this.giftList);
+		return "gestione";
 	}
 
 }

@@ -49,4 +49,5 @@ public class VisualizzaDettagliGLMgrBean implements VisualizzaDettagliGLMgr {
 		
 		return Pernottamento.copiaToPernottamentoDTO(listaPernottamenti);
 	}
+	
 }
