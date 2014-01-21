@@ -88,6 +88,13 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	
     	Collections.sort(pacchetti, PacchettoDTO.ordinaPerDataInizio);
     	
+    	//Informazioni per il debug
+    	
+    	for(int i =0; i<pacchetti.size();i++){
+    		System.out.println("Posizione " + i);
+    		System.out.println("Id pacchetto" + pacchetti.get(i).getIdPacchetto());
+    		System.out.println("Data Inizio :" + pacchetti.get(i).getDataInizio());
+    	}
     	if(pacchetti.size() > 1){
     		for (int i = 0; i < pacchetti.size() -1;i++){
     			if(pacchetti.get(i).getDataFine().after(pacchetti.get(i+1).getDataFine()))
