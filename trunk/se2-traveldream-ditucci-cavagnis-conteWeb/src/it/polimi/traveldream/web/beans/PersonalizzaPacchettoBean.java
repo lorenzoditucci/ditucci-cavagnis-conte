@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
@@ -51,5 +52,14 @@ public class PersonalizzaPacchettoBean {
 		return;
 	}
 	
+	public void rimuoviPernottamento(PernottamentoDTO pernottamento){
+		this.pacchetto.getPernotti().remove(pernottamento);
+		return;
+	}
+	
+	public void rimuoviEscursione(EscursioneDTO escursione){
+		this.pacchetto.getEscursioni().remove(escursione);
+		return;
+	}
 	
 }
