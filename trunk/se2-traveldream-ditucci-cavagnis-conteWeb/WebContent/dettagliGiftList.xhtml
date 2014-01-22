@@ -49,9 +49,47 @@
 	  		<p:outputPanel>
 	  		<h:outputText value = "Pacchetto - #{pacchetto.nome}"/><br/>
 	  		<p:outputLabel>Voli</p:outputLabel>
-	  		
-	  		<!-- mostro i dettagli dei voli -->
-			<p:dataTable var="volo" value="#{pacchetto.voli}">
+	  		<!--  dettagli dei voli acquistati -->
+	  		<h:outputText value="Acquistati" />
+			<p:dataTable var="volo" value="#{cercaGiftListBean.risultatiVoliAcquistati}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Città Partenza"/>
+					</f:facet>
+					<h:outputText value="#{volo.cittaPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.cittaArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Azione" />
+					</f:facet>
+					<h:outputText value="Già Acquistato" />
+				</p:column>
+			</p:dataTable>
+			<h:outputText value="Voli Non Ancora Acquistati" />
+	  		<!-- mostro i dettagli dei voli non acquistati-->
+			<p:dataTable var="volo" value="#{cercaGiftListBean.risultatiVoliLiberi}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value = "Città Partenza"/>
@@ -87,7 +125,7 @@
 					<h:commandButton value="Acquista Volo" action="#{prodottoBaseBean.acquistaProdottoBaseVolo(volo,giftlist)}" />
 				</p:column>
 			</p:dataTable>
-			<!-- Mostro i dettagli dei pernottamenti -->
+			<!-- Mostro i dettagli dei pernottamenti-->
 			<p:outputLabel>Pernottamenti</p:outputLabel>
 			<p:dataTable var="pernottamento" value="#{cercaGiftListBean.getPernottamentiDiPacchetto(pacchetto)}">
 				<p:column>
@@ -112,7 +150,7 @@
 				</p:column>
 			</p:dataTable>
 			
-			<!--  Mostro i dettagli delle escursioni -->
+			<!--  Mostro i dettagli delle escursioni DA METTERE A POSTO-->
 			<p:outputLabel>Escursioni</p:outputLabel>
 			<p:dataTable var="escursione" value = "#{pacchetto.escursioni}">
 				<p:column>
