@@ -67,7 +67,67 @@
 </div>
 <div id='contenitore-centrale'>
 	<div id='contenitore-form-testo'>
-    	<p:outputLabel value = "#{personalizzaPacchettoBean.pacchetto.nome}"/>
+		<h:form>
+			<p:outputLabel value="#{personalizzaPacchettoBean.pacchetto.nome}"/>
+			<p:outputPanel>
+				<p:outputLabel>Voli contenuti nel pacchetto</p:outputLabel>
+				<p:dataTable var="volo" value="#{personalizzaPacchettoBean.pacchetto.voli}">
+					<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Città Partenza"/>
+					</f:facet>
+					<h:outputText value="#{volo.cittaPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.cittaArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataArrivo}"/>
+				</p:column>
+				</p:dataTable>
+				
+				<p:outputLabel>Pernottamenti</p:outputLabel>
+				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.getPernottamenti()}">
+					<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data inizio Prenotazione"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataInizio}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fine"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataFine}"/>
+				</p:column>
+				</p:dataTable>
+			
+			</p:outputPanel>
+		</h:form>
+    	
 	</div>
 </div>
 </div>
