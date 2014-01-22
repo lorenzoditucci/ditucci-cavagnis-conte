@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.GestionePacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
@@ -85,6 +86,20 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 	@Override
 	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare) {
 		return creaPacchettoMgr.cercaEscursione(idEscursioneDaCercare);
+	}
+
+	@Override
+	public boolean controllaCoerenza(PacchettoDTO pacchetto) throws CoerenzaException {
+		
+		try{
+		creaPacchettoMgr.controlloPacchetto(pacchetto);
+		return true;
+		}
+		catch(CoerenzaException e){
+			System.out.println(e.getMessaggi().get(0));
+		return false;
+		}
+		
 	}
 
 }

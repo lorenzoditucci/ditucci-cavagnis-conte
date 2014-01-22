@@ -55,7 +55,9 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	
     	if(p == null)
     		throw new NullPointerException();
+    	
     	voli = p.getVoli();
+    	pernottamenti = p.getPernotti();
     	
     	Collections.sort(voli, VoloDTO.ordinaPerDataPartenza);
     	Collections.sort(pernottamenti, PernottamentoDTO.ordinaPerDataInizio);
@@ -95,8 +97,7 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     				throw new CoerenzaException("Due pacchetti si sovrappongono");
     			}
     		}
-    	}
-    	
+    	} 	
     	return;
     }
     

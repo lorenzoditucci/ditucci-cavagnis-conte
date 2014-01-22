@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.GestionePacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
@@ -198,8 +199,16 @@ public class GestionePacchettoBean {
 		
 		ricalcolaCosto();
 		ricalcolaCittaDestinazione();
-	
-		System.out.println(getPacchetto().getCosto());
+		
+		System.out.println(getPacchetto().getVoli().size());
+		System.out.println(getPacchetto().getPernotti().size());
+		
+		
+			if(gestionePacchettoMgr.controllaCoerenza(this.pacchetto)==false)
+			{
+			System.out.println("Non coerente");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Modifiche non coerenti", "Modifica non coerente"));	
+			}
 		
 		return null;
 	}
