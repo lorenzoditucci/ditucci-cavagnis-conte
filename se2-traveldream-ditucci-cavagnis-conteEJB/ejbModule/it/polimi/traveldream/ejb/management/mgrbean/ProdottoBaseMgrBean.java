@@ -11,6 +11,8 @@ import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
+import it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati;
+import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.VoliAcquistatiProva;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
@@ -124,8 +126,38 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
     	
     	
     }
+    @Override
+	public void registraAcquisto(PernottamentoDTO pernottamentoDaAcquistare,GiftListDTO giftListDaAcquistare, String nomeAcquirente,Timestamp dataAcquisto) {
+		Pernottamento p = new Pernottamento();
+		p = em.find(Pernottamento.class, pernottamentoDaAcquistare.getIdPernottametto());
+		controllaAcquisto(p);
+		
+		GiftList g = new GiftList();
+		g = em.find(GiftList.class, giftListDaAcquistare.getIdGiftList());
+		
+		if(!g.getPernottamenti().contains(p)){
+			PernottamentiAcquistati acquistato = new PernottamentiAcquistati();
+			acquistato.setDataAcquisto(dataAcquisto);
+			acquistato.setIdGiftList(g.getIdGiftList());
+			acquistato.setIdPernottamento(pernottamentoDaAcquistare.getIdPernottametto());
+			acquistato.setNomeAcquirente(nomeAcquirente);
+			em.persist(acquistato);
+			g.getPernottamenti().add(acquistato);
+			em.merge(g);
+			
+		}
+		
+	}
     
-    /**
+    private void controllaAcquisto(Pernottamento p) {
+		if(p.getHotel().getAcquistato()==0){
+			p.getHotel().setAcquistato((byte)1);
+			em.merge(p);
+		}
+		
+	}
+
+	/**
      * controlla se il volo registrato e' gia' stato acquistato e nel caso lo registra
      * @param v2
      */
@@ -159,6 +191,8 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
 		 * COMPLETARE- ERRORE DB ESISTE HOTELS, NOI QUA PARLIAMO DI PERNOTTAMENTI!!!
 		 */
 	}
+
+	
     
 
 }

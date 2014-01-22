@@ -22,7 +22,7 @@ public class GiftListDTO {
 	private String nome;
 
 	@NotEmpty
-	private List<PernottamentoDTO> pernottamenti;
+	private List<PernottamentiAcquistatiDTO> pernottamenti;
 	
 	@NotEmpty
 	private List<VoliAcquistatiProvaDTO> voli;
@@ -34,7 +34,7 @@ public class GiftListDTO {
 	private List<PacchettoDTO> pacchettiContenuti;
 	
 	public GiftListDTO(){
-		this.pernottamenti = new ArrayList<PernottamentoDTO>(); 
+		this.setPernottamenti(new ArrayList<PernottamentiAcquistatiDTO>()); 
 		this.pacchettiContenuti = new ArrayList<PacchettoDTO>();
 		this.nome = new String();
 		this.mailCliente = new String();
@@ -66,14 +66,6 @@ public class GiftListDTO {
 		this.nome = nome;
 	}
 
-	public List<PernottamentoDTO> getPernottamenti() {
-		return pernottamenti;
-	}
-
-	public void setPernottamenti(List<PernottamentoDTO> pernottamenti) {
-		this.pernottamenti = pernottamenti;
-	}
-
 	public List<VoliAcquistatiProvaDTO> getVoli() {
 		return voli;
 	}
@@ -96,6 +88,14 @@ public class GiftListDTO {
 
 	public void setPacchettiContenuti(List<PacchettoDTO> pacchettiContenuti) {
 		this.pacchettiContenuti = pacchettiContenuti;
+	}
+
+	public List<PernottamentiAcquistatiDTO> getPernottamenti() {
+		return pernottamenti;
+	}
+
+	public void setPernottamenti(List<PernottamentiAcquistatiDTO> pernottamenti) {
+		this.pernottamenti = pernottamenti;
 	}	
 	
 

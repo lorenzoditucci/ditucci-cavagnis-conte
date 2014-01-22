@@ -12,6 +12,7 @@
 		<class>it.polimi.traveldream.ejb.management.entity.Hotel</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Impiegato</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Pacchetto</class>
+		<class>it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Pernottamento</class>
 		<class>it.polimi.traveldream.ejb.management.entity.User</class>
 		<class>it.polimi.traveldream.ejb.management.entity.VoliAcquistatiProva</class>

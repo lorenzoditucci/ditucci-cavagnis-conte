@@ -141,6 +141,20 @@ public class Pernottamento implements Serializable {
 		return copia; 
 	}
 	
+	public List<PernottamentiAcquistati> getGiftLists() {
+		return giftLists;
+	}
+
+	public void setGiftLists(List<PernottamentiAcquistati> giftLists) {
+		this.giftLists = giftLists;
+	}
+
+	/**
+	 * collegamento al ponte pernottamentiAcquistati
+	 */
+	@OneToMany(cascade=CascadeType.REMOVE)
+	private List<PernottamentiAcquistati> giftLists;
+	
 	
 
 }
