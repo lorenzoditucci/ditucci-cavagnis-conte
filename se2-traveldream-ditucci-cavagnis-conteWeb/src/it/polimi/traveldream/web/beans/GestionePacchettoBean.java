@@ -1,10 +1,12 @@
 package it.polimi.traveldream.web.beans;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.GestionePacchettoMgr;
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
@@ -191,6 +193,60 @@ public class GestionePacchettoBean {
 		System.out.println(avviso);
 		return null;
 	}
+	
+	public String salvaModifichePacchetto(){
+		
+		ricalcolaCosto();
+		ricalcolaCittaDestinazione();
+	
+		System.out.println(getPacchetto().getCosto());
+		
+		return null;
+	}
+
+	private void ricalcolaCittaDestinazione() {
+			ArrayList<CittaDTO> daCopiare = new ArrayList<CittaDTO>();
+			for(int i=0; i<getPacchetto().getVoli().size();i++){
+				daCopiare.add(new CittaDTO(getPacchetto().getVoli().get(i).getCittaPartenza()));	
+			}
+			getPacchetto().getCittaDestinazione().addAll(daCopiare);	
+	}
+
+
+	private void ricalcolaCosto() {
+		double costoTotModificato=0.0;
+		/*azzera costo*/
+		getPacchetto().setCosto(0);
+		
+		for(int i=0; i<getPacchetto().getVoli().size(); i++)
+			costoTotModificato+=getPacchetto().getVoli().get(i).getCosto();
+		
+		for(int i=0; i<getPacchetto().getEscursioni().size(); i++)
+			costoTotModificato+=getPacchetto().getEscursioni().get(i).getCosto();
+		
+		/*aggiornamento pernottamenti*/
+		costoTotModificato+=aggiornaPrezzoPacchettoConPernottamenti();
+	
+		/*aggiornamento costo*/
+		System.out.println(costoTotModificato);
+		getPacchetto().setCosto(costoTotModificato);
+	}
+	
+	private double aggiornaPrezzoPacchettoConPernottamenti() {
+		double prezzoPernottamento=0;
+		for(int i=0; i<getPacchetto().getPernotti().size(); i++){
+			Timestamp dataInizio =getPacchetto().getPernotti().get(i).getDataInizio();
+			Timestamp dataFine =getPacchetto().getPernotti().get(i).getDataFine();
+			dataInizio.setHours(0);
+			dataInizio.setMinutes(0);
+			dataFine.setHours(0);
+			dataFine.setMinutes(0);
+			int giorni=(int) (dataFine.getTime()-dataInizio.getTime())/86400000;
+			prezzoPernottamento+=giorni*getPacchetto().getPernotti().get(i).getHotel().getCosto();	
+		}
+		return prezzoPernottamento;	
+	}
+
 
 	public int getIdPacchettoDaCercare() {
 		return idPacchettoDaCercare;
