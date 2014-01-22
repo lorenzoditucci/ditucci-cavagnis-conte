@@ -78,10 +78,10 @@ public class GestionePacchettoBean {
 	
 	public String eliminaPacchetto(){
 		if(gestionePacchettoMgr.eliminaPacchettoId(pacchetto)){
-			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Eliminazione eseguita correttamente", "Tutto ok"));	
 			return "index.xhtml";
 		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non è possibile eliminare", "Non presente"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non è possibile eliminare il pacchetto", "Non presente"));
 		    return "";
 		}
 		
@@ -206,7 +206,9 @@ public class GestionePacchettoBean {
 			}
 		
 		/*nuova pagina*/	
-		return null;
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Modifiche apportate correttamente", "Tutto ok"));	
+			
+		return "index.xhtml";
 	}
 
 	private void ricalcolaCittaDestinazione() {
