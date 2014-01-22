@@ -158,10 +158,8 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 		TypedQuery<Pernottamento> queryRicercaPernottamenti = em.createNamedQuery("Pernottamento.cercaPernottamentoIdPacchetto", Pernottamento.class);
 		List<Pernottamento> listaPernottamento = queryRicercaPernottamenti.setParameter("idPacchetto", newPacchetto.getIdPacchetto()).getResultList();
 	
-	/*	for(int i=0; i<listaPernottamento.size(); i++){
-			em.remove(listaPernottamento.get(i));
-		}*/
-
+		System.out.println("Lista pernottamenti");
+		System.out.println(listaPernottamento.size());
 		
 		for(int i=0; i<pacchettoAggiornato.getPernotti().size(); i++){
 	
@@ -174,7 +172,7 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 		 	listaPernottamento.get(i).setHotel(listaHotel.get(0));
 		 	listaPernottamento.get(i).setPacchetto(newPacchetto);
 		 	
-		 	em.refresh(listaPernottamento.get(i));
+		 	em.merge(listaPernottamento.get(i));
 		}
 	}
 
