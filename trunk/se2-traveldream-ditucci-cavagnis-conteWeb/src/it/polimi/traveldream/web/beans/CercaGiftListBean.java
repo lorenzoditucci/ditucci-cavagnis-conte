@@ -65,31 +65,20 @@ public class CercaGiftListBean {
         setRisultatoRicerca(new ArrayList<GiftListDTO>());
     }
 
-    public String cerca(){
-    	try {
-    		setRisultatoRicerca(cercaMGR.cerca(Integer.parseInt(idRicerca)));
-        	System.out.println("sto cercando...");
-        	/**
-        	 * cerco i voli che NON sono stati acquistati
-        	 */
-        	System.out.println("id ricerca = "+Integer.parseInt(idRicerca));
-        	setVoliAcquistati(voliAcquistatiProvaMGR.cercaVoliAcquistati(Integer.parseInt(idRicerca)));
-        	smistaVoli();
-        	System.out.println(voliAcquistati.get(0).getIdVolo());
-        	/**
-        	 * metodo per la redirect
-        	 */
-        	if(getRisultatoRicerca().size()==0){
-        		FacesContext.getCurrentInstance().addMessage("cercaGiftList:codiceGiftList", new FacesMessage(FacesMessage.SEVERITY_ERROR,"giftListNonTrovato", "GiftList non trovata!"));
-        		return "";
-        	}
-        	return "giftList?faces-redirect=true";
-		} catch (Exception e) {
-			setRisultatoRicerca(new ArrayList<GiftListDTO>());
-			//getRisultatoRicerca().get(0).setNome("Non trovato, Riprova");
-			return null;
-		}	
-    }
+        	 public String cerca(){
+        	    	setRisultatoRicerca(cercaMGR.cerca(Integer.parseInt(idRicerca)));
+        	    	aggiornaAcquistati();
+        	    	if(getRisultatoRicerca().size()==0){
+        	    		FacesContext.getCurrentInstance().addMessage("cercaGiftList:codiceGiftList", new FacesMessage(FacesMessage.SEVERITY_ERROR,"giftListNonTrovato", "GiftList non trovata!"));
+        	    		return "";
+        	    	}
+        	    	return "giftList?faces-redirect=true";
+        	    }
+
+			public void aggiornaAcquistati() {
+				setVoliAcquistati(voliAcquistatiProvaMGR.cercaVoliAcquistati(Integer.parseInt(idRicerca)));
+				smistaVoli();
+			}    
     
     private boolean eAcquistato(VoloDTO volo){
     	for(int i=0; i<voliAcquistati.size();i++){
