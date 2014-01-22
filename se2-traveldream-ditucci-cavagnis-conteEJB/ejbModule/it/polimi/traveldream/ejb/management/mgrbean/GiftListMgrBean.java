@@ -66,7 +66,7 @@ public class GiftListMgrBean implements GiftListMgr {
     		daAggiungere.setPernottamenti(Pernottamento.copiaToPernottamentoDTO(listaGiftList.get(i).getPernottamenti()));
     		daAggiungere.setEscursioni(EscursioneMgrBean.copiaListaToDTO(listaGiftList.get(i).getEscursioni()));
     		daAggiungere.setPacchettiContenuti(PacchettoMgrBean.copiaListaQuery(listaGiftList.get(i).getPacchettiContenuti()));
-    		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaGiftList.get(i).getVoli()));
+    		//daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaGiftList.get(i).getVoli()));
     		
     		copia.add(daAggiungere);
     	}

@@ -41,19 +41,116 @@
 		<div id='contenitore-centrale'>
 			<div id='contenitore-form-testo'>
 				<h:form style="padding : 30px;">
-					<ui:repeat var="giftlist" value="#{cercaGiftListBean.risultatoRicerca}">
-						<p:outputLabel>giftlist - #{giftlist.idGiftList}</p:outputLabel><br/>
-						<ui:repeat var="pacchetto" value="#{giftlist.pacchettiContenuti}">
-							<p:outputLabel>pacchetto - #{pacchetto.nome}</p:outputLabel><br/>
-							<ui:repeat var="voli" value="#{pacchetto.voli}">
-								<p:outputLabel> volo - #{voli.cittaPartenza}</p:outputLabel>
-							</ui:repeat>
-								<ui:repeat var="pernottamenti" value="#{cercaGiftListBean.getPernottamentiDiPacchetto(pacchetto)}">
-									<p:outputLabel> #{pernottamenti.idPernottametto}</p:outputLabel>
-								</ui:repeat>		
-							
-						</ui:repeat>
-					</ui:repeat>
+					
+					
+					<!-- prova -->
+			<ui:repeat var='giftlist' value="#{cercaGiftListBean.risultatoRicerca}">
+			<ui:repeat var="pacchetto" value="#{giftlist.pacchettiContenuti}">
+	  		<p:outputPanel>
+	  		<h:outputText value = "Pacchetto - #{pacchetto.nome}"/><br/>
+	  		<p:outputLabel>Voli</p:outputLabel>
+	  		
+	  		<!-- mostro i dettagli dei voli -->
+			<p:dataTable var="volo" value="#{pacchetto.voli}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Città Partenza"/>
+					</f:facet>
+					<h:outputText value="#{volo.cittaPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.cittaArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Azione" />
+					</f:facet>
+					<h:commandButton value="Acquista Volo" action="#{prodottoBaseBean.acquistaProdottoBaseVolo(volo,giftlist)}" />
+				</p:column>
+			</p:dataTable>
+			<!-- Mostro i dettagli dei pernottamenti -->
+			<p:outputLabel>Pernottamenti</p:outputLabel>
+			<p:dataTable var="pernottamento" value="#{cercaGiftListBean.getPernottamentiDiPacchetto(pacchetto)}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data inizio Prenotazione"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataInizio}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fine"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataFine}"/>
+				</p:column>
+			</p:dataTable>
+			
+			<!--  Mostro i dettagli delle escursioni -->
+			<p:outputLabel>Escursioni</p:outputLabel>
+			<p:dataTable var="escursione" value = "#{pacchetto.escursioni}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.citta}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrizione"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.descrizione}"/>
+				</p:column>
+			
+			</p:dataTable>
+			</p:outputPanel>
+			
+		</ui:repeat>
+		</ui:repeat>
+
+					
+
+
 				</h:form>
 			</div>
 		</div>

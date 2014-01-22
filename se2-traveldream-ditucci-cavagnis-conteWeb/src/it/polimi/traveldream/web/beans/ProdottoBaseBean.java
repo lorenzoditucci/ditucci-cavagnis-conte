@@ -27,7 +27,7 @@ public class ProdottoBaseBean {
         // TODO Auto-generated constructor stub
     }
     
-    public String acquistaProdottoBase(VoloDTO volo,GiftListDTO giftList){
+    public String acquistaProdottoBaseVolo(VoloDTO volo,GiftListDTO giftList){
     	/**
     	 * non so se andra' messo qua o ci mettiamo una pagina nel mezzo
     	 * nel caso spostiamo il tutto in un altra funzione
@@ -41,12 +41,12 @@ public class ProdottoBaseBean {
     }
     
     
-    public String acquistaProdottoBase(EscursioneDTO escursione,GiftListDTO giftList){
+    public String acquistaProdottoBaseEscursione(EscursioneDTO escursione,GiftListDTO giftList){
     	mgr.registraAcquisto(escursione,giftList);
     	return "acquista?faces-redirect=true";
     }
     
-    public String acquistaProdottoBase(PernottamentoDTO pernottamento,GiftListDTO giftList){
+    public String acquistaProdottoBasePernottamento(PernottamentoDTO pernottamento,GiftListDTO giftList){
     	mgr.registraAcquisto(pernottamento, giftList);
     	return "acquista?faces-redirect=true";
     }
