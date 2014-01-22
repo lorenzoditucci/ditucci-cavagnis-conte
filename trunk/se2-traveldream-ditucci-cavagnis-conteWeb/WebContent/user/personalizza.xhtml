@@ -72,7 +72,15 @@
 			<p:outputPanel>
 				<p:outputLabel>Voli contenuti nel pacchetto</p:outputLabel>
 				<p:dataTable var="volo" value="#{personalizzaPacchettoBean.pacchetto.voli}">
-					<p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Id"/>
+					</f:facet>
+					<h:outputText value="#{volo.idVolo}"/>
+				</p:column>
+				
+				<p:column>
 					<f:facet name="header">
 						<h:outputText value = "Città Partenza"/>
 					</f:facet>
@@ -104,7 +112,7 @@
 					<h:commandLink value = "Rimuovi Volo" action="#{personalizzaPacchettoBean.rimuoviVolo(volo)}"/>
 				</p:column>
 				</p:dataTable>
-				<h:commandLink value="Aggiungi Volo"></h:commandLink><br/>
+				<h:link value="Aggiungi Volo" outcome="cercaEAggiungiVolo"/><br/>
 				
 				
 				<!-- Mostro dettagli dei pernottamenti -->

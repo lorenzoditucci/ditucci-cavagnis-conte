@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
+import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
@@ -14,6 +15,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.jboss.weld.context.ejb.Ejb;
+
 
 @ManagedBean(name="personalizzaPacchettoBean")
 @SessionScoped
@@ -21,9 +24,15 @@ public class PersonalizzaPacchettoBean {
 	
 	@EJB
 	private VisualizzaDettagliGLMgr glMgr;
+	
+	@EJB
+	private VoloMgr voloMgr;
 
 	private PacchettoDTO pacchetto;
 	private PacchettoDTO pacchettoOriginaleDto;
+	
+	private int idVolo;
+	private List<VoloDTO> voliCercati;
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -33,6 +42,26 @@ public class PersonalizzaPacchettoBean {
 		this.pacchetto = pacchetto;
 	}
 	
+	
+	
+	public int getIdVolo() {
+		return idVolo;
+	}
+
+	public void setIdVolo(int idVolo) {
+		this.idVolo = idVolo;
+	}
+	
+	
+
+	public List<VoloDTO> getVoliCercati() {
+		return voliCercati;
+	}
+
+	public void setVoliCercati(List<VoloDTO> voliCercati) {
+		this.voliCercati = voliCercati;
+	}
+
 	public String personalizza(PacchettoDTO p){
 		this.pacchetto = p;
 		this.pacchetto.setPernotti(getPernottamenti(p));
@@ -60,6 +89,18 @@ public class PersonalizzaPacchettoBean {
 	public void rimuoviEscursione(EscursioneDTO escursione){
 		this.pacchetto.getEscursioni().remove(escursione);
 		return;
+	}
+	
+	public void cercaVolo(){
+		this.voliCercati = voloMgr.cercaVoloPerID(idVolo);
+	}
+	
+	public String aggiungiVolo(VoloDTO volo){
+		if(!pacchetto.getVoli().contains(volo)){
+			pacchetto.getVoli().add(volo);
+		}
+			
+		return "personalizza";
 	}
 	
 }
