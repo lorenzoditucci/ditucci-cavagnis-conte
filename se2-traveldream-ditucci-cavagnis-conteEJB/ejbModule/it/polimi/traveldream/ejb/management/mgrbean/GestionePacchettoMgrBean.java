@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.GestionePacchettoMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
 import it.polimi.traveldream.ejb.management.entity.User;
@@ -25,6 +30,9 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 	
 	@Resource
 	private EJBContext context;
+	
+	@EJB
+	private CreaPacchettoMgr creaPacchettoMgr;
 	
 	
 	@Override
@@ -62,6 +70,21 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 			return false;
 			}
 		
+	}
+
+	@Override
+	public List<VoloDTO> cercaVolo(int idVoloDaCercare) {
+		return creaPacchettoMgr.cercaVolo(idVoloDaCercare);
+	}
+
+	@Override
+	public List<HotelDTO> cercaHotel(int idHotelDaCercare) {
+		return creaPacchettoMgr.cercaHotel(idHotelDaCercare);
+	}
+
+	@Override
+	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare) {
+		return creaPacchettoMgr.cercaEscursione(idEscursioneDaCercare);
 	}
 
 }
