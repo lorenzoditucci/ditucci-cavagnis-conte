@@ -88,6 +88,7 @@ public class GiftListMgrBean implements GiftListMgr {
     	lista.addAll(gl.getPacchettiContenuti());
     	List<PacchettoDTO> listaDTO = new ArrayList<PacchettoDTO>(glDTO.getPacchettiContenuti());
     	listaDTO.add(pDTO);
+    	glDTO.setPacchettiContenuti(listaDTO);
     	controlloCoerenzaMGRBean.controllaGiftList(glDTO);
     	
     	if(!lista.contains(p)){
