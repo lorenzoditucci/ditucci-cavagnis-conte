@@ -20,7 +20,12 @@
     	<h:form>
 		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
 		</h:form>
-		<h:form><h4>Ricerca Pacchetto</h4></h:form>
+		<h:form id="cercaPacchettoID">
+			<h:outputLabel for="id-pacchetto">Cerca pacchetto:</h:outputLabel>
+			<h:inputText id="id-pacchetto" value="#{gestionePacchettoBean.idPacchettoDaCercare}" />
+	   
+	    <h:commandButton value="Cerca" action="#{gestionePacchettoBean.cercaPacchetto()}" update="cercaPacchettoID"/>
+		</h:form>
 		
 		<h:form><h:link value="Crea Pacchetto" outcome=""></h:link></h:form>
 		
