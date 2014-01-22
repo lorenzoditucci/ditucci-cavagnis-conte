@@ -99,8 +99,15 @@
 					</f:facet>
 					<h:outputText value = "#{volo.dataArrivo}"/>
 				</p:column>
-				</p:dataTable>
 				
+				<p:column>
+					<h:commandLink value = "Rimuovi Volo"/>
+				</p:column>
+				</p:dataTable>
+				<h:commandLink value="Aggiungi Volo"></h:commandLink><br/>
+				
+				
+				<!-- Mostro dettagli dei pernottamenti -->
 				<p:outputLabel>Pernottamenti</p:outputLabel>
 				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.getPernottamenti()}">
 					<p:column>
@@ -123,8 +130,41 @@
 					</f:facet>
 					<h:outputText value = "#{pernottamento.dataFine}"/>
 				</p:column>
+				
+				<p:column>
+					<h:commandLink value = "Rimuovi Pernottamento"/>
+				</p:column>
 				</p:dataTable>
-			
+			<h:commandLink value="Aggiungi Pernottamento"></h:commandLink><br/>
+				<!--  Mostro i dettagli delle escursioni -->
+			<p:outputLabel>Escursioni</p:outputLabel>
+			<p:dataTable var="escursione" value = "#{pacchetto.escursioni}">
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.citta}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrizione"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.descrizione}"/>
+				</p:column>
+				
+				<p:column>
+					<h:commandLink value = "Rimuovi Escursione"/>
+				</p:column>
+			</p:dataTable>
+			<h:commandLink value = "Aggiungi Escursione"/>
 			</p:outputPanel>
 		</h:form>
     	
