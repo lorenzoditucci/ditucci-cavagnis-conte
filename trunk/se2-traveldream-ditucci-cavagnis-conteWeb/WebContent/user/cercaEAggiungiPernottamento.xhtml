@@ -66,6 +66,7 @@
 	
 </div>
 	<div id='contenitore-centrale'>
+		 <p:growl id="msgs" />  
 		<p:panel header="Inserisci id Hotel">  
     	<h:panelGrid columns="2" id="grid"> 
 		<h:form>
@@ -74,12 +75,12 @@
                             value="#{personalizzaPacchettoBean.idHotel}" required="true"/> 
                             
             <h:outputLabel value="Data inizio" for="dataInizio"/>
-            <p:calendar value="#{personalizzaPacchettoBean.dataInizio}" id="dataInizio" pattern="MM/dd/yyyy" />
+            <p:calendar value="#{personalizzaPacchettoBean.dataInizio}" id="dataInizio" pattern="MM/dd/yyyy" required="true"/>
         
         	<h:outputLabel value="Data Fine" for="dataFine"/>
-            <p:calendar value="#{personalizzaPacchettoBean.dataFine}" id="dataFine" pattern="MM/dd/yyyy" />
+            <p:calendar value="#{personalizzaPacchettoBean.dataFine}" id="dataFine" pattern="MM/dd/yyyy" required="true"/>
             <h:commandButton value="Aggiungi"  
-                            action="#{personalizzaPacchettoBean.creaPernottamento()}" update="pernottamentiGrid"  >  
+                            action="#{personalizzaPacchettoBean.creaPernottamento()}" update="pernottamentiGrid "  >  
             </h:commandButton>  
         </h:form>
         </h:panelGrid>  

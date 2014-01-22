@@ -204,16 +204,22 @@ public class PersonalizzaPacchettoBean {
 	public void creaPernottamento(){
 		List<HotelDTO> hotels = hotelMgr.cercaHotelPerID(idHotel);
 		if(hotels.isEmpty()){
-			return;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore."
+					+ " Non è stato trovato nessun hotel.", ""));
 		}
-		pernottamentoDTO = new PernottamentoDTO();
-		pernottamentoDTO.setDataInizio(new Timestamp(this.dataInizio.getTime()));
-		pernottamentoDTO.setDataFine(new Timestamp(this.dataFine.getTime()));
-		pernottamentoDTO.setHotel(hotels.get(0));
-		pernottamentoDTO.setPacchetto(this.pacchetto);
+		if(dataInizio.before(dataFine)){
+			pernottamentoDTO = new PernottamentoDTO();
+			pernottamentoDTO.setDataInizio(new Timestamp(this.dataInizio.getTime()));
+			pernottamentoDTO.setDataFine(new Timestamp(this.dataFine.getTime()));
+			pernottamentoDTO.setHotel(hotels.get(0));
+			pernottamentoDTO.setPacchetto(this.pacchetto);
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore. "
+					+ "La data di inizio pernottamento deve precedere quella di fine ", ""));  
+		}
 		return;
-		
 	}
+
 	
 	public String aggiungiPernottamento(){
 		if(!pacchetto.getPernotti().contains(pernottamentoDTO)){

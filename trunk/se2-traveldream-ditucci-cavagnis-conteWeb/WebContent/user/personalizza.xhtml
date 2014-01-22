@@ -17,8 +17,10 @@
 <div id="banner-top">	
 	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
 </div>
-<div id="menu-sinistra">
 
+
+<div id="menu-sinistra">
+		 
 		<h:form>
 	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
 	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
@@ -66,6 +68,7 @@
 	
 </div>
 <div id='contenitore-centrale'>
+ 	
 	<div id='contenitore-form-testo'>
 		<h:form>
 			<p:outputLabel value="#{personalizzaPacchettoBean.pacchetto.nome}"/>
@@ -143,7 +146,7 @@
 					<h:commandLink value = "Rimuovi Pernottamento" action="#{personalizzaPacchettoBean.rimuoviPernottamento(pernottamento)}"/>
 				</p:column>
 				</p:dataTable>
-			<h:link value="Aggiungi Pernottamento" outcome="cercaEAggiungiPernottamento"/>
+			<h:link value="Aggiungi Pernottamento" outcome="cercaEAggiungiPernottamento"/><br/>
 				<!--  Mostro i dettagli delle escursioni -->
 			<p:outputLabel>Escursioni</p:outputLabel>
 			<p:dataTable var="escursione" value = "#{personalizzaPacchettoBean.pacchetto.escursioni}">
