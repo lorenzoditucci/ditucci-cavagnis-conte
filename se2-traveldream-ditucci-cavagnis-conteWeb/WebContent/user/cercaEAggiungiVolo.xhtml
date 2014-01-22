@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<title>Inserisci Pacchetto in Gift List</title>
+</h:head>
+<h:body>
+<!-- chiamo il bean -->
+#{pacchettoBean.cercaAll()}
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+</div>
+<div id="menu-sinistra">
+
+		<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
+	    </h:form>
+	    	<h:link  outcome="gestioneGL/gestione">
+	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
+	    		- Gestione Gifti List
+	    	</h:link><br/>
+	    	<h:link  outcome="pacchettiAcquistati.xhtml">
+	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+	    		- Pacchetti Acquistati
+	    	</h:link><br/>
+	    	
+	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+    
+			<p:panel>
+			
+				<h:panelGrid columns="1" id="pacchettoGrid">
+		
+				
+	         
+	
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+					
+					
+				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+				<h:message for="data-inizio"></h:message>
+				
+				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+				<h:message for="data-fine"></h:message>
+				
+				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+	            <h:message for="costo-pacchetto"></h:message>
+				
+				
+			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+	       </h:panelGrid>
+	       </p:panel>
+		</h:form>
+	
+</div>
+	<div id='contenitore-centrale'>
+		<p:panel header="Inserisci id Volo">  
+    	<h:panelGrid columns="2" id="grid"> 
+		<h:form>
+            <h:outputLabel value="Id Volo: " for="idVolo"></h:outputLabel>  
+            <p:inputText id="idVolo"   
+                            value="#{personalizzaPacchettoBean.idVolo}" required="true"/>  
+        
+            <h:commandButton value="Cerca"  
+                            action="#{personalizzaPacchettoBean.cercaVolo()}" update="voliGrid"  >  
+             
+            </h:commandButton>  
+        </h:form>
+        </h:panelGrid>  
+        
+        <h:form>
+        <h:panelGrid id="voliGrid">
+        <p:dataTable id = "voli" value="#{personalizzaPacchettoBean.voliCercati}" var="volo">
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Id"/>
+        		</f:facet>
+        		<h:outputText value="#{volo.idVolo}"/>
+        	</p:column>
+ 			
+ 			<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Città Partenza"/>
+        		</f:facet>
+        		<h:outputText value="#{volo.cittaPartenza}"/>
+        	</p:column>  
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Città Arrivo"/>
+        		</f:facet>
+        		<h:outputText value="#{volo.cittaArrivo}"/>
+        	</p:column> 
+        	
+        	<p:column>
+        		<h:commandLink value="Aggiungi Volo" action="#{personalizzaPacchettoBean.aggiungiVolo(volo)}"/>
+        	</p:column>     
+        </p:dataTable>
+        </h:panelGrid>
+        </h:form>
+    </p:panel>
+    	
+	</div>
+</div>
+</h:body>           
+</html>
+

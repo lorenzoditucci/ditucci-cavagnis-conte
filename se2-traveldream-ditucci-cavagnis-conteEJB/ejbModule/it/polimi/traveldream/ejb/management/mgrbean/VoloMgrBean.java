@@ -22,6 +22,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class VoloMgrBean implements VoloMgr {
@@ -40,7 +41,7 @@ public class VoloMgrBean implements VoloMgr {
 		Volo newVolo = new Volo(volo);
 		em.persist(newVolo);
 		
-		/*Aggiungi cittˆ al db*/
+		/*Aggiungi cittï¿½ al db*/
 		CittaDTO cittaDaInserire = new CittaDTO();
 		cittaDaInserire.setNome(volo.getCittaArrivo());
 		cittaMgrBean.save(cittaDaInserire);
@@ -54,6 +55,7 @@ public class VoloMgrBean implements VoloMgr {
 		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
 		for (int i = 0; i < listaVolo.size(); i++){
 			VoloDTO daAggiungere = new VoloDTO();
+			daAggiungere.setIdVolo(listaVolo.get(i).getIdVolo());
 			daAggiungere.setCittaArrivo(listaVolo.get(i).getCittaArrivo());
 			daAggiungere.setCittaPartenza(listaVolo.get(i).getCittaPartenza());
 			daAggiungere.setCompagnia(listaVolo.get(i).getCompagnia());
@@ -72,5 +74,13 @@ public class VoloMgrBean implements VoloMgr {
 		Volo v = em.find(Volo.class, idVolo);
         em.remove(v);
 		
+	}
+	
+	@Override
+	public List<VoloDTO> cercaVoloPerID(int idVoloDaCercare){
+		TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaVoloId", Volo.class);
+    	List<Volo> listaVolo = queryRicerca.setParameter("idVolo", idVoloDaCercare).getResultList();
+    	
+    	return copiaListaToDTO(listaVolo); 
 	}
 }
