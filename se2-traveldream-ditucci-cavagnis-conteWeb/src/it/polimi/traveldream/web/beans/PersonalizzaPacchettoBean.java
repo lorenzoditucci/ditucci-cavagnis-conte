@@ -1,20 +1,27 @@
 package it.polimi.traveldream.web.beans;
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.jboss.weld.context.ejb.Ejb;
 
@@ -31,6 +38,12 @@ public class PersonalizzaPacchettoBean {
 
 	@EJB
 	private EscursioneMgr escursioneMgr;
+	
+	@EJB
+	private HotelMgr hotelMgr;
+	/*
+	 * Dati del pacchetto
+	 */
 	private PacchettoDTO pacchetto;
 	private PacchettoDTO pacchettoOriginaleDto;
 	
@@ -39,6 +52,12 @@ public class PersonalizzaPacchettoBean {
 	
 	private int idEscursione;
 	private List<EscursioneDTO> escursioniCercate;
+	
+	private int idHotel;
+	private Date dataInizio;
+	private Date dataFine;
+	private HotelDTO hotel;
+	private PernottamentoDTO pernottamentoDTO;
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -50,6 +69,46 @@ public class PersonalizzaPacchettoBean {
 	
 	
 	
+	public PernottamentoDTO getPernottamentoDTO() {
+		return pernottamentoDTO;
+	}
+
+	public void setPernottamentoDTO(PernottamentoDTO pernottamentoDTO) {
+		this.pernottamentoDTO = pernottamentoDTO;
+	}
+
+	public Date getDataInizio() {
+		return dataInizio;
+	}
+
+	public void setDataInizio(Date dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+
+	public Date getDataFine() {
+		return dataFine;
+	}
+
+	public void setDataFine(Date dataFine) {
+		this.dataFine = dataFine;
+	}
+
+	public HotelDTO getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(HotelDTO hotel) {
+		this.hotel = hotel;
+	}
+
+	public int getIdHotel() {
+		return idHotel;
+	}
+
+	public void setIdHotel(int idHotel) {
+		this.idHotel = idHotel;
+	}
+
 	public int getIdVolo() {
 		return idVolo;
 	}
@@ -115,6 +174,9 @@ public class PersonalizzaPacchettoBean {
 	
 	public void cercaVolo(){
 		this.voliCercati = voloMgr.cercaVoloPerID(idVolo);
+		if(voliCercati.size()==0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nessun volo trovato.","secondo mex" ));
+		}
 		return;
 	}
 	
@@ -136,6 +198,27 @@ public class PersonalizzaPacchettoBean {
 			this.pacchetto.getEscursioni().add(escursione);
 		}
 			
+		return "personalizza";
+	}
+	
+	public void creaPernottamento(){
+		List<HotelDTO> hotels = hotelMgr.cercaHotelPerID(idHotel);
+		if(hotels.isEmpty()){
+			return;
+		}
+		pernottamentoDTO = new PernottamentoDTO();
+		pernottamentoDTO.setDataInizio(new Timestamp(this.dataInizio.getTime()));
+		pernottamentoDTO.setDataFine(new Timestamp(this.dataFine.getTime()));
+		pernottamentoDTO.setHotel(hotels.get(0));
+		pernottamentoDTO.setPacchetto(this.pacchetto);
+		return;
+		
+	}
+	
+	public String aggiungiPernottamento(){
+		if(!pacchetto.getPernotti().contains(pernottamentoDTO)){
+			pacchetto.getPernotti().add(pernottamentoDTO);
+		}
 		return "personalizza";
 	}
 	

@@ -143,7 +143,7 @@
 					<h:commandLink value = "Rimuovi Pernottamento" action="#{personalizzaPacchettoBean.rimuoviPernottamento(pernottamento)}"/>
 				</p:column>
 				</p:dataTable>
-			<h:commandLink value="Aggiungi Pernottamento"></h:commandLink><br/>
+			<h:link value="Aggiungi Pernottamento" outcome="cercaEAggiungiPernottamento"/>
 				<!--  Mostro i dettagli delle escursioni -->
 			<p:outputLabel>Escursioni</p:outputLabel>
 			<p:dataTable var="escursione" value = "#{personalizzaPacchettoBean.pacchetto.escursioni}">
