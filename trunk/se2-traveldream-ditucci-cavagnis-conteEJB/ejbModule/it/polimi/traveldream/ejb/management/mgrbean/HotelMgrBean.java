@@ -6,13 +6,17 @@ import java.util.List;
 import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
+import it.polimi.traveldream.ejb.management.entity.Volo;
+
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class HotelMgrBean implements HotelMgr {
@@ -60,5 +64,15 @@ public class HotelMgrBean implements HotelMgr {
 		Hotel h = em.find(Hotel.class, idHotel);
         em.remove(h);
 	}
+	
+	@Override
+	public List<HotelDTO> cercaHotelPerID(int idHotelDaCercare){
+		TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
+    	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", idHotelDaCercare).getResultList();
+    	
+    	return copiaListaToDTO(listaHotel); 
+	}
+	
+	
 	
 }
