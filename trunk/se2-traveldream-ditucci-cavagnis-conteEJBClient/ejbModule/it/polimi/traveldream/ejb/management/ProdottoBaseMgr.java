@@ -15,4 +15,8 @@ public interface ProdottoBaseMgr {
 
 	void registraAcquisto(PernottamentoDTO pernottamento, GiftListDTO giftList);
 
+	void registraAcquisto(PernottamentoDTO pernottamentoDaAcquistare,
+			GiftListDTO giftListDaAcquistare, String nomeAcquirente,
+			Timestamp dataAcquisto);
+
 }

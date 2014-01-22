@@ -8,6 +8,7 @@ import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
+import it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati;
 import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
@@ -63,7 +64,7 @@ public class GiftListMgrBean implements GiftListMgr {
     		daAggiungere.setIdGiftList(listaGiftList.get(i).getIdGiftList());
     		daAggiungere.setNome(listaGiftList.get(i).getNome());
     		daAggiungere.setMailCliente(listaGiftList.get(i).getMailCliente());
-    		daAggiungere.setPernottamenti(Pernottamento.copiaToPernottamentoDTO(listaGiftList.get(i).getPernottamenti()));
+    		daAggiungere.setPernottamenti(PernottamentiAcquistati.copiaToPernottamentiAcquistatiDTO(listaGiftList.get(i).getPernottamenti()));
     		daAggiungere.setEscursioni(EscursioneMgrBean.copiaListaToDTO(listaGiftList.get(i).getEscursioni()));
     		daAggiungere.setPacchettiContenuti(PacchettoMgrBean.copiaListaQuery(listaGiftList.get(i).getPacchettiContenuti()));
     		//daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaGiftList.get(i).getVoli()));

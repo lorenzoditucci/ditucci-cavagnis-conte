@@ -13,6 +13,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
+
 /**
  * lo uso per gestire i prodotti base acquistabili
  * @author ditu
@@ -28,6 +30,7 @@ public class ProdottoBaseBean {
      */
 	
 	private VoloDTO voloDaAcquistare;
+	private PernottamentoDTO pernottamentoDaAcquistare;
 	private GiftListDTO giftListDaAcquistare;
 	private String nomeAcquirente;
 	private Timestamp dataAcquisto;
@@ -69,8 +72,16 @@ public class ProdottoBaseBean {
     }
     
     public String acquistaProdottoBasePernottamento(PernottamentoDTO pernottamento,GiftListDTO giftList){
-    	mgr.registraAcquisto(pernottamento, giftList);
-    	return "acquista?faces-redirect=true";
+    	setGiftListDaAcquistare(giftList);
+    	setPernottamentoDaAcquistare(pernottamento);
+    	
+    	return "acquista_pernottamento?faces-redirect=true";
+    }
+    
+    public String registraAcquistoPernottamento(){
+    	setDataAcquistoCalendar(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+    	mgr.registraAcquisto(pernottamentoDaAcquistare, giftListDaAcquistare,nomeAcquirente,dataAcquisto);
+    	return "dettagliGiftList?faces-redirect=true";
     }
 
 	public VoloDTO getVoloDaAcquistare() {
@@ -103,6 +114,14 @@ public class ProdottoBaseBean {
 
 	public void setDataAcquistoCalendar(Timestamp dataAcquistoCalendar) {
 		this.dataAcquisto = dataAcquistoCalendar;
+	}
+
+	public PernottamentoDTO getPernottamentoDaAcquistare() {
+		return pernottamentoDaAcquistare;
+	}
+
+	public void setPernottamentoDaAcquistare(PernottamentoDTO pernottamentoDaAcquistare) {
+		this.pernottamentoDaAcquistare = pernottamentoDaAcquistare;
 	}
 
 }
