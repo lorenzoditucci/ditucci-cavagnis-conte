@@ -9,6 +9,7 @@ import java.lang.Object;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
@@ -19,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
@@ -51,6 +53,10 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	private EJBContext context;
 
 	public PacchettoDTO pacchettoInBean;
+	
+	@EJB
+	private ControlloCoerenzaMGRBean controlloCoerenzaMgr;
+	
 	
 	/*
 	 * Questo metodo viene chiamato automaticamente alla creazione 
@@ -383,6 +389,11 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	@PreDestroy
 	public void exit(){
 		System.out.println("Sessione staful crea pacchetto terminata");
+	}
+
+	@Override
+	public void controlloPacchetto(PacchettoDTO pacchetto) throws CoerenzaException {
+		controlloCoerenzaMgr.controlloPacchetto(pacchetto);
 	}
 	
 	

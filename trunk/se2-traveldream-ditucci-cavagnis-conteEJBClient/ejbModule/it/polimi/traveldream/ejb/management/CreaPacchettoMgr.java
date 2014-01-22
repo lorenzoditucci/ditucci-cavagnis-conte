@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb.management;
 
 import java.util.List;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
@@ -32,5 +33,7 @@ public interface CreaPacchettoMgr {
 	public PacchettoDTO ottieniPacchettoDaConfermare() throws CloneNotSupportedException;
 
 	public boolean salvaPacchettoInDB();
+
+	public void controlloPacchetto(PacchettoDTO pacchetto) throws CoerenzaException;
 	
 }

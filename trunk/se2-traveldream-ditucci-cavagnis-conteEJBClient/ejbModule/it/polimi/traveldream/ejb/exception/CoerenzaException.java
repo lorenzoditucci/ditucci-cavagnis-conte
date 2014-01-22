@@ -3,6 +3,8 @@ package it.polimi.traveldream.ejb.exception;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.ApplicationException;
+
 /**
  * eccezione lanciata in caso di incoerenza di un pacchetto o di una giftlist.
  * Contiene al suo interno una stringa di messaggi da visualizzare all'utente.
@@ -10,12 +12,14 @@ import java.util.List;
  *
  */
 
+@ApplicationException(rollback = true)
 public class CoerenzaException extends RuntimeException{
 
 	
 	private List<String> messaggi;
 	
-	
+
+
 	/**
 	 * Costruttore senza parametri
 	 */
@@ -30,5 +34,13 @@ public class CoerenzaException extends RuntimeException{
 	
 	public void aggungiMessaggio(String m){
 		messaggi.add(m);
+	}
+	
+	public List<String> getMessaggi() {
+		return messaggi;
+	}
+
+	public void setMessaggi(List<String> messaggi) {
+		this.messaggi = messaggi;
 	}
 }

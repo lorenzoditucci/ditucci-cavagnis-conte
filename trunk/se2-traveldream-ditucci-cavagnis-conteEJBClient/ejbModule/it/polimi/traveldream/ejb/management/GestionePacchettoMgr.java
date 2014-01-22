@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
@@ -23,5 +24,7 @@ public interface GestionePacchettoMgr {
 	public List<HotelDTO> cercaHotel(int idHotelDaCercare);
 
 	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare);
+
+	public boolean controllaCoerenza(PacchettoDTO pacchetto) throws CoerenzaException;
 	
 }
