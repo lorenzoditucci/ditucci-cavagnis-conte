@@ -1,5 +1,8 @@
 package it.polimi.traveldream.web.beans;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import it.polimi.traveldream.ejb.management.ProdottoBaseMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
@@ -23,6 +26,12 @@ public class ProdottoBaseBean {
     /**
      * Default constructor. 
      */
+	
+	private VoloDTO voloDaAcquistare;
+	private GiftListDTO giftListDaAcquistare;
+	private String nomeAcquirente;
+	private Timestamp dataAcquisto;
+	
     public ProdottoBaseBean() {
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +45,21 @@ public class ProdottoBaseBean {
     	/**
     	 * devo registrare che il prodotto base e' stato acquistato
     	 */
-    	mgr.registraAcquisto(volo,giftList);
-    	return "acquista?faces-redirect=true";
+    	
+    	setGiftListDaAcquistare(giftList);
+    	setVoloDaAcquistare(volo);
+    	
+    	
+    	return "acquista_volo?faces-redirect=true";
+    }
+    /**
+     * registro il volo dopo aver ricevuto la conferma
+     * @return
+     */
+    public String registraAcquistoVolo(){
+    	setDataAcquistoCalendar(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+    	mgr.registraAcquisto(voloDaAcquistare,giftListDaAcquistare,nomeAcquirente,dataAcquisto);
+    	return "dettagliGiftList?faces-redirect=true";
     }
     
     
@@ -50,5 +72,37 @@ public class ProdottoBaseBean {
     	mgr.registraAcquisto(pernottamento, giftList);
     	return "acquista?faces-redirect=true";
     }
+
+	public VoloDTO getVoloDaAcquistare() {
+		return voloDaAcquistare;
+	}
+
+	public void setVoloDaAcquistare(VoloDTO voloDaAcquistare) {
+		this.voloDaAcquistare = voloDaAcquistare;
+	}
+
+	public GiftListDTO getGiftListDaAcquistare() {
+		return giftListDaAcquistare;
+	}
+
+	public void setGiftListDaAcquistare(GiftListDTO giftListDaAcquistare) {
+		this.giftListDaAcquistare = giftListDaAcquistare;
+	}
+
+	public String getNomeAcquirente() {
+		return nomeAcquirente;
+	}
+
+	public void setNomeAcquirente(String nomeAcquirente) {
+		this.nomeAcquirente = nomeAcquirente;
+	}
+
+	public Timestamp getDataAcquistoCalendar() {
+		return dataAcquisto;
+	}
+
+	public void setDataAcquistoCalendar(Timestamp dataAcquistoCalendar) {
+		this.dataAcquisto = dataAcquistoCalendar;
+	}
 
 }

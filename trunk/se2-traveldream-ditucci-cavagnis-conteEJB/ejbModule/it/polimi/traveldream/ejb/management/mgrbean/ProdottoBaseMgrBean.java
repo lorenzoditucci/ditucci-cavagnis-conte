@@ -50,7 +50,8 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
 	/**
      * @see ProdottoBaseMgr#registraAcquistoVolo(VoloDTO)
      */
-    public void registraAcquisto(VoloDTO volo,GiftListDTO giftList) {
+    @Override
+    public void registraAcquisto(VoloDTO volo,GiftListDTO giftList, String nomeAcquirente, Timestamp dataAcquisto) {
     	/**
     	 * aggiungo il volo alla lista e faccio update della giftList
     	 * devo anche controllare che il booleano di acquistato sia ad uno?
@@ -113,8 +114,8 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
     		VoliAcquistatiProva acquistato = new VoliAcquistatiProva();
     		acquistato.setIdVolo(v.getIdVolo());
     		acquistato.setIdGiftList(g.getIdGiftList());
-    		acquistato.setDataAcquisto(new Timestamp(0));
-    		acquistato.setNomeAcquirente("pino");
+    		acquistato.setDataAcquisto(dataAcquisto);
+    		acquistato.setNomeAcquirente(nomeAcquirente);
     		em.persist(acquistato);
     		g.getVoli().add(acquistato);
     		em.merge(g);
