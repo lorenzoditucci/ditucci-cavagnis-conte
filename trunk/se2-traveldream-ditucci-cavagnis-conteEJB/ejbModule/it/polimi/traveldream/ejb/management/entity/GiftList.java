@@ -57,17 +57,9 @@ public class GiftList implements Serializable {
 	/**
 	 * connessione bidirezionale many to many con i voli
 	 */
-	@ManyToMany
-		@JoinTable(
-			name="VoliAcquistati"
-			, joinColumns={
-				@JoinColumn(name="idGiftList", nullable=false)
-				}
-			, inverseJoinColumns={
-				@JoinColumn(name="idVolo", nullable=false)
-				}
-			)
-		private List<Volo> voli;
+	
+	@OneToMany(cascade=CascadeType.REMOVE)
+		private List<VoliAcquistatiProva> voli;
 
 	/**
 	 * connessione bidirezionale many to many con le escursioni
@@ -112,8 +104,8 @@ public class GiftList implements Serializable {
 		this.nome = giftList.getNome();
 		this.escursioni = Escursione.copiaToEscursione(giftList.getEscursioni());
 		this.pernottamenti = Pernottamento.copiaToPernottamento(giftList.getPernottamenti());
-		this.pacchettiContenuti = Pacchetto.copiaToPacchetto(giftList.getPacchettiContenuti());
-		this.voli = Volo.copiaToVolo(giftList.getVoli());	
+		this.pacchettiContenuti = Pacchetto.copiaToPacchetto(giftList.getPacchettiContenuti());	
+		this.voli = VoliAcquistatiProva.copiaToVoloAcquistatoProva(giftList.getVoli());
 	}
 	
 	public static List<GiftList> copiaToGiftList(List<GiftListDTO> lista){
@@ -159,11 +151,11 @@ public class GiftList implements Serializable {
 	
 	
 	
-	public List<Volo> getVoli() {
+	public List<VoliAcquistatiProva> getVoli() {
 		return voli;
 	}
 
-	public void setVoli(List<Volo> voli) {
+	public void setVoli(List<VoliAcquistatiProva> voli) {
 		this.voli = voli;
 	}
 

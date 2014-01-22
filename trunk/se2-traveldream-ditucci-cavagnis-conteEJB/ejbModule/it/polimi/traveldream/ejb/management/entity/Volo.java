@@ -74,6 +74,15 @@ public class Volo implements Serializable {
 		return copia;
 	}
 	
+	public static List<Volo> copiaToVoloAcquistatoProva(List<VoloDTO> lista){
+		List<Volo> copia = new ArrayList<Volo>();
+		for(int i=0; i<lista.size(); i++){
+			Volo daAggiungere = new Volo(lista.get(i));
+			copia.add(daAggiungere);	
+		}
+		return copia;
+	}
+	
 	public static List<VoloDTO> copiaToVoloDTO(List<Volo> lista){
 		ArrayList<VoloDTO> copia = new ArrayList<VoloDTO>();
 		for(int i=0; i<lista.size(); i++){
@@ -163,8 +172,8 @@ public class Volo implements Serializable {
 	 * associazione many to many con Gift List
 	 */
 	
-		@ManyToMany(mappedBy="voli",cascade = CascadeType.PERSIST)
-		private List<GiftList> giftLists;
+		@OneToMany(cascade=CascadeType.REMOVE)
+		private List<VoliAcquistatiProva> giftLists;
 		
 	/**
 	 * associazione con Pacchetto (volinpacchetto)
