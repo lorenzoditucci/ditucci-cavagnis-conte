@@ -44,15 +44,15 @@
 			<h:panelGrid columns="3" id="pacchettoGrid">
 			
 			<h:outputLabel for="nome">Nome:</h:outputLabel>
-			<h:inputText id="nome" value="#{gestionePacchettoBean.pacchetto.nome}" />
+			<h:outputLabel id="nome" value="#{gestionePacchettoBean.pacchetto.nome}" />
 		    <h:message for="nome"></h:message>
 		    
 		    <h:outputLabel for="descrizione">Descrizione:</h:outputLabel>
-			<h:inputText id="descrizione" value="#{gestionePacchettoBean.pacchetto.descrizione}" />
+			<h:outputLabel id="descrizione" value="#{gestionePacchettoBean.pacchetto.descrizione}" />
 		    <h:message for="descrizione"></h:message>
 		    
 		    <h:outputLabel for="disponibilita-max">Disponibilità max:</h:outputLabel> 
-            <h:inputText id="disponibilita-max" value="#{gestionePacchettoBean.pacchetto.disponibilitaMax}" />
+            <h:outputLabel id="disponibilita-max" value="#{gestionePacchettoBean.pacchetto.disponibilitaMax}" />
             <h:message for="disponibilita-max"></h:message>
             
             <h:outputLabel for="disponibilita-attuale">Disponibilità attuale:</h:outputLabel> 
@@ -60,11 +60,11 @@
             <h:message for="disponibilita-attuale"></h:message>
             
             <h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
-			<p:calendar value="#{gestionePacchettoBean.pacchetto.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy" />  
+			<h:outputLabel value="#{gestionePacchettoBean.pacchetto.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy" />  
 			<h:message for="data-inizio"></h:message>
 			
 			<h:outputLabel for="data-fine">Data di Ritorno:</h:outputLabel>
-			<p:calendar value="#{gestionePacchettoBean.pacchetto.dataFine}" id="data-fine" pattern="MM/dd/yyyy" />
+			<h:outputLabel value="#{gestionePacchettoBean.pacchetto.dataFine}" id="data-fine" pattern="MM/dd/yyyy" />
 			<h:message for="data-fine"></h:message>
 			
 			<h:outputLabel for="costo">Costo:</h:outputLabel> 
