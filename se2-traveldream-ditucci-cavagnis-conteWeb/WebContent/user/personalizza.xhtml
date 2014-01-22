@@ -132,7 +132,7 @@
 				</p:column>
 				
 				<p:column>
-					<h:commandLink value = "Rimuovi Pernottamento"/>
+					<h:commandLink value = "Rimuovi Pernottamento" action="#{personalizzaPacchettoBean.rimuoviPernottamento(pernottamento)}"/>
 				</p:column>
 				</p:dataTable>
 			<h:commandLink value="Aggiungi Pernottamento"></h:commandLink><br/>
@@ -161,7 +161,7 @@
 				</p:column>
 				
 				<p:column>
-					<h:commandLink value = "Rimuovi Escursione"/>
+					<h:commandLink value = "Rimuovi Escursione" action = "#{personalizzaPacchettoBean.rimuoviEscursione(escursione)}"/>
 				</p:column>
 			</p:dataTable>
 			<h:commandLink value = "Aggiungi Escursione"/>
