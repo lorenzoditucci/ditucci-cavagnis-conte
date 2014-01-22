@@ -38,7 +38,6 @@
   </p:layoutUnit>  
     <p:layoutUnit position="center">  
     	
-    	 <h:form id="modificaPacchettoForm">  
   
 		<p:panel header="Dati del pacchetto">
 		
@@ -73,6 +72,25 @@
             <h:message for="costo"></h:message>
         </h:panelGrid>
        </p:panel>
+       
+       
+     <h:form id="modificaVoliForm">  
+       <p:growl id="msgs" /> 
+       
+       <p:panel header="Inserisci id Volo">  
+    	<h:panelGrid columns="2" id="grid"> 
+
+            <h:outputLabel value="Id Volo (Rispettare ordine dei voli): " for="idVolo"></h:outputLabel>  
+            <p:inputText id="idVolo"   
+                            value="#{gestionePacchettoBean.idVoloDaCercare}" required="true"/>  
+        
+            <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
+                            action="#{gestionePacchettoBean.cercaEAggiungiVolo()}" update="voli msgs @parent" >  
+             
+            </p:commandButton>  
+        </h:panelGrid>  
+    </p:panel>  
+       
        
       	Voli contenuti nel pacchetto
        <p:outputPanel id="voli">  
@@ -139,7 +157,7 @@
                 <f:facet name="header">   
                     <h:outputText value="Operazione" />  
                 </f:facet>  
-                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:voli" process=":modificaPacchettoForm:voli">  
+                <p:commandLink value="Rimuovi" update=":modificaVoliForm:voli" process=":modificaVoliForm:voli">  
                     <p:collector value="#{volo}"  
                                  removeFrom="#{gestionePacchettoBean.pacchetto.voli}" />  
                 </p:commandLink>  
@@ -148,6 +166,33 @@
         </p:dataTable>  
     </p:outputPanel> 
     
+    </h:form>
+    
+    
+  <h:form id="modificaPernottamentiForm">  
+  <p:growl id="msgs" />  
+  
+    <p:panel header="Inserisci id Hotel">  
+    	<h:panelGrid columns="1" id="grid"> 
+
+            <h:outputLabel value="Id Hotel (Rispettare ordine dei voli): " for="idHotel"></h:outputLabel>  
+            <p:inputText id="idHotel"   
+                            value="#{gestionePacchettoBean.idHotelDaCercare}" required="true"/>  
+     <h:outputLabel value="Data inizio " for="data-inizio"></h:outputLabel>             
+              <p:calendar id="data-inizio"   
+                            value="#{gestionePacchettoBean.dataInizio}" required="true" pattern="MM/dd/yyyy" />       
+      <h:outputLabel value="Data fine: " for="data-fine"></h:outputLabel> 
+        	 <p:calendar id="data-fine"   
+                            value="#{gestionePacchettoBean.dataFine}" required="true" pattern="MM/dd/yyyy"/>	
+        		      
+            <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
+                            action="#{gestionePacchettoBean.cercaEAggiungiPernottamento()}" update="pernottamenti msgs @parent" >  
+            </p:commandButton>  
+        </h:panelGrid>  
+    </p:panel> 
+  
+  
+  
    Pernottamenti contenuti nel pacchetto 
     <p:outputPanel id="pernottamenti"> 
         <p:dataTable id="pernottamentoTable" value="#{gestionePacchettoBean.pacchetto.pernotti}" var="pernottamento">  
@@ -197,14 +242,33 @@
                 <f:facet name="header">   
                     <h:outputText value="Operazione" />  
                 </f:facet>  
-                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:pernottamenti" process=":modificaPacchettoForm:pernottamenti">  
+                <p:commandLink value="Rimuovi" update=":modificaPernottamentiForm:pernottamenti" process=":modificaPernottamentiForm:pernottamenti">  
                     <p:collector value="#{pernottamento}"  
                                  removeFrom="#{gestionePacchettoBean.pacchetto.pernotti}" />  
                 </p:commandLink>  
             </p:column>      
         </p:dataTable>  
  </p:outputPanel>  
+ </h:form>
+
+<h:form id="modificaEscursioniForm">  
+  
+<p:growl id="msgs" />  
  
+    <p:panel header="Inserisci id Escursione">  
+    	<h:panelGrid columns="2" id="grid"> 
+
+            <h:outputLabel value="Id Escursione: " for="idEscursione"></h:outputLabel>  
+            <p:inputText id="idEscursione"   
+                            value="#{gestionePacchettoBean.idEscursioneDaCercare}" required="true"/>  
+        
+            <p:commandButton id="cerca-aggiungi" value="Aggiungi"  
+                            action="#{gestionePacchettoBean.cercaEAggiungiEscursione()}" update="escursioni msgs @parent" >  
+             
+            </p:commandButton>  
+        </h:panelGrid>  
+    </p:panel>  
+      
  Escursioni contenute nel pacchetto 
  <p:outputPanel id="escursioni">  
         <p:dataTable id="escursioniTable" value="#{gestionePacchettoBean.pacchetto.escursioni}" var="escursione">  
@@ -264,7 +328,7 @@
                 <f:facet name="header">   
                     <h:outputText value="Operazione" />  
                 </f:facet>  
-                <p:commandLink value="Rimuovi" update=":modificaPacchettoForm:escursioni" process=":modificaPacchettoForm:escursioni">  
+                <p:commandLink value="Rimuovi" update=":modificaEscursioniForm:escursioni" process=":modificaEscursioniForm:escursioni">  
                     <p:collector value="#{escursione}"  
                                  removeFrom="#{gestionePacchettoBean.pacchetto.escursioni}" />  
                 </p:commandLink>  
@@ -273,10 +337,9 @@
         </p:dataTable>  
     </p:outputPanel> 
  
-	</h:form>
-	
-    
-    </p:layoutUnit>  
+</h:form> 
+ 
+</p:layoutUnit>  
     
 </p:layout>    
 </h:body>           
