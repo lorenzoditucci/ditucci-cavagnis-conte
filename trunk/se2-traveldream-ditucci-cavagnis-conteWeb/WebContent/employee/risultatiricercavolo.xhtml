@@ -22,7 +22,7 @@
 		</h:form>
 		<h:form><h4>Ricerca Pacchetto</h4></h:form>
 		
-		<h:form><h:link value="Crea Pacchetto" outcome=""></h:link></h:form>
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
 		
 		<h:form><h:link value="Aggiungi prodotto base" outcome="aggiungiprodottobase"></h:link></h:form>
 		
@@ -33,27 +33,22 @@
   
     <p:layoutUnit position="center">  
   
-   <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-  
-  	<h:form id="formEscursione">
-        <ui:repeat var="escursione" value="#{cercaProdottoBaseBean.risultatoRicercaEscursione}">
-    	<h:outputLabel value="id - #{escursione.idEscursione}" /><br/>
-    	<h:outputLabel value="nome - #{escursione.nome}" /><br/>
-    	<h:outputLabel value="descrizione - #{escursione.descrizione}" /><br/>
-    	<h:outputLabel value="data inizio- #{escursione.dataInizio}" /><br/>
-    	<h:outputLabel value="data fine - #{escursione.dataFine}" /><br/>
-    	<h:outputLabel value="città - #{escursione.citta}" /><br/>
-    	<h:outputLabel value="costo - #{escursione.costo}" /><br/>
-    	<h:outputLabel value="acquistato - #{escursione.acquistato}" /><br/>
-    	<br/>
-    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione)}">  
+        <ui:repeat var="volo" value="#{cercaProdottoBaseBean.risultatoRicercaVolo}">
+    	<h:outputLabel value="id - #{volo.idVolo}" /><br/>
+    	<h:outputLabel value="compagnia - #{volo.compagnia}" /><br/>
+    	<h:outputLabel value="Città partenza - #{volo.cittaPartenza}" /><br/>
+		<h:outputLabel value="Città arrivo - #{volo.cittaArrivo}" /><br/>
+		<h:outputLabel value="Data partenza - #{volo.dataPartenza}" /><br/>
+		<h:outputLabel value="Data arrivo - #{volo.dataArrivo}" /><br/>
+	    <h:outputLabel value="Costo - #{volo.costo}" /><br/>
+	    <h:outputLabel value="Acquistato - #{volo.acquistato}" /><br/>
+	
+    	<p>-----------------</p><br/>
+    	<p:commandLink id="elimina" action="#{voloBean.rimuoviVolo(volo)}">  
         <h:outputText value="Elimina" />  
         </p:commandLink> 
     	
     	</ui:repeat>
-    </h:form>
-    	
-    	 
   
     
     </p:layoutUnit>  

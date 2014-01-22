@@ -22,7 +22,7 @@
 		</h:form>
 		<h:form><h4>Ricerca Pacchetto</h4></h:form>
 		
-		<h:form><h:link value="Crea Pacchetto" outcome=""></h:link></h:form>
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
 		
 		<h:form><h:link value="Aggiungi prodotto base" outcome="aggiungiprodottobase"></h:link></h:form>
 		
@@ -33,22 +33,27 @@
   
     <p:layoutUnit position="center">  
   
-        <ui:repeat var="hotel" value="#{cercaProdottoBaseBean.risultatoRicercaHotel}">
-    	<h:outputLabel value="id - #{hotel.idHotel}" /><br/>
-    	<h:outputLabel value="nome - #{hotel.nome}" /><br/>
-    	<h:outputLabel value="descrizione - #{hotel.indirizzo}" /><br/>
-    	<h:outputLabel value="citta - #{hotel.citta}" /><br/>
-    	<h:outputLabel value="classe - #{hotel.classe}" /><br/>
-    	<h:outputLabel value="costo - #{hotel.costo}" /><br/>
-    	<h:outputLabel value="acquistato - #{hotel.acquistato}" /><br/>
-    	<p>-----------------</p><br/>
-    	
-    	<p:commandLink id="elimina" action="#{hotelBean.rimuoviHotel(hotel)}">  
-        <h:outputText value="Elimina" />  
-        </p:commandLink> 	
-    
-    	</ui:repeat>
+   <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
   
+  	<h:form id="formEscursione">
+        <ui:repeat var="escursione" value="#{cercaProdottoBaseBean.risultatoRicercaEscursione}">
+    	<h:outputLabel value="id - #{escursione.idEscursione}" /><br/>
+    	<h:outputLabel value="nome - #{escursione.nome}" /><br/>
+    	<h:outputLabel value="descrizione - #{escursione.descrizione}" /><br/>
+    	<h:outputLabel value="data inizio- #{escursione.dataInizio}" /><br/>
+    	<h:outputLabel value="data fine - #{escursione.dataFine}" /><br/>
+    	<h:outputLabel value="città - #{escursione.citta}" /><br/>
+    	<h:outputLabel value="costo - #{escursione.costo}" /><br/>
+    	<h:outputLabel value="acquistato - #{escursione.acquistato}" /><br/>
+    	<br/>
+    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione)}">  
+        <h:outputText value="Elimina" />  
+        </p:commandLink> 
+    	
+    	</ui:repeat>
+    </h:form>
+    	
+    	 
   
     
     </p:layoutUnit>  
