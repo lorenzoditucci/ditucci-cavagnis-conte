@@ -7,6 +7,7 @@ import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,7 @@ public class PersonalizzaPacchettoBean {
 	private VisualizzaDettagliGLMgr glMgr;
 
 	private PacchettoDTO pacchetto;
+	private PacchettoDTO pacchettoOriginaleDto;
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -32,13 +34,21 @@ public class PersonalizzaPacchettoBean {
 	
 	public String personalizza(PacchettoDTO p){
 		this.pacchetto = p;
+		this.pacchetto.setPernotti(getPernottamenti(p));
+		this.pacchettoOriginaleDto = p;
+		this.pacchettoOriginaleDto.setPernotti(getPernottamenti(p));
 		return "personalizza";
 	}
 	
-	public List<PernottamentoDTO> getPernottamenti(){
+	public List<PernottamentoDTO> getPernottamenti(PacchettoDTO p) {
 		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
-		pernottamenti = glMgr.cercaPernottamentiDaPacchetto(pacchetto);
+		pernottamenti = glMgr.cercaPernottamentiDaPacchetto(p);
 		return pernottamenti;
+	}
+	
+	public void rimuoviVolo(VoloDTO volo){
+		this.pacchetto.getVoli().remove(volo);
+		return;
 	}
 	
 	

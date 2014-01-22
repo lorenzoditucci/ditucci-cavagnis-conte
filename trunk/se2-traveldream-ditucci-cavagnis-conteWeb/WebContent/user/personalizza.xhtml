@@ -101,7 +101,7 @@
 				</p:column>
 				
 				<p:column>
-					<h:commandLink value = "Rimuovi Volo"/>
+					<h:commandLink value = "Rimuovi Volo" action="#{personalizzaPacchettoBean.rimuoviVolo(volo)}"/>
 				</p:column>
 				</p:dataTable>
 				<h:commandLink value="Aggiungi Volo"></h:commandLink><br/>
@@ -109,7 +109,7 @@
 				
 				<!-- Mostro dettagli dei pernottamenti -->
 				<p:outputLabel>Pernottamenti</p:outputLabel>
-				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.getPernottamenti()}">
+				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.pacchetto.pernotti}">
 					<p:column>
 					<f:facet name="header">
 						<h:outputText value="Nome Hotel"/>
