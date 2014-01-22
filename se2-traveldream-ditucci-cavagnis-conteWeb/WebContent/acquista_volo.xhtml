@@ -47,6 +47,7 @@
 					<p:outputLabel value="partenza #{prodottoBaseBean.voloDaAcquistare.dataPartenza} arrivo #{prodottoBaseBean.voloDaAcquistare.dataArrivo}"/><br/>
 					<p:outputLabel value="costo: #{prodottoBaseBean.voloDaAcquistare.costo}"/><br/>
 					Il tuo nome:<p:inputText value="#{prodottoBaseBean.nomeAcquirente}"/><br/>
+					<h:message for="erroreAcquisto"/>
 					<p:commandButton value="Conferma Acquisto" action="#{prodottoBaseBean.registraAcquistoVolo()}"/>
 				</h:form>
 			</div>
