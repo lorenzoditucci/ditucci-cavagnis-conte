@@ -19,6 +19,7 @@ import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class EscursioneMgrBean implements EscursioneMgr {
@@ -37,7 +38,7 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		Escursione newEscursione = new Escursione(escursione);
 		em.persist(newEscursione);
 		
-		/*Aggiungi cittˆ al db*/
+		/*Aggiungi cittï¿½ al db*/
 		CittaDTO cittaDaInserire = new CittaDTO();
 		cittaDaInserire.setNome(escursione.getCitta());
 		cittaMgrBean.save(cittaDaInserire);
@@ -47,6 +48,7 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		ArrayList<EscursioneDTO> copia = new ArrayList<EscursioneDTO>();
 		for(int i=0; i<listaEscursione.size(); i++){
 			EscursioneDTO daAggiungere = new EscursioneDTO();
+			daAggiungere.setIdEscursione(listaEscursione.get(i).getIdEscursione());
 			daAggiungere.setNome(listaEscursione.get(i).getNome());
 			daAggiungere.setDescrizione(listaEscursione.get(i).getDescrizione());
 			daAggiungere.setCitta(listaEscursione.get(i).getCitta());
@@ -65,4 +67,12 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		Escursione e = em.find(Escursione.class, id);
         em.remove(e);
 	}
+	 
+	 @Override
+		public List<EscursioneDTO> cercaEscursionePerID(int idEscursioneDaCercare){
+			TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursioneId", Escursione.class);
+	    	List<Escursione> listaEscursione = queryRicerca.setParameter("idEscursione", idEscursioneDaCercare).getResultList();
+	    	
+	    	return copiaListaToDTO(listaEscursione); 
+		}
 }

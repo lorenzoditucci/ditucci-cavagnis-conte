@@ -3,6 +3,7 @@ package it.polimi.traveldream.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
@@ -28,11 +29,16 @@ public class PersonalizzaPacchettoBean {
 	@EJB
 	private VoloMgr voloMgr;
 
+	@EJB
+	private EscursioneMgr escursioneMgr;
 	private PacchettoDTO pacchetto;
 	private PacchettoDTO pacchettoOriginaleDto;
 	
 	private int idVolo;
 	private List<VoloDTO> voliCercati;
+	
+	private int idEscursione;
+	private List<EscursioneDTO> escursioniCercate;
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -53,6 +59,22 @@ public class PersonalizzaPacchettoBean {
 	}
 	
 	
+
+	public int getIdEscursione() {
+		return idEscursione;
+	}
+
+	public void setIdEscursione(int idEscursione) {
+		this.idEscursione = idEscursione;
+	}
+
+	public List<EscursioneDTO> getEscursioniCercate() {
+		return escursioniCercate;
+	}
+
+	public void setEscursioniCercate(List<EscursioneDTO> escursioniCercate) {
+		this.escursioniCercate = escursioniCercate;
+	}
 
 	public List<VoloDTO> getVoliCercati() {
 		return voliCercati;
@@ -93,11 +115,25 @@ public class PersonalizzaPacchettoBean {
 	
 	public void cercaVolo(){
 		this.voliCercati = voloMgr.cercaVoloPerID(idVolo);
+		return;
 	}
 	
 	public String aggiungiVolo(VoloDTO volo){
 		if(!pacchetto.getVoli().contains(volo)){
 			pacchetto.getVoli().add(volo);
+		}
+			
+		return "personalizza";
+	}
+	
+	public void cercaEscursione(){
+		this.escursioniCercate = escursioneMgr.cercaEscursionePerID(idEscursione);
+		return;
+	}
+	
+	public String aggiungiEscursione(EscursioneDTO escursione){
+		if(!pacchetto.getEscursioni().contains(escursione)){
+			this.pacchetto.getEscursioni().add(escursione);
 		}
 			
 		return "personalizza";
