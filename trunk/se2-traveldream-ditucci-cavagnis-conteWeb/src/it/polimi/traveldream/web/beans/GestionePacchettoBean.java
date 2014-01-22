@@ -90,7 +90,6 @@ public class GestionePacchettoBean {
 	
 	public String cercaEAggiungiVolo(){
 		VoloDTO volo=new VoloDTO();
-		System.out.println("sono dentro al metodo");
 		  
     	if(gestionePacchettoMgr.cercaVolo(idVoloDaCercare).isEmpty()){
     		
@@ -200,16 +199,13 @@ public class GestionePacchettoBean {
 		ricalcolaCosto();
 		ricalcolaCittaDestinazione();
 		
-		System.out.println(getPacchetto().getVoli().size());
-		System.out.println(getPacchetto().getPernotti().size());
-		
-		
 			if(gestionePacchettoMgr.controllaCoerenza(this.pacchetto)==false)
 			{
-			System.out.println("Non coerente");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Modifiche non coerenti", "Modifica non coerente"));	
+			return null;
 			}
 		
+		/*nuova pagina*/	
 		return null;
 	}
 
@@ -237,7 +233,6 @@ public class GestionePacchettoBean {
 		costoTotModificato+=aggiornaPrezzoPacchettoConPernottamenti();
 	
 		/*aggiornamento costo*/
-		System.out.println(costoTotModificato);
 		getPacchetto().setCosto(costoTotModificato);
 	}
 	
