@@ -32,16 +32,7 @@ public class VisualizzaDettagliGLMgrBean implements VisualizzaDettagliGLMgr {
 	// TODO Auto-generated constructor stub
 }
 	
-	/*
-	 *  public ArrayList<GiftListDTO> cercaGLperMail(String userEmail) {
-    	
-    	TypedQuery<GiftList> queryRicerca = em.createNamedQuery("cercaGiftListPerMail", GiftList.class);
-    	List<GiftList> listaGiftList =  queryRicerca.setParameter("mail", userEmail).getResultList();
-		
-    	return copiaListaQuery(listaGiftList);     
-    }
-    
-	 */
+	
 	@Override 
 	public List<PernottamentoDTO> cercaPernottamentiDaPacchetto(PacchettoDTO pacchetto){
 		TypedQuery<Pernottamento> queryRicerca = em.createNamedQuery("Pernottamento.cercaPernottamentoIdPacchetto", Pernottamento.class);
