@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<title>Inserisci Pacchetto in Gift List</title>
+</h:head>
+<h:body>
+<!-- chiamo il bean -->
+#{pacchettoBean.cercaAll()}
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+</div>
+<div id="menu-sinistra">
+
+		<h:form>
+	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
+	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
+	    </h:form>
+	    	<h:link  outcome="gestioneGL/gestione">
+	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
+	    		- Gestione Gifti List
+	    	</h:link><br/>
+	    	<h:link  outcome="pacchettiAcquistati.xhtml">
+	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+	    		- Pacchetti Acquistati
+	    	</h:link><br/>
+	    	
+	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+    
+			<p:panel>
+			
+				<h:panelGrid columns="1" id="pacchettoGrid">
+		
+				
+	         
+	
+				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
+				<p:message for="nome-pacchetto"></p:message>
+					
+					
+				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
+				<h:message for="data-inizio"></h:message>
+				
+				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+				<h:message for="data-fine"></h:message>
+				
+				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
+	            <h:message for="costo-pacchetto"></h:message>
+				
+				
+			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
+	       </h:panelGrid>
+	       </p:panel>
+		</h:form>
+	
+</div>
+	<div id='contenitore-centrale'>
+		<p:panel header="Inserisci id Escursione">  
+    	<h:panelGrid columns="2" id="grid"> 
+		<h:form>
+            <h:outputLabel value="Id Escursione: " for="idEscursione"></h:outputLabel>  
+            <p:inputText id="idEscursione"   
+                            value="#{personalizzaPacchettoBean.idEscursione}" required="true"/>  
+        
+            <h:commandButton value="Cerca"  
+                            action="#{personalizzaPacchettoBean.cercaEscursione()}" update="escursioniGrid"  >  
+             
+            </h:commandButton>  
+        </h:form>
+        </h:panelGrid>  
+        
+        <h:form>
+        <h:panelGrid id="escursioniGrid">
+        <p:dataTable id = "escursioni" value="#{personalizzaPacchettoBean.escursioniCercate}" var="escursione">
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Id"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.idEscursione}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Nome"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.nome}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Descrizione"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.descrizione}"/>
+        	</p:column>
+        	
+ 			<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Inizio"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.dataInizio}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Fine"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.dataFine}"/>
+        	</p:column>
+ 			
+ 			<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Città"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.citta}"/>
+        	</p:column>  
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Costo"/>
+        		</f:facet>
+        		<h:outputText value="#{escursione.costo}"/>
+        	</p:column> 
+        	
+        	<p:column>
+        		<h:commandLink value="Aggiungi Escursione" action="#{personalizzaPacchettoBean.aggiungiEscursione(escursione)}"/>
+        	</p:column>     
+        </p:dataTable>
+        </h:panelGrid>
+        </h:form>
+    </p:panel>
+    	
+	</div>
+</div>
+</h:body>           
+</html>
+
