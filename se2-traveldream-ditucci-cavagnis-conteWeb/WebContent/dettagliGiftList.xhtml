@@ -10,7 +10,8 @@
 	<title>GiftList - Dettagli</title>
 </h:head>
 <h:body>
-#{cercaGiftListBean.aggiornaAcquistati()}
+#{cercaGiftListBean.aggiornaVoliAcquistati()}
+#{cercaGiftListBean.aggiornaPernottamentiDiPacchetto()}
 	<div id="background" />
 	<div id='contenitore-geneale'>
 		<div id="banner-top"></div>
@@ -79,6 +80,18 @@
 					</f:facet>
 					<h:outputText value = "#{volo.dataArrivo}"/>
 				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Compagnia"/>
+					</f:facet>
+					<h:outputText value = "#{volo.compagnia}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="prezzo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.costo}"/>
+				</p:column>
 				
 				<p:column>
 					<f:facet name="header">
@@ -117,7 +130,18 @@
 					</f:facet>
 					<h:outputText value = "#{volo.dataArrivo}"/>
 				</p:column>
-				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Compagnia"/>
+					</f:facet>
+					<h:outputText value = "#{volo.compagnia}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="prezzo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.costo}"/>
+				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Azione" />
@@ -125,9 +149,9 @@
 					<h:commandButton value="Acquista Volo" action="#{prodottoBaseBean.acquistaProdottoBaseVolo(volo,giftlist)}" />
 				</p:column>
 			</p:dataTable>
-			<!-- Mostro i dettagli dei pernottamenti-->
-			<p:outputLabel>Pernottamenti</p:outputLabel>
-			<p:dataTable var="pernottamento" value="#{cercaGiftListBean.getPernottamentiDiPacchetto(pacchetto)}">
+			<!-- dettagli pernottamenti già acquistati -->
+			<p:outputLabel>Pernottamenti Già Acquistati</p:outputLabel>
+			<p:dataTable var="pernottamento" value="#{cercaGiftListBean.risultatiPernottamentiAcquistati}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Nome Hotel"/>
@@ -147,6 +171,62 @@
 						<h:outputText value="Data Fine"/>
 					</f:facet>
 					<h:outputText value = "#{pernottamento.dataFine}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Classe Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.classe}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="prezzo"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.costo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Azione" />
+					</f:facet>
+					<h:outputText value="Già Acquistato" />
+				</p:column>
+			</p:dataTable>
+			
+			<!-- Mostro i dettagli dei pernottamenti Non ancora acquistati-->
+			<p:outputLabel>Pernottamenti non ancora acquistati</p:outputLabel>
+			<p:dataTable var="pernottamento" value="#{cercaGiftListBean.risultatiPernottamentiLiberi}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data inizio Prenotazione"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataInizio}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fine"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataFine}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Classe Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.classe}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="prezzo"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.costo}"/>
 				</p:column>
 				<p:column>
 					<f:facet name="header">

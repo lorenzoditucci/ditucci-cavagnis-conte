@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
+import it.polimi.traveldream.ejb.management.PernottamentiAcquistatiMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoliAcquistatiProvaMGR;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentiAcquistatiDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoliAcquistatiProvaDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
@@ -40,6 +42,9 @@ public class CercaGiftListBean {
 	
 	@EJB
 	private VoliAcquistatiProvaMGR voliAcquistatiProvaMGR;
+	
+	@EJB
+	private PernottamentiAcquistatiMgr pernottamentiAcquistatiMgr;
 	/**
 	 * qui ci salvo il risultato della ricerca
 	 */
@@ -51,6 +56,14 @@ public class CercaGiftListBean {
 	private List<VoloDTO> risultatiVoliAcquistati;
 	/* qua ci sono i VOLO liberi*/
 	private List<VoloDTO> risultatiVoliLiberi;
+	
+	/*PERNOTTAMENTIACQUISTATIDTO pernottamenti acquistati*/
+	private List<PernottamentiAcquistatiDTO> pernottamentiAcquistati;
+	/* pernottamenti realmente acquistati*/
+	private List<PernottamentoDTO> risultatiPernottamentiAcquistati;
+	/* pernottamenti ancora liberi*/
+	private List<PernottamentoDTO> risultatiPernottamentiLiberi;
+	
 	/**
 	 * parametro che passo contente l'id della gift list da cercare.
 	 */
@@ -67,7 +80,7 @@ public class CercaGiftListBean {
 
         	 public String cerca(){
         	    	setRisultatoRicerca(cercaMGR.cerca(Integer.parseInt(idRicerca)));
-        	    	aggiornaAcquistati();
+        	    	aggiornaVoliAcquistati();
         	    	if(getRisultatoRicerca().size()==0){
         	    		FacesContext.getCurrentInstance().addMessage("cercaGiftList:codiceGiftList", new FacesMessage(FacesMessage.SEVERITY_ERROR,"giftListNonTrovato", "GiftList non trovata!"));
         	    		return "";
@@ -75,7 +88,7 @@ public class CercaGiftListBean {
         	    	return "giftList?faces-redirect=true";
         	    }
 
-			public void aggiornaAcquistati() {
+			public void aggiornaVoliAcquistati() {
 				setVoliAcquistati(voliAcquistatiProvaMGR.cercaVoliAcquistati(Integer.parseInt(idRicerca)));
 				smistaVoli();
 			}    
@@ -110,6 +123,41 @@ public class CercaGiftListBean {
 			}
 		}
 		
+	}
+
+    public void aggiornaPernottamentiDiPacchetto(){
+    	/* salvo i dto dei pacchettoAcquistato */
+    	setPernottamentiAcquistati(pernottamentiAcquistatiMgr.cercaPernottamentiAcquistati(Integer.parseInt(idRicerca)));
+    	smistaPernottamenti();
+    	
+    	
+    }
+    
+	private void smistaPernottamenti() {
+		setRisultatiPernottamentiAcquistati(new ArrayList<PernottamentoDTO>());
+		setRisultatiPernottamentiLiberi(new ArrayList<PernottamentoDTO>());
+		for(GiftListDTO g:risultatoRicerca){
+			for(PacchettoDTO p:g.getPacchettiContenuti()){
+				for(PernottamentoDTO pernottamento: getPernottamentiDiPacchetto(p)){
+					if(eAcquistato(pernottamento)){
+						getRisultatiPernottamentiAcquistati().add(pernottamento);
+					}else{
+						getRisultatiPernottamentiLiberi().add(pernottamento);
+					}
+				}
+			}
+			System.out.println("pacchetti liberi size= "+getRisultatiPernottamentiLiberi().size());
+		}
+		
+	}
+
+	private boolean eAcquistato(PernottamentoDTO pernottamento) {
+		for(int i=0;i<pernottamentiAcquistati.size();i++){
+			if(pernottamento.getIdPernottametto()==pernottamentiAcquistati.get(i).getIdPernottamento()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<PernottamentoDTO> getPernottamentiDiPacchetto(PacchettoDTO pacchetto){
@@ -157,4 +205,32 @@ public class CercaGiftListBean {
 	public void setRisultatiVoliLiberi(List<VoloDTO> risultatiVoliLiberi) {
 		this.risultatiVoliLiberi = risultatiVoliLiberi;
 	}
+
+	public List<PernottamentiAcquistatiDTO> getPernottamentiAcquistati() {
+		return pernottamentiAcquistati;
+	}
+
+	public void setPernottamentiAcquistati(List<PernottamentiAcquistatiDTO> pernottamentiAcquistati) {
+		this.pernottamentiAcquistati = pernottamentiAcquistati;
+	}
+
+	public List<PernottamentoDTO> getRisultatiPernottamentiAcquistati() {
+		return risultatiPernottamentiAcquistati;
+	}
+
+	public void setRisultatiPernottamentiAcquistati(
+			List<PernottamentoDTO> risultatiPernottamentiAcquistati) {
+		this.risultatiPernottamentiAcquistati = risultatiPernottamentiAcquistati;
+	}
+
+	public List<PernottamentoDTO> getRisultatiPernottamentiLiberi() {
+		return risultatiPernottamentiLiberi;
+	}
+
+	public void setRisultatiPernottamentiLiberi(
+			List<PernottamentoDTO> risultatiPernottamentiLiberi) {
+		this.risultatiPernottamentiLiberi = risultatiPernottamentiLiberi;
+	}
+
+
 }
