@@ -1,6 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import java.util.ArrayList;
@@ -17,10 +18,12 @@ import javax.faces.bean.ViewScoped;
 public class GestioneGiftListBean {
 	@EJB
 	private GiftListMgr giftListMgr;
-
+	@EJB
+	private UserMgr userMgr;
+	
 	private GiftListDTO giftList;
 	
-	@ManagedProperty("#{userBean.mail}")
+	//@ManagedProperty("#{userBean.mail}")
 	private String userEmail;
 	
 	private ArrayList<GiftListDTO> risultatoRicerca;
@@ -56,6 +59,7 @@ public class GestioneGiftListBean {
 	}
 	
 	public String cercaGlPerMail(){
+		userEmail = userMgr.getUserDTO().getEmail();
 		setRisultatoRicerca(giftListMgr.cercaGLperMail(this.userEmail));
 		return "gestione?faces-redirect=true";
 	}
