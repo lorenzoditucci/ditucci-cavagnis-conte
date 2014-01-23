@@ -18,6 +18,7 @@ import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Acquista;
 import it.polimi.traveldream.ejb.management.entity.Citta;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
@@ -175,5 +176,19 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 		 	em.merge(listaPernottamento.get(i));
 		}
 	}
+
+	@Override
+	public boolean controllaChePacchettoNonFacciaParteDiGL(
+			PacchettoDTO pacchetto) {
+			/*le query sulle tabelle di join si fanno solo con le native query*/
+			String sqlQuery = "SELECT * FROM Contiene WHERE idPacchetto = "+pacchetto.getIdPacchetto();
+			
+			if(em.createNativeQuery(sqlQuery).getResultList().isEmpty())
+				return true;
+			
+		return false;
+	}
+
+
 
 }

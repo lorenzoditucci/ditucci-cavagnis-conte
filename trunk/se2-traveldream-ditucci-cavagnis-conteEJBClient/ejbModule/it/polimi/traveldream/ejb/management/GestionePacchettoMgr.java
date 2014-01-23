@@ -26,5 +26,9 @@ public interface GestionePacchettoMgr {
 	public List<EscursioneDTO> cercaEscursione(int idEscursioneDaCercare);
 
 	public boolean controllaCoerenza(PacchettoDTO pacchetto) throws CoerenzaException;
+
+	public boolean controllaChePacchettoNonFacciaParteDiGL(
+			PacchettoDTO pacchetto);
+
 	
 }

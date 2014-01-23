@@ -190,11 +190,21 @@ public class GestionePacchettoBean {
 
 
 	public String inviaComunicazione(){
+		
 		System.out.println(avviso);
 		return null;
 	}
 	
 	public String salvaModifichePacchetto(){
+		/*condizioni per la modifica di un pacchetto:
+		 * - che non sia stato acquistato da nessuno
+		 * - che non faccia parte di una giftlist
+		 * */
+		if(!gestionePacchettoMgr.controllaChePacchettoNonFacciaParteDiGL(this.pacchetto)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il pacchetto fa parte di una GL e non pu˜ essere modificato", "Modifiche non salvate"));	
+			return null;
+		}
+		
 		
 		ricalcolaCosto();
 		ricalcolaCittaDestinazione();
