@@ -10,8 +10,10 @@ import it.polimi.traveldream.ejb.management.dto.UserDTO;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 
 @ManagedBean(name="inserisciPacchettoInGLBean")
@@ -43,6 +45,11 @@ public class InserisciPacchettoInGLBean {
 	}
 	
 	public String aggiungi(GiftListDTO gl){
+		if(gl.getPacchettiContenuti().contains(pDTO)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore."
+					+ " Il pacchetto selezionato è già inserito nella Gift List", ""));
+			return "index";
+		}
 		glBean.aggiungiPacchetto(gl, pDTO);
 		return "visualizzaPacchetto";
 	}

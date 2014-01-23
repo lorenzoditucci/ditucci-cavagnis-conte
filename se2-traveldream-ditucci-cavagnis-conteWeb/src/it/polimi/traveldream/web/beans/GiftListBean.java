@@ -3,6 +3,7 @@ package it.polimi.traveldream.web.beans;
 import java.util.ArrayList;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 
 import javax.annotation.PostConstruct;
@@ -19,9 +20,12 @@ public class GiftListBean {
 	@EJB
 	private GiftListMgr giftListMgr;
 
+	@EJB
+	private UserMgr userMgr;
+	
 	private GiftListDTO giftList;
 	
-	@ManagedProperty("#{userBean.mail}")
+	//@ManagedProperty("#{userBean.mail}")
 	private String userEmail;
 
 
@@ -49,6 +53,7 @@ public class GiftListBean {
 	}
 
 	public String aggiungiGiftList() {
+		userEmail = userMgr.getUserDTO().getEmail();
 		giftList.setMailCliente(userEmail);
 		giftListMgr.save(giftList);	
 		return "gestione?faces-redirect=true";
