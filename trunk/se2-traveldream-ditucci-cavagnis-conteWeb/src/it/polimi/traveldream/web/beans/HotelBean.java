@@ -37,6 +37,14 @@ public class HotelBean {
 	}
 	
 	public String rimuoviHotel(HotelDTO h) {
+		
+		if(hotelMgr.controllaAppertenenzaPacchetto(h)){
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il pb fa parte di un pacchetto!",  "Non puoi rimuovere un prodotto base che fa parte di un pacchetto");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			return "";
+		}
+		
+		
 			if(h.getAcquistato()==0){
 				hotelMgr.remove(h.getIdHotel());
 				return "cercahotel";		

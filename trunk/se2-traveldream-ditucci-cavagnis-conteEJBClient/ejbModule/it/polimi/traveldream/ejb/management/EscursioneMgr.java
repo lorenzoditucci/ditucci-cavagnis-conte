@@ -14,6 +14,8 @@ public interface EscursioneMgr {
 
 	public void remove(int id);
 
-	List<EscursioneDTO> cercaEscursionePerID(int idEscursioneDaCercare);
+	public List<EscursioneDTO> cercaEscursionePerID(int idEscursioneDaCercare);
+
+	public boolean controllaAppertenenzaPacchetto(EscursioneDTO e);
 
 }

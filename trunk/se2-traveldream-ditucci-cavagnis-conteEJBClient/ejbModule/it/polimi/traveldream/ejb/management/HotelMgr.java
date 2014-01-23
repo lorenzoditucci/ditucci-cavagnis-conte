@@ -13,6 +13,8 @@ public interface HotelMgr {
 
 	public void remove(int idHotel);
 
-	List<HotelDTO> cercaHotelPerID(int idHotelDaCercare);
+	public List<HotelDTO> cercaHotelPerID(int idHotelDaCercare);
+
+	public boolean controllaAppertenenzaPacchetto(HotelDTO h);
 
 }

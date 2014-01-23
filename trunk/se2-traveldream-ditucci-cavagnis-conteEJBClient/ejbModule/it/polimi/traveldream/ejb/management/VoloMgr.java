@@ -16,4 +16,6 @@ public interface VoloMgr {
 
 	List<VoloDTO> cercaVoloPerID(int idVoloDaCercare);
 
+	public boolean controllaAppertenenzaPacchetto(VoloDTO v);
+
 }

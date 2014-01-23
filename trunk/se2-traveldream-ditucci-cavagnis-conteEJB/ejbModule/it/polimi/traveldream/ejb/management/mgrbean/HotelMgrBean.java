@@ -8,6 +8,7 @@ import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
+import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import javax.annotation.Resource;
@@ -71,6 +72,18 @@ public class HotelMgrBean implements HotelMgr {
     	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", idHotelDaCercare).getResultList();
     	
     	return copiaListaToDTO(listaHotel); 
+	}
+
+	@Override
+	public boolean controllaAppertenenzaPacchetto(HotelDTO h) {
+		TypedQuery<Pernottamento> queryRicercaPernottamenti = em.createNamedQuery("Pernottamento.cercaPernottamentoIdHotel", Pernottamento.class);
+		List<Pernottamento> listaPernottamento = queryRicercaPernottamenti.setParameter("idHotel", h.getIdHotel()).getResultList();
+	
+		if(listaPernottamento.isEmpty())
+			return false;
+		
+		
+		return true;		
 	}
 	
 	

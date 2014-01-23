@@ -21,7 +21,9 @@ import java.util.List;
 @Table(name="Pernottamento")
 @NamedQueries({
 	@NamedQuery(name="Pernottamento.findAll", query="SELECT p FROM Pernottamento p"),
-	@NamedQuery(name="Pernottamento.cercaPernottamentoIdPacchetto", query="SELECT p FROM Pernottamento p WHERE p.pacchetto.idPacchetto= :idPacchetto")
+	@NamedQuery(name="Pernottamento.cercaPernottamentoIdPacchetto", query="SELECT p FROM Pernottamento p WHERE p.pacchetto.idPacchetto= :idPacchetto"),
+	@NamedQuery(name="Pernottamento.cercaPernottamentoIdHotel", query="SELECT p FROM Pernottamento p WHERE p.hotel.idHotel= :idHotel")
+	
 })
 
 public class Pernottamento implements Serializable {

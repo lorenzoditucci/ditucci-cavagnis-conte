@@ -45,7 +45,17 @@ public class EscursioneBean {
 	
 	
 public String rimuoviEscursione(EscursioneDTO e) {
-	System.out.println(e.getIdEscursione());
+	
+	
+	if(escursioneMgr.controllaAppertenenzaPacchetto(e)){
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il pb fa parte di un pacchetto!",  "Non puoi rimuovere un prodotto base che fa parte di un pacchetto");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		return "";
+	}
+	
+	
+	
+	
 		if(e.getAcquistato()==0){
 			escursioneMgr.remove(e.getIdEscursione());
 			return "cercaescursione";		
@@ -55,7 +65,6 @@ public String rimuoviEscursione(EscursioneDTO e) {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			return "";
 		}
-			
 		
 	}
 	

@@ -159,9 +159,6 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 		TypedQuery<Pernottamento> queryRicercaPernottamenti = em.createNamedQuery("Pernottamento.cercaPernottamentoIdPacchetto", Pernottamento.class);
 		List<Pernottamento> listaPernottamento = queryRicercaPernottamenti.setParameter("idPacchetto", newPacchetto.getIdPacchetto()).getResultList();
 	
-		System.out.println("Lista pernottamenti");
-		System.out.println(listaPernottamento.size());
-		
 		for(int i=0; i<pacchettoAggiornato.getPernotti().size(); i++){
 	
 			listaPernottamento.get(i).setDataInizio(pacchettoAggiornato.getPernotti().get(i).getDataInizio());

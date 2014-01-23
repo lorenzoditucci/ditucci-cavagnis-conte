@@ -75,4 +75,17 @@ public class EscursioneMgrBean implements EscursioneMgr {
 	    	
 	    	return copiaListaToDTO(listaEscursione); 
 		}
+	 
+	 @Override
+		public boolean controllaAppertenenzaPacchetto(EscursioneDTO e) {
+			String sqlQuery = "SELECT * FROM EscursioniPacchetto WHERE idEscursione = "+e.getIdEscursione();
+			
+			/*non appartiene a un pacchetto*/
+			if(em.createNativeQuery(sqlQuery).getResultList().isEmpty())
+				return false;
+			
+			/*appartiene ad un pacchetto*/
+			return true;
+			
+		}
 }
