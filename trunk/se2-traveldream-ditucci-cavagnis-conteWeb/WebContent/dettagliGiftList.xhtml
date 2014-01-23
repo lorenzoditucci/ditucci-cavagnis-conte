@@ -12,6 +12,7 @@
 <h:body>
 #{cercaGiftListBean.aggiornaVoliAcquistati()}
 #{cercaGiftListBean.aggiornaPernottamentiDiPacchetto()}
+#{cercaGiftListBean.aggiornaEscursioniAcquistate()}
 	<div id="background" />
 	<div id='contenitore-geneale'>
 		<div id="banner-top"></div>
@@ -236,9 +237,9 @@
 				</p:column>
 			</p:dataTable>
 			
-			<!--  Mostro i dettagli delle escursioni DA METTERE A POSTO-->
-			<p:outputLabel>Escursioni</p:outputLabel>
-			<p:dataTable var="escursione" value = "#{pacchetto.escursioni}">
+			<!--  Mostro i dettagli delle escursioni acquistate-->
+			<p:outputLabel>Escursioni Acquistate</p:outputLabel>
+			<p:dataTable var="escursione" value = "#{cercaGiftListBean.risultatiEscursioniAcquistate}">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Nome"/>
@@ -248,9 +249,15 @@
 				
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Nome"/>
+						<h:outputText value="Partenza"/>
 					</f:facet>
-					<h:outputText value = "#{escursione.nome}"/>
+					<h:outputText value = "#{escursione.dataInizio}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Fine"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.dataFine}"/>
 				</p:column>
 				
 				<p:column>
@@ -265,8 +272,57 @@
 					</f:facet>
 					<h:outputText value = "#{escursione.descrizione}"/>
 				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Azione" />
+					</f:facet>
+					<h:outputText value="Già Acquistato" />
+				</p:column>
 			
 			</p:dataTable>
+			<p:outputLabel>Escursioni Non Ancora Acquistate</p:outputLabel>
+			<p:dataTable var="escursione" value = "#{cercaGiftListBean.risultatiEscursioniLibere}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.dataInizio}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Fine"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.dataFine}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.citta}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrizione"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.descrizione}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Azione" />
+					</f:facet>
+					<h:commandButton value="Acquista Escursione" action="#{prodottoBaseBean.acquistaProdottoBaseEscursione(escursione,giftlist)}" />
+				</p:column>
+			
+			</p:dataTable>
+			
 			</p:outputPanel>
 			
 		</ui:repeat>

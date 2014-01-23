@@ -31,6 +31,7 @@ public class ProdottoBaseBean {
 	
 	private VoloDTO voloDaAcquistare;
 	private PernottamentoDTO pernottamentoDaAcquistare;
+	private EscursioneDTO escursioneDaAcquistare;
 	private GiftListDTO giftListDaAcquistare;
 	private String nomeAcquirente;
 	private Timestamp dataAcquisto;
@@ -67,8 +68,15 @@ public class ProdottoBaseBean {
     
     
     public String acquistaProdottoBaseEscursione(EscursioneDTO escursione,GiftListDTO giftList){
-    	mgr.registraAcquisto(escursione,giftList);
-    	return "acquista?faces-redirect=true";
+    	setGiftListDaAcquistare(giftList);
+    	setEscursioneDaAcquistare(escursione);
+    	return "acquista_escursione?faces-redirect=true";
+    }
+    
+    public String registraAcquistoEscursione(){
+    	setDataAcquistoCalendar(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+    	mgr.registraAcquisto(escursioneDaAcquistare,giftListDaAcquistare,nomeAcquirente,dataAcquisto);
+    	return "dettagliGiftList?faces-redirect=true";
     }
     
     public String acquistaProdottoBasePernottamento(PernottamentoDTO pernottamento,GiftListDTO giftList){
@@ -122,6 +130,14 @@ public class ProdottoBaseBean {
 
 	public void setPernottamentoDaAcquistare(PernottamentoDTO pernottamentoDaAcquistare) {
 		this.pernottamentoDaAcquistare = pernottamentoDaAcquistare;
+	}
+
+	public EscursioneDTO getEscursioneDaAcquistare() {
+		return escursioneDaAcquistare;
+	}
+
+	public void setEscursioneDaAcquistare(EscursioneDTO escursioneDaAcquistare) {
+		this.escursioneDaAcquistare = escursioneDaAcquistare;
 	}
 
 }

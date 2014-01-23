@@ -143,8 +143,8 @@ public class Escursione implements Serializable {
 	 * associazione many to many con Gift List
 	 */
 	
-		@ManyToMany(mappedBy="escursioni", cascade = CascadeType.PERSIST)
-		private List<GiftList> giftLists;
+	@OneToMany(cascade=CascadeType.REMOVE)
+	private List<EscursioniAcquistate> giftLists;
 		
 	/**
 	 * associazione con Pacchetto - escursioniPacchetto
@@ -179,4 +179,13 @@ public class Escursione implements Serializable {
 			return copia;
 		
 	}
+
+	public List<EscursioniAcquistate> getGiftLists() {
+		return giftLists;
+	}
+
+	public void setGiftLists(List<EscursioniAcquistate> giftLists) {
+		this.giftLists = giftLists;
+	}
+
 }

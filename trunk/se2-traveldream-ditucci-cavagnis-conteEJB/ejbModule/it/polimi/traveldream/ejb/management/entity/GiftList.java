@@ -56,17 +56,8 @@ public class GiftList implements Serializable {
 	 * connessione bidirezionale many to many con le escursioni
 	 */
 	
-	@ManyToMany
-		@JoinTable(
-				name="EscursioniAcquistate"
-				, joinColumns={
-						@JoinColumn(name="idGiftList", nullable=false)
-				}
-				, inverseJoinColumns={
-						@JoinColumn(name="idEscursione", nullable=false)
-				}
-				)
-		private List<Escursione> escursioni;
+	@OneToMany(cascade=CascadeType.REMOVE)
+	private List<EscursioniAcquistate> escursioni;
 	
 	/**
 	 * connessione pacchetto - Contiene
@@ -93,7 +84,7 @@ public class GiftList implements Serializable {
 	public GiftList(GiftListDTO giftList) {
 		this.mailCliente = giftList.getMailCliente();
 		this.nome = giftList.getNome();
-		this.escursioni = Escursione.copiaToEscursione(giftList.getEscursioni());
+		this.setEscursioni(EscursioniAcquistate.copiaToEscursione(giftList.getEscursioni()));
 		this.setPernottamenti(PernottamentiAcquistati.copiaToPernottamentiAcquistati(giftList.getPernottamenti()));
 		this.pacchettiContenuti = Pacchetto.copiaToPacchetto(giftList.getPacchettiContenuti());	
 		this.voli = VoliAcquistatiProva.copiaToVoloAcquistatoProva(giftList.getVoli());
@@ -142,14 +133,6 @@ public class GiftList implements Serializable {
 		this.voli = voli;
 	}
 
-	public List<Escursione> getEscursioni() {
-		return escursioni;
-	}
-
-	public void setEscursioni(List<Escursione> escursioni) {
-		this.escursioni = escursioni;
-	}
-
 	public List<Pacchetto> getPacchettiContenuti() {
 		return pacchettiContenuti;
 	}
@@ -166,6 +149,16 @@ public class GiftList implements Serializable {
 
 	public void setPernottamenti(List<PernottamentiAcquistati> pernottamenti) {
 		this.pernottamenti = pernottamenti;
+	}
+
+
+	public List<EscursioniAcquistate> getEscursioni() {
+		return escursioni;
+	}
+
+
+	public void setEscursioni(List<EscursioniAcquistate> escursioni) {
+		this.escursioni = escursioni;
 	}
 
 }

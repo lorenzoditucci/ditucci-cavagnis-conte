@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.CercaGiftListMgr;
+import it.polimi.traveldream.ejb.management.EscursioniAcquistateMgr;
 import it.polimi.traveldream.ejb.management.PernottamentiAcquistatiMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoliAcquistatiProvaMGR;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
+import it.polimi.traveldream.ejb.management.dto.EscursioniAcquistateDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentiAcquistatiDTO;
@@ -45,6 +48,9 @@ public class CercaGiftListBean {
 	
 	@EJB
 	private PernottamentiAcquistatiMgr pernottamentiAcquistatiMgr;
+	
+	@EJB
+	private EscursioniAcquistateMgr EscursioniAcquistateMgr;
 	/**
 	 * qui ci salvo il risultato della ricerca
 	 */
@@ -64,6 +70,13 @@ public class CercaGiftListBean {
 	/* pernottamenti ancora liberi*/
 	private List<PernottamentoDTO> risultatiPernottamentiLiberi;
 	
+	/*EscursioniAcquistateDTO escursioni acquistate*/
+	private List<EscursioniAcquistateDTO> escursioniAcquistate;
+	/* escursioni realmente acquistate*/
+	private List<EscursioneDTO> risultatiEscursioniAcquistate;
+	/* escursioni ancora libere*/
+	private List<EscursioneDTO> risultatiEscursioniLibere;
+	
 	/**
 	 * parametro che passo contente l'id della gift list da cercare.
 	 */
@@ -77,8 +90,41 @@ public class CercaGiftListBean {
       //  ricercaGiftList= new GiftListDTO();
         setRisultatoRicerca(new ArrayList<GiftListDTO>());
     }
+    
+    public void aggiornaEscursioniAcquistate(){
+    	setEscursioniAcquistate(EscursioniAcquistateMgr.cercaEscursioniAcquistate(Integer.parseInt(idRicerca)));
+    	smistaEscursioni();
+    	
+    }
 
-        	 public String cerca(){
+    private void smistaEscursioni() {
+    	risultatiEscursioniAcquistate = new ArrayList<EscursioneDTO>();
+    	risultatiEscursioniLibere = new ArrayList<EscursioneDTO>();
+    	
+    	for(GiftListDTO g:risultatoRicerca){
+    		for(PacchettoDTO p: g.getPacchettiContenuti()){
+    			for(EscursioneDTO e:p.getEscursioni()){
+    				if(eAcquistato(e)){
+    					risultatiEscursioniAcquistate.add(e);
+    				}else{
+    					risultatiEscursioniLibere.add(e);
+    				}
+    			}
+    		}
+    	}
+		
+	}
+
+	private boolean eAcquistato(EscursioneDTO e) {
+		for(int i=0;i<escursioniAcquistate.size();i++){
+			if(e.getIdEscursione() == escursioniAcquistate.get(i).getIdEscursione()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+			public String cerca(){
         	    	setRisultatoRicerca(cercaMGR.cerca(Integer.parseInt(idRicerca)));
         	    	aggiornaVoliAcquistati();
         	    	if(getRisultatoRicerca().size()==0){
@@ -230,6 +276,32 @@ public class CercaGiftListBean {
 	public void setRisultatiPernottamentiLiberi(
 			List<PernottamentoDTO> risultatiPernottamentiLiberi) {
 		this.risultatiPernottamentiLiberi = risultatiPernottamentiLiberi;
+	}
+
+	public List<EscursioniAcquistateDTO> getEscursioniAcquistate() {
+		return escursioniAcquistate;
+	}
+
+	public void setEscursioniAcquistate(List<EscursioniAcquistateDTO> escursioniAcquistate) {
+		this.escursioniAcquistate = escursioniAcquistate;
+	}
+
+	public List<EscursioneDTO> getRisultatiEscursioniAcquistate() {
+		return risultatiEscursioniAcquistate;
+	}
+
+	public void setRisultatiEscursioniAcquistate(
+			List<EscursioneDTO> risultatiEscursioniAcquistate) {
+		this.risultatiEscursioniAcquistate = risultatiEscursioniAcquistate;
+	}
+
+	public List<EscursioneDTO> getRisultatiEscursioniLibere() {
+		return risultatiEscursioniLibere;
+	}
+
+	public void setRisultatiEscursioniLibere(
+			List<EscursioneDTO> risultatiEscursioniLibere) {
+		this.risultatiEscursioniLibere = risultatiEscursioniLibere;
 	}
 
 

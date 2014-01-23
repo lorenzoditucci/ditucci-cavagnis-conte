@@ -7,7 +7,6 @@
 		<class>it.polimi.traveldream.ejb.management.entity.Citta</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Escursione</class>
 		<class>it.polimi.traveldream.ejb.management.entity.EscursioniAcquistate</class>
-		<class>it.polimi.traveldream.ejb.management.entity.EscursioniAcquistatePK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.GiftList</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Hotel</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Impiegato</class>

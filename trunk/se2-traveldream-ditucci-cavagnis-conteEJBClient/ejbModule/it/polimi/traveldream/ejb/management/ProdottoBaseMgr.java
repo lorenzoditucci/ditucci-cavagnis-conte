@@ -11,11 +11,11 @@ public interface ProdottoBaseMgr {
 
 	void registraAcquisto(VoloDTO volo, GiftListDTO giftList, String nomeAcquirente, Timestamp dataAcquisto);
 
-	void registraAcquisto(EscursioneDTO escursione, GiftListDTO giftList);
-
-	void registraAcquisto(PernottamentoDTO pernottamento, GiftListDTO giftList);
-
 	void registraAcquisto(PernottamentoDTO pernottamentoDaAcquistare,
+			GiftListDTO giftListDaAcquistare, String nomeAcquirente,
+			Timestamp dataAcquisto);
+
+	void registraAcquisto(EscursioneDTO escursioneDaAcquistare,
 			GiftListDTO giftListDaAcquistare, String nomeAcquirente,
 			Timestamp dataAcquisto);
 
