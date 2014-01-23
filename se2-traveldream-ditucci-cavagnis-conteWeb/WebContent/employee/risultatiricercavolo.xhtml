@@ -35,7 +35,9 @@
 		
   </p:layoutUnit>  
   
-    <p:layoutUnit position="center">  
+    <p:layoutUnit position="center"> 
+    
+    <p:growl id="growl"></p:growl> 
   
         <ui:repeat var="volo" value="#{cercaProdottoBaseBean.risultatoRicercaVolo}">
     	<h:outputLabel value="id - #{volo.idVolo}" /><br/>

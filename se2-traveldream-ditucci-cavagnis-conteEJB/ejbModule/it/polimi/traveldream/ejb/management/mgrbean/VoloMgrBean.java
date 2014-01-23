@@ -83,4 +83,17 @@ public class VoloMgrBean implements VoloMgr {
     	
     	return copiaListaToDTO(listaVolo); 
 	}
+
+	@Override
+	public boolean controllaAppertenenzaPacchetto(VoloDTO v) {
+		String sqlQuery = "SELECT * FROM VoliPacchetto WHERE idVolo = "+v.getIdVolo();
+		
+		/*non appartiene a un pacchetto*/
+		if(em.createNativeQuery(sqlQuery).getResultList().isEmpty())
+			return false;
+		
+		/*appartiene ad un pacchetto*/
+		return true;
+		
+	}
 }

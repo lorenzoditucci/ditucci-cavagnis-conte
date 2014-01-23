@@ -36,6 +36,8 @@
   </p:layoutUnit>  
   
     <p:layoutUnit position="center">  
+    
+    <p:growl id="growl"></p:growl>
   
         <ui:repeat var="hotel" value="#{cercaProdottoBaseBean.risultatoRicercaHotel}">
     	<h:outputLabel value="id - #{hotel.idHotel}" /><br/>

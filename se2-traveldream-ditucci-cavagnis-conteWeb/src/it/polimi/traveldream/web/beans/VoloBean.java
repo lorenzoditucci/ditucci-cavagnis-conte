@@ -48,6 +48,13 @@ public class VoloBean {
 	}
 	
 	public String rimuoviVolo(VoloDTO v) {
+			
+			if(voloMgr.controllaAppertenenzaPacchetto(v)){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Non puoi eliminare il pb", "NO!"));	
+				
+				return "";
+			}
+		
 			if(v.getAcquistato()==0){
 				voloMgr.remove(v.getIdVolo());
 				return "cercaescursione";		
