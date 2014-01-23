@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,7 +11,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="Acquista")
-@NamedQuery(name="Acquista.findAll", query="SELECT a FROM Acquista a")
+@NamedQueries({
+	@NamedQuery(name="Acquista.findAll", query="SELECT a FROM Acquista a"),
+	@NamedQuery(name="Acquistati.cercaAcquirentiPacchetto", query="SELECT a FROM Acquista a WHERE a.id.idPacchetto = :idPacchetto")
+})
 public class Acquista implements Serializable {
 	private static final long serialVersionUID = 1L;
 
