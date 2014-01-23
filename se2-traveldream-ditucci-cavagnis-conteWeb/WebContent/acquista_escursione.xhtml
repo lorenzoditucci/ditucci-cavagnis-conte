@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<title>GiftList - Acquista Escursione</title>
+</h:head>
+<h:body>
+
+	<div id="background" />
+	<div id='contenitore-geneale'>
+		<div id="banner-top"></div>
+		<div id="menu-sinistra">
+
+			<h:link outcome="user/index">
+				<img src="resources/image/user.png" alt="login" width="30"
+					height="30" />
+    		 - Accesso Clienti
+   	</h:link>
+			<br />
+			<h:link outcome="employee/index">
+				<img src="resources/image/impiegato.png" alt="login" width="30"
+					height="30" />
+    		- Admin
+   	</h:link>
+			<h:form id="cercaGiftList" style="padding:15px">
+			Gift List<br />
+
+				<h:inputText id="codiceGiftList"
+					value="#{cercaGiftListBean.idRicerca}" label="codiceGistList" />
+				<p:message for="codiceGiftList"></p:message>
+
+
+				<h:commandButton value="Cerca" action="#{cercaGiftListBean.cerca()}" />
+			</h:form>
+		</div>
+		<div id='contenitore-centrale'>
+			<div id='contenitore-form-testo'>
+				<h:form style="padding : 30px;">
+					Riepilogo ordine<br/>
+					<p:outputLabel value="Nome escursione #{prodottoBaseBean.escursioneDaAcquistare.nome}"/><br/>
+					<p:outputLabel value="città #{prodottoBaseBean.escursioneDaAcquistare.citta}"/><br/>
+					<p:outputLabel value="da #{prodottoBaseBean.escursioneDaAcquistare.dataInizio} a #{prodottoBaseBean.escursioneDaAcquistare.dataFine}"/><br/>
+					<p:outputLabel value="costo: #{prodottoBaseBean.escursioneDaAcquistare.costo}"/><br/>
+					Il tuo nome:<p:inputText value="#{prodottoBaseBean.nomeAcquirente}"/><br/>
+					<h:message for="erroreAcquisto"/>
+					<p:commandButton value="Conferma Acquisto" action="#{prodottoBaseBean.registraAcquistoEscursione()}"/>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
+

@@ -10,6 +10,8 @@ import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
+import it.polimi.traveldream.ejb.management.entity.EscursioniAcquistate;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati;
 import it.polimi.traveldream.ejb.management.entity.Pernottamento;
@@ -169,27 +171,36 @@ public class ProdottoBaseMgrBean implements ProdottoBaseMgr {
 		
 	}
 
-	@Override
-	public void registraAcquisto(EscursioneDTO escursione, GiftListDTO giftList) {
-		controllaAcquisto(escursione);
-		giftList.getEscursioni().add(escursione);
-		em.merge(escursione);
-		
-	}
+	
 
-	private void controllaAcquisto(EscursioneDTO escursione) {
+	private void controllaAcquisto(Escursione escursione) {
 		if(escursione.getAcquistato()==0){
-			escursione.setAcquistato(1);
+			escursione.setAcquistato((byte)1);
 			em.merge(escursione);
 		}
 		
 	}
 
 	@Override
-	public void registraAcquisto(PernottamentoDTO pernottamento,GiftListDTO giftList) {
-		/**
-		 * COMPLETARE- ERRORE DB ESISTE HOTELS, NOI QUA PARLIAMO DI PERNOTTAMENTI!!!
-		 */
+	public void registraAcquisto(EscursioneDTO escursioneDaAcquistare,GiftListDTO giftListDaAcquistare, String nomeAcquirente,Timestamp dataAcquisto) {
+		Escursione e = new Escursione();
+		e = em.find(Escursione.class, escursioneDaAcquistare.getIdEscursione());
+		controllaAcquisto(e);
+		
+		GiftList g = new GiftList();
+    	g = em.find(GiftList.class,giftListDaAcquistare.getIdGiftList());
+		
+    	if(!g.getEscursioni().contains(e)){
+    		EscursioniAcquistate acquisto = new EscursioniAcquistate();
+    		acquisto.setDataAcquisto(dataAcquisto);
+    		acquisto.setIdEscursione(e.getIdEscursione());
+    		acquisto.setIdGiftList(g.getIdGiftList());
+    		acquisto.setNomeAcquirente(nomeAcquirente);
+    		
+    		em.persist(acquisto);
+    		g.getEscursioni().add(acquisto);
+    		em.merge(acquisto);
+    	}
 	}
 
 	

@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class VoliAcquistatiProvaDTO {
 
-	
+	@NotEmpty
 	private int idVoloAcquistato;
 	
 	@NotEmpty

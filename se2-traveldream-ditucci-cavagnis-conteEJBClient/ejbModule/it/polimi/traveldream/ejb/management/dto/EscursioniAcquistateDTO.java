@@ -2,36 +2,31 @@ package it.polimi.traveldream.ejb.management.dto;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class PernottamentiAcquistatiDTO {
-	
+public class EscursioniAcquistateDTO {
+
 	@NotEmpty
-	private int idPernottamentoAcquistato;
+	private int idEscursioniAcquistate;
 	
 	@NotEmpty
 	private int idGiftList;
 	
 	@NotEmpty
-	private int idPernottamento;
+	private int idEscursione;
 	
 	@NotEmpty
 	private Timestamp dataAcquisto;
-	
+
 	@NotEmpty
 	private String nomeAcquirente;
 
-	public int getIdPernottamentoAcquistato() {
-		return idPernottamentoAcquistato;
+	public int getIdEscursioniAcquistate() {
+		return idEscursioniAcquistate;
 	}
 
-	public void setIdPernottamentoAcquistato(int idPernottamentoAcquistato) {
-		this.idPernottamentoAcquistato = idPernottamentoAcquistato;
+	public void setIdEscursioniAcquistate(int idEscursioniAcquistate) {
+		this.idEscursioniAcquistate = idEscursioniAcquistate;
 	}
 
 	public int getIdGiftList() {
@@ -42,12 +37,12 @@ public class PernottamentiAcquistatiDTO {
 		this.idGiftList = idGiftList;
 	}
 
-	public int getIdPernottamento() {
-		return idPernottamento;
+	public int getIdEscursione() {
+		return idEscursione;
 	}
 
-	public void setIdPernottamento(int idPernottamento) {
-		this.idPernottamento = idPernottamento;
+	public void setIdEscursione(int idEscursione) {
+		this.idEscursione = idEscursione;
 	}
 
 	public Timestamp getDataAcquisto() {
@@ -65,5 +60,4 @@ public class PernottamentiAcquistatiDTO {
 	public void setNomeAcquirente(String nomeAcquirente) {
 		this.nomeAcquirente = nomeAcquirente;
 	}
-	
 }
