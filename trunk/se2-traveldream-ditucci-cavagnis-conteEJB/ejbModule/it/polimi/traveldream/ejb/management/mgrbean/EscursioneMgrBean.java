@@ -101,6 +101,10 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		e.setCitta(escursione.getCitta());
 		e.setCosto(escursione.getCosto());
 		
+		CittaDTO cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(escursione.getCitta());
+		cittaMgrBean.save(cittaDaInserire);
+		
 		/*aggiornamento persistenza*/
 		em.merge(e);
 	}
