@@ -9,10 +9,12 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="escursioneBean")
-@RequestScoped
+@SessionScoped
 public class EscursioneBean {
 	
 	@EJB
@@ -53,9 +55,6 @@ public String rimuoviEscursione(EscursioneDTO e) {
 		return "";
 	}
 	
-	
-	
-	
 		if(e.getAcquistato()==0){
 			escursioneMgr.remove(e.getIdEscursione());
 			return "cercaescursione";		
@@ -67,5 +66,31 @@ public String rimuoviEscursione(EscursioneDTO e) {
 		}
 		
 	}
+
+
+public String modificaEscursione(EscursioneDTO e){
+	this.escursione=e;
+	return "modificaEscursione.xhtml";
+	
+}
+
+public String confermaModifiche(){
+	
+	if(escursioneMgr.controllaAppertenenzaPacchetto(escursione)){
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il prodotto base fa parte di un pacchetto! non si pu˜ modificare!", "Errore"));	
+		return null;
+	}
+	
+	if (escursione.getDataInizio().getTime() >= escursione.getDataFine().getTime()) {
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Intervallo date errato", "Non ha senso!!!"));
+	     return null;
+	}
+	
+	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Modifiche eseguite", "ok"));	
+	
+	escursioneMgr.aggiornaModificheEscursione(escursione);
+	
+	return "cercaescursione";
+}
 	
 }

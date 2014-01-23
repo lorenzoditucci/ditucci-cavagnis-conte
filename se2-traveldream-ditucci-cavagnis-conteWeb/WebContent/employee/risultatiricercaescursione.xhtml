@@ -42,6 +42,7 @@
   	<p:growl id="growl"></p:growl>
   
   	<h:form id="formEscursione">
+  	
         <ui:repeat var="escursione" value="#{cercaProdottoBaseBean.risultatoRicercaEscursione}">
     	<h:outputLabel value="id - #{escursione.idEscursione}" /><br/>
     	<h:outputLabel value="nome - #{escursione.nome}" /><br/>
@@ -52,16 +53,18 @@
     	<h:outputLabel value="costo - #{escursione.costo}" /><br/>
     	<h:outputLabel value="acquistato - #{escursione.acquistato}" /><br/>
     	<br/>
-    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione)}">  
-        <h:outputText value="Elimina" />  
-        </p:commandLink> 
-    	
+    	<p:commandLink id="elimina" action="#{escursioneBean.rimuoviEscursione(escursione)}">
+    	<h:outputText value="Elimina" /> 
+    	</p:commandLink>
+        
+        <br/> 
+        <p:commandLink id="modifica" action="#{escursioneBean.modificaEscursione(escursione)}">
+        <h:outputText value="modifica" />
+        </p:commandLink>
+	
     	</ui:repeat>
     </h:form>
-    	
-    	 
-  
-    
+
     </p:layoutUnit>  
     
 </p:layout>    
