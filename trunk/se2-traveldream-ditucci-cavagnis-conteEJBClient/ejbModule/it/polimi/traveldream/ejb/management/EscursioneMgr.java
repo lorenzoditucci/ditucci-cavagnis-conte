@@ -18,4 +18,6 @@ public interface EscursioneMgr {
 
 	public boolean controllaAppertenenzaPacchetto(EscursioneDTO e);
 
+	public void aggiornaModificheEscursione(EscursioneDTO escursione);
+
 }

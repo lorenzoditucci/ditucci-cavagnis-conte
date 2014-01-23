@@ -88,4 +88,20 @@ public class EscursioneMgrBean implements EscursioneMgr {
 			return true;
 			
 		}
+
+	@Override
+	public void aggiornaModificheEscursione(EscursioneDTO escursione) {
+		Escursione e = em.find(Escursione.class, escursione.getIdEscursione());
+		
+		/*aggiornamento dati escursione*/
+		e.setNome(escursione.getNome());
+		e.setDescrizione(escursione.getDescrizione());
+		e.setDataInizio(new Timestamp(escursione.getDataInizio().getTime()));
+		e.setDataFine(new Timestamp(escursione.getDataFine().getTime()));
+		e.setCitta(escursione.getCitta());
+		e.setCosto(escursione.getCosto());
+		
+		/*aggiornamento persistenza*/
+		em.merge(e);
+	}
 }
