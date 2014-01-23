@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
@@ -22,6 +23,8 @@ public class InserisciPacchettoInGLBean {
 
 	@EJB
 	GiftListMgr glBean;
+	@EJB
+	UserMgr userMgr;
 	
 	private PacchettoDTO pDTO;
 	
@@ -55,6 +58,7 @@ public class InserisciPacchettoInGLBean {
 	}
 	
 	public void cercaPerMail(){
+		this. userEmail = userMgr.getUserDTO().getEmail();
 		this.setRisultatoRicerca(glBean.cercaGLperMail(userEmail));
 		return;
 	}

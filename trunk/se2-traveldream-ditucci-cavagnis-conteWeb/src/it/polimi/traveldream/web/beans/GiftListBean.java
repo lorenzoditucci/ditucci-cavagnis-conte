@@ -25,7 +25,7 @@ public class GiftListBean {
 	
 	private GiftListDTO giftList;
 	
-	//@ManagedProperty("#{userBean.mail}")
+	@ManagedProperty("#{userBean.mail}")
 	private String userEmail;
 
 
