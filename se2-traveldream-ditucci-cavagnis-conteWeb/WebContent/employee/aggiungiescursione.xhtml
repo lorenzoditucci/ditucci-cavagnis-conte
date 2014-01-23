@@ -63,9 +63,9 @@
 				<h:message for="data-fine"></h:message>
 	
 				<h:outputLabel for="citta">Città:</h:outputLabel>
-			    <h:inputText id="citta" value="#{escursioneBean.escursione.citta}" />
+				<p:autoComplete id="citta" value="#{escursioneBean.escursione.citta}" completeMethod="#{escursioneBean.autoCompletamentoCitta()}"/>
 				<h:message for="citta"></h:message>
-
+				
 				<h:outputLabel for="costo">Costo:</h:outputLabel>
 				<h:inputText id="costo" value="#{escursioneBean.escursione.costo}" />
 			    <h:message for="costo"></h:message>

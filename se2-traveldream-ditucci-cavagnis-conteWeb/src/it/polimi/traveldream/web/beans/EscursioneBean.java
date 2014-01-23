@@ -1,5 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
+import java.util.List;
+
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
@@ -92,5 +94,11 @@ public String confermaModifiche(){
 	
 	return "cercaescursione";
 }
+
+public List<String>  autoCompletamentoCitta(){
 	
+	
+	return escursioneMgr.ottieniListaCitta();
+}
+
 }
