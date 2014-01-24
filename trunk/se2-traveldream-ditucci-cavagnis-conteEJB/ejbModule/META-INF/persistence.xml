@@ -3,7 +3,6 @@
 	<persistence-unit name="se2-traveldream-ditucci-cavagnis-conteEJB">
 		<jta-data-source>jdbc/traveldreamdb_connection</jta-data-source>
 		<class>it.polimi.traveldream.ejb.management.entity.Acquista</class>
-		<class>it.polimi.traveldream.ejb.management.entity.AcquistaPK</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Citta</class>
 		<class>it.polimi.traveldream.ejb.management.entity.Escursione</class>
 		<class>it.polimi.traveldream.ejb.management.entity.EscursioniAcquistate</class>
