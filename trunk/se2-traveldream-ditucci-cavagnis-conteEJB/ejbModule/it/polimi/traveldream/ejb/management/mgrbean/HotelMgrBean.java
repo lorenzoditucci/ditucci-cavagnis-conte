@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,26 @@ public class HotelMgrBean implements HotelMgr {
 		
 		
 		return true;		
+	}
+
+	@Override
+	public void aggiornaModificheHotel(HotelDTO hotel) {
+		Hotel h = em.find(Hotel.class, hotel.getIdHotel());
+		
+		/*aggiornamento dati escursione*/
+		h.setNome(hotel.getNome());
+		h.setDescrizione(hotel.getDescrizione());
+		h.setIndirizzo(hotel.getIndirizzo());
+		h.setCitta(hotel.getCitta());
+		h.setClasse(hotel.getClasse());
+		h.setCosto(hotel.getCosto());
+
+		CittaDTO cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(hotel.getCitta());
+		cittaMgrBean.save(cittaDaInserire);
+		
+		/*aggiornamento persistenza*/
+		em.merge(h);
 	}
 	
 	

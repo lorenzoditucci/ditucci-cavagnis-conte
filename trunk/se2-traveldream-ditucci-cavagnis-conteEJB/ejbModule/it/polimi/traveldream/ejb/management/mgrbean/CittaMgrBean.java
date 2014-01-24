@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -54,7 +55,24 @@ public class CittaMgrBean implements CittaMgr {
 	@Override
 	public void remove(int idCitta) {
 		// TODO Auto-generated method stub
+	}
 
+	@Override
+	public List<String> findAllCittaPerAutoCompletamento() {
+		TypedQuery<Citta> queryRicerca = em.createNamedQuery("Citta.findAll", Citta.class);
+    	List<Citta> listaCitta =  queryRicerca.getResultList();
+    
+		return convertiListaCittaInListaStringhe(listaCitta);
+	}
+
+	private List<String> convertiListaCittaInListaStringhe(List<Citta> listaCitta) {
+		List<String> listaCittaPerAutoComplete= new ArrayList<String>();
+		
+		for(Citta c: listaCitta){
+			listaCittaPerAutoComplete.add(c.getNome());
+		}
+		
+		return listaCittaPerAutoComplete;
 	}
 
 }

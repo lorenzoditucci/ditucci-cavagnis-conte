@@ -20,4 +20,6 @@ public interface EscursioneMgr {
 
 	public void aggiornaModificheEscursione(EscursioneDTO escursione);
 
+	public List<String> ottieniListaCitta();
+
 }

@@ -2,8 +2,10 @@ package it.polimi.traveldream.ejb.management.mgrbean;
 
 import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Group;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.User;
@@ -95,5 +97,29 @@ public class VoloMgrBean implements VoloMgr {
 		/*appartiene ad un pacchetto*/
 		return true;
 		
+	}
+	
+	@Override
+	public void aggiornaModificheVolo(VoloDTO volo) {
+		Volo v = em.find(Volo.class, volo.getIdVolo());
+		
+		/*aggiornamento dati escursione*/
+		v.setCompagnia(volo.getCompagnia());
+		v.setCittaArrivo(volo.getCittaArrivo());
+		v.setCittaPartenza(volo.getCittaPartenza());
+		v.setDataInizio(new Timestamp(volo.getDataPartenza().getTime()));
+		v.setDataFine(new Timestamp(volo.getDataArrivo().getTime()));
+		v.setCosto(volo.getCosto());
+		
+		CittaDTO cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(v.getCittaPartenza());
+		cittaMgrBean.save(cittaDaInserire);
+		
+		cittaDaInserire = new CittaDTO();
+		cittaDaInserire.setNome(v.getCittaArrivo());
+		cittaMgrBean.save(cittaDaInserire);
+		
+		/*aggiornamento persistenza*/
+		em.merge(v);
 	}
 }
