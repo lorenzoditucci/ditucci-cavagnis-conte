@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="css/style.css" />
+	<title>Visualizza Pacchetto Amico</title>
+</h:head>
+<h:body>
+<div id="background" />
+<div id='contenitore-geneale'>
+<div id="banner-top">	
+	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
+</div>
+<div id="menu-sinistra">
+
+		<h:form>
+	    	<p:outputLabel value="Ciao Utente Non Registrato!" /><br/>
+	    	<p:outputLabel value="Qua puoi osservare il pacchetto di un amico,
+	    	 ma per acquistarlo devi registrarti!" /><br/>
+	    	
+	    	<h:commandButton value="Registrati" action="home" />
+	    	
+		</h:form>
+	
+</div>
+<div id='contenitore-centrale'>
+	<div id='contenitore-form-testo'>
+    <f:event type="preRenderView" listener="#{visualizzaPacchettoAmicoBean.prendiDaBarraIndirizziParametro()}" />
+	<h:form style="padding : 30px;">
+			<ui:repeat var="pacchetto" value="#{visualizzaPacchettoAmicoBean.risultato}">
+		
+		    <p:growl id="growl" showDetail="true" />
+		
+		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:panelGrid columns="2" cellpadding="10">
+		            
+		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
+		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
+		            	<h:outputText value="città escursione - #{esc.citta}" />
+		            </ui:repeat>
+		     
+		        </h:panelGrid>
+		    </p:fieldset>
+		    <p:commandLink value="Acquista" action="#" /><br/>
+			</ui:repeat>
+		</h:form>  
+		</div>
+</div>
+</div>
+</h:body>           
+</html>
+

@@ -12,6 +12,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import quicktime.sound.SICompletion;
 
@@ -35,12 +36,13 @@ public class PacchettoBean {
 	private ArrayList<PacchettoDTO> risultato;
 	private ArrayList<PacchettoDTO> risultatoVisualizzaPacchetto;
     
+	/*
 	@PostConstruct
 	public void init() {
 		setRisultato(new ArrayList<PacchettoDTO>());
         userEmail = new String();
 	}
-	
+	*/
 	
     public PacchettoBean() {
         
@@ -70,6 +72,12 @@ public class PacchettoBean {
     	setRisultatoVisualizzaPacchetto(pacchettoMgr.prendiPerId(idPacchetto));
     	return "visualizzaPacchetto?faces-redirect=true";
     }
+    
+    private String visualizzaPacchettoAmico(int id) {
+    	setRisultatoVisualizzaPacchetto(pacchettoMgr.prendiPerId(id));
+    	return "visualizzaPacchettoAmico?faces-redirect=true";
+	}
+    
 	public ArrayList<PacchettoDTO> getRisultato() {
 		return risultato;
 	}
@@ -96,5 +104,10 @@ public class PacchettoBean {
 	public void setRisultatoVisualizzaPacchetto(
 			ArrayList<PacchettoDTO> risultatoVisualizzaPacchetto) {
 		this.risultatoVisualizzaPacchetto = risultatoVisualizzaPacchetto;
+	}
+	
+	public String prendiDaBarraIndirizziParametro(){
+		int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
+		return visualizzaPacchettoAmico(id);
 	}
 }
