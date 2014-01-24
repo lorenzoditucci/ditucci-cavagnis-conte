@@ -3,15 +3,17 @@ package it.polimi.traveldream.web.beans;
 import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="hotelBean")
-@RequestScoped
+@SessionScoped
 public class HotelBean {
 	
 	@EJB
@@ -57,4 +59,25 @@ public class HotelBean {
 				
 			
 		}
+	
+	
+	public String modificaHotel(HotelDTO h){
+		this.hotel=h;
+		return "modificaHotel.xhtml";
+		
+	}
+
+	public String confermaModifiche(){
+		
+		if(hotelMgr.controllaAppertenenzaPacchetto(hotel)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il prodotto base fa parte di un pacchetto! non si pu˜ modificare!", "Errore"));	
+			return null;
+		}
+	
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Modifiche eseguite", "ok"));	
+		
+		hotelMgr.aggiornaModificheHotel(this.hotel);
+		
+		return "cercaescursione";
+	}
 }

@@ -17,4 +17,6 @@ public interface HotelMgr {
 
 	public boolean controllaAppertenenzaPacchetto(HotelDTO h);
 
+	public void aggiornaModificheHotel(HotelDTO hotel);
+
 }

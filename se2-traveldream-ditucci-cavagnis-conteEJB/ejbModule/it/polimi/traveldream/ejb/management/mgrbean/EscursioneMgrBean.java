@@ -108,4 +108,11 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		/*aggiornamento persistenza*/
 		em.merge(e);
 	}
+
+	@Override
+	public List<String> ottieniListaCitta() {
+		return cittaMgrBean.findAllCittaPerAutoCompletamento();
+	}
+	
+	
 }

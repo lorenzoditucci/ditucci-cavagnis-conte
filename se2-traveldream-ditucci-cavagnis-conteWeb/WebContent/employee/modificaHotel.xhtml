@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>HomePage</title>
+</h:head>
+<h:body>
+
+<p:layout fullPage="true">  
+	<p:layoutUnit position="north" size="100" resizable="true">  
+        Travel Dream
+    </p:layoutUnit>  
+    
+    <p:layoutUnit position="west" size="200" resizable="true">  
+    	<h2>Benvenuto #{userBean.name}</h2>
+    	<h:form>
+		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+		</h:form>
+		
+		<h:form id="cercaPacchettoID">
+			<h:outputLabel for="id-pacchetto">Cerca pacchetto:</h:outputLabel>
+			<h:inputText id="id-pacchetto" value="#{gestionePacchettoBean.idPacchettoDaCercare}" />
+	   
+	    <h:commandButton value="Cerca" action="#{gestionePacchettoBean.cercaPacchetto()}" update="cercaPacchettoID"/>
+		</h:form>
+		
+		<h:form><h:link value="Crea Pacchetto" outcome="creapacchetto"></h:link></h:form>
+		
+		<h:form><h:link value="Aggiungi prodotto base" outcome="aggiungiprodottobase"></h:link></h:form>
+		
+		<h:form><h:link value="Cerca prodotto base" outcome="cercaprodottobase"></h:link></h:form>
+		
+		
+  </p:layoutUnit>  
+    <p:layoutUnit position="center">  
+    	
+    	
+    	
+  <h:form>
+  <p:growl id="growl"></p:growl>
+		<p:panel header="Dati dell'Hotel">
+		
+			<h:panelGrid columns="3" id="hotelGrid">
+			
+			<h:outputLabel for="id">IdHotel:</h:outputLabel>
+			<h:outputLabel id="id" value="#{hotelBean.hotel.idHotel}" />
+		    <h:message for="id"></h:message>
+		    
+		    <h:outputLabel for="nome">Nome:</h:outputLabel>
+			<h:inputText id="nome" value="#{hotelBean.hotel.nome}" />
+		    <h:message for="nome"></h:message>
+
+		    <h:outputLabel for="descrizione">Descrizione:</h:outputLabel>
+			<h:inputText id="descrizione" value="#{hotelBean.hotel.descrizione}" />
+		    <h:message for="descrizione"></h:message>
+		    
+		    <h:outputLabel for="indirizzo">Descrizione:</h:outputLabel>
+			<h:inputText id="indirizzo" value="#{hotelBean.hotel.indirizzo}" />
+		    <h:message for="indirizzo"></h:message>
+		    
+		    <h:outputLabel for="citta">Città:</h:outputLabel> 
+            <h:inputText id="citta" value="#{hotelBean.hotel.citta}" />
+            <h:message for="citta"></h:message>
+            
+            <h:outputLabel for="classe">Classe:</h:outputLabel> 
+            <p:rating value="#{hotelBean.hotel.classe}" />
+            <h:message for="classe"></h:message>
+
+			<h:outputLabel for="costo">Costo:</h:outputLabel> 
+            <h:inputText id="costo" value="#{hotelBean.hotel.costo}" />
+            <h:message for="costo"></h:message>
+        </h:panelGrid>
+       </p:panel>
+      
+     <h:commandButton value="Conferma modifica" action="#{hotelBean.confermaModifiche()}"/>  
+
+</h:form>
+
+</p:layoutUnit>  
+    
+</p:layout>    
+</h:body>           
+</html>

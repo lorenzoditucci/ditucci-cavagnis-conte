@@ -18,4 +18,6 @@ public interface VoloMgr {
 
 	public boolean controllaAppertenenzaPacchetto(VoloDTO v);
 
+	public void aggiornaModificheVolo(VoloDTO volo);
+
 }

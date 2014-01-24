@@ -96,8 +96,7 @@ public String confermaModifiche(){
 }
 
 public List<String>  autoCompletamentoCitta(){
-	
-	
+
 	return escursioneMgr.ottieniListaCitta();
 }
 
