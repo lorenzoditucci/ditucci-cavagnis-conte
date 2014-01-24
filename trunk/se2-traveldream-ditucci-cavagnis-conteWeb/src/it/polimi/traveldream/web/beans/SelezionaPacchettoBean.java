@@ -9,9 +9,11 @@ import it.polimi.traveldream.ejb.management.dto.UserDTO;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  * Session Bean implementation class SelezionaPacchettoBean
@@ -52,7 +54,11 @@ public class SelezionaPacchettoBean {
 	
 	public String acquistaPacchetto(PacchettoDTO p){
 		UserDTO userDTO = userMgr.getUserDTO();
-		acquistaPacchettoMgr.aggiungiAcquisto(userDTO,p);
+		if(!acquistaPacchettoMgr.aggiungiAcquisto(userDTO,p)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il pacchetto non è più disponibile", "Non è possibile comprare questo pacchetto perchè i "
+					+ "posti sono esauriti."));
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Il pacchetto è stato acquistato correttamente", ""));
 		return "index";
 	}
 

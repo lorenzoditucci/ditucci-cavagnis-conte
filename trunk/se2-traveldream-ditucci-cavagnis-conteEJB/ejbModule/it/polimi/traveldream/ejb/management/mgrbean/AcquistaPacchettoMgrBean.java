@@ -46,7 +46,7 @@ public class AcquistaPacchettoMgrBean implements AcquistaPacchettoMgr {
     }
 
 	@Override
-	public void aggiungiAcquisto(UserDTO user, PacchettoDTO pDTO) {
+	public boolean aggiungiAcquisto(UserDTO user, PacchettoDTO pDTO) {
 		Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
 		User u = em.find(User.class, user.getEmail());
 		if(p.getDisponibilitaAttuale() == p.getDisponibilitaMax()){
@@ -66,9 +66,10 @@ public class AcquistaPacchettoMgrBean implements AcquistaPacchettoMgr {
 			em.merge(p);
 		}else {
 			System.out.println("Acquisto non disponibile");
+			return false;
 		}
 		
-		return;
+		return true;
 		
 	}
 	
