@@ -35,5 +35,9 @@ public interface CreaPacchettoMgr {
 	public boolean salvaPacchettoInDB();
 
 	public void controlloPacchetto(PacchettoDTO pacchetto) throws CoerenzaException;
+
+	public void exit();
+
+	public void inizialize();
 	
 }

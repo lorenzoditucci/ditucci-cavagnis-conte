@@ -51,7 +51,11 @@
     	
     	<p:commandLink id="elimina" action="#{hotelBean.rimuoviHotel(hotel)}">  
         <h:outputText value="Elimina" />  
-        </p:commandLink> 	
+        </p:commandLink> 
+        <br/> 
+        <p:commandLink id="modifica" action="#{hotelBean.modificaHotel(hotel)}">
+        <h:outputText value="modifica" />
+        </p:commandLink>	
     
     	</ui:repeat>
   

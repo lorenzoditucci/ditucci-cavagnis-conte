@@ -96,8 +96,8 @@ public class CreaPacchettoBean {
 		     return "";
 		}
 	
+		creaPacchettoMgr.inizialize();
 		creaPacchettoMgr.instanziaPacchetto(getPacchetto());
-		
 		return "aggiungiVoliInPacchetto"; 
 	}
 
@@ -311,8 +311,32 @@ public class CreaPacchettoBean {
 		creaPacchettoMgr.salvaPacchettoInDB();
 		
 		//distruggi session scope
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		
+		/*"pulisco" il session scope*/
+		resettaSessionScope();
+		
+		creaPacchettoMgr.exit();
+		
         return "index.xhtml";
+	}
+
+
+	private void resettaSessionScope() {
+		this.pacchetto= new PacchettoDTO();
+		this.voli= new ArrayList<VoloDTO>();
+		this.pernottamenti=new ArrayList<PernottamentoDTO>();
+		this.escursioni=new ArrayList<EscursioneDTO>();
+		this.dataInizio=null;
+		this.dataFine=null;
+		this.dataInizioPernottamento=null;
+		this.dataFinePernottamento=null;
+		this.idEscursioneDaCercare=0;
+		this.idHotelDaCercare=0;
+		this.idVoloDaCercare=0;
+		this.volo=new VoloDTO();
+		this.escursione=new EscursioneDTO();
+		this.pernottamento=new PernottamentoDTO();	
 	}
 
 	private boolean giaContenuto() {
