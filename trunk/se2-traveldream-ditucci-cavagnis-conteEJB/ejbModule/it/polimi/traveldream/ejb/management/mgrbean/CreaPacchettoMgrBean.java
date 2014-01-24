@@ -13,6 +13,8 @@ import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -64,10 +66,11 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 	 * i dati durante tutta la sessione della creazione del pacchetto
 	 * */
 	@PostConstruct
-	public void initialize() {
+	@PostActivate
+	public void inizialize() {
 		this.pacchettoInBean=new PacchettoDTO();
 		}
-
+	
 	@Override
 	public void instanziaPacchetto(PacchettoDTO pacchetto) {
 		copiaDTOtoDTOStateful(pacchetto);
@@ -84,7 +87,7 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		this.pacchettoInBean.setDataFine(pacchetto.getDataFine());
 		//E' stato appena creato e quindi non l'ha ancora comprato nessuno
 		this.pacchettoInBean.setDisponibilitaAttuale(pacchetto.getDisponibilitaMax());
-		//il costo � ancora da calcolare
+		//il costo e' ancora da calcolare
 		this.pacchettoInBean.setCosto(0.0);
 		this.pacchettoInBean.setMail(pacchetto.getMail());
 	}
@@ -319,7 +322,6 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 /*
  * Salva il pacchetto nella persistenza dei dati
  * */
-	@Remove
 	@Override
 	public boolean salvaPacchettoInDB(){
 		Pacchetto newPacchetto = new Pacchetto();
@@ -386,9 +388,10 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		return true;
 	}
 
-	@PreDestroy
+	@Override
+	@PrePassivate
 	public void exit(){
-		System.out.println("Sessione staful crea pacchetto terminata");
+		this.pacchettoInBean=new PacchettoDTO();
 	}
 
 	@Override

@@ -92,7 +92,7 @@ public class VoloBean {
 		
 		voloMgr.aggiornaModificheVolo(volo);
 		
-		return "cercaescursione";
+		return "cercavolo";
 	}
 	
 	

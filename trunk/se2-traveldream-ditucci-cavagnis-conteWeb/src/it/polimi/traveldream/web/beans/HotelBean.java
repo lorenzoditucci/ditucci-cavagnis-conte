@@ -78,6 +78,6 @@ public class HotelBean {
 		
 		hotelMgr.aggiornaModificheHotel(this.hotel);
 		
-		return "cercaescursione";
+		return "cercahotel";
 	}
 }
