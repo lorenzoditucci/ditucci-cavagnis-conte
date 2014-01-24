@@ -45,6 +45,9 @@ public class VoloBean {
 		}
 		
 		voloMgr.save(volo);	
+		
+		/*pulisco session scope*/
+		volo = new VoloDTO();
 		return "aggiungiprodottobase";
 	}
 	

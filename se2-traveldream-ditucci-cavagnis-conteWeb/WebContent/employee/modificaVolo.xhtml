@@ -63,11 +63,11 @@
 		    <h:message for="citta-arrivo"></h:message>
 
 		    <h:outputLabel for="data-inizio">Data partenza:</h:outputLabel>
-			<p:calendar value="#{voloBean.volo.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy" />  
+			<p:calendar value="#{voloBean.volo.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
 			<h:message for="data-inizio"></h:message>
 			
 			<h:outputLabel for="data-fine">Data arrivo:</h:outputLabel>
-			<p:calendar value="#{voloBean.volo.dataArrivo}" id="data-fine" pattern="MM/dd/yyyy" />  
+			<p:calendar value="#{voloBean.volo.dataArrivo}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />  
 			<h:message for="data-fine"></h:message>
 		   		
 			<h:outputLabel for="costo">Costo:</h:outputLabel> 
