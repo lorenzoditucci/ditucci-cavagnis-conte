@@ -8,6 +8,6 @@ import it.polimi.traveldream.ejb.management.dto.UserDTO;
 @Local
 public interface AcquistaPacchettoMgr {
 	
-	public void aggiungiAcquisto(UserDTO user, PacchettoDTO pacchettoSelezionato);
+	public boolean aggiungiAcquisto(UserDTO user, PacchettoDTO pacchettoSelezionato);
 
 }
