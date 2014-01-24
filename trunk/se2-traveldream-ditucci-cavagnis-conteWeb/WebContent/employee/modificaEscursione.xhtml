@@ -59,11 +59,11 @@
 		    <h:message for="descrizione"></h:message>
 		    
 		    <h:outputLabel for="data-inizio">Data inizio:</h:outputLabel>
-			<p:calendar value="#{escursioneBean.escursione.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy" />  
+			<p:calendar value="#{escursioneBean.escursione.dataInizio}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
 			<h:message for="data-inizio"></h:message>
 			
 			<h:outputLabel for="data-fine">Data fine:</h:outputLabel>
-			<p:calendar value="#{escursioneBean.escursione.dataFine}" id="data-fine" pattern="MM/dd/yyyy" />
+			<p:calendar value="#{escursioneBean.escursione.dataFine}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
 			<h:message for="data-fine"></h:message>
 		    
 		    <h:outputLabel for="citta">Città:</h:outputLabel> 
