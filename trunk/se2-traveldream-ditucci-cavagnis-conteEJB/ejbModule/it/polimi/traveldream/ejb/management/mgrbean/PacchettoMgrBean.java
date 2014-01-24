@@ -124,4 +124,13 @@ public class PacchettoMgrBean implements pacchettoMgr {
 		return copiaListaQuery(listaPacchetti);
 	}
 
+	@Override
+	public ArrayList<PacchettoDTO> prendiPerIdEMail(int id, String mailCreatore) {
+		TypedQuery<Pacchetto> query = em.createNamedQuery("CercaPacchettiIDEMail", Pacchetto.class);
+		query.setParameter("id", id);
+		query.setParameter("mail", mailCreatore);
+		List<Pacchetto> listaPacchetti = query.getResultList();
+		return copiaListaQuery(listaPacchetti);
+	}
+
 }

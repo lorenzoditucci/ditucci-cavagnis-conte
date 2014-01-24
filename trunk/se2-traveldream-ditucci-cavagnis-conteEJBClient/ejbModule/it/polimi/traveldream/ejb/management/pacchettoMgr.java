@@ -12,4 +12,6 @@ public interface pacchettoMgr {
 
 	ArrayList<PacchettoDTO> prendiPerId(int idPacchetto);
 
+	ArrayList<PacchettoDTO> prendiPerIdEMail(int id, String mailCreatore);
+
 }
