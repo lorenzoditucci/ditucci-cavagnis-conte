@@ -10,87 +10,136 @@
 	<title>Clienti: Pacchetto Selezionato</title>
 </h:head>
 <h:body>
-<div id="background" />
-<div id='contenitore-geneale'>
-<div id="banner-top">	
-	<p align="center">Scritta travelDream carina dcaodicdsiacmi d csidaisncsc</p>
-</div>
-<div id="menu-sinistra">
-
-		<h:form>
-	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
-	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
-	    </h:form>
-	    	<h:link  outcome="gestioneGL/gestione">
-	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
-	    		- Gestione Gifti List
-	    	</h:link><br/>
-	    	<h:link  outcome="pacchettiAcquistati.xhtml">
-	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
-	    		- Pacchetti Acquistati
-	    	</h:link><br/>
-	    	
-	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
-    
-			<p:panel>
-			
-				<h:panelGrid columns="1" id="pacchettoGrid">
-		
-				
-	         
-	
-				<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
-				<h:inputText id="nome-pacchetto" value="#{cercaPacchettoBean.nomePacchetto}" />
-				<p:message for="nome-pacchetto"></p:message>
-					
-					
-				<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
-				<p:calendar value="#{cercaPacchettoBean.dataPartenza}" id="data-inizio" pattern="MM/dd/yyyy HH:mm" />  
-				<h:message for="data-inizio"></h:message>
-				
-				<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
-				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
-				<h:message for="data-fine"></h:message>
-				
-				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
-	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
-	            <h:message for="costo-pacchetto"></h:message>
-				
-				
-			<h:commandButton value="Cerca" action="#{cercaPacchettoBean.cercaPacchetti()}" update="pacchettoGrid"/>
-	       </h:panelGrid>
-	       </p:panel>
-		</h:form>
-	
-</div>
-<div id='contenitore-centrale'>
-	<div id='contenitore-form-testo'>
-    
-	<h:form style="padding : 30px;">
-			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultatoVisualizzaPacchetto}">
-		
-		    <p:growl id="growl" showDetail="true" />
-		
-		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
-		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
-		        <h:panelGrid columns="2" cellpadding="10">
-		            
-		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
-		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
-		            	<h:outputText value="città escursione - #{esc.citta}" />
-		            </ui:repeat>
-		     
-		        </h:panelGrid>
-		    </p:fieldset>
-		    <h:commandLink value = "Aggiungi a GiftList" action = "#{inserisciPacchettoInGLBean.inserisciPacchetto(pacchetto)}"/><br/>
-		    <h:commandLink value="Acquista" action="#{selezionaPacchettoBean.acquistaPacchetto(pacchetto)}" /><br/>
-		    <h:commandLink value="Personalizza" action="#{personalizzaPacchettoBean.personalizza(pacchetto)}" /><br/>
-		    <p:commandLink value="Invia ad Amico" action="#"/><br/>
-			</ui:repeat>
-		</h:form>  
+	<div id="background" />
+	<div id='contenitore-geneale'>
+		<div id="banner-top">
+			<p align="center">Scritta travelDream carina dcaodicdsiacmi d
+				csidaisncsc</p>
 		</div>
-</div>
-</div>
-</h:body>           
+		<div id="menu-sinistra">
+
+			<h:form>
+				<h:outputLabel value="Ciao #{userBean.name}!" />
+				<br />
+				<h:commandButton action="#{logoutBean.logout}" value="Logout" />
+				<br />
+				<br />
+			</h:form>
+			<h:link outcome="gestioneGL/gestione">
+				<img src="../resources/image/giftList.png" width="30px"
+					height="30px" alt="" />
+	    		- Gestione Gifti List
+	    	</h:link>
+			<br />
+			<h:link outcome="pacchettiAcquistati.xhtml">
+				<img src="../resources/image/acquistati.png" width="30px"
+					height="30px" alt="" />
+	    		- Pacchetti Acquistati
+	    	</h:link>
+			<br />
+
+			<h:form id="ricercaPacchetto"
+				style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
+
+				<p:panel>
+
+					<h:panelGrid columns="1" id="pacchettoGrid">
+
+
+
+
+						<h:outputLabel for="nome-pacchetto">Nome pacchetto:</h:outputLabel>
+						<h:inputText id="nome-pacchetto"
+							value="#{cercaPacchettoBean.nomePacchetto}" />
+						<p:message for="nome-pacchetto"></p:message>
+
+
+						<h:outputLabel for="data-inizio">Data di partenza:</h:outputLabel>
+						<p:calendar value="#{cercaPacchettoBean.dataPartenza}"
+							id="data-inizio" pattern="MM/dd/yyyy HH:mm" />
+						<h:message for="data-inizio"></h:message>
+
+						<h:outputLabel for="data-fine">Data di fine:</h:outputLabel>
+						<p:calendar value="#{cercaPacchettoBean.dataRitorno}"
+							id="data-fine" pattern="MM/dd/yyyy HH:mm" />
+						<h:message for="data-fine"></h:message>
+
+						<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
+						<p:inputText id="costo-pacchetto"
+							value="#{cercaPacchettoBean.costo}" />
+						<h:message for="costo-pacchetto"></h:message>
+
+
+						<h:commandButton value="Cerca"
+							action="#{cercaPacchettoBean.cercaPacchetti()}"
+							update="pacchettoGrid" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+
+		</div>
+		<div id='contenitore-centrale'>
+			<div id='contenitore-form-testo'>
+
+				<h:form style="padding : 30px;">
+					<ui:repeat var="pacchetto"
+						value="#{pacchettoBean.risultatoVisualizzaPacchetto}">
+
+						<p:growl id="growl" showDetail="true" />
+
+						<p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}"
+							toggleable="true" toggleSpeed="500">
+							<p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}"
+								update="growl" />
+							<h:panelGrid columns="2" cellpadding="10">
+
+								<h:outputText
+									value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}" />;
+		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
+									<h:outputText value="città escursione - #{esc.citta}" />
+								</ui:repeat>
+
+							</h:panelGrid>
+						</p:fieldset>
+						<h:commandLink value="Aggiungi a GiftList"
+							action="#{inserisciPacchettoInGLBean.inserisciPacchetto(pacchetto)}" />
+						<br />
+						<h:commandLink value="Acquista"
+							action="#{selezionaPacchettoBean.acquistaPacchetto(pacchetto)}" />
+						<br />
+						<h:commandLink value="Personalizza"
+							action="#{personalizzaPacchettoBean.personalizza(pacchetto)}" />
+						<br />
+						<p:commandLink value="Invia ad Amico" action="#" />
+						<br />
+						<p:commandLink id="showDialogButton" type="button"
+							value="Invia ad Amico" onclick="PF('dlg').show()" />
+
+						<p:dialog header="Invia Ad Amico" widgetVar="dlg" resizable="false" >
+							<h:form id="form">
+
+								<h:panelGrid columns="1" style="margin-bottom:10px">
+								#{visualizzaPacchettoAmicoBean.indirizzo(pacchetto.idPacchetto,pacchetto.mail)}
+									<h:outputLabel for="indirizzoPagina" value="Indirizzo inviato" /><br/>
+									<p:inputText id="indirizzoVero"
+										value="#{visualizzaPacchettoAmicoBean.indirizzo}" /><br/>
+									<h:outputLabel for="indirizzoMail" value="Indirizzo Mail" /><br/>
+									<p:inputText id="indirizzoMailVero"
+										value="mail" /><br/>
+									<h:outputLabel for="messaggio" value="Messaggio" /><br/>
+									<h:inputText value="Ciao! #{userBean.name} vuole inviarti questo pacchetto dal titolo #{pacchetto.nome}" /> <br/>	
+								</h:panelGrid>
+
+								<p:commandButton id="submitButton" value="Invia"
+									action="#{gestionePacchettoBean.inviaComunicazione()}"
+									oncomplete="PF('dlg').hide();" />
+							</h:form>
+						</p:dialog>
+					</ui:repeat>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
 </html>
 
