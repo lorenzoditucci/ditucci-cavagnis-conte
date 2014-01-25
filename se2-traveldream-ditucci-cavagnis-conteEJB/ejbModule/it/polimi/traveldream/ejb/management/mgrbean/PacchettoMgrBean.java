@@ -1,6 +1,8 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -55,12 +57,16 @@ public class PacchettoMgrBean implements pacchettoMgr {
     	 * La query di default e' stata leggermente modificata in modo da permettere l'ordine inverso
     	 * 
     	 */
+    	Timestamp adesso = new Timestamp(Calendar.getInstance().getTime().getTime());
     	String queryRicerca = "SELECT p "
     			+ "FROM Pacchetto p WHERE p.mail IN("
     			+ "SELECT i.email "
-    			+ "FROM  Impiegato i ) ORDER BY p.idPacchetto DESC";
+    			+ "FROM  Impiegato i ) "
+    			+ "AND p.dataInizio > :adesso "
+    			+ " ORDER BY p.idPacchetto DESC";
     	TypedQuery<Pacchetto> q = em.createQuery(queryRicerca, Pacchetto.class);
     	//q.setParameter("tipo", "impiegato");
+    	q.setParameter("adesso", adesso);
     	List<Pacchetto> listaPacchetti = q.getResultList();
     	/**
     	 * OLD METHOD
