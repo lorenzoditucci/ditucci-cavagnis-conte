@@ -3,6 +3,7 @@ package it.polimi.traveldream.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
@@ -53,7 +54,14 @@ public class InserisciPacchettoInGLBean {
 					+ " Il pacchetto selezionato è già inserito nella Gift List", ""));
 			return "index";
 		}
-		glBean.aggiungiPacchetto(gl, pDTO);
+		try {
+			glBean.aggiungiPacchetto(gl, pDTO);
+		} catch (CoerenzaException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore di coerenza."
+					+ e.getMessaggi().get(0), ""));
+			return "index";
+		}
+		
 		return "visualizzaPacchetto";
 	}
 	
