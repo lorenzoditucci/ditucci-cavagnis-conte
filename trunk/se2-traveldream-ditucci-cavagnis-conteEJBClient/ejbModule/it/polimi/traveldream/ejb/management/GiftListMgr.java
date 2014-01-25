@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Local;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 
@@ -17,7 +18,7 @@ public interface GiftListMgr {
 	
 	public ArrayList<GiftListDTO> cercaGLperMail(String userEmail);
 
-	void aggiungiPacchetto(GiftListDTO glDTO, PacchettoDTO pDTO);
+	void aggiungiPacchetto(GiftListDTO glDTO, PacchettoDTO pDTO) throws CoerenzaException;
 
 	void rimuovi(PacchettoDTO pDTO, GiftListDTO glDTO); 
 	

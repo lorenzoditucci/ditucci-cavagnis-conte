@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb.management.mgrbean;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
@@ -83,7 +84,7 @@ public class GiftListMgrBean implements GiftListMgr {
     }
     
     @Override
-    public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO){    	
+    public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO) throws CoerenzaException{    	
     	GiftList gl = em.find(GiftList.class, glDTO.getIdGiftList());
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
     	List<Pacchetto> lista = new ArrayList<Pacchetto>();
@@ -91,7 +92,8 @@ public class GiftListMgrBean implements GiftListMgr {
     	List<PacchettoDTO> listaDTO = new ArrayList<PacchettoDTO>(glDTO.getPacchettiContenuti());
     	listaDTO.add(pDTO);
     	glDTO.setPacchettiContenuti(listaDTO);
-    	//controlloCoerenzaMGRBean.controllaGiftList(glDTO);
+    	controlloCoerenzaMGRBean.controllaGiftList(glDTO);
+    
     	
     	if(!lista.contains(p)){
     		lista.add(p);
