@@ -19,6 +19,7 @@ public class VisualizzaPacchettoAmicoBean {
 	private ArrayList<PacchettoDTO> risultato;
 	private int idPacchetto;
 	private String mailCreatore;
+	private String indirizzo;
 		
 	public String prendiDaBarraIndirizziParametro(){
 		int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
@@ -31,6 +32,12 @@ public class VisualizzaPacchettoAmicoBean {
 	private String visualizzaPacchettoAmico(int id,String mailCreatore) {
     	setRisultato(pacchettoMgr.prendiPerIdEMail(id,mailCreatore));
     	return "visualizzaPacchettoAmico?faces-redirect=true";
+	}
+	
+	public String indirizzo(int id, String mail){
+		setIndirizzo("http://localhost:8080/se2-traveldream-ditucci-cavagnis-conteWeb/visualizzaPacchettoAmico.xhtml?id="+id+"&mail="+mail);
+		return "";
+		
 	}
 
 	public ArrayList<PacchettoDTO> getRisultato() {
@@ -55,5 +62,13 @@ public class VisualizzaPacchettoAmicoBean {
 
 	public void setMailCreatore(String mailCreatore) {
 		this.mailCreatore = mailCreatore;
+	}
+
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
 	}
 }
