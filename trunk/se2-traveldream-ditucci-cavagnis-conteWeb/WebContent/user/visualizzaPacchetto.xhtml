@@ -109,25 +109,29 @@
 						<br />
 						<h:commandLink value="Personalizza"
 							action="#{personalizzaPacchettoBean.personalizza(pacchetto)}" />
-						<br />
-						<p:commandLink value="Invia ad Amico" action="#" />
+
 						<br />
 						<p:commandLink id="showDialogButton" type="button"
 							value="Invia ad Amico" onclick="PF('dlg').show()" />
 
-						<p:dialog header="Invia Ad Amico" widgetVar="dlg" resizable="false" >
+						<p:dialog header="Invia Ad Amico" widgetVar="dlg"
+							resizable="false">
 							<h:form id="form">
 
 								<h:panelGrid columns="1" style="margin-bottom:10px">
 								#{visualizzaPacchettoAmicoBean.indirizzo(pacchetto.idPacchetto,pacchetto.mail)}
-									<h:outputLabel for="indirizzoPagina" value="Indirizzo inviato" /><br/>
+									<h:outputLabel for="indirizzoPagina" value="Indirizzo inviato" />
+									<br />
 									<p:inputText id="indirizzoVero"
-										value="#{visualizzaPacchettoAmicoBean.indirizzo}" /><br/>
-									<h:outputLabel for="indirizzoMail" value="Indirizzo Mail" /><br/>
-									<p:inputText id="indirizzoMailVero"
-										value="mail" /><br/>
-									<h:outputLabel for="messaggio" value="Messaggio" /><br/>
-									<h:outputText/>Text value="Ciao! #{userBean.name} vuole inviarti questo pacchetto dal titolo #{pacchetto.nome}" /> <br/>	
+										value="#{visualizzaPacchettoAmicoBean.indirizzo}" />
+									<br />
+									<h:outputLabel for="indirizzoMail" value="Indirizzo Mail" />
+									<br />
+									<p:inputText id="indirizzoMailVero" value="mail" />
+									<br />
+									<h:outputLabel for="messaggio" value="Messaggio" />
+									<br />
+									<h:outputText />Ciao! #{userBean.name} vuole inviarti questo pacchetto dal titolo #{pacchetto.nome} <br />
 								</h:panelGrid>
 
 								<p:commandButton id="submitButton" value="Invia"
