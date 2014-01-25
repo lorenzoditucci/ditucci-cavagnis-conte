@@ -48,8 +48,12 @@
 					<!-- prova -->
 			<ui:repeat var='giftlist' value="#{cercaGiftListBean.risultatoRicerca}">
 			<ui:repeat var="pacchetto" value="#{giftlist.pacchettiContenuti}">
-	  		<p:outputPanel>
+	  		
 	  		<h:outputText value = "Pacchetto - #{pacchetto.nome}"/><br/>
+	  		</ui:repeat>
+	  		</ui:repeat>
+	  		<ui:repeat var="giftlist" value="#{cercaGiftListBean.risultatoRicerca}">
+	  		<p:outputPanel>
 	  		<p:outputLabel>Voli</p:outputLabel>
 	  		<!--  dettagli dei voli acquistati -->
 	  		<h:outputText value="Acquistati" />
@@ -322,13 +326,10 @@
 				</p:column>
 			
 			</p:dataTable>
-			
+			<p:growl id="growl"></p:growl>
 			</p:outputPanel>
-			
-		</ui:repeat>
-		</ui:repeat>
 
-					
+			</ui:repeat>		
 
 
 				</h:form>

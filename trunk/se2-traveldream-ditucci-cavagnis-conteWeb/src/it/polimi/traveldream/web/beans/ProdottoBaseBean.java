@@ -2,6 +2,7 @@ package it.polimi.traveldream.web.beans;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 import it.polimi.traveldream.ejb.management.ProdottoBaseMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
@@ -10,8 +11,10 @@ import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
 
@@ -50,6 +53,11 @@ public class ProdottoBaseBean {
     	 * devo registrare che il prodotto base e' stato acquistato
     	 */
     	
+    	if(controllaTempo(volo.getDataPartenza())){
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Prodotto Base non Acquistabile", "il prodotto base non e' acquistabile in quanto scaduto!"));
+    		return "";
+    	}
+    	
     	setGiftListDaAcquistare(giftList);
     	setVoloDaAcquistare(volo);
     	
@@ -66,20 +74,39 @@ public class ProdottoBaseBean {
     	return "dettagliGiftList?faces-redirect=true";
     }
     
-    
     public String acquistaProdottoBaseEscursione(EscursioneDTO escursione,GiftListDTO giftList){
+    	if(controllaTempo(escursione.getDataInizio())){
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Prodotto Base non Acquistabile", "il prodotto base non e' acquistabile in quanto scaduto!"));
+    		return "";
+    	}
     	setGiftListDaAcquistare(giftList);
     	setEscursioneDaAcquistare(escursione);
     	return "acquista_escursione?faces-redirect=true";
     }
     
-    public String registraAcquistoEscursione(){
+    private boolean controllaTempo(Date dataInizio) {
+		//Timestamp adesso = new Timestamp(Calendar.getInstance().getTime().getTime());
+    	Date adesso = new Date();
+    	adesso = new java.sql.Timestamp(adesso.getTime());
+		System.out.println("data adesso "+adesso.getTime());
+		if(dataInizio.after(adesso)){
+			System.out.println(dataInizio.getTime()+" >>>> "+adesso.getTime());
+			return false;
+		}
+		return true;
+	}
+
+	public String registraAcquistoEscursione(){
     	setDataAcquistoCalendar(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
     	mgr.registraAcquisto(escursioneDaAcquistare,giftListDaAcquistare,nomeAcquirente,dataAcquisto);
     	return "dettagliGiftList?faces-redirect=true";
     }
     
     public String acquistaProdottoBasePernottamento(PernottamentoDTO pernottamento,GiftListDTO giftList){
+    	if(controllaTempo(pernottamento.getDataInizio())){
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Prodotto Base non Acquistabile", "il prodotto base non e' acquistabile in quanto scaduto!"));
+    		return "";
+    	}
     	setGiftListDaAcquistare(giftList);
     	setPernottamentoDaAcquistare(pernottamento);
     	
