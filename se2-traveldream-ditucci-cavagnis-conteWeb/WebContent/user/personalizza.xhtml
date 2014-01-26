@@ -74,7 +74,7 @@
 			<p:growl id="growl"></p:growl>
 			<p:outputLabel value="#{personalizzaPacchettoBean.pacchetto.nome}"/>
 			<p:outputPanel>
-				<p:outputLabel>Voli contenuti nel pacchetto</p:outputLabel>
+				<p:outputLabel>Voli</p:outputLabel>
 				<p:dataTable var="volo" value="#{personalizzaPacchettoBean.pacchetto.voli}">
 				
 				<p:column>
@@ -123,29 +123,43 @@
 				<p:outputLabel>Pernottamenti</p:outputLabel>
 				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.pacchetto.pernotti}">
 					<p:column>
-					<f:facet name="header">
-						<h:outputText value="Nome Hotel"/>
-					</f:facet>
-					<h:outputText value = "#{pernottamento.hotel.nome}"/>
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Data inizio Prenotazione"/>
-					</f:facet>
-					<h:outputText value = "#{pernottamento.dataInizio}"/>
-				</p:column>
-				
-				<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome Hotel"/>
+						</f:facet>
+						<h:outputText value = "#{pernottamento.hotel.nome}"/>
+					</p:column>
+			
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Città Hotel"/>
+						</f:facet>
+						<h:outputText value = "#{pernottamento.hotel.citta}"/>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Numero Stelle"/>
+						</f:facet>
+						<h:outputText value = "#{pernottamento.hotel.classe}"/>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Data inizio Prenotazione"/>
+						</f:facet>
+						<h:outputText value = "#{pernottamento.dataInizio}"/>
+					</p:column>
+					
+					<p:column>
 					<f:facet name="header">
 						<h:outputText value="Data Fine"/>
 					</f:facet>
 					<h:outputText value = "#{pernottamento.dataFine}"/>
-				</p:column>
+					</p:column>
 				
-				<p:column>
-					<h:commandLink value = "Rimuovi Pernottamento" action="#{personalizzaPacchettoBean.rimuoviPernottamento(pernottamento)}"/>
-				</p:column>
+					<p:column>
+						<h:commandLink value = "Rimuovi Pernottamento" action="#{personalizzaPacchettoBean.rimuoviPernottamento(pernottamento)}"/>
+					</p:column>
 				</p:dataTable>
 			<h:link value="Aggiungi Pernottamento" outcome="cercaEAggiungiPernottamento"/><br/>
 				<!--  Mostro i dettagli delle escursioni -->
