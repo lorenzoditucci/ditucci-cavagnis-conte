@@ -32,7 +32,7 @@ public class UserMgrBean implements UserMgr {
 	@Override
 	public void save(UserDTO user) {
 		User newUser = new User(user);
-		List<Group> groups = new ArrayList<Group>(); //ad ogni utente possono corrispondere più gruppi di appartenenza
+		List<Group> groups = new ArrayList<Group>(); //ad ogni utente possono corrispondere piï¿½ gruppi di appartenenza
 		groups.add(Group.USER); //aggiunto USER ai gruppi dell'utente appena creato
 		newUser.setGroups(groups);
 		em.persist(newUser); //sulla base di dati viene registrata la persistenza
@@ -55,7 +55,7 @@ public class UserMgrBean implements UserMgr {
 	@Override
 	@RolesAllowed({Group._USER,Group._EMPLOYEE})
 	public UserDTO getUserDTO() {
-		UserDTO userDTO = convertToDTO(getPrincipalUser()); //getPrincipal è l'utente corrente
+		UserDTO userDTO = convertToDTO(getPrincipalUser()); //getPrincipal ï¿½ l'utente corrente
 		return userDTO;
 	}
 
@@ -77,7 +77,7 @@ public class UserMgrBean implements UserMgr {
     public List<User> getAllUsers() {
     	//User.find_all nome della query
     	//ritorna il risultato della query
-    	//la named query è un modo comedo di avere query cablate nel codice
+    	//la named query ï¿½ un modo comedo di avere query cablate nel codice
     	return em.createNamedQuery(User.FIND_ALL, User.class).getResultList();
     }
 
@@ -110,5 +110,6 @@ public class UserMgrBean implements UserMgr {
 		userDTO.setLastName(user.getLastName());
 		return userDTO;
 	}
+    
 }
 

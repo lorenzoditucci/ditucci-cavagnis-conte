@@ -108,6 +108,20 @@ public class VoloDTO implements Comparable<VoloDTO> {
 	}
 
 	@Override
+	public boolean equals(Object altro){
+		if(altro == null || altro.getClass() != this.getClass()){
+			return false;
+		}
+		
+		VoloDTO altroVolo = (VoloDTO) altro;
+		
+		if(this.idVolo == altroVolo.getIdVolo()){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public int compareTo(VoloDTO v) {
 		
 		if(this.getDataPartenza().before(v.getDataPartenza()))

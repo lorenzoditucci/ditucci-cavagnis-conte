@@ -69,9 +69,11 @@
 		<p:panel header="Inserisci id Volo">  
     	<h:panelGrid columns="2" id="grid"> 
 		<h:form>
-            <h:outputLabel value="Id Volo: " for="idVolo"></h:outputLabel>  
-            <p:inputText id="idVolo"   
-                            value="#{personalizzaPacchettoBean.idVolo}" required="true"/>  
+			<p:growl id="growl"/>
+            <h:outputLabel value="Città di Partenza: " for="cittaPartenza"></h:outputLabel> 
+            <p:inputText id = "cittaPartenza" value="#{personalizzaPacchettoBean.cittaPartenza}" required = "true"/>
+            <h:outputLabel value="Città di Arrivo" for="cittaArrivo"/>
+            <p:inputText id = "cittaArrivo" value = "#{personalizzaPacchettoBean.cittaArrivo}" required = "true"/>  
         
             <h:commandButton value="Cerca"  
                             action="#{personalizzaPacchettoBean.cercaVolo()}" update="voliGrid"  >  
@@ -102,7 +104,21 @@
         			<h:outputText value = "Città Arrivo"/>
         		</f:facet>
         		<h:outputText value="#{volo.cittaArrivo}"/>
-        	</p:column> 
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Partenza"/>
+        		</f:facet>
+        		<h:outputText value="#{volo.dataPartenza}"/>
+        	</p:column>  
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Arrivo"/>
+        		</f:facet>
+        		<h:outputText value="#{volo.dataArrivo}"/>
+        	</p:column>  
         	
         	<p:column>
         		<h:commandLink value="Aggiungi Volo" action="#{personalizzaPacchettoBean.aggiungiVolo(volo)}"/>

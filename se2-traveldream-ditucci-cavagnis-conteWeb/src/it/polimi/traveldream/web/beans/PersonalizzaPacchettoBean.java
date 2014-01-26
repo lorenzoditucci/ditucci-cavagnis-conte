@@ -66,9 +66,33 @@ public class PersonalizzaPacchettoBean {
 	private HotelDTO hotel;
 	private PernottamentoDTO pernottamentoDTO;
 	
+	private String cittaPartenza;
+	private String cittaArrivo;
+	
 	public PersonalizzaPacchettoBean(){
 		selezionaPacchettoBean = new SelezionaPacchettoBean();
 	}
+
+	
+	public String getCittaPartenza() {
+		return cittaPartenza;
+	}
+
+
+	public void setCittaPartenza(String cittaPartenza) {
+		this.cittaPartenza = cittaPartenza;
+	}
+
+
+	public String getCittaArrivo() {
+		return cittaArrivo;
+	}
+
+
+	public void setCittaArrivo(String cittaArrivo) {
+		this.cittaArrivo = cittaArrivo;
+	}
+
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -184,18 +208,19 @@ public class PersonalizzaPacchettoBean {
 	}
 	
 	public void cercaVolo(){
-		this.voliCercati = voloMgr.cercaVoloPerID(idVolo);
+		this.voliCercati = voloMgr.cercaVoloPerPartenzaArrivo(cittaPartenza, cittaArrivo);
 		if(voliCercati.size()==0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nessun volo trovato.","secondo mex" ));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nessun volo trovato.","" ));
 		}
 		return;
 	}
 	
 	public String aggiungiVolo(VoloDTO volo){
-		if(!pacchetto.getVoli().contains(volo)){
-			pacchetto.getVoli().add(volo);
+		if(pacchetto.getVoli().contains(volo)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il volo scelto è già presente nel pacchetto","" ));
+			return null;
 		}
-			
+		pacchetto.getVoli().add(volo);	
 		return "personalizza";
 	}
 	

@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import org.jboss.weld.context.ejb.Ejb;
+
 @ManagedBean
 @SessionScoped
 public class UserBean {
@@ -28,7 +30,8 @@ public class UserBean {
 	@PostConstruct
 	public void init() {
 		setMailCurrentUser();
-		setPacchettiAcquistati(userMgr.getUserDTO().getPacchettiAcquistati());
+		//setPacchettiAcquistati(userMgr.getUserDTO().getPacchettiAcquistati());
+		pacchettiAcquistati = new ArrayList<PacchettoDTO>();
 	}
 	
 	public String getName() {

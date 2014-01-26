@@ -16,6 +16,7 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name="Acquista.findAll", query="SELECT a FROM Acquista a"),
 	//@NamedQuery(name="Acquistati.cercaAcquirentiPacchetto", query="SELECT a FROM Acquista a WHERE a.id.idPacchetto = :idPacchetto")
+	@NamedQuery(name = "Acquista.cercaPerUtente", query = "SELECT a FROM Acquista a WHERE a.user = :user"),
 })
 public class Acquista implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class Acquista implements Serializable {
 	public Acquista() {
 	}
 
-	@OneToOne()
+	@OneToOne(optional = false)
 	private User user;
 	
 	@OneToOne(optional = false) 	
