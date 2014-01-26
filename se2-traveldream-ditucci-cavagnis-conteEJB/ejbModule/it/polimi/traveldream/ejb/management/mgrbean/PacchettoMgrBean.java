@@ -51,8 +51,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
      */
     @Override
     public ArrayList<PacchettoDTO> prendiTutti() {
-    	System.out.println("entro in prendi tutti");
-    	/**
+    	/*
     	 * utilizzo come query la default della entity in quanto mi servono tutti i pacchetti.
     	 * La query di default e' stata leggermente modificata in modo da permettere l'ordine inverso
     	 * 
@@ -65,18 +64,11 @@ public class PacchettoMgrBean implements pacchettoMgr {
     			+ "AND p.dataInizio > :adesso "
     			+ " ORDER BY p.idPacchetto DESC";
     	TypedQuery<Pacchetto> q = em.createQuery(queryRicerca, Pacchetto.class);
-    	//q.setParameter("tipo", "impiegato");
     	q.setParameter("adesso", adesso);
     	List<Pacchetto> listaPacchetti = q.getResultList();
-    	/**
-    	 * OLD METHOD
-    	 
-    	TypedQuery<Pacchetto> queryRicerca = em.createNamedQuery("Pacchetto.findAll", Pacchetto.class);
-    	List<Pacchetto> listaPacchetti =  queryRicerca.getResultList();
-		
-    	*/
     	
-    	/**
+    	
+    	/*
     	 * ritorno direttamente la copia della lista di pacchetti -risultato della query-
     	 */
     	return copiaListaQuery(listaPacchetti);     
@@ -91,18 +83,7 @@ public class PacchettoMgrBean implements pacchettoMgr {
 		ArrayList<PacchettoDTO> copia = new ArrayList<PacchettoDTO>();
 		for(int i=0; i<listaPacchetti.size();i++){
     		PacchettoDTO daAggiungere = new PacchettoDTO();
-    		/*daAggiungere.setIdPacchetto(listaPacchetti.get(i).getIdPacchetto());
-    		daAggiungere.setCosto(listaPacchetti.get(i).getCosto());
-    		daAggiungere.setDataFine(listaPacchetti.get(i).getDataFine());
-    		daAggiungere.setDataInizio(listaPacchetti.get(i).getDataInizio());
-    		daAggiungere.setDescrizione(listaPacchetti.get(i).getDescrizione());
-    		daAggiungere.setDisponibilitaAttuale(listaPacchetti.get(i).getDisponibilitaAttuale());
-    		daAggiungere.setDisponibilitaMax(listaPacchetti.get(i).getDisponibilitaMax());
-    		daAggiungere.setMail(listaPacchetti.get(i).getMail());
-    		daAggiungere.setNome(listaPacchetti.get(i).getNome());
-    		//manca la copia delle liste?!
-    		
-    		daAggiungere.setVoli(VoloMgrBean.copiaListaToDTO(listaPacchetti.get(i).getVoli()));*/
+
     		daAggiungere = listaPacchetti.get(i).convertiInDTO();
     		
     		copia.add(daAggiungere);

@@ -80,7 +80,6 @@ public class CercaPacchettoBean {
 	}
 	
 	public String cercaPacchetti(){
-		System.out.println("cercapacchetti - faccio controllo");
 		if(costo == null && nomePacchetto == null && dataPartenza==null && dataRitorno == null ){
 			FacesContext.getCurrentInstance().addMessage("ricercaPacchetto:nome-pacchetto", new FacesMessage(FacesMessage.SEVERITY_ERROR,"campiVuoti", "campi vuoti - ricerca nulla!"));
 			return "";

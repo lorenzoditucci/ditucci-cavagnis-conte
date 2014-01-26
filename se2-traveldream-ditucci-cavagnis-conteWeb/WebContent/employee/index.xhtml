@@ -10,6 +10,9 @@
 </h:head>
 <h:body>
 
+<!-- chiamo il bean -->
+#{pacchettoBean.cercaAll()}
+
 <p:layout fullPage="true">  
 	<p:layoutUnit position="north" size="100" resizable="true">  
         Travel Dream
@@ -40,7 +43,31 @@
     <p:growl id="growl"></p:growl>
     
   
-    
+    <h:form>
+			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
+		
+		    <p:growl id="growl" showDetail="true" />
+		
+		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
+		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
+		        <h:form>
+		            
+		            <h:outputText value="Nome: #{pacchetto.nome}"/><br/>	
+		            <h:outputText value="Valido dal: #{pacchetto.dataInizio}"/>	            
+		            <h:outputText value="Al: #{pacchetto.dataFine}"/> <br/>
+		            <h:outputLabel for="citta" value="Citta visitate: " />
+		   			<ui:repeat value="#{pacchetto.cittaDestinazione}" var="citta">  
+                    <h:outputLabel value="#{citta.nome}"/> 
+            		</ui:repeat> 
+            		<br/> 	                    
+		            <h:outputText value="Creato da: #{pacchetto.mail}"/>
+		            <br/> 	
+		       		<h:commandButton action="#{gestionePacchettoBean.cercaPacchetto(pacchetto.idPacchetto)}" value="Visualizza dettagli" />
+		     
+		        </h:form>
+		    </p:fieldset>
+			</ui:repeat>
+		</h:form> 
     
     </p:layoutUnit>  
     
