@@ -77,6 +77,14 @@ public class EscursioneMgrBean implements EscursioneMgr {
 		}
 	 
 	 @Override
+	 public List<EscursioneDTO> cercaEscursionePerCitta(String citta){
+		TypedQuery<Escursione> queryRicerca = em.createNamedQuery("Escursione.cercaEscursionePerCitta", Escursione.class);
+	    List<Escursione> listaEscursione = queryRicerca.setParameter("citta", citta).getResultList();
+	    	
+	    return copiaListaToDTO(listaEscursione);
+	 }
+	 
+	 @Override
 		public boolean controllaAppertenenzaPacchetto(EscursioneDTO e) {
 			String sqlQuery = "SELECT * FROM EscursioniPacchetto WHERE idEscursione = "+e.getIdEscursione();
 			
