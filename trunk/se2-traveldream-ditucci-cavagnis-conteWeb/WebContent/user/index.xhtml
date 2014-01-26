@@ -74,7 +74,8 @@
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
 		        <h:panelGrid columns="2" cellpadding="10">
 		            
-		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
+		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/><br/>
+		            <h:outputText value = "descrizione: #{pacchetto.descrizione}"/>
 		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
 		            	<h:outputText value="città escursione - #{esc.citta}" />
 		            </ui:repeat>

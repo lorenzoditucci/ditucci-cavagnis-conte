@@ -85,6 +85,13 @@ public class VoloMgrBean implements VoloMgr {
     	
     	return copiaListaToDTO(listaVolo); 
 	}
+	
+	@Override
+	public List<VoloDTO> cercaVoloPerPartenzaArrivo(String partenza, String arrivo){
+		TypedQuery<Volo> queryRicerca = em.createNamedQuery("Volo.cercaPartenzaArrivo", Volo.class);
+		List<Volo> listaVolo = queryRicerca.setParameter("partenza", partenza).setParameter("arrivo", arrivo).getResultList();
+		return copiaListaToDTO(listaVolo);
+	}
 
 	@Override
 	public boolean controllaAppertenenzaPacchetto(VoloDTO v) {

@@ -15,6 +15,8 @@ public interface VoloMgr {
 	public void remove(int idVolo);
 
 	List<VoloDTO> cercaVoloPerID(int idVoloDaCercare);
+	
+	List<VoloDTO> cercaVoloPerPartenzaArrivo(String cittaPartenza, String cittaArrivo);
 
 	public boolean controllaAppertenenzaPacchetto(VoloDTO v);
 

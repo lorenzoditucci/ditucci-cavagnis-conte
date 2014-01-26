@@ -20,7 +20,8 @@ import java.util.List;
 @Table(name="Volo")
 @NamedQueries({
 	@NamedQuery(name="Volo.findAll", query="SELECT v FROM Volo v"),
-	@NamedQuery(name="Volo.cercaVoloId", query="SELECT v FROM Volo v WHERE v.idVolo= :idVolo")
+	@NamedQuery(name="Volo.cercaVoloId", query="SELECT v FROM Volo v WHERE v.idVolo= :idVolo"),
+	@NamedQuery(name="Volo.cercaPartenzaArrivo", query = "SELECT v FROM Volo v WHERE v.cittaPartenza = :partenza and v.cittaArrivo = :arrivo"),
 })
 
 public class Volo implements Serializable {
