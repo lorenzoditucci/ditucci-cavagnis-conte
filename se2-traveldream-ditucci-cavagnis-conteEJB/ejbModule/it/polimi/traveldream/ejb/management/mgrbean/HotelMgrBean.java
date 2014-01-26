@@ -74,6 +74,14 @@ public class HotelMgrBean implements HotelMgr {
     	
     	return copiaListaToDTO(listaHotel); 
 	}
+	
+	@Override 
+	public List<HotelDTO> cercaHotelPerCitta(String citta){
+		TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelPerCitta", Hotel.class);
+    	List<Hotel> listaHotel = queryRicerca.setParameter("citta", citta).getResultList();
+    	
+    	return copiaListaToDTO(listaHotel); 
+	}
 
 	@Override
 	public boolean controllaAppertenenzaPacchetto(HotelDTO h) {

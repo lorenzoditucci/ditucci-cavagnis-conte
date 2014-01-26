@@ -70,48 +70,50 @@
 		<p:panel header="Inserisci id Hotel">  
     	<h:panelGrid columns="2" id="grid"> 
 		<h:form>
-            <h:outputLabel value="Id Hotel: " for="idHotel"></h:outputLabel>  
-            <p:inputText id="idHotel"   
-                            value="#{personalizzaPacchettoBean.idHotel}" required="true"/> 
-                            
+             
+            <h:outputLabel value="Città Hotel: " for="cittaHotel"/>  
+            <p:inputText id="cittaHotel"   
+                            value="#{personalizzaPacchettoBean.cittaHotel}" required="true"/>
+                                            
             <h:outputLabel value="Data inizio" for="dataInizio"/>
             <p:calendar value="#{personalizzaPacchettoBean.dataInizio}" id="dataInizio" pattern="MM/dd/yyyy" required="true"/>
         
         	<h:outputLabel value="Data Fine" for="dataFine"/>
             <p:calendar value="#{personalizzaPacchettoBean.dataFine}" id="dataFine" pattern="MM/dd/yyyy" required="true"/>
-            <h:commandButton value="Aggiungi"  
-                            action="#{personalizzaPacchettoBean.creaPernottamento()}" update="pernottamentiGrid "  >  
+            <h:commandButton value="Cerca Hotel"  
+                            action="#{personalizzaPacchettoBean.cercaHotel()}" update="pernottamentiGrid "  >  
             </h:commandButton>  
         </h:form>
         </h:panelGrid>  
         
         <h:form>
         <h:panelGrid id="pernottamentiGrid">
-        <p:dataTable value="#{personalizzaPacchettoBean.pernottamentoDTO}" var="pernottamento">
+        <p:dataTable value="#{personalizzaPacchettoBean.hotelCercati}" var="hotel">
         	<p:column>
         		<f:facet name="header">
         			<h:outputText value = "Nome Hotel"/>
         		</f:facet>
-        		<h:outputText value="#{pernottamento.hotel.nome}"/>
+        		<h:outputText value="#{hotel.nome}"/>
         	</p:column>
  			
  			<p:column>
         		<f:facet name="header">
-        			<h:outputText value = "Data Inizio"/>
+        			<h:outputText value = "Città"/>
         		</f:facet>
-        		<h:outputText value="#{pernottamento.dataInizio}"/>
+        		<h:outputText value="#{hotel.citta}"/>
         	</p:column>  
         	
         	<p:column>
         		<f:facet name="header">
-        			<h:outputText value = "Data Fine"/>
+        			<h:outputText value = "Numero di stelle"/>
         		</f:facet>
-        		<h:outputText value="#{pernottamento.dataFine}"/>
+        		<h:outputText value="#{hotel.classe}"/>
         	</p:column> 
         	
         	<p:column>
-        		<h:commandLink value="Aggiungi Pernottamento" action="#{personalizzaPacchettoBean.aggiungiPernottamento()}"/>
-        	</p:column>     
+        		<h:commandLink value="Aggiungi Hotel" action="#{personalizzaPacchettoBean.aggiungiPernottamento(hotel)}"/>
+        	</p:column> 
+        	  
         </p:dataTable>
         </h:panelGrid>
         </h:form>

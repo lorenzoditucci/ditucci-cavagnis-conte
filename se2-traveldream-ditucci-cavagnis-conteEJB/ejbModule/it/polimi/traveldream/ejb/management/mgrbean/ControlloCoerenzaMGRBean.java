@@ -200,7 +200,7 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
      * controlla che due date Calendar siano uguali con granularitù pari al giorno
      */
     private boolean stessoGiornoMeseAnno(Calendar d1,Calendar d2){
-    	if(d1.DAY_OF_MONTH == d2.DAY_OF_MONTH && d1.MONTH == d2.MONTH && d1.YEAR == d2.YEAR )
+    	if(d1.get(Calendar.DAY_OF_MONTH) == d2.get(Calendar.DAY_OF_MONTH) && d1.get(Calendar.MONTH) == d2.get(Calendar.MONTH) && d1.get(Calendar.YEAR) == d2.get(Calendar.YEAR) )
     		return true;
     	return false;
     	

@@ -54,26 +54,65 @@ public class PersonalizzaPacchettoBean {
 	private PacchettoDTO pacchetto;
 	private PacchettoDTO pacchettoOriginaleDto;
 	
+	/*
+	 * Dati riguardanti il volo
+	 */
 	private int idVolo;
 	private List<VoloDTO> voliCercati;
+	private String cittaPartenza;
+	private String cittaArrivo;
 	
+	/*
+	 * dati riguardanti le escursioni
+	 */
 	private int idEscursione;
 	private List<EscursioneDTO> escursioniCercate;
 	
+	/*
+	 * dati per la creazione del pernottamento
+	 */
 	private int idHotel;
 	private Date dataInizio;
 	private Date dataFine;
-	private HotelDTO hotel;
+	private List<HotelDTO> hotelCercati;
 	private PernottamentoDTO pernottamentoDTO;
+	private String cittaHotel;
 	
-	private String cittaPartenza;
-	private String cittaArrivo;
+	
+	
+	
+	
 	
 	public PersonalizzaPacchettoBean(){
 		selezionaPacchettoBean = new SelezionaPacchettoBean();
 	}
 
 	
+	
+	public List<HotelDTO> getHotelCercati() {
+		return hotelCercati;
+	}
+
+
+
+	public void setHotelCercati(List<HotelDTO> hotelCercati) {
+		this.hotelCercati = hotelCercati;
+	}
+
+
+
+	public String getCittaHotel() {
+		return cittaHotel;
+	}
+
+
+
+	public void setCittaHotel(String cittaHotel) {
+		this.cittaHotel = cittaHotel;
+	}
+
+
+
 	public String getCittaPartenza() {
 		return cittaPartenza;
 	}
@@ -128,13 +167,13 @@ public class PersonalizzaPacchettoBean {
 		this.dataFine = dataFine;
 	}
 
-	public HotelDTO getHotel() {
+	/*public HotelDTO getHotel() {
 		return hotel;
 	}
 
 	public void setHotel(HotelDTO hotel) {
 		this.hotel = hotel;
-	}
+	}*/
 
 	public int getIdHotel() {
 		return idHotel;
@@ -237,17 +276,12 @@ public class PersonalizzaPacchettoBean {
 		return "personalizza";
 	}
 	
-	public void creaPernottamento(){
-		List<HotelDTO> hotels = hotelMgr.cercaHotelPerID(idHotel);
-		if(hotels.isEmpty()){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore."
-					+ " Non è stato trovato nessun hotel.", ""));
-		}
+	private void creaPernottamento(HotelDTO hotel){
 		if(dataInizio.before(dataFine)){
 			pernottamentoDTO = new PernottamentoDTO();
 			pernottamentoDTO.setDataInizio(new Timestamp(this.dataInizio.getTime()));
 			pernottamentoDTO.setDataFine(new Timestamp(this.dataFine.getTime()));
-			pernottamentoDTO.setHotel(hotels.get(0));
+			pernottamentoDTO.setHotel(hotel);
 			pernottamentoDTO.setPacchetto(this.pacchetto);
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore. "
@@ -255,12 +289,23 @@ public class PersonalizzaPacchettoBean {
 		}
 		return;
 	}
+	
+	public void cercaHotel(){
+		this.hotelCercati = hotelMgr.cercaHotelPerCitta(cittaHotel);
+		if(hotelCercati.size()==0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nessun volo trovato.","" ));
+		}
+		return;
+	}
 
 	
-	public String aggiungiPernottamento(){
-		if(!pacchetto.getPernotti().contains(pernottamentoDTO)){
+	public String aggiungiPernottamento(HotelDTO hotel){
+		this.creaPernottamento(hotel);
+		/*if(!pacchetto.getPernotti().contains(pernottamentoDTO)){
 			pacchetto.getPernotti().add(pernottamentoDTO);
-		}
+		}*/
+		
+		pacchetto.getPernotti().add(pernottamentoDTO);
 		return "personalizza";
 	}
 	
