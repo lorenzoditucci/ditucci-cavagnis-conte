@@ -308,10 +308,7 @@ public class CreaPacchettoBean {
 
 	public String salvaPacchetto(){
 		creaPacchettoMgr.salvaPacchettoInDB();
-		
-		//distruggi session scope
-		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		
+	
 		/*"pulisco" il session scope*/
 		resettaSessionScope();
 		

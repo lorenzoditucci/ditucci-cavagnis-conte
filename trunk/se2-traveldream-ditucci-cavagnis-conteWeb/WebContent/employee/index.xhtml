@@ -44,6 +44,7 @@
     
   
     <h:form>
+    Ultimi pacchetti creati:
 			<ui:repeat var="pacchetto" value="#{pacchettoBean.risultato}">
 		
 		    <p:growl id="growl" showDetail="true" />
@@ -54,12 +55,7 @@
 		            
 		            <h:outputText value="Nome: #{pacchetto.nome}"/><br/>	
 		            <h:outputText value="Valido dal: #{pacchetto.dataInizio}"/>	            
-		            <h:outputText value="Al: #{pacchetto.dataFine}"/> <br/>
-		            <h:outputLabel for="citta" value="Citta visitate: " />
-		   			<ui:repeat value="#{pacchetto.cittaDestinazione}" var="citta">  
-                    <h:outputLabel value="#{citta.nome}"/> 
-            		</ui:repeat> 
-            		<br/> 	                    
+		            <h:outputText value="Al: #{pacchetto.dataFine}"/> <br/>	                    
 		            <h:outputText value="Creato da: #{pacchetto.mail}"/>
 		            <br/> 	
 		       		<h:commandButton action="#{gestionePacchettoBean.cercaPacchetto(pacchetto.idPacchetto)}" value="Visualizza dettagli" />
