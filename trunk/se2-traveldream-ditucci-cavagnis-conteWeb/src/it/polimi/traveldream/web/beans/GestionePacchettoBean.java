@@ -79,6 +79,11 @@ public class GestionePacchettoBean {
 		}	
 	}
 	
+	public String cercaPacchetto(int idPacchetto){
+		this.idPacchettoDaCercare=idPacchetto;
+		return cercaPacchetto();	
+	}
+	
 	public String eliminaPacchetto(){
 		if(gestionePacchettoMgr.eliminaPacchettoId(pacchetto)){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Eliminazione eseguita correttamente", "Tutto ok"));	
