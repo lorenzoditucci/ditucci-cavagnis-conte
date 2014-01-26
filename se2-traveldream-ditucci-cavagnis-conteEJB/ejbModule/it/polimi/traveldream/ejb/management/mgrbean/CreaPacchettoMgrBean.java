@@ -384,7 +384,6 @@ public class CreaPacchettoMgrBean implements CreaPacchettoMgr{
 		 	em.persist(newPernottamento);
 		}
 	
-		//manca pernottamento che sono da creare
 		return true;
 	}
 
