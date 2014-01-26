@@ -1,7 +1,9 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -185,6 +187,23 @@ public class GestionePacchettoMgrBean implements GestionePacchettoMgr {
 			
 		return false;
 	}
+
+	@Override
+	public List<String> ottieniAcquirentiDelPacchetto(PacchettoDTO pacchetto) {
+		String sqlQuery = "select user_email from Acquisti where pacchetto_idPacchetto="+pacchetto.getIdPacchetto();
+		List<String> emailAcquirenti = em.createNativeQuery(sqlQuery).getResultList();
+	
+		System.out.println(emailAcquirenti.size());
+		
+		/*tecnica per rimuovere duplicati di una lista*/
+		Set setItems = new LinkedHashSet(emailAcquirenti);
+		emailAcquirenti.clear();
+		emailAcquirenti.addAll(setItems);
+		System.out.println(emailAcquirenti.size());
+	
+		return emailAcquirenti;		
+	}
+
 
 
 

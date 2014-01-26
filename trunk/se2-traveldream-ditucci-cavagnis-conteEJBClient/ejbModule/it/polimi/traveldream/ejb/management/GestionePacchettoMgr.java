@@ -30,5 +30,8 @@ public interface GestionePacchettoMgr {
 	public boolean controllaChePacchettoNonFacciaParteDiGL(
 			PacchettoDTO pacchetto);
 
+
+	public List<String> ottieniAcquirentiDelPacchetto(PacchettoDTO pacchetto);
+
 	
 }

@@ -96,27 +96,59 @@
             
             <h:commandButton value="Elimina" action="#{gestionePacchettoBean.eliminaPacchetto()}"></h:commandButton>
 		 	<h:commandButton value="Modifica" action="modificaPacchetto.xhtml"></h:commandButton>
-			<p:commandButton id="showDialogButton" type="button" value="Invia Comunicazione" onclick="PF('dlg').show()" />  
-   
+			<p:commandButton id="showDialogButton" type="button" value="Invia Comunicazione" onclick="#{gestionePacchettoBean.cercaAcquirenti()}"/>  
+ <!--  
    <p:dialog header="Comunicazione" widgetVar="dlg" resizable="false">  
     <h:form id="form">  
   
         <h:panelGrid columns="2" style="margin-bottom:10px">  
             <h:outputLabel for="comunicazione" value="Comunicazione" />  
-            <p:inputText id="comunicazione" value="#{gestionePacchettoBean.avviso}" />  
+            <p:inputText id="comunicazione" value="#{gestionePacchettoBean.avviso}" /> 
+                    
+            <ui:repeat value="#{gestionePacchettoBean.acquirenti}" var="mail">  
+                <h:outputText value="#{mail}"/><br/>          	       	 	  
+            </ui:repeat>  
+     
         </h:panelGrid>  
   
         <p:commandButton id="submitButton" value="Invia" action="#{gestionePacchettoBean.inviaComunicazione()}" oncomplete="PF('dlg').hide();"/>  
               
     </h:form>  
-</p:dialog> 
+</p:dialog> --> 
+
+        <p:dialog widgetVar="dlg" header="Invia Comunicazione" width="530" >
+
+                <h:form id="form">
+
+                    <h:panelGrid columns="2" cellspacing="5">
+                    	 <h:outputLabel for="a" value="A: " />
+                    	 <ui:repeat value="#{gestionePacchettoBean.acquirenti}" var="mail">  
+               			 <h:outputText value="#{mail}; "/>         	       	 	  
+            			 </ui:repeat>
+            			
+           
+                       
+                        <h:outputLabel for="oggetto" value="Oggetto: " />
+                        <p:inputText id="oggetto" size="50"/>
+                    </h:panelGrid>
+
+                    <p:separator />
+
+                    <p:editor widgetVar="editor" />
+
+                    <p:separator />
+
+                   <p:commandButton id="submitButton" value="Invia" action="#{gestionePacchettoBean.inviaComunicazione()}" oncomplete="PF('dlg').hide();"/>  
+     			   <p:commandButton id="annullaButton" type="button" value="Annulla" onclick="PF('dlg').hide();"/>  
+   
+                </h:form>
+
+            </p:dialog>
+
+
+
    </h:form>
-   
-  
-   
-   
-		
-		
+	
 		
     </p:layoutUnit>     
 </p:layout>    

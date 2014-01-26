@@ -49,7 +49,6 @@ public class CreaPacchettoBean {
 	@NotNull
 	private int idHotelDaCercare;
 	
-	@NotNull
 	private int idEscursioneDaCercare;
 
 
@@ -135,7 +134,7 @@ public class CreaPacchettoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 			return null;	
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 		
 		/*Prossima pagina: selezione degli hotel*/
 		return "aggiungiHotelInPacchetto";
@@ -231,7 +230,7 @@ public class CreaPacchettoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date/Cittˆ non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 			return null;	
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 		
 		/*Prossima pagina: confermo creazione del pacchetto*/
 		this.setPacchetto(creaPacchettoMgr.ottieniPacchettoDaConfermare());
