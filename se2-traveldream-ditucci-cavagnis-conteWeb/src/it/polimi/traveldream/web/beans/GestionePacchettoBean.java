@@ -3,6 +3,7 @@ package it.polimi.traveldream.web.beans;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.CreaPacchettoMgr;
@@ -54,6 +55,8 @@ public class GestionePacchettoBean {
 	private PacchettoDTO pacchetto;
 	
 	private String avviso;
+
+	private List<String> acquirenti;
 	
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -187,11 +190,20 @@ public class GestionePacchettoBean {
 		}
 		return false;
 	}
+	
+	public String cercaAcquirenti(){
+		setAcquirenti(new ArrayList<String>());
+		/*prendi lista degli acquirenti*/
+		List<String> ottieniAcquirentiDelPacchetto = gestionePacchettoMgr.ottieniAcquirentiDelPacchetto(this.pacchetto);
+		getAcquirenti().addAll(ottieniAcquirentiDelPacchetto);
+		
+		return "PF('dlg').show()";
+	}
 
 
 	public String inviaComunicazione(){
 		
-		System.out.println(avviso);
+		
 		return null;
 	}
 	
@@ -199,7 +211,7 @@ public class GestionePacchettoBean {
 		/*condizioni per la modifica di un pacchetto:
 		 * - che non sia stato acquistato da nessuno
 		 * - che non faccia parte di una giftlist
-		 * */
+		 */
 		if(!gestionePacchettoMgr.controllaChePacchettoNonFacciaParteDiGL(this.pacchetto)){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Il pacchetto fa parte di una GL e non pu˜ essere modificato", "Modifiche non salvate"));	
 			return null;
@@ -330,6 +342,16 @@ public class GestionePacchettoBean {
 
 	public void setIdEscursioneDaCercare(int idEscursioneDaCercare) {
 		this.idEscursioneDaCercare = idEscursioneDaCercare;
+	}
+
+
+	public List<String> getAcquirenti() {
+		return acquirenti;
+	}
+
+
+	public void setAcquirenti(List<String> acquirenti) {
+		this.acquirenti = acquirenti;
 	}
 
 }
