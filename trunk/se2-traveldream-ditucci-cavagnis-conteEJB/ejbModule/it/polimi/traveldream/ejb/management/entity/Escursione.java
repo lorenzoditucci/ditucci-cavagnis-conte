@@ -22,7 +22,8 @@ import java.util.List;
 @Table(name="Escursione")
 @NamedQueries({
 	@NamedQuery(name="Escursione.findAll", query="SELECT e FROM Escursione e"),
-	@NamedQuery(name="Escursione.cercaEscursioneId", query="SELECT e FROM Escursione e WHERE e.idEscursione = :idEscursione")
+	@NamedQuery(name="Escursione.cercaEscursioneId", query="SELECT e FROM Escursione e WHERE e.idEscursione = :idEscursione"),
+	@NamedQuery(name="Escursione.cercaEscursionePerCitta", query = "SELECT e FROM Escursione E where e.citta = :citta"),
 })
 public class Escursione implements Serializable {
 	private static final long serialVersionUID = 1L;

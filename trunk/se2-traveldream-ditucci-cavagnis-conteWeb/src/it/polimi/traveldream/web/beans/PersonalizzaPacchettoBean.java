@@ -65,7 +65,7 @@ public class PersonalizzaPacchettoBean {
 	/*
 	 * dati riguardanti le escursioni
 	 */
-	private int idEscursione;
+	private String cittaEscursione;
 	private List<EscursioneDTO> escursioniCercate;
 	
 	/*
@@ -89,6 +89,18 @@ public class PersonalizzaPacchettoBean {
 
 	
 	
+	public String getCittaEscursione() {
+		return cittaEscursione;
+	}
+
+
+
+	public void setCittaEscursione(String cittaEscursione) {
+		this.cittaEscursione = cittaEscursione;
+	}
+
+
+
 	public List<HotelDTO> getHotelCercati() {
 		return hotelCercati;
 	}
@@ -191,15 +203,6 @@ public class PersonalizzaPacchettoBean {
 		this.idVolo = idVolo;
 	}
 	
-	
-
-	public int getIdEscursione() {
-		return idEscursione;
-	}
-
-	public void setIdEscursione(int idEscursione) {
-		this.idEscursione = idEscursione;
-	}
 
 	public List<EscursioneDTO> getEscursioniCercate() {
 		return escursioniCercate;
@@ -264,7 +267,10 @@ public class PersonalizzaPacchettoBean {
 	}
 	
 	public void cercaEscursione(){
-		this.escursioniCercate = escursioneMgr.cercaEscursionePerID(idEscursione);
+		this.escursioniCercate = escursioneMgr.cercaEscursionePerCitta(cittaEscursione);
+		if(escursioniCercate.size()==0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nessuna escursione trovata","" ));
+		}
 		return;
 	}
 	

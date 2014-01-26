@@ -22,4 +22,6 @@ public interface EscursioneMgr {
 
 	public List<String> ottieniListaCitta();
 
+	List<EscursioneDTO> cercaEscursionePerCitta(String citta);
+
 }

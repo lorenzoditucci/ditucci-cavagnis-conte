@@ -69,9 +69,10 @@
 		<p:panel header="Inserisci id Escursione">  
     	<h:panelGrid columns="2" id="grid"> 
 		<h:form>
-            <h:outputLabel value="Id Escursione: " for="idEscursione"></h:outputLabel>  
-            <p:inputText id="idEscursione"   
-                            value="#{personalizzaPacchettoBean.idEscursione}" required="true"/>  
+            <p:growl id = "growl"/>                
+			<h:outputLabel value="Città Escursione: " for="cittaEscursione"/>  
+            <p:inputText id="cittaEscursione"   
+                            value="#{personalizzaPacchettoBean.cittaEscursione}" required="true"/>  
         
             <h:commandButton value="Cerca"  
                             action="#{personalizzaPacchettoBean.cercaEscursione()}" update="escursioniGrid"  >  
