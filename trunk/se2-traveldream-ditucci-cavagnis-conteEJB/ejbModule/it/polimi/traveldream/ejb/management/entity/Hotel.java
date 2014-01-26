@@ -21,7 +21,8 @@ import java.util.List;
 @Table(name="Hotel")
 @NamedQueries({
 	@NamedQuery(name="Hotel.findAll", query="SELECT h FROM Hotel h"),
-	@NamedQuery(name="Hotel.cercaHotelId", query="SELECT h FROM Hotel h WHERE h.idHotel= :idHotel")
+	@NamedQuery(name="Hotel.cercaHotelId", query="SELECT h FROM Hotel h WHERE h.idHotel= :idHotel"),
+	@NamedQuery(name = "Hotel.cercaHotelPerCitta", query = "SELECT h FROM Hotel h WHERE h.citta = :citta"),
 })
 public class Hotel implements Serializable {
 	private static final long serialVersionUID = 1L;

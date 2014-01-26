@@ -19,4 +19,6 @@ public interface HotelMgr {
 
 	public void aggiornaModificheHotel(HotelDTO hotel);
 
+	List<HotelDTO> cercaHotelPerCitta(String citta);
+
 }
