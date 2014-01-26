@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
+import it.polimi.traveldream.ejb.management.ControlloCoerenzaMGR;
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.HotelMgr;
@@ -41,6 +43,11 @@ public class PersonalizzaPacchettoBean {
 	
 	@EJB
 	private HotelMgr hotelMgr;
+	
+	@EJB
+	private ControlloCoerenzaMGR coerenzaMGR;
+	
+	private SelezionaPacchettoBean selezionaPacchettoBean;
 	/*
 	 * Dati del pacchetto
 	 */
@@ -58,6 +65,10 @@ public class PersonalizzaPacchettoBean {
 	private Date dataFine;
 	private HotelDTO hotel;
 	private PernottamentoDTO pernottamentoDTO;
+	
+	public PersonalizzaPacchettoBean(){
+		selezionaPacchettoBean = new SelezionaPacchettoBean();
+	}
 
 	public PacchettoDTO getPacchetto() {
 		return pacchetto;
@@ -226,6 +237,18 @@ public class PersonalizzaPacchettoBean {
 			pacchetto.getPernotti().add(pernottamentoDTO);
 		}
 		return "personalizza";
+	}
+	
+	
+	public String confermaPacchetto(){
+		try {
+			coerenzaMGR.controlloPacchetto(pacchetto);
+		} catch (CoerenzaException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore."
+					+ "Il pacchetto non è coerente. " + e.getMessaggi().get(0), ""));
+			return null;
+		}
+		return selezionaPacchettoBean.selezionaPacchettoDTO(pacchetto);
 	}
 	
 }

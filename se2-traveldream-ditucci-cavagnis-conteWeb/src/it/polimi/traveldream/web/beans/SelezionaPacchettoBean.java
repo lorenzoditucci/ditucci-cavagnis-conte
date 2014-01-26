@@ -1,5 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
+import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.AcquistaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
@@ -35,13 +36,18 @@ public class SelezionaPacchettoBean {
      * Default constructor. 
      */
     public SelezionaPacchettoBean() {
-        // TODO Auto-generated constructor stub
+        pacchettoSelezionato = new PacchettoDTO();
     }
     
     public String selezionaPacchetto(int idPacchetto){
     	pacchettoSelezionato = mgr.cercaPacchettoId(idPacchetto).get(0);
     	return "visualizzaPacchetto?faces-redirect=true";
     	
+    }
+    
+    public String selezionaPacchettoDTO(PacchettoDTO pacchetto){
+    	this.setPacchettoSelezionato(pacchetto);
+    	return "visualizzaPacchetto?faces-redirect=true"; 
     }
 
 	public PacchettoDTO getPacchettoSelezionato() {
@@ -61,5 +67,7 @@ public class SelezionaPacchettoBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Il pacchetto è stato acquistato correttamente", ""));
 		return "index";
 	}
+	
+	
 
 }

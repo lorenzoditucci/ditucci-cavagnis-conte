@@ -71,6 +71,7 @@
  	
 	<div id='contenitore-form-testo'>
 		<h:form>
+			<p:growl id="growl"></p:growl>
 			<p:outputLabel value="#{personalizzaPacchettoBean.pacchetto.nome}"/>
 			<p:outputPanel>
 				<p:outputLabel>Voli contenuti nel pacchetto</p:outputLabel>
@@ -177,6 +178,8 @@
 			</p:dataTable>
 			<h:link value = "Aggiungi Escursione" outcome = "cercaEAggiungiEscursione"/>
 			</p:outputPanel>
+			
+			<h:commandButton value = "conferma pacchetto" action="#{personalizzaPacchettoBean.confermaPacchetto()}"></h:commandButton>
 		</h:form>
     	
 	</div>
