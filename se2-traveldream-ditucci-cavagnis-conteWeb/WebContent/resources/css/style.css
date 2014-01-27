@@ -31,12 +31,15 @@ body {
 }
 
 #banner-top{
+	position:relative;
     width: 100%;
     height: 100px;
     padding-top: 0px;
     display: block;
+    z-index: 101;
     background: url(#{resource['image:banner.gif']}) no-repeat center;
-    background-size: conver;
+    margin-bottom:10px;
+    background-size: cover;
 }
 
 #menu-sinistra{

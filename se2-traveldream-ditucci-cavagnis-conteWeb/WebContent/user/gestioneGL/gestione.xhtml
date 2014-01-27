@@ -24,6 +24,12 @@
     	<h:form>
 			<p:commandButton action="#{logoutBean.logout}" value="Logout" />
 		</h:form>
+			<h:link outcome="/user/index">
+				<img src="../../resources/image/home.png" width="30px"
+					height="30px" alt="" />
+	    		- Home
+	    	</h:link>
+			<br />
 			<h:link  outcome="gestione">
 	    		<img src="../../resources/image/giftList.png" width="30px" height="30px"/>
 	    		- Gestione Gifti List
