@@ -1,7 +1,10 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
 import it.polimi.traveldream.ejb.management.UserMgr;
+import it.polimi.traveldream.ejb.management.dto.AcquistaDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
+import it.polimi.traveldream.ejb.management.entity.Acquista;
+import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Group;
 import it.polimi.traveldream.ejb.management.entity.User;
 
@@ -14,6 +17,7 @@ import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  * Session Bean implementation class UserBean
@@ -111,5 +115,15 @@ public class UserMgrBean implements UserMgr {
 		return userDTO;
 	}
     
+    
+    @Override
+    public List<AcquistaDTO> acquisti(UserDTO user){
+    	User u = new User();
+    	u.setEmail(user.getEmail());
+    	TypedQuery<Acquista> queryRicerca = em.createNamedQuery("Acquista.cercaPerUtente", Acquista.class);
+	    List<Acquista> listaAcquista = queryRicerca.setParameter("user", u).getResultList();
+	    	
+	    return Acquista.copiaToAcquistaDTO(listaAcquista);
+    }
 }
 

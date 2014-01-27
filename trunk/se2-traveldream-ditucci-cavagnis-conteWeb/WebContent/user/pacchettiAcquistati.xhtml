@@ -12,8 +12,8 @@
 <h:body>
 <div id='background' />
 
-<!-- DA COTNROLLARE FORSE NON FUNZIONA -->
-#{pacchettoBean.cercaAcquistati(userBean.mail)}
+<!-- DA COTNROLLARE FORSE NON FUNZIONA 
+#{pacchettoBean.cercaAcquistati(userBean.mail)}-->
 <div id="contenitore-generale">
 	<div id="banner-top">
 	</div>
@@ -70,26 +70,41 @@
 		</h:form>
 	</div>
 	<div id='contenitore-centrale'>
-	<div id='contenitore-form-testo'>
-    
-	<h:form style="padding : 30px;">
-			<ui:repeat var="pacchetto" value="#{userBean.pacchettiAcquistati}">
-		
-		    <p:growl id="growl" showDetail="true" />
-		
-		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
-		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
-		        <h:panelGrid columns="2" cellpadding="10">
-		            
-		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/>;
-		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
-		            	<h:outputText value="città escursione - #{esc.citta}" />
-		            </ui:repeat>
-		     
-		        </h:panelGrid>
-		    </p:fieldset>
-			</ui:repeat>
-		</h:form>  
+		<div id='contenitore-form-testo'>
+    		<h:form>
+        <h:panelGrid id="pacchettiAcquistatiGrid">
+        <p:dataTable id = "pacchettiAcquistati" value="#{userBean.acquisti}" var="acquisto">
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Acquisto"/>
+        		</f:facet>
+        		<h:outputText value="#{acquisto.dataAcquisto}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Nome Pacchetto"/>
+        		</f:facet>
+        		<h:outputText value="#{acquisto.pacchetto.nome}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Inizio"/>
+        		</f:facet>
+        		<h:outputText value="#{acquisto.pacchetto.dataInizio}"/>
+        	</p:column>
+        	
+        	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Data Fine"/>
+        		</f:facet>
+        		<h:outputText value="#{acquisto.pacchetto.dataFine}"/>
+        	</p:column>
+ 			   
+        </p:dataTable>
+        </h:panelGrid>
+        </h:form>
 		</div>
 </div>
 </div>    
