@@ -1,9 +1,12 @@
 package it.polimi.traveldream.web.beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.traveldream.ejb.management.UserMgr;
+import it.polimi.traveldream.ejb.management.dto.AcquistaDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.UserDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -21,7 +24,8 @@ public class UserBean {
 	private UserMgr userMgr;
 	
 	private String mail;
-	private ArrayList<PacchettoDTO> pacchettiAcquistati;
+	//private ArrayList<PacchettoDTO> pacchettiAcquistati;
+	private List<AcquistaDTO> acquisti;
 	
 	public UserBean(){
 		
@@ -31,9 +35,18 @@ public class UserBean {
 	public void init() {
 		setMailCurrentUser();
 		//setPacchettiAcquistati(userMgr.getUserDTO().getPacchettiAcquistati());
-		pacchettiAcquistati = new ArrayList<PacchettoDTO>();
+		//acquisti = userMgr.acquisti(userMgr.getUserDTO()); 
 	}
 	
+	
+	public List<AcquistaDTO> getAcquisti() {
+		return acquisti;
+	}
+
+	public void setAcquisti(List<AcquistaDTO> acquisti) {
+		this.acquisti = acquisti;
+	}
+
 	public String getName() {
 		return userMgr.getUserDTO().getFirstName(); //chiamo l'oggetto e poi chiedo il nome
 	}
@@ -46,12 +59,9 @@ public class UserBean {
 		this.mail = userMgr.getUserDTO().getEmail();
 	}
 
-	public ArrayList<PacchettoDTO> getPacchettiAcquistati() {
-		return pacchettiAcquistati;
-	}
-
-	public void setPacchettiAcquistati(ArrayList<PacchettoDTO> pacchettiAcquistati) {
-		this.pacchettiAcquistati = pacchettiAcquistati;
+	public String pacchettiAcquistati(){
+		acquisti = userMgr.acquisti(userMgr.getUserDTO()); 
+		return "pacchettiAcquistati";
 	}
 
 }

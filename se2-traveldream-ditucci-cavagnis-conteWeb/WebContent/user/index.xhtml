@@ -33,11 +33,12 @@
 	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
 	    		- Gestione Gifti List
 	    	</h:link><br/>
-	    	<h:link  outcome="pacchettiAcquistati.xhtml">
-	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
-	    		- Pacchetti Acquistati
-	    	</h:link><br/>
-	    	
+	    	<h:form>
+			    	<h:commandLink  action="#{userBean.pacchettiAcquistati()}">
+			    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+			    		- Pacchetti Acquistati
+			    	</h:commandLink><br/>
+	    	</h:form>
 	    	<h:form id="ricercaPacchetto" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
     
 			<p:panel>

@@ -1,5 +1,8 @@
 package it.polimi.traveldream.ejb.management;
 
+import java.util.List;
+
+import it.polimi.traveldream.ejb.management.dto.AcquistaDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 
 import javax.ejb.Local;
@@ -14,5 +17,7 @@ public interface UserMgr {
 	public void unregister();
 	
 	public UserDTO getUserDTO();
+
+	List<AcquistaDTO> acquisti(UserDTO user);
 
 }
