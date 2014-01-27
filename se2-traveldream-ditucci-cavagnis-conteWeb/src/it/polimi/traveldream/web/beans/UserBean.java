@@ -61,7 +61,7 @@ public class UserBean {
 
 	public String pacchettiAcquistati(){
 		acquisti = userMgr.acquisti(userMgr.getUserDTO()); 
-		return "pacchettiAcquistati";
+		return "/user/pacchettiAcquistati";
 	}
 
 }
