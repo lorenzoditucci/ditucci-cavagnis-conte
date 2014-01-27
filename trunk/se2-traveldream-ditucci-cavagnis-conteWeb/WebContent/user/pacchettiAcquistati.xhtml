@@ -22,6 +22,12 @@
 	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
 	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
 	    </h:form>
+	    	<h:link outcome="index">
+				<img src="../resources/image/home.png" width="30px"
+					height="30px" alt="" />
+	    		- Home
+	    	</h:link>
+			<br />
 	    	<h:link  outcome="gestioneGL/gestione">
 	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
 	    		- Gestione Gifti List
