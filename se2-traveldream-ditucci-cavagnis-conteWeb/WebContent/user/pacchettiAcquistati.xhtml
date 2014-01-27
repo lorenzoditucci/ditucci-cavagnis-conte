@@ -12,8 +12,7 @@
 <h:body>
 <div id='background' />
 
-<!-- DA COTNROLLARE FORSE NON FUNZIONA 
-#{pacchettoBean.cercaAcquistati(userBean.mail)}-->
+
 <div id="contenitore-generale">
 	<div id="banner-top">
 	</div>
@@ -32,10 +31,12 @@
 	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
 	    		- Gestione Gifti List
 	    	</h:link><br/>
-	    	<h:link  outcome="pacchettiAcquistati.xhtml">
-	    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
-	    		- Pacchetti Acquistati
-	    	</h:link><br/>
+	    	<h:form>
+			    	<h:commandLink  action="#{userBean.pacchettiAcquistati()}">
+			    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+			    		- Pacchetti Acquistati
+			    	</h:commandLink><br/>
+	    	</h:form>
 	    	
 	    	<h:form id="pacchettiAcquistati" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
     
