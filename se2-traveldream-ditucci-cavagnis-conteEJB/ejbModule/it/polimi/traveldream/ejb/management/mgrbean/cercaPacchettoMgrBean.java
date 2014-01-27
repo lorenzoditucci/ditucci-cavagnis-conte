@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb.management.mgrbean;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
     	String query="SELECT p from Pacchetto p WHERE (p.nome LIKE :nome "
     			+ "AND (:dataPartenza IS NULL OR (p.dataInizio >= :dataPartenza)) "
     			+ "AND (:dataFine IS NULL OR(p.dataFine <= :dataFine)) "
-    			+ "AND (:costo IS NULL OR(p.costo <= :costo)))";
+    			+ "AND (:costo IS NULL OR(p.costo <= :costo))"
+    			+ "AND (p.dataInizio > :dataOggi))";
     	
     	TypedQuery<Pacchetto> queryDiRicerca = em.createQuery(query,Pacchetto.class);
     	/**
@@ -73,6 +75,9 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
 		}
     	
     	queryDiRicerca.setParameter("costo", costo);
+    	
+    	Timestamp dataOggi = new Timestamp(Calendar.getInstance().getTime().getTime());
+    	queryDiRicerca.setParameter("dataOggi", dataOggi);
     	
     	System.out.println(queryDiRicerca);
     	
