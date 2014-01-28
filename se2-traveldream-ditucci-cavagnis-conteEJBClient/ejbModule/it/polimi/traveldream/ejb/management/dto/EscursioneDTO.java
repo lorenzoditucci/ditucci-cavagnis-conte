@@ -15,9 +15,12 @@ import java.util.List;
 
 
 
+
+
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -112,6 +115,21 @@ public class EscursioneDTO {
 	public void setIdEscursione(int idEscursione) {
 		this.idEscursione = idEscursione;
 	}
+	
+	@Override
+	public boolean equals(Object altro){
+		if(altro == null || altro.getClass() != this.getClass()){
+			return false;
+		}
+		
+		EscursioneDTO altraEscursioneDTO = (EscursioneDTO)altro;
+		if(this.idEscursione == altraEscursioneDTO.getIdEscursione()){
+			return true;
+		}
+		return false;
+		
+	}
+	
 
 	
 	
