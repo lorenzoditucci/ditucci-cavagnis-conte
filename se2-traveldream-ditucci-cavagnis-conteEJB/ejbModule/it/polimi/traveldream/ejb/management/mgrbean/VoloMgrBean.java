@@ -4,11 +4,13 @@ import it.polimi.traveldream.ejb.management.VoloMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
+import it.polimi.traveldream.ejb.management.dto.VoliAcquistatiProvaDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Escursione;
 import it.polimi.traveldream.ejb.management.entity.Group;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.User;
+import it.polimi.traveldream.ejb.management.entity.VoliAcquistatiProva;
 import it.polimi.traveldream.ejb.management.entity.Volo;
 
 import java.sql.Timestamp;
@@ -129,4 +131,25 @@ public class VoloMgrBean implements VoloMgr {
 		/*aggiornamento persistenza*/
 		em.merge(v);
 	}
+
+	public static List<VoliAcquistatiProvaDTO> copiaToDTO(
+			List<VoliAcquistatiProva> voli) {
+		
+			List<VoliAcquistatiProvaDTO> copia = new ArrayList<VoliAcquistatiProvaDTO>();
+			for(int i=0; i< voli.size(); i++){
+				VoliAcquistatiProvaDTO daAggiungere = new VoliAcquistatiProvaDTO();
+				daAggiungere.setDataAcquisto(voli.get(i).getDataAcquisto());
+				daAggiungere.setIdGiftList(voli.get(i).getIdGiftList());
+				daAggiungere.setIdVolo(voli.get(i).getIdVolo());
+				daAggiungere.setIdVoloAcquistato(voli.get(i).getIdVoloAcquistato());
+				daAggiungere.setNomeAcquirente(voli.get(i).getNomeAcquirente());
+				copia.add(daAggiungere);
+				
+			}
+			return copia;
+		
+		
+	}
+
+	
 }

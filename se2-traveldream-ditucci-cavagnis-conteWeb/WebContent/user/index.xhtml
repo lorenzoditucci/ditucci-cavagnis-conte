@@ -86,7 +86,7 @@
 		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
 		            	<h:outputText value="città escursione - #{esc.citta}" />
 		            </ui:repeat>
-		        <h:commandButton action="#{pacchettoBean.visualizzaPacchetto(pacchetto.idPacchetto)}" value="Visualizza Pacchetto" />
+		        <h:commandButton action="#{selezionaPacchettoBean.selezionaPacchetto(pacchetto.idPacchetto)}" value="Visualizza Pacchetto" />
 		     
 		        </h:panelGrid>
 		    </p:fieldset>
