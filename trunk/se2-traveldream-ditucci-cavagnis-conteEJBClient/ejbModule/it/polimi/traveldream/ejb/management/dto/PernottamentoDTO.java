@@ -62,6 +62,23 @@ public class PernottamentoDTO {
 		this.pacchetto = pacchetto;
 	}
 	
+	@Override
+	public boolean equals(Object altro){
+		if(altro == null || altro.getClass() != this.getClass()){
+			return false;
+		}
+		
+		PernottamentoDTO nuovoDto = (PernottamentoDTO) altro;
+		if(nuovoDto.getIdPernottametto() == this.getIdPernottametto()){
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	
+	
 	public static Comparator <PernottamentoDTO>
 	ordinaPerDataInizio = new Comparator <PernottamentoDTO>()
 	{
