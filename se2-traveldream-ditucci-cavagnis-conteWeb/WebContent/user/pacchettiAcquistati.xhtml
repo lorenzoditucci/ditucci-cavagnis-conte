@@ -21,22 +21,32 @@
 	    	<h:outputLabel value="Ciao #{userBean.name}!" /><br/>
 	    	<h:commandButton action="#{logoutBean.logout}" value="Logout" /><br/><br/>
 	    </h:form>
-	    	<h:link outcome="index">
+	    <div id='link'>
+		    	<a><h:link outcome="index">
 				<img src="../resources/image/home.png" width="30px"
 					height="30px" alt="" />
-	    		- Home
-	    	</h:link>
+	    		Home
+	    	</h:link></a>
+		    </div>
 			<br />
-	    	<h:link  outcome="gestioneGL/gestione">
+			<div id='link'>
+	    		<a><h:link  outcome="gestioneGL/gestione">
 	    		<img src="../resources/image/giftList.png" width="30px" height="30px"/>
-	    		- Gestione Gifti List
-	    	</h:link><br/>
-	    	<h:form>
+	    		 Gestione Gifti List
+	    	</h:link></a>
+	    	</div>
+	    	<br/>
+	    	<div id='link'>
+	    		<a>
+	    			<h:form>
 			    	<h:commandLink  action="#{userBean.pacchettiAcquistati()}">
-			    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
-			    		- Pacchetti Acquistati
+			    		<img src="../../resources/image/acquistati.png" width="30px" height="30px"/>
+			    		 Pacchetti Acquistati
 			    	</h:commandLink><br/>
 	    	</h:form>
+	    		</a>
+	    	</div>
+	    	<br/>
 	    	
 	    	<h:form id="pacchettiAcquistati" style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
     
