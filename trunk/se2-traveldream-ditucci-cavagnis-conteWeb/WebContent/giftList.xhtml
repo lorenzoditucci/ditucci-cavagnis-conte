@@ -17,14 +17,31 @@
 </div>
 <div id="menu-sinistra">
 
-	<h:link outcome="user/index">
-    		<img src="resources/image/user.png" alt="login" width="30" height="30" />
-    		 - Accesso Clienti
+	<div id='link'>
+		<a>
+			<h:link outcome="home">
+    		<img src="resources/image/home.png" alt="login" width="30" height="30" />
+    		  Home
    	</h:link><br/>
-   	<h:link outcome="employee/index">
+		</a>
+	</div>
+	<div id='link'>
+		<a>
+			<h:link outcome="user/index">
+    		<img src="resources/image/user.png" alt="login" width="30" height="30" />
+    		  Accesso Clienti
+   	</h:link><br/>
+		</a>
+	</div>
+	
+	<div id='link'>
+		<a>
+		<h:link outcome="employee/index">
     		<img src="resources/image/impiegato.png" alt="login" width="30" height="30" />
-    		- Admin
+    		 Admin
    	</h:link>
+		</a>
+	</div>
 	<h:form id="cercaGiftList" style="padding:15px">
 			Gift List<br/>
 		
@@ -43,16 +60,19 @@
 		
 		    <p:growl id="growl" showDetail="true" />
 		
-		    <p:fieldset legend="Pacchetto - #{gift.idGiftList}" toggleable="true" toggleSpeed="500">
+		    <p:fieldset legend="GiftList - #{gift.idGiftList}" toggleable="true" toggleSpeed="500">
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
 		        <h:panelGrid columns="2" cellpadding="10">
 		            
-		            <h:outputText value="nome: #{gift.nome}, mail cliente : #{gift.mailCliente}"/>;
+		            <h:outputText value="nome: #{gift.nome}, mail creatore : #{gift.mailCliente}"/>
 		        
 		        </h:panelGrid>
 		    </p:fieldset>
+		    <h:form>
+		    	<h:link outcome="dettagliGiftList">Visualizza Dettagli</h:link>
+		    </h:form>
+		    
 			</ui:repeat>
-			<h:link outcome="dettagliGiftList">Visualizza Dettagli</h:link>
 		</h:form>
 		</div>
 </div>
