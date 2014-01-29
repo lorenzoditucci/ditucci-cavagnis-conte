@@ -87,15 +87,17 @@
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
 		        <h:panelGrid columns="2" cellpadding="10">
 		            
-		            <h:outputText value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}"/><br/>
-		            <h:outputText value = "descrizione: #{pacchetto.descrizione}"/>
-		            <h:outputText value = "costo totale: #{pacchetto.costo}"/>
-		            <ui:repeat var="pernottamento" value="#{pacchetto.pernotti}">
-		            	<h:outputText value="#{pernottamento.hotel.nome}"></h:outputText>
-		            </ui:repeat>
-		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
-		            	<h:outputText value="città escursione - #{esc.citta}" />
-		            </ui:repeat>
+		            <h:outputText
+									value="Pacchetto #{pacchetto.idPacchetto} - #{pacchetto.nome} " />
+								<br />
+								<h:outputText
+									value="Data Inizio #{pacchetto.dataInizio} - Data Fine #{pacchetto.dataFine}" />
+								<br />
+								<h:outputText value="Costo #{pacchetto.costo}" />
+								<br />
+								<h:outputText value = "#{pacchetto.descrizione}"/>
+								<br/>
+		            
 		        <h:commandButton action="#{selezionaPacchettoBean.selezionaPacchetto(pacchetto.idPacchetto)}" value="Visualizza Pacchetto" />
 		     
 		        </h:panelGrid>
