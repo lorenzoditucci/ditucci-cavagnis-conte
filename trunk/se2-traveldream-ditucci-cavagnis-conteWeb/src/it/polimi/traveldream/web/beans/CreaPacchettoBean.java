@@ -176,14 +176,14 @@ public class CreaPacchettoBean {
 	public String aggiungiPernottamentiInPacchetto(){
 		if(!dateConseguentiPernottamenti()){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore temporale nella lista dei pernottamenti", "La ricerca non ha prodotto risultati"));
-			return null;
+			return "aggiungiPernottamentiInPacchetto";
 		}
 		
 		//vado sul bean stateful
 		if(!creaPacchettoMgr.inserisciPernottamentiInPacchettoInstanziato(getPernottamenti())){
 			//non coerenti
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Date non coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
-			return null;	
+			return "aggiungiPernottamentiInPacchetto";	
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Date coerenti al pacchetto", "La ricerca non ha prodotto risultati"));
 		

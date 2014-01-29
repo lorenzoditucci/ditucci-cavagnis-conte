@@ -62,6 +62,10 @@ public class ControlloCoerenzaMGRBean implements ControlloCoerenzaMGR{
     	Collections.sort(voli, VoloDTO.ordinaPerDataPartenza);
     	Collections.sort(pernottamenti, PernottamentoDTO.ordinaPerDataInizio);
     	
+    	if(voli.isEmpty() || pernottamenti.isEmpty()){
+    		throw new CoerenzaException("Liste voli/pernottamenti vuote");
+    	}
+    	
     	// controllo che la data partenza sia lo stesso giorno della data inizio
     	
     	if(!(stessoGiornoMeseAnno(toCalendar(voli.get(0).getDataPartenza()), toCalendar(p.getDataInizio()))) &&
