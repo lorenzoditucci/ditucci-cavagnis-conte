@@ -1,8 +1,5 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
@@ -11,8 +8,9 @@ import it.polimi.traveldream.ejb.management.entity.EscursioniAcquistate;
 import it.polimi.traveldream.ejb.management.entity.GiftList;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
 import it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati;
-import it.polimi.traveldream.ejb.management.entity.Pernottamento;
-import it.polimi.traveldream.ejb.management.entity.Volo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -22,8 +20,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.jboss.weld.context.ejb.Ejb;
 
 /**
  * Session Bean implementation class GiftListMgrBean
@@ -87,6 +83,7 @@ public class GiftListMgrBean implements GiftListMgr {
     public void aggiungiPacchetto(GiftListDTO glDTO,PacchettoDTO pDTO) throws CoerenzaException{    	
     	GiftList gl = em.find(GiftList.class, glDTO.getIdGiftList());
     	Pacchetto p = em.find(Pacchetto.class, pDTO.getIdPacchetto());
+    	p.setDisponibilitaAttuale(p.getDisponibilitaAttuale()-1);
     	List<Pacchetto> lista = new ArrayList<Pacchetto>();
     	lista.addAll(gl.getPacchettiContenuti());
     	List<PacchettoDTO> listaDTO = new ArrayList<PacchettoDTO>(glDTO.getPacchettiContenuti());
@@ -100,6 +97,7 @@ public class GiftListMgrBean implements GiftListMgr {
     		gl.setPacchettiContenuti(lista);
     	}
     	em.merge(gl);
+    	em.merge(p);
     }
     
     @Override
