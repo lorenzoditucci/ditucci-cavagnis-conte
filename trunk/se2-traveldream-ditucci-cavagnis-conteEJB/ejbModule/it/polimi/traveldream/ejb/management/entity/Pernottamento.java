@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.management.entity;
 
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
+import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
@@ -54,7 +55,7 @@ public class Pernottamento implements Serializable {
 	 */
 	
 	public Pernottamento(PernottamentoDTO pernottamento) {
-		this.idPernottametto = pernottamento.getIdPernottametto();
+		//this.idPernottametto = pernottamento.getIdPernottametto();
 		this.dataInizio=pernottamento.getDataInizio();
 		this.dataFine=pernottamento.getDataFine();
 		if(this.hotel != null){
@@ -113,6 +114,8 @@ public class Pernottamento implements Serializable {
 				daAggiungere.setDataInizio(lista.get(i).getDataInizio());
 				daAggiungere.setDataFine(lista.get(i).getDataFine());
 				daAggiungere.setIdPernottametto(lista.get(i).getIdPernottametto());
+				PacchettoDTO pacchettoDTO = lista.get(i).getPacchetto().convertiInDTO();
+				daAggiungere.setPacchetto(pacchettoDTO);
 				
 				HotelDTO hotel = new HotelDTO();
 				hotel.setIdHotel(lista.get(i).getHotel().getIdHotel());

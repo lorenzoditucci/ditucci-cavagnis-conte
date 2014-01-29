@@ -46,8 +46,10 @@ public class SelezionaPacchettoBean {
     }
     
     public String selezionaPacchettoDTO(PacchettoDTO pacchetto){
-    	this.setPacchettoSelezionato(pacchetto);
-    	return "visualizzaPacchetto?faces-redirect=true"; 
+    	pacchettoSelezionato = pacchetto;
+    	System.out.println("seleziona pacchetto id: " + pacchettoSelezionato.getIdPacchetto());
+    	//this.setPacchettoSelezionato(pacchetto);
+    	return "visualizzaPacchetto"; 
     }
 
 	public PacchettoDTO getPacchettoSelezionato() {
