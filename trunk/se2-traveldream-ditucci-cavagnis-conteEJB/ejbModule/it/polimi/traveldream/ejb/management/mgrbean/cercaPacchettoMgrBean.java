@@ -47,12 +47,16 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
      * @see cercaPacchettoMgr#cercaPacchettiParam(int, String)
      */
     public ArrayList<PacchettoDTO> cercaPacchettiParam(Date dataPartenza, Date dataFine, Double costo, String nomePacchetto) {
+    	Timestamp adesso = new Timestamp(Calendar.getInstance().getTime().getTime());
     	
     	String query="SELECT p from Pacchetto p WHERE (p.nome LIKE :nome "
     			+ "AND (:dataPartenza IS NULL OR (p.dataInizio >= :dataPartenza)) "
     			+ "AND (:dataFine IS NULL OR(p.dataFine <= :dataFine)) "
     			+ "AND (:costo IS NULL OR(p.costo <= :costo))"
-    			+ "AND (p.dataInizio > :dataOggi))";
+    			+ "AND (p.dataInizio > :dataOggi)"
+    			+ "AND p.mail IN ("
+    			+ " SELECT i.email from Impiegato i)"
+    			+ " AND p.dataInizio > :adesso )";
     	
     	TypedQuery<Pacchetto> queryDiRicerca = em.createQuery(query,Pacchetto.class);
     	/**
@@ -75,6 +79,7 @@ public class cercaPacchettoMgrBean implements cercaPacchettoMgr {
 		}
     	
     	queryDiRicerca.setParameter("costo", costo);
+    	queryDiRicerca.setParameter("adesso", adesso);
     	
     	Timestamp dataOggi = new Timestamp(Calendar.getInstance().getTime().getTime());
     	queryDiRicerca.setParameter("dataOggi", dataOggi);
