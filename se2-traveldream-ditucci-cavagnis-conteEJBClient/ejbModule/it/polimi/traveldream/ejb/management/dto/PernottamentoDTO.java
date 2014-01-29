@@ -69,7 +69,11 @@ public class PernottamentoDTO {
 		}
 		
 		PernottamentoDTO nuovoDto = (PernottamentoDTO) altro;
-		if(nuovoDto.getIdPernottametto() == this.getIdPernottametto()){
+		if(nuovoDto.getDataInizio().equals(this.dataInizio) &&
+			nuovoDto.getDataFine().equals(this.dataFine) &&
+			nuovoDto.getHotel().getIdHotel() == this.getHotel().getIdHotel() &&
+			nuovoDto.getPacchetto().getIdPacchetto() == this.getPacchetto().getIdPacchetto())
+				{
 			return true;
 		}
 		

@@ -8,11 +8,14 @@ import java.util.List;
 
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.ControlloCoerenzaMGR;
+import it.polimi.traveldream.ejb.management.CreaPacchettoPersonalizzatoMgr;
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.HotelMgr;
+import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.pacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
@@ -22,6 +25,7 @@ import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -47,6 +51,18 @@ public class PersonalizzaPacchettoBean {
 	@EJB
 	private ControlloCoerenzaMGR coerenzaMGR;
 	
+	@EJB
+	private CreaPacchettoPersonalizzatoMgr creaPacchettoPersonalizzatoMgr;
+	
+	@EJB
+	private UserMgr userMgr;
+	
+	@EJB
+	private pacchettoMgr pacchettoMgr;
+	
+	private String userEmail;
+	
+	@ManagedProperty(value = "#{selezionaPacchettoBean}")
 	private SelezionaPacchettoBean selezionaPacchettoBean;
 	/*
 	 * Dati del pacchetto
@@ -84,11 +100,23 @@ public class PersonalizzaPacchettoBean {
 	
 	
 	public PersonalizzaPacchettoBean(){
-		selezionaPacchettoBean = new SelezionaPacchettoBean();
 	}
 
 	
 	
+	public SelezionaPacchettoBean getSelezionaPacchettoBean() {
+		return selezionaPacchettoBean;
+	}
+
+
+
+	public void setSelezionaPacchettoBean(
+			SelezionaPacchettoBean selezionaPacchettoBean) {
+		this.selezionaPacchettoBean = selezionaPacchettoBean;
+	}
+
+
+
 	public String getCittaEscursione() {
 		return cittaEscursione;
 	}
@@ -223,12 +251,22 @@ public class PersonalizzaPacchettoBean {
 	public String personalizza(PacchettoDTO p){
 		this.pacchetto = p;
 		this.pacchetto.setPernotti(getPernottamenti(p));
-		this.pacchettoOriginaleDto = p;
+		PacchettoDTO pacchettoDTO = new PacchettoDTO();
+		List<VoloDTO> newVoliDtos =  new ArrayList<VoloDTO>();
+		newVoliDtos.addAll(p.getVoli());
+		pacchettoDTO.setVoli(newVoliDtos);
+		List<PernottamentoDTO> newPernottamentiDtos =  new ArrayList<PernottamentoDTO>();
+		newPernottamentiDtos.addAll(getPernottamenti(p));
+		pacchettoDTO.setPernotti(newPernottamentiDtos);
+		List<EscursioneDTO> newEscursioniDtos =  new ArrayList<EscursioneDTO>();
+		newEscursioniDtos.addAll(p.getEscursioni());
+		pacchettoDTO.setEscursioni(newEscursioniDtos);
+		this.pacchettoOriginaleDto = pacchettoDTO;
 		this.pacchettoOriginaleDto.setPernotti(getPernottamenti(p));
 		return "personalizza";
 	}
 	
-	public List<PernottamentoDTO> getPernottamenti(PacchettoDTO p) {
+	private List<PernottamentoDTO> getPernottamenti(PacchettoDTO p) {
 		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
 		pernottamenti = glMgr.cercaPernottamentiDaPacchetto(p);
 		return pernottamenti;
@@ -307,9 +345,9 @@ public class PersonalizzaPacchettoBean {
 	
 	public String aggiungiPernottamento(HotelDTO hotel){
 		this.creaPernottamento(hotel);
-		/*if(!pacchetto.getPernotti().contains(pernottamentoDTO)){
+		if(!pacchetto.getPernotti().contains(pernottamentoDTO)){
 			pacchetto.getPernotti().add(pernottamentoDTO);
-		}*/
+		}
 		
 		pacchetto.getPernotti().add(pernottamentoDTO);
 		return "personalizza";
@@ -324,7 +362,64 @@ public class PersonalizzaPacchettoBean {
 					+ "Il pacchetto non è coerente. " + e.getMessaggi().get(0), ""));
 			return null;
 		}
+		
+		if(diverso()){
+			pacchetto.setMail(userMgr.getUserDTO().getEmail());
+			int id = creaPacchettoPersonalizzatoMgr.salvaPacchettoPersonalizzato(pacchetto);
+			return selezionaPacchettoBean.selezionaPacchettoDTO(pacchettoMgr.prendiPerId(id).get(0));
+		}
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Errore."
+				+ "Il pacchetto non è stato salvato perchè non hai effettuato nessuna modifica. ", ""));
 		return selezionaPacchettoBean.selezionaPacchettoDTO(pacchetto);
+	}
+	
+	private boolean diverso(){
+		System.out.println("entro in diversi");
+		boolean diversi = false;
+		// controllo che tutti i voli siano diversi
+		for(int i=0; i<pacchetto.getVoli().size() && !diversi;i++){
+			boolean trovato = false;
+			for(int j=0; j<pacchettoOriginaleDto.getVoli().size() && !trovato;j++){
+				if(pacchetto.getVoli().get(i).equals(pacchettoOriginaleDto.getVoli().get(j))){
+					trovato = true;
+				}
+			}	
+			System.out.println("");
+			if(!trovato){
+				diversi = true;
+			}
+			
+		}
+		
+		//controllo le escursioni
+		for(int i=0; i<pacchetto.getEscursioni().size() && !diversi;i++){
+			boolean trovato = false;
+			for(int j=0; j<pacchettoOriginaleDto.getEscursioni().size() && !trovato;j++){
+				if(pacchetto.getEscursioni().get(i).equals(pacchettoOriginaleDto.getEscursioni().get(j))){
+					trovato = true;
+				}
+			}
+			if(!trovato){
+				diversi = true;
+			}
+			
+		}
+		
+		//controllo i pernottamenti
+		for(int i=0; i<pacchetto.getPernotti().size() && !diversi;i++){
+			boolean trovato = false;
+			for(int j=0; j<pacchettoOriginaleDto.getPernotti().size() && !trovato;j++){
+				if(pacchetto.getPernotti().get(i).equals(pacchettoOriginaleDto.getPernotti().get(j))){
+					trovato = true;
+				}
+			}
+			if(!trovato){
+				diversi = true;
+			}
+		}
+		System.out.println("valore di diversi alla fine: " +diversi);
+		return diversi;
 	}
 	
 }

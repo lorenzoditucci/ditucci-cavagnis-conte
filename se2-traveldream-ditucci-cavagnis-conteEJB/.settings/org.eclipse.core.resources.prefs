@@ -4,6 +4,7 @@ encoding//ejbModule/it/polimi/traveldream/ejb/management/entity/User.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/AcquistaPacchettoMgrBean.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/ControlloCoerenzaMGRBean.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/CreaPacchettoMgrBean.java=UTF-8
+encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/CreaPacchettoPersonalizzatoMgrBean.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/EscursioneMgrBean.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/UserMgrBean.java=UTF-8
 encoding//ejbModule/it/polimi/traveldream/ejb/management/mgrbean/VoloMgrBean.java=UTF-8

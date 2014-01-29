@@ -133,6 +133,13 @@
 				<p:dataTable var="pernottamento" value="#{personalizzaPacchettoBean.pacchetto.pernotti}">
 					<p:column>
 						<f:facet name="header">
+							<h:outputText value="Id pacchetto"/>
+						</f:facet>
+						<h:outputText value = "#{pernottamento.pacchetto.idPacchetto}"/>
+					</p:column>
+				
+					<p:column>
+						<f:facet name="header">
 							<h:outputText value="Nome Hotel"/>
 						</f:facet>
 						<h:outputText value = "#{pernottamento.hotel.nome}"/>
