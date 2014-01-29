@@ -1,19 +1,20 @@
 package it.polimi.traveldream.web.beans;
 
-import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.AcquistaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.UserMgr;
+import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.UserDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -29,6 +30,8 @@ public class SelezionaPacchettoBean {
 	private AcquistaPacchettoMgr acquistaPacchettoMgr;
 	@EJB
 	private UserMgr userMgr;
+	@EJB
+	private VisualizzaDettagliGLMgr glMgr;
 	
 	private PacchettoDTO pacchettoSelezionato;
 	
@@ -41,14 +44,21 @@ public class SelezionaPacchettoBean {
     
     public String selezionaPacchetto(int idPacchetto){
     	pacchettoSelezionato = mgr.cercaPacchettoId(idPacchetto).get(0);
+    	List<PernottamentoDTO> pernottamenti = getPernottamenti(pacchettoSelezionato);
+    	pacchettoSelezionato.setPernotti(pernottamenti);
     	return "visualizzaPacchetto?faces-redirect=true";
     	
     }
     
+    private List<PernottamentoDTO> getPernottamenti(PacchettoDTO p) {
+		List<PernottamentoDTO> pernottamenti = new ArrayList<PernottamentoDTO>();
+		pernottamenti = glMgr.cercaPernottamentiDaPacchetto(p);
+		return pernottamenti;
+	}
+    
     public String selezionaPacchettoDTO(PacchettoDTO pacchetto){
     	pacchettoSelezionato = pacchetto;
-    	System.out.println("seleziona pacchetto id: " + pacchettoSelezionato.getIdPacchetto());
-    	//this.setPacchettoSelezionato(pacchetto);
+    	pacchettoSelezionato.setPernotti(getPernottamenti(pacchetto));
     	return "visualizzaPacchetto"; 
     }
 

@@ -12,8 +12,7 @@
 <h:body>
 	<div id="background" />
 	<div id='contenitore-geneale'>
-		<div id="banner-top">
-		</div>
+		<div id="banner-top"></div>
 		<div id="menu-sinistra">
 
 			<h:form>
@@ -24,24 +23,28 @@
 				<br />
 			</h:form>
 			<div id='link'>
-		    	<a href="index.xhtml"><img src="../resources/image/home.png" width="30px"/> Home</a>
-		    </div>
+				<a href="index.xhtml"><img src="../resources/image/home.png"
+					width="30px" alt="" /> Home</a>
+			</div>
 			<br />
 			<div id='link'>
-	    		<a href="gestioneGL/gestione.xhtml"><img src="../resources/image/giftList.png" width="30px"/> Gestione Gift List</a>
-	    	</div>
-	    	<br/>
-	    	<div id='link'>
-	    		<a>
-	    			<h:form>
-			    	<h:commandLink  action="#{userBean.pacchettiAcquistati()}">
-			    		<img src="../resources/image/acquistati.png" width="30px" height="30px"/>
+				<a href="gestioneGL/gestione.xhtml"><img
+					src="../resources/image/giftList.png" width="30px" alt="" />
+					Gestione Gift List</a>
+			</div>
+			<br />
+			<div id='link'>
+				<a> <h:form>
+						<h:commandLink action="#{userBean.pacchettiAcquistati()}">
+							<img src="../resources/image/acquistati.png" width="30px"
+								height="30px" alt="" />
 			    		 Pacchetti Acquistati
-			    	</h:commandLink><br/>
-	    	</h:form>
-	    		</a>
-	    	</div>
-	    	<br/>
+			    	</h:commandLink>
+						<br />
+					</h:form>
+				</a>
+			</div>
+			<br />
 
 			<h:form id="ricercaPacchetto"
 				style="padding-right: 20px;padding-bottom:20px;padding-top:20px">
@@ -91,21 +94,129 @@
 						value="#{selezionaPacchettoBean.pacchettoSelezionato}">
 
 						<p:growl id="growl" showDetail="true" />
+						<h:outputText value="Nome Pacchetto: #{pacchetto.nome}" />
+						<br />
+						<h:outputText value="Voli" />
+						<p:dataTable var="volo" value="#{pacchetto.voli}">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Città Partenza" />
+								</f:facet>
+								<h:outputText value="#{volo.cittaPartenza}" />
+							</p:column>
 
-						<p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}"
-							toggleable="true" toggleSpeed="500">
-							<p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}"
-								update="growl" />
-							<h:panelGrid columns="2" cellpadding="10">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Città Arrivo" />
+								</f:facet>
+								<h:outputText value="#{volo.cittaArrivo}" />
+							</p:column>
 
-								<h:outputText
-									value="nome: #{pacchetto.nome}, mail  : #{pacchetto.mail}" />;
-		            <ui:repeat var="esc" value="#{pacchetto.escursioni}">
-									<h:outputText value="città escursione - #{esc.citta}" />
-								</ui:repeat>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Data Partenza" />
+								</f:facet>
+								<h:outputText value="#{volo.dataPartenza}" />
+							</p:column>
 
-							</h:panelGrid>
-						</p:fieldset>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Data Arrivo" />
+								</f:facet>
+								<h:outputText value="#{volo.dataArrivo}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Costo" />
+								</f:facet>
+								<h:outputText value="#{volo.costo}" />
+							</p:column>
+
+						</p:dataTable>
+
+						<br />
+						<p:outputLabel>Pernottamenti</p:outputLabel>
+						<p:dataTable var="pernottamento" value="#{pacchetto.pernotti}">
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Nome Hotel" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.hotel.nome}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Città Hotel" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.hotel.citta}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Numero Stelle" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.hotel.classe}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Data inizio Prenotazione" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.dataInizio}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Data Fine" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.dataFine}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Costo giornaliero" />
+								</f:facet>
+								<h:outputText value="#{pernottamento.hotel.costo}" />
+							</p:column>
+						</p:dataTable>
+
+						<br />
+						<p:outputLabel>Escursioni</p:outputLabel>
+						<p:dataTable var="escursione"
+							value="#{personalizzaPacchettoBean.pacchetto.escursioni}">
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Nome" />
+								</f:facet>
+								<h:outputText value="#{escursione.nome}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Città" />
+								</f:facet>
+								<h:outputText value="#{escursione.citta}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Descrizione" />
+								</f:facet>
+								<h:outputText value="#{escursione.descrizione}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Costo" />
+								</f:facet>
+								<h:outputText value="#{escursione.costo}" />
+							</p:column>
+
+
+						</p:dataTable>
+						 
+
 						<h:commandLink value="Aggiungi a GiftList"
 							action="#{inserisciPacchettoInGLBean.inserisciPacchetto(pacchetto)}" />
 						<br />
