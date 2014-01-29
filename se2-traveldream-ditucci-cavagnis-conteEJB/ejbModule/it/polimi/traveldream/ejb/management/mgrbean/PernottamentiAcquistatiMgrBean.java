@@ -1,11 +1,13 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.traveldream.ejb.management.PernottamentiAcquistatiMgr;
 import it.polimi.traveldream.ejb.management.dto.PernottamentiAcquistatiDTO;
+import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.entity.PernottamentiAcquistati;
+import it.polimi.traveldream.ejb.management.entity.Pernottamento;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
@@ -15,8 +17,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
 
 /**
  * Session Bean implementation class PernottamentiAcquistatiMgrBean
@@ -65,6 +65,14 @@ public class PernottamentiAcquistatiMgrBean implements PernottamentiAcquistatiMg
 			copia.add(daAggiungere);
 		}
 		return copia;
+	}
+	
+	@Override
+	public List<PernottamentoDTO> pernottamentoPerID(int id){
+		TypedQuery<Pernottamento> queryRicerca = em.createNamedQuery("Pernottamento.cercaPernottamentoId", Pernottamento.class);
+    	List<Pernottamento> lista = queryRicerca.setParameter("idPernottamento", id).getResultList();
+    	
+    	return Pernottamento.copiaToPernottamentoDTO(lista);
 	}
 
 }

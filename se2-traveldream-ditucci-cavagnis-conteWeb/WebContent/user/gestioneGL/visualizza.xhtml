@@ -170,7 +170,137 @@
 			</p:dataTable>
 			</p:outputPanel>
 			<p:commandButton value="Rimuovi Pacchetto" action="#{visualizzaDettagliGLBean.rimuoviPacchetto(pacchetto)}"/>
+			
+			
 		</ui:repeat>
+		
+			<br/><h:outputText value ="Voli Acquistati"/>
+			<p:dataTable value = "#{visualizzaDettagliGLBean.ottieniVoli()}" var = "volo">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value = "Città Partenza"/>
+					</f:facet>
+					<h:outputText value="#{volo.cittaPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.cittaArrivo}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Partenza"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataPartenza}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Arrivo"/>
+					</f:facet>
+					<h:outputText value = "#{volo.dataArrivo}"/>
+				</p:column>
+				
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Acquisto"/>
+					</f:facet>
+					<h:outputText value = "#{visualizzaDettagliGLBean.ottieniDataAcquistoVolo(volo.idVolo)}"/>
+				</p:column>
+				
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Acquirente"/>
+					</f:facet>
+					<h:outputText value = "#{visualizzaDettagliGLBean.acquirenteVolo(volo.idVolo)}"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+			<br/><h:outputText value ="Pernottamenti Acquistati"/>
+			<p:dataTable var="pernottamento" value="#{visualizzaDettagliGLBean.ottieniPernottamenti()}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Hotel"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.hotel.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data inizio Prenotazione"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataInizio}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fine"/>
+					</f:facet>
+					<h:outputText value = "#{pernottamento.dataFine}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Acquisto"/>
+					</f:facet>
+					<h:outputText value = "#{visualizzaDettagliGLBean.ottieniDataAcquistoPernottamento(pernottamento.idPernottametto)}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome acquirente"/>
+					</f:facet>
+					<h:outputText value = "#{visualizzaDettagliGLBean.acquirentePernottamento(pernottamento.idPernottametto)}"/>
+				</p:column>
+			</p:dataTable>
+			
+			
+			<br/><h:outputText value ="Escursioni Acquistate"/>
+			
+			<p:dataTable var="escursione" value = "#{visualizzaDettagliGLBean.ottieniEscursioni()}">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.nome}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Città"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.citta}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrizione"/>
+					</f:facet>
+					<h:outputText value = "#{escursione.descrizione}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Acquisto"/>
+					</f:facet>
+					<h:outputText value = "#{ottieniDataAcquistoEscursioni(escursione.idEscursione)}"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome acquirente"/>
+					</f:facet>
+					<h:outputText value = "#{acquirenteEscursione(escursione.idEscursione)}"/>
+				</p:column>
+			
+			</p:dataTable>
+			
+		
 	</h:form>
     </p:panel>
     </div>

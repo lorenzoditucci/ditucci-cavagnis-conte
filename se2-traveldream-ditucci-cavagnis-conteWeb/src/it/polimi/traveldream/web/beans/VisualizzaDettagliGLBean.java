@@ -1,24 +1,26 @@
 package it.polimi.traveldream.web.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import it.polimi.traveldream.ejb.management.EscursioneMgr;
 import it.polimi.traveldream.ejb.management.GiftListMgr;
+import it.polimi.traveldream.ejb.management.PernottamentiAcquistatiMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
 import it.polimi.traveldream.ejb.management.VoliAcquistatiProvaMGR;
+import it.polimi.traveldream.ejb.management.VoloMgr;
+import it.polimi.traveldream.ejb.management.dto.EscursioneDTO;
 import it.polimi.traveldream.ejb.management.dto.GiftListDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
+import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-
-import com.sun.org.apache.xml.internal.security.Init;
 
 
 @ManagedBean(name="visualizzaDettagliGLBean")
@@ -33,8 +35,16 @@ public class VisualizzaDettagliGLBean {
 	private VoliAcquistatiProvaMGR voliAcquistatiProvaMGR;
 	@EJB
 	private GiftListMgr glMgr;
+	@EJB
+	private VoloMgr voloMgr;
+	@EJB
+	private EscursioneMgr escursioneMgr;
+	@EJB
+	private PernottamentiAcquistatiMgr perMgr; 
 	
 	private GiftListDTO giftList;
+	
+	private List<VoloDTO> voliAcquistati;
 	
 	
 	public VisualizzaDettagliGLBean(){
@@ -51,6 +61,16 @@ public class VisualizzaDettagliGLBean {
 		}
 		return "visualizza";
 	}
+
+	public List<VoloDTO> getVoliAcquistati() {
+		return voliAcquistati;
+	}
+
+
+	public void setVoliAcquistati(List<VoloDTO> voliAcquistati) {
+		this.voliAcquistati = voliAcquistati;
+	}
+
 
 	public GiftListDTO getGiftList() {
 		return giftList;
@@ -116,4 +136,81 @@ public class VisualizzaDettagliGLBean {
 		return "gestione";
 	}
 
+	public List<VoloDTO> ottieniVoli(){
+		List<VoloDTO> lista = new ArrayList<VoloDTO>();
+		for(int i=0; i<giftList.getVoli().size();i++){
+			lista.add(voloMgr.cercaVoloPerID(giftList.getVoli().get(i).getIdVolo()).get(0));
+		}
+		
+		return lista;
+		
+	}
+	
+	public String acquirenteVolo(int id){
+		for(int i = 0; i<giftList.getVoli().size();i++){
+			if(id==giftList.getVoli().get(i).getIdVolo())
+				return giftList.getVoli().get(i).getNomeAcquirente();
+		}
+		return "null";
+	}
+	
+	public Timestamp ottieniDataAcquistoVolo(int id){
+		for(int i = 0; i<giftList.getVoli().size();i++){
+			if(id==giftList.getVoli().get(i).getIdVolo())
+				return giftList.getVoli().get(i).getDataAcquisto();
+		}
+		return null;
+	}
+	
+	public List<EscursioneDTO> ottieniEscursioni(){
+		List<EscursioneDTO> lista = new ArrayList<EscursioneDTO>();
+		for(int i=0; i<giftList.getEscursioni().size();i++){
+			lista.add(escursioneMgr.cercaEscursionePerID(giftList.getEscursioni().get(i).getIdEscursione()).get(0));
+		}
+		
+		return lista;
+		
+	}
+	
+	public String acquirenteEscursione(int id){
+		for(int i = 0; i<giftList.getEscursioni().size();i++){
+			if(id==giftList.getEscursioni().get(i).getIdEscursione())
+				return giftList.getEscursioni().get(i).getNomeAcquirente();
+		}
+		return "null";
+	}
+	
+	public Timestamp ottieniDataAcquistoEscursione(int id){
+		for(int i = 0; i<giftList.getEscursioni().size();i++){
+			if(id==giftList.getEscursioni().get(i).getIdEscursione())
+				return giftList.getEscursioni().get(i).getDataAcquisto();
+		}
+		return null;
+	}
+	
+	public List<PernottamentoDTO> ottieniPernottamenti(){
+		List<PernottamentoDTO> lista = new ArrayList<PernottamentoDTO>();
+		for(int i=0; i<giftList.getPernottamenti().size();i++){
+			lista.add(perMgr.pernottamentoPerID(giftList.getPernottamenti().get(i).getIdPernottamento()).get(0));
+		}
+		
+		return lista;
+		
+	}
+	
+	public String acquirentePernottamento(int id){
+		for(int i = 0; i<giftList.getPernottamenti().size();i++){
+			if(id==giftList.getPernottamenti().get(i).getIdPernottamento())
+				return giftList.getPernottamenti().get(i).getNomeAcquirente();
+		}
+		return "null";
+	}
+	
+	public Timestamp ottieniDataAcquistoPernottamento(int id){
+		for(int i = 0; i<giftList.getPernottamenti().size();i++){
+			if(id==giftList.getPernottamenti().get(i).getIdPernottamento())
+				return giftList.getPernottamenti().get(i).getDataAcquisto();
+		}
+		return null;
+	}
 }

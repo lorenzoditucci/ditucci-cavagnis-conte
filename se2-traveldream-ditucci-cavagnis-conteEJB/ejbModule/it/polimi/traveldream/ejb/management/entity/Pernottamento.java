@@ -3,15 +3,22 @@ package it.polimi.traveldream.ejb.management.entity;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
-import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -23,8 +30,8 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="Pernottamento.findAll", query="SELECT p FROM Pernottamento p"),
 	@NamedQuery(name="Pernottamento.cercaPernottamentoIdPacchetto", query="SELECT p FROM Pernottamento p WHERE p.pacchetto.idPacchetto= :idPacchetto"),
-	@NamedQuery(name="Pernottamento.cercaPernottamentoIdHotel", query="SELECT p FROM Pernottamento p WHERE p.hotel.idHotel= :idHotel")
-	
+	@NamedQuery(name="Pernottamento.cercaPernottamentoIdHotel", query="SELECT p FROM Pernottamento p WHERE p.hotel.idHotel= :idHotel"),
+	@NamedQuery(name="Pernottamento.cercaPernottamentoId", query="SELECT p FROM Pernottamento p WHERE p.idPernottametto = :idPernottamento")
 })
 
 public class Pernottamento implements Serializable {
