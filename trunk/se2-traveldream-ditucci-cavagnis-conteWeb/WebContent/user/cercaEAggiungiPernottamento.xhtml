@@ -122,6 +122,13 @@
         	</p:column> 
         	
         	<p:column>
+        		<f:facet name="header">
+        			<h:outputText value = "Costo Giornaliero"/>
+        		</f:facet>
+        		<h:outputText value="#{hotel.costo}"/>
+        	</p:column>  
+        	
+        	<p:column>
         		<h:commandLink value="Aggiungi Hotel" action="#{personalizzaPacchettoBean.aggiungiPernottamento(hotel)}"/>
         	</p:column> 
         	  
