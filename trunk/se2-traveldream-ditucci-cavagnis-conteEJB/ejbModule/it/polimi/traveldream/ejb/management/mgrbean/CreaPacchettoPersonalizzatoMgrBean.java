@@ -2,9 +2,6 @@ package it.polimi.traveldream.ejb.management.mgrbean;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.traveldream.ejb.management.CreaPacchettoPersonalizzatoMgr;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.entity.Citta;
@@ -14,6 +11,10 @@ import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pacchetto;
 import it.polimi.traveldream.ejb.management.entity.Pernottamento;
 import it.polimi.traveldream.ejb.management.entity.Volo;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
@@ -53,7 +54,6 @@ public class CreaPacchettoPersonalizzatoMgrBean implements CreaPacchettoPersonal
 	newPacchetto.setDisponibilitaMax(10);
 	newPacchetto.setDataInizio(pacchetto.getDataInizio());
 	newPacchetto.setDataFine(pacchetto.getDataFine());
-	newPacchetto.setCosto(pacchetto.getCosto());
 	newPacchetto.setMail(pacchetto.getMail());
 	//relations
 	newPacchetto.setCittaDestinazione(new ArrayList<Citta>());
@@ -61,6 +61,7 @@ public class CreaPacchettoPersonalizzatoMgrBean implements CreaPacchettoPersonal
 	newPacchetto.setEscursioni(new ArrayList<Escursione>());
 	newPacchetto.setGiftLists(new ArrayList<GiftList>());
 	
+	newPacchetto.setCosto(this.calcolaCosto(pacchetto));
 	//persist
 	em.persist(newPacchetto);
 	
@@ -107,6 +108,33 @@ public class CreaPacchettoPersonalizzatoMgrBean implements CreaPacchettoPersonal
 	}
 
 	return newPacchetto.getIdPacchetto() ;
+    }
+    
+    private double calcolaCosto(PacchettoDTO pacchetto){
+    	double prezzo = 0;
+    	//Aggiungo costo dei voli
+    	for(int i=0;i<pacchetto.getVoli().size();i++){
+    		prezzo += pacchetto.getVoli().get(i).getCosto();
+    	}
+    	
+    	//Aggiungo costo delle escursioni
+    	for(int i=0;i<pacchetto.getEscursioni().size();i++){
+    		prezzo += pacchetto.getEscursioni().get(i).getCosto();
+    	}
+    	
+    	//Aggiungo costo dei pernottamenti
+    	for(int i=0; i<pacchetto.getPernotti().size(); i++){
+			Timestamp dataInizio =pacchetto.getPernotti().get(i).getDataInizio();
+			Timestamp dataFine =pacchetto.getPernotti().get(i).getDataFine();
+			dataInizio.setHours(0);
+			dataInizio.setMinutes(0);
+			dataFine.setHours(0);
+			dataFine.setMinutes(0);
+			int giorni=(int) (dataFine.getTime()-dataInizio.getTime())/86400000;
+			prezzo+=giorni*pacchetto.getPernotti().get(i).getHotel().getCosto();
+			
+		}
+    	return prezzo;
     }
 
 }
