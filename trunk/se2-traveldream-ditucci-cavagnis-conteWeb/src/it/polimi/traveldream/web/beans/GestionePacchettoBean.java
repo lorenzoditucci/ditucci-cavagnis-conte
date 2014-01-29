@@ -69,6 +69,7 @@ public class GestionePacchettoBean {
 
 
 	public String cercaPacchetto(){
+		System.out.println("Premuto!");
 		this.pacchetto=gestionePacchettoMgr.cercaPacchettoId(idPacchettoDaCercare);
 		
 		if(this.pacchetto==null){
@@ -157,6 +158,18 @@ public class GestionePacchettoBean {
     	}	
 		
 	}
+	
+	public String rimuoviPernottamento(PernottamentoDTO pernottamento){
+		for(int i=0; i<this.pacchetto.getPernotti().size(); i++){
+			if(this.pacchetto.getPernotti().get(i).getHotel().getIdHotel()==pernottamento.getHotel().getIdHotel()){
+				this.pacchetto.getPernotti().remove(i);
+				return "";
+			}
+		}
+		return "";
+		
+	}
+	
 
 
 	private boolean hotelGiaContenuto(HotelDTO hotelScelto) {
