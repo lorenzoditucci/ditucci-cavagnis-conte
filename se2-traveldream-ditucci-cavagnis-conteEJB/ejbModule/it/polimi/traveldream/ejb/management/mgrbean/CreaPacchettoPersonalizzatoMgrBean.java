@@ -46,7 +46,7 @@ public class CreaPacchettoPersonalizzatoMgrBean implements CreaPacchettoPersonal
     public int salvaPacchettoPersonalizzato(PacchettoDTO pacchetto){
     
     Pacchetto newPacchetto = new Pacchetto();
-	newPacchetto.setNome(pacchetto.getNome() + " - Personalizzato");
+	newPacchetto.setNome("Personalizzato");
 	newPacchetto.setDescrizione("Pacchetto Personalizzato");
 	//imposto disponibilità attuale e max a 10 come da documento
 	newPacchetto.setDisponibilitaAttuale(10);
