@@ -2,10 +2,12 @@ package it.polimi.traveldream.web.beans;
 
 
 import it.polimi.traveldream.ejb.management.cercaPacchettoMgr;
+import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -33,6 +35,7 @@ public class CercaPacchettoBean {
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private Double costo;
+	private String nomeCitta;
 	
 	
 
@@ -90,7 +93,23 @@ public class CercaPacchettoBean {
 				return "";
 			}
 		}
-		setRisultato(mgr.cercaPacchettiParam(dataPartenza,dataRitorno,costo, nomePacchetto));
+		//setRisultato(mgr.cercaPacchettiParam(dataPartenza,dataRitorno,costo, nomePacchetto));
+		if(nomeCitta.equals("")){
+			setRisultato(mgr.cercaPacchettiParam(dataPartenza,dataRitorno,costo, nomePacchetto));
+		}else{
+			ArrayList<PacchettoDTO> risultato = mgr.cercaPacchettiParam(dataPartenza, dataRitorno, costo, nomePacchetto);
+			ArrayList<PacchettoDTO> risultatoFiltrato = new ArrayList<PacchettoDTO>();
+			for(PacchettoDTO p:risultato){
+				int flag=0;
+				for(int i=0;i<p.getCittaDestinazione().size() && flag==0;i++){
+					if(p.getCittaDestinazione().get(i).getNome().equals(getNomeCitta())){
+						risultatoFiltrato.add(p);
+						flag = 1;
+					}
+				}
+			}
+			setRisultato(risultatoFiltrato);
+		}
 		
 		return "/user/risultatiRicercaPacchetti.xhtml";
 	}
@@ -133,6 +152,18 @@ public class CercaPacchettoBean {
 
 	public void setCosto(Double costo) {
 		this.costo = costo;
+	}
+
+
+
+	public String getNomeCitta() {
+		return nomeCitta;
+	}
+
+
+
+	public void setNomeCitta(String nomeCitta) {
+		this.nomeCitta = nomeCitta;
 	}
 
 }

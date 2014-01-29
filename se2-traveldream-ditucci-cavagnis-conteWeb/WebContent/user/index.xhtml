@@ -60,6 +60,10 @@
 				<p:calendar value="#{cercaPacchettoBean.dataRitorno}" id="data-fine" pattern="MM/dd/yyyy HH:mm" />
 				<h:message for="data-fine"></h:message>
 				
+				<h:outputLabel for="citta">Citta contenuta:</h:outputLabel>
+				<p:inputText id="nome-citta" value="#{cercaPacchettoBean.nomeCitta}"/>
+				<h:message for="nome-citta"></h:message>
+				
 				<h:outputLabel for="costo-pacchetto">Costo Massimo:</h:outputLabel>
 	        	<p:inputText id="costo-pacchetto" value="#{cercaPacchettoBean.costo}"/> 
 	            <h:message for="costo-pacchetto"></h:message>
