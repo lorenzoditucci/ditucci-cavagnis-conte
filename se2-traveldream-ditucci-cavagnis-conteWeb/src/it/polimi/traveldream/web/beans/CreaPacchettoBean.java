@@ -191,6 +191,17 @@ public class CreaPacchettoBean {
 		return "aggiungiEscursioniInPacchetto";
 	}
 	
+	public String rimuoviPernottamento(PernottamentoDTO pernottamento){
+		for(int i=0; i<this.pernottamenti.size(); i++){
+			if(this.pernottamenti.get(i).getHotel().getIdHotel()==pernottamento.getHotel().getIdHotel()){
+				this.pernottamenti.remove(i);
+				return "";
+			}
+		}
+		return "";
+		
+	}
+	
 	public String cercaEAggiungiEscursione(){
 		escursione = new EscursioneDTO();
 		  

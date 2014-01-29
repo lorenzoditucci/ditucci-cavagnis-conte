@@ -109,9 +109,8 @@
                 <f:facet name="header">   
                     <h:outputText value="Operazione" />  
                 </f:facet>  
-                <p:commandLink value="Rimuovi" update=":inserimentoPernottamentiForm:pernottamenti" process=":inserimentoPernottamentiForm:pernottamenti">  
-                    <p:collector value="#{pernottamento}"  
-                                 removeFrom="#{creaPacchettoBean.pernottamenti}" />  
+                <p:commandLink value="Rimuovi" action="#{creaPacchettoBean.rimuoviPernottamento(pernottamento)}" update=":inserimentoPernottamentiForm:pernottamenti" process=":inserimentoPernottamentiForm:pernottamenti">  
+                 
                 </p:commandLink>  
             </p:column> 
             

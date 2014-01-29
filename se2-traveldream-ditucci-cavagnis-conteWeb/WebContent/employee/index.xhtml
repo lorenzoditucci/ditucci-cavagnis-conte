@@ -51,7 +51,7 @@
 		
 		    <p:fieldset legend="Pacchetto - #{pacchetto.idPacchetto}" toggleable="true" toggleSpeed="500">
 		        <p:ajax event="toggle" listener="#{fieldsetBean.handleToggle}" update="growl" />
-		        <h:form>
+		       <h:panelGrid columns="2" cellpadding="10">
 		            
 		            <h:outputText value="Nome: #{pacchetto.nome}"/><br/>	
 		            <h:outputText value="Valido dal: #{pacchetto.dataInizio}"/>	            
@@ -60,10 +60,13 @@
 		            <br/> 	
 		       		<h:commandButton action="#{gestionePacchettoBean.cercaPacchetto(pacchetto.idPacchetto)}" value="Visualizza dettagli" />
 		     
-		        </h:form>
+		       </h:panelGrid> 
 		    </p:fieldset>
 			</ui:repeat>
 		</h:form> 
+		
+
+		
     
     </p:layoutUnit>  
     

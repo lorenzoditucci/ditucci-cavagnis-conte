@@ -242,9 +242,8 @@
                 <f:facet name="header">   
                     <h:outputText value="Operazione" />  
                 </f:facet>  
-                <p:commandLink value="Rimuovi" update=":modificaPernottamentiForm:pernottamenti" process=":modificaPernottamentiForm:pernottamenti">  
-                    <p:collector value="#{pernottamento}"  
-                                 removeFrom="#{gestionePacchettoBean.pacchetto.pernotti}" />  
+                <p:commandLink value="Rimuovi" action="#{gestionePacchettoBean.rimuoviPernottamento(pernottamento)}" update=":modificaPernottamentiForm:pernottamenti" process=":modificaPernottamentiForm:pernottamenti">  
+                    
                 </p:commandLink>  
             </p:column>      
         </p:dataTable>  
