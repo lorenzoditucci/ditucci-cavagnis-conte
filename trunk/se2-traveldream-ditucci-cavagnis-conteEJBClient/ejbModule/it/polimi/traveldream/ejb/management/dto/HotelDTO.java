@@ -6,6 +6,7 @@ package it.polimi.traveldream.ejb.management.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,6 +32,7 @@ public class HotelDTO {
 	private double costo;
 
 	@NotEmpty
+	@Size(max = 15)
 	private String descrizione;
 
 	@NotEmpty
@@ -71,6 +73,7 @@ public class HotelDTO {
 		this.costo = costo;
 	}
 
+	
 	public String getDescrizione() {
 		return descrizione;
 	}

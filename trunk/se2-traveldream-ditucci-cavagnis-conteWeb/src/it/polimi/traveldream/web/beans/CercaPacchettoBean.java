@@ -103,6 +103,7 @@ public class CercaPacchettoBean {
 				int flag=0;
 				for(int i=0;i<p.getCittaDestinazione().size() && flag==0;i++){
 					if(p.getCittaDestinazione().get(i).getNome().equals(getNomeCitta())){
+						System.out.println("pacchetto "+p.getNome()+"citta pacchetto == "+p.getCittaDestinazione().get(i).getNome()+" && parametro =="+getNomeCitta());
 						risultatoFiltrato.add(p);
 						flag = 1;
 					}
