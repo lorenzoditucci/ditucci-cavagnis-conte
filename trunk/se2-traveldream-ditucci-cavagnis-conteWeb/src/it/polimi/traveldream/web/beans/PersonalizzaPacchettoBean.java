@@ -389,6 +389,9 @@ public class PersonalizzaPacchettoBean {
 		}
 		
 		//controllo le escursioni
+		if(pacchetto.getEscursioni().size() != pacchettoOriginaleDto.getEscursioni().size()){
+			diversi = true;
+		}
 		for(int i=0; i<pacchetto.getEscursioni().size() && !diversi;i++){
 			boolean trovato = false;
 			for(int j=0; j<pacchettoOriginaleDto.getEscursioni().size() && !trovato;j++){
@@ -414,7 +417,6 @@ public class PersonalizzaPacchettoBean {
 				diversi = true;
 			}
 		}
-		System.out.println("valore di diversi alla fine: " +diversi);
 		return diversi;
 	}
 	
