@@ -371,8 +371,15 @@ public class PersonalizzaPacchettoBean {
 	}
 	
 	private boolean diverso(){
-		System.out.println("entro in diversi");
+		
 		boolean diversi = false;
+		if(pacchetto.getVoli().size() != pacchettoOriginaleDto.getVoli().size()){
+			diversi = true;
+		}
+		
+		if(pacchetto.getPernotti().size() != pacchettoOriginaleDto.getPernotti().size()){
+			diversi = true;
+		}
 		// controllo che tutti i voli siano diversi
 		for(int i=0; i<pacchetto.getVoli().size() && !diversi;i++){
 			boolean trovato = false;
