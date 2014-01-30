@@ -288,14 +288,14 @@
 					<f:facet name="header">
 						<h:outputText value="Data Acquisto"/>
 					</f:facet>
-					<h:outputText value = "#{ottieniDataAcquistoEscursione(escursione.idEscursione)}"/>
+					<h:outputText value = "#{visualizzaDettagliGLBean.ottieniDataAcquistoEscursione(escursione.idEscursione)}"/>
 				</p:column>
 				
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Nome acquirente"/>
 					</f:facet>
-					<h:outputText value = "#{acquirenteEscursione(escursione.idEscursione)}"/>
+					<h:outputText value = "#{visualizzaDettagliGLBean.acquirenteEscursione(escursione.idEscursione)}"/>
 				</p:column>
 			
 			</p:dataTable>
