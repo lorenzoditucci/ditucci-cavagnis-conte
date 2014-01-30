@@ -1,16 +1,10 @@
 package it.polimi.traveldream.web.beans;
 
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import it.polimi.traveldream.ejb.exception.CoerenzaException;
 import it.polimi.traveldream.ejb.management.ControlloCoerenzaMGR;
 import it.polimi.traveldream.ejb.management.CreaPacchettoPersonalizzatoMgr;
 import it.polimi.traveldream.ejb.management.EscursioneMgr;
-import it.polimi.traveldream.ejb.management.GiftListMgr;
 import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.UserMgr;
 import it.polimi.traveldream.ejb.management.VisualizzaDettagliGLMgr;
@@ -22,14 +16,17 @@ import it.polimi.traveldream.ejb.management.dto.PacchettoDTO;
 import it.polimi.traveldream.ejb.management.dto.PernottamentoDTO;
 import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.jboss.weld.context.ejb.Ejb;
 
 
 @ManagedBean(name="personalizzaPacchettoBean")
@@ -349,7 +346,6 @@ public class PersonalizzaPacchettoBean {
 			pacchetto.getPernotti().add(pernottamentoDTO);
 		}
 		
-		pacchetto.getPernotti().add(pernottamentoDTO);
 		return "personalizza";
 	}
 	
