@@ -96,11 +96,15 @@ public class CreaPacchettoPersonalizzatoMgrBean implements CreaPacchettoPersonal
 	
 	//pernottamento
 	for(int i=0; i<pacchetto.getPernotti().size(); i++){
-		Pernottamento newPernottamento=new Pernottamento(pacchetto.getPernotti().get(i));
-
+		Pernottamento newPernottamento = new Pernottamento(pacchetto.getPernotti().get(i));
+		
+		System.out.println("Id dell'hotel da cercare: " + pacchetto.getPernotti().get(i).getHotel().getIdHotel());
+		
 		TypedQuery<Hotel> queryRicerca = em.createNamedQuery("Hotel.cercaHotelId", Hotel.class);
 	 	List<Hotel> listaHotel = queryRicerca.setParameter("idHotel", pacchetto.getPernotti().get(i).getHotel().getIdHotel()).getResultList();
-		
+	
+	 	System.out.println(listaHotel.get(0).getIdHotel());
+	 	
 	 	newPernottamento.setHotel(listaHotel.get(0));
 	 	newPernottamento.setPacchetto(newPacchetto);
 	 	

@@ -1,16 +1,13 @@
 package it.polimi.traveldream.ejb.management.mgrbean;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.traveldream.ejb.management.HotelMgr;
 import it.polimi.traveldream.ejb.management.dto.CittaDTO;
 import it.polimi.traveldream.ejb.management.dto.HotelDTO;
-import it.polimi.traveldream.ejb.management.dto.VoloDTO;
 import it.polimi.traveldream.ejb.management.entity.Hotel;
 import it.polimi.traveldream.ejb.management.entity.Pernottamento;
-import it.polimi.traveldream.ejb.management.entity.Volo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -48,6 +45,7 @@ public class HotelMgrBean implements HotelMgr {
 		ArrayList<HotelDTO> copia = new ArrayList<HotelDTO>();
 		for(int i=0; i < listaHotel.size(); i++){
 			HotelDTO daAggiungere = new HotelDTO();
+			daAggiungere.setIdHotel(listaHotel.get(i).getIdHotel());
 			daAggiungere.setNome(listaHotel.get(i).getNome());
 			daAggiungere.setDescrizione(listaHotel.get(i).getDescrizione());
 			daAggiungere.setCitta(listaHotel.get(i).getCitta());
