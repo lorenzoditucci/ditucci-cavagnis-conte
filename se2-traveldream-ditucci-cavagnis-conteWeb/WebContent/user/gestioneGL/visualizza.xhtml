@@ -82,6 +82,7 @@
     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
   	<p:panel>
   	<h:form>
+  		<p:growl id="growl" showDetail="true" />
   		<h:outputLabel>#{visualizzaDettagliGLBean.giftList.nome}</h:outputLabel><br/>
   		<ui:repeat var="pacchetto" value="#{visualizzaDettagliGLBean.giftList.pacchettiContenuti}">
 	  		<p:outputPanel>

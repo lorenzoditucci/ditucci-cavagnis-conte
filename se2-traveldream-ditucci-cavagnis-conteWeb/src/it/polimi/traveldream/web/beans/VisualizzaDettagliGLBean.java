@@ -93,8 +93,6 @@ public class VisualizzaDettagliGLBean {
 	public String rimuoviPacchetto(PacchettoDTO p) {
 		//controllo che non ci siano prodotti base acquistati.
 		//controllo sui voli
-		System.out.println("Grandezza p.voli: "+ p.getVoli().size());
-		System.out.println("grandezza gl.voli acquistati: "+ giftList.getVoli().size());
 		
 		giftList.setVoli(voliAcquistatiProvaMGR.cercaVoliAcquistati(giftList.getIdGiftList()));
 		
