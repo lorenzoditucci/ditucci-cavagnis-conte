@@ -66,7 +66,9 @@ public class Pernottamento implements Serializable {
 		this.dataInizio=pernottamento.getDataInizio();
 		this.dataFine=pernottamento.getDataFine();
 		if(this.hotel != null){
-			this.hotel = new Hotel(pernottamento.getHotel());
+			Hotel newHotel = new Hotel(pernottamento.getHotel());
+			newHotel.setIdHotel(pernottamento.getHotel().getIdHotel());
+			this.hotel = newHotel;
 		}
 		if(this.pacchetto != null){
 			this.pacchetto = new Pacchetto(pernottamento.getPacchetto());
