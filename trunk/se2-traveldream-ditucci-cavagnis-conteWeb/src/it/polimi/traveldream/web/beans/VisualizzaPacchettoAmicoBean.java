@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
+
 @ManagedBean(name="visualizzaPacchettoAmicoBean")
 @javax.faces.bean.SessionScoped
 public class VisualizzaPacchettoAmicoBean {
@@ -20,7 +22,10 @@ public class VisualizzaPacchettoAmicoBean {
 	private int idPacchetto;
 	private String mailCreatore;
 	private String indirizzo;
-		
+	
+	public String visualizzaDettagli(){
+		return "visualizzaPacchettoAmicoDettagli?faces-redirect=true";
+	}
 	public String prendiDaBarraIndirizziParametro(){
 		int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
 		setIdPacchetto(id);
